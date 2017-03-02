@@ -12,6 +12,7 @@
 		1101CDBD1E68CF5B003B7CA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */; };
 		1101CDBF1E68CF5B003B7CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */; };
 		1101CDC21E68CF5B003B7CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */; };
+		119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 119142521E68D89A00FF9A1B /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,8 @@
 		1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1101CDC31E68CF5B003B7CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
+		119142531E68D89A00FF9A1B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +63,18 @@
 				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
 				1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */,
 				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
+				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
+				119142551E68D8AB00FF9A1B /* Core data */,
 			);
 			path = TinkoffChat;
+			sourceTree = "<group>";
+		};
+		119142551E68D8AB00FF9A1B /* Core data */ = {
+			isa = PBXGroup;
+			children = (
+				119142521E68D89A00FF9A1B /* Model.xcdatamodeld */,
+			);
+			name = "Core data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,6 +111,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = U754XV4Y2S;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -139,6 +157,7 @@
 			files = (
 				1101CDBA1E68CF5B003B7CA1 /* ViewController.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,
+				119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TinkoffChat/TinkoffChat.entitlements;
 				DEVELOPMENT_TEAM = U754XV4Y2S;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -272,6 +292,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TinkoffChat/TinkoffChat.entitlements;
 				DEVELOPMENT_TEAM = U754XV4Y2S;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -300,8 +321,22 @@
 				1101CDC81E68CF5B003B7CA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		119142521E68D89A00FF9A1B /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				119142531E68D89A00FF9A1B /* Model.xcdatamodel */,
+			);
+			currentVersion = 119142531E68D89A00FF9A1B /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1101CDAC1E68CF5B003B7CA1 /* Project object */;
 }
