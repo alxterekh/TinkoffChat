@@ -9,13 +9,51 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource, ConnectionManagerDelegate {
+    
+    @IBOutlet weak var peers: UITableView!
+    
+    var connectionManager: ConnectionManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    func setup() {
+        connectionManager = ConnectionManager()
+        connectionManager.delegate = self
+        peers.delegate = self
+        peers.dataSource = self
     }
+    
+    // MARK: - UITableView related method implementation
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        return UITableViewCell(style: .default, reuseIdentifier: "cell")
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 0.0
+    }
+    
 }
+
+
+
+
+
+

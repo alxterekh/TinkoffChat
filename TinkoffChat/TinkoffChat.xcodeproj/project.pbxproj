@@ -12,6 +12,8 @@
 		1101CDBD1E68CF5B003B7CA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */; };
 		1101CDBF1E68CF5B003B7CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */; };
 		1101CDC21E68CF5B003B7CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */; };
+		1133D4201E69B564006A69F3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D41F1E69B564006A69F3 /* ChatViewController.swift */; };
+		1133D4221E69B6AE006A69F3 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */; };
 		119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 119142521E68D89A00FF9A1B /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,8 @@
 		1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1101CDC31E68CF5B003B7CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1133D41F1E69B564006A69F3 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
 		119142531E68D89A00FF9A1B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,16 +61,26 @@
 		1101CDB61E68CF5B003B7CA1 /* TinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
-				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
-				1101CDB91E68CF5B003B7CA1 /* ViewController.swift */,
+				1133D4231E69B6BB006A69F3 /* Source */,
 				1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */,
-				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
 				1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */,
+				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
 				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
-				119142551E68D8AB00FF9A1B /* Core data */,
 			);
 			path = TinkoffChat;
+			sourceTree = "<group>";
+		};
+		1133D4231E69B6BB006A69F3 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
+				1101CDB91E68CF5B003B7CA1 /* ViewController.swift */,
+				1133D41F1E69B564006A69F3 /* ChatViewController.swift */,
+				1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */,
+				119142551E68D8AB00FF9A1B /* Core data */,
+			);
+			name = Source;
 			sourceTree = "<group>";
 		};
 		119142551E68D8AB00FF9A1B /* Core data */ = {
@@ -157,6 +171,8 @@
 			files = (
 				1101CDBA1E68CF5B003B7CA1 /* ViewController.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,
+				1133D4221E69B6AE006A69F3 /* ConnectionManager.swift in Sources */,
+				1133D4201E69B564006A69F3 /* ChatViewController.swift in Sources */,
 				119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
