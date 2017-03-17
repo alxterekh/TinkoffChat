@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBOutlet weak var userinfoText: UITextView!
     @IBOutlet weak var avatarPicture: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var textColor: UILabel!
     
     var connectionManager: ConnectionManager?
     
@@ -68,6 +69,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     @IBAction func saveProfileData(_ sender: UIButton) {
         print("Profile data saved")
+    }
+    
+    @IBAction func changeTextColor (_ sender: UIButton) {
+        textColor.textColor = sender.backgroundColor
     }
     
     func setup() {

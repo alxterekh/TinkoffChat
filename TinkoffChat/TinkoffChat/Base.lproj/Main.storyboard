@@ -89,22 +89,37 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSA-tu-Gvv">
                                 <rect key="frame" x="172" y="573" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changeTextColor:" destination="p3c-5G-I6k" eventType="touchUpInside" id="ToF-CG-j9V"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Csv-X4-LyZ">
                                 <rect key="frame" x="48" y="573" width="30" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changeTextColor:" destination="p3c-5G-I6k" eventType="touchUpInside" id="NEO-1g-U7M"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aM2-dD-WNR">
                                 <rect key="frame" x="297" y="573" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changeTextColor:" destination="p3c-5G-I6k" eventType="touchUpInside" id="sOe-wW-MVN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrJ-nx-yXA">
                                 <rect key="frame" x="329" y="573" width="30" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changeTextColor:" destination="p3c-5G-I6k" eventType="touchUpInside" id="y5l-ey-KJH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vSp-SW-Sin">
                                 <rect key="frame" x="16" y="573" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changeTextColor:" destination="p3c-5G-I6k" eventType="touchUpInside" id="iLe-PY-Jfy"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
@@ -146,6 +161,7 @@
                         <outlet property="avatarName" destination="JNY-O9-rFf" id="Pf6-je-SV2"/>
                         <outlet property="avatarPicture" destination="JCI-C5-8tX" id="C8R-MD-02N"/>
                         <outlet property="saveButton" destination="Kh1-3g-e6Z" id="jWJ-wn-vFR"/>
+                        <outlet property="textColor" destination="8bM-Iw-E9R" id="ppw-uk-Btb"/>
                         <outlet property="userinfoText" destination="oLL-g7-aUL" id="03A-3K-3p5"/>
                         <outlet property="username" destination="NVn-EH-yEF" id="Qal-p2-3Tw"/>
                         <outlet property="usernameField" destination="e2a-5Y-Ceh" id="Jbx-ao-ftk"/>
