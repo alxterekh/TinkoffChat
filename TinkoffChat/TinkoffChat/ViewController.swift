@@ -11,8 +11,6 @@ import MultipeerConnectivity
 
 class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, ConnectionManagerDelegate {
     
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var avatarName: UILabel!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var userinfoText: UITextView!
     @IBOutlet weak var avatarPicture: UIImageView!
@@ -20,6 +18,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBOutlet weak var textColor: UILabel!
     
     var connectionManager: ConnectionManager?
+    
+    let alert = UIAlertController(title: "Do something", message: "With this", preferredStyle: .actionSheet)
     
     // MARK: - View lifecycle
     
@@ -40,6 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         super.viewDidAppear(animated)
         print("\(#function)")
         printAllControllsDescriptions()
+        self.present(alert, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -65,7 +66,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         print("\n\n")
     }
     
-    // MARK: -
+    // MARK: - Actions
     
     @IBAction func saveProfileData(_ sender: UIButton) {
         print("Profile data saved")
@@ -75,14 +76,43 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         textColor.textColor = sender.backgroundColor
     }
     
+    // MARK: -
+    
     func setup() {
+        setupDependencies()
+        setupGestureRecognizer()
+        setupActionSheet()
+    }
+    
+    func setupDependencies() {
         usernameField.delegate = self
         userinfoText.delegate = self
         usernameField.returnKeyType = .done
         connectionManager = ConnectionManager()
         connectionManager?.delegate = self
+    }
+    
+    func setupGestureRecognizer() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector( dismissKeyboard))
         view.addGestureRecognizer(tap)
+    }
+    
+    func setupActionSheet() {
+        alert.addAction(UIAlertAction(title: "New photo", style: .default) { action in
+            
+        })
+        
+        alert.addAction(UIAlertAction(title: "Select photo", style: .default) { action in
+            
+        })
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { action in
+            
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
+            
+        })
     }
     
     func dismissKeyboard() {

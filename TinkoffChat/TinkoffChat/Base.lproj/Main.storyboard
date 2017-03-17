@@ -161,12 +161,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="avatarName" destination="JNY-O9-rFf" id="Pf6-je-SV2"/>
                         <outlet property="avatarPicture" destination="JCI-C5-8tX" id="C8R-MD-02N"/>
                         <outlet property="saveButton" destination="Kh1-3g-e6Z" id="jWJ-wn-vFR"/>
                         <outlet property="textColor" destination="8bM-Iw-E9R" id="ppw-uk-Btb"/>
                         <outlet property="userinfoText" destination="oLL-g7-aUL" id="03A-3K-3p5"/>
-                        <outlet property="username" destination="NVn-EH-yEF" id="Qal-p2-3Tw"/>
                         <outlet property="usernameField" destination="e2a-5Y-Ceh" id="Jbx-ao-ftk"/>
                     </connections>
                 </viewController>
