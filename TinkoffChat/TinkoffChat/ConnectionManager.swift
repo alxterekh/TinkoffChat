@@ -128,5 +128,3 @@ class ConnectionManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDele
         print("didFinishReceivingResourceWithName")
     }
 }
-
-
