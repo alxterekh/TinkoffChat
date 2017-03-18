@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     var connectionManager: ConnectionManager?
     
-    let alert = UIAlertController(title: "Do something", message: "With this", preferredStyle: .actionSheet)
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
     // MARK: - View lifecycle
     
@@ -40,7 +40,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         super.viewDidAppear(animated)
         print("\(#function)")
         printAllControllsDescriptions()
-        self.present(alert, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,7 +75,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         textColor.textColor = sender.backgroundColor
     }
     
-    // MARK: -
+   // MARK: -
     
     func setup() {
         setupDependencies()
@@ -93,8 +92,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }
     
     func setupGestureRecognizer() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector( dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        avatarPicture.isUserInteractionEnabled = true
+        avatarPicture.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        self.present(alert, animated: true)
     }
     
     func setupActionSheet() {
@@ -123,6 +133,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
         return true
     }
 }
