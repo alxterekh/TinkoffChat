@@ -13,9 +13,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var userinfoText: UITextView!
-    @IBOutlet weak var avatarPicture: UIImageView!
+    @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var textColor: UILabel!
+    @IBOutlet weak var textColorSampleLabel: UILabel!
     
     let connectionManager = ConnectionManager()
     let avatatImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -27,39 +27,39 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         super.viewDidLoad()
         setup()
         print("\(#function)")
-        printAllControllsDescriptions()
+        printAllControlsDescriptions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("\(#function)")
-        printAllControllsDescriptions()
+        printAllControlsDescriptions()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("\(#function)")
-        printAllControllsDescriptions()
+        printAllControlsDescriptions()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("\(#function)")
-        printAllControllsDescriptions()
+        printAllControlsDescriptions()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         print("\(#function)")
-        printAllControllsDescriptions()
+        printAllControlsDescriptions()
     }
     
     // MARK: - Help methods
     
-    func printAllControllsDescriptions() {
-        let controlls = [usernameField, userinfoText, saveButton]
-        for control in controlls {
-            print(control?.description ?? "there isn't decription")
+    func printAllControlsDescriptions() {
+        let controls = [usernameField, userinfoText, saveButton] as [UIView]
+        for control in controls {
+            print(control.description)
             print("\n")
         }
         print("\n\n")
@@ -72,7 +72,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }
     
     @IBAction func changeTextColor (_ sender: UIButton) {
-        textColor.textColor = sender.backgroundColor
+        textColorSampleLabel.textColor = sender.backgroundColor
     }
     
    // MARK: - Initialization
@@ -92,16 +92,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }
     
     func setupGestureRecognizer() {
-        let tapOnEmptySpace = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tapOnEmptySpace = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tapOnEmptySpace)
         
-        let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        avatarPicture.isUserInteractionEnabled = true
-        avatarPicture.addGestureRecognizer(tapOnImage)
+        let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(ViewController.imageTapped(tapGestureRecognizer:)))
+        avatarImageView.isUserInteractionEnabled = true
+        avatarImageView.addGestureRecognizer(tapOnImage)
     }
     
     func setupActionSheet() {
-        avatatImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) { [unowned self] action in
+        avatatImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) {
+            [unowned self] action in
+            
             self.photoPicker.allowsEditing = false
             self.photoPicker.sourceType = UIImagePickerControllerSourceType.camera
             self.photoPicker.cameraCaptureMode = .photo
@@ -109,22 +111,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             self.present(self.photoPicker, animated: true)
         })
         
-        avatatImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {[unowned self] action in
+        avatatImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
+            [unowned self] action in
+            
             self.photoPicker.allowsEditing = false
             self.photoPicker.sourceType = .photoLibrary
             self.photoPicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
             self.present(self.photoPicker, animated: true)
         })
         
-        avatatImageActionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {[unowned self] action in
-            self.avatarPicture.image = #imageLiteral(resourceName: "placeholder")
-        })
-        
         avatatImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
     }
     
-    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
-    {
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         present(avatatImageActionSheet, animated: true)
     }
     
@@ -136,9 +135,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        avatarPicture.image = chosenImage
-        //avatarPicture.contentMode = .scaleAspectFit
+        avatarImageView.image = chosenImage
         dismiss(animated:true, completion: nil)
+        
+        avatatImageActionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {
+            [unowned self] action in
+            
+            self.avatarImageView.image = #imageLiteral(resourceName: "placeholder")
+        })
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

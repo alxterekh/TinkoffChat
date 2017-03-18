@@ -94,28 +94,28 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Csv-X4-LyZ">
-                                <rect key="frame" x="84.5" y="573" width="67.5" height="30"/>
+                                <rect key="frame" x="85" y="573" width="67" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="changeTextColor:" destination="p3c-5G-I6k" eventType="touchUpInside" id="NEO-1g-U7M"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aM2-dD-WNR">
-                                <rect key="frame" x="223" y="573" width="67.5" height="30"/>
+                                <rect key="frame" x="223" y="573" width="67" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="changeTextColor:" destination="p3c-5G-I6k" eventType="touchUpInside" id="sOe-wW-MVN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrJ-nx-yXA">
-                                <rect key="frame" x="292.5" y="573" width="67" height="30"/>
+                                <rect key="frame" x="292" y="573" width="66.5" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="changeTextColor:" destination="p3c-5G-I6k" eventType="touchUpInside" id="y5l-ey-KJH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vSp-SW-Sin">
-                                <rect key="frame" x="16" y="573" width="66.5" height="30"/>
+                                <rect key="frame" x="16" y="573" width="67" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="changeTextColor:" destination="p3c-5G-I6k" eventType="touchUpInside" id="iLe-PY-Jfy"/>
@@ -161,9 +161,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="avatarPicture" destination="JCI-C5-8tX" id="C8R-MD-02N"/>
+                        <outlet property="avatarImageView" destination="JCI-C5-8tX" id="Mqk-9f-hhB"/>
                         <outlet property="saveButton" destination="Kh1-3g-e6Z" id="jWJ-wn-vFR"/>
-                        <outlet property="textColor" destination="8bM-Iw-E9R" id="ppw-uk-Btb"/>
+                        <outlet property="textColorSampleLabel" destination="8bM-Iw-E9R" id="O3e-u0-LuJ"/>
                         <outlet property="userinfoText" destination="oLL-g7-aUL" id="03A-3K-3p5"/>
                         <outlet property="usernameField" destination="e2a-5Y-Ceh" id="Jbx-ao-ftk"/>
                     </connections>
