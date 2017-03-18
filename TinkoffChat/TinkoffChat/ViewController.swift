@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, ConnectionManagerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ConnectionManagerDelegate {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var userinfoText: UITextView!
@@ -17,9 +17,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var textColor: UILabel!
     
-    var connectionManager: ConnectionManager?
-    
+    let connectionManager = ConnectionManager()
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    let photoPicker = UIImagePickerController()
     
     // MARK: - View lifecycle
     
@@ -86,49 +86,65 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     func setupDependencies() {
         usernameField.delegate = self
         userinfoText.delegate = self
+        photoPicker.delegate = self
+        connectionManager.delegate = self
         usernameField.returnKeyType = .done
-        connectionManager = ConnectionManager()
-        connectionManager?.delegate = self
     }
     
     func setupGestureRecognizer() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        let tapOnEmptySpace = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapOnEmptySpace)
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         avatarPicture.isUserInteractionEnabled = true
-        avatarPicture.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    
-    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
-    {
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
-        self.present(alert, animated: true)
+        avatarPicture.addGestureRecognizer(tapOnImage)
     }
     
     func setupActionSheet() {
-        alert.addAction(UIAlertAction(title: "New photo", style: .default) { action in
-            
+        alert.addAction(UIAlertAction(title: "New photo", style: .default) { [unowned self] action in
+            self.photoPicker.allowsEditing = false
+            self.photoPicker.sourceType = UIImagePickerControllerSourceType.camera
+            self.photoPicker.cameraCaptureMode = .photo
+            self.photoPicker.modalPresentationStyle = .fullScreen
+            self.present(self.photoPicker, animated: true)
         })
         
-        alert.addAction(UIAlertAction(title: "Select photo", style: .default) { action in
-            
+        alert.addAction(UIAlertAction(title: "Select photo", style: .default) {[unowned self] action in
+            self.photoPicker.allowsEditing = false
+            self.photoPicker.sourceType = .photoLibrary
+            self.photoPicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+            self.present(self.photoPicker, animated: true)
         })
         
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { action in
-            
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) {[unowned self] action in
+            self.avatarPicture.image = #imageLiteral(resourceName: "placeholder")
         })
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
-            
-        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
+    }
+    
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        present(alert, animated: true)
     }
     
     func dismissKeyboard() {
         view.endEditing(true)
     }
     
+    //MARK: - UIImagePickerControllerDelegate
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        avatarPicture.image = chosenImage
+        //avatarPicture.contentMode = .scaleAspectFit
+        dismiss(animated:true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+
     // MARK: - UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
