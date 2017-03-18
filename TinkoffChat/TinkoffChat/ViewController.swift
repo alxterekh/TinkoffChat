@@ -18,10 +18,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBOutlet weak var textColor: UILabel!
     
     let connectionManager = ConnectionManager()
-    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    let avatatImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     let photoPicker = UIImagePickerController()
     
-    // MARK: - View lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         textColor.textColor = sender.backgroundColor
     }
     
-   // MARK: -
+   // MARK: - Initialization
     
     func setup() {
         setupDependencies()
@@ -101,7 +101,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }
     
     func setupActionSheet() {
-        alert.addAction(UIAlertAction(title: "New photo", style: .default) { [unowned self] action in
+        avatatImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) { [unowned self] action in
             self.photoPicker.allowsEditing = false
             self.photoPicker.sourceType = UIImagePickerControllerSourceType.camera
             self.photoPicker.cameraCaptureMode = .photo
@@ -109,23 +109,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             self.present(self.photoPicker, animated: true)
         })
         
-        alert.addAction(UIAlertAction(title: "Select photo", style: .default) {[unowned self] action in
+        avatatImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {[unowned self] action in
             self.photoPicker.allowsEditing = false
             self.photoPicker.sourceType = .photoLibrary
             self.photoPicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
             self.present(self.photoPicker, animated: true)
         })
         
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) {[unowned self] action in
+        avatatImageActionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {[unowned self] action in
             self.avatarPicture.image = #imageLiteral(resourceName: "placeholder")
         })
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
+        avatatImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
     }
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        present(alert, animated: true)
+        present(avatatImageActionSheet, animated: true)
     }
     
     func dismissKeyboard() {
