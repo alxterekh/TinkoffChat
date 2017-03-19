@@ -18,8 +18,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBOutlet weak var textColorSampleLabel: UILabel!
     
     let connectionManager = ConnectionManager()
-    let avatarImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     let photoPicker = UIImagePickerController()
+    var avatarImageActionSheet:UIAlertController?
     
     // MARK: - Lifecycle
     
@@ -65,7 +65,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         print("\n\n")
     }
     
-    
     // MARK: - Actions
     
     @IBAction func saveProfileData(_ sender: UIButton) {
@@ -81,7 +80,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     func setup() {
         setupDependencies()
         setupGestureRecognizer()
-        setupActionSheet()
+        setupDefaultActionSheet()
     }
     
     func setupDependencies() {
@@ -101,8 +100,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         avatarImageView.addGestureRecognizer(tapOnImage)
     }
     
-    func setupActionSheet() {
-        avatarImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) {
+    func setupDefaultActionSheet() {
+        avatarImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        avatarImageActionSheet!.addAction(UIAlertAction(title: "New photo", style: .default) {
             [unowned self] action in
             
             self.photoPicker.allowsEditing = false
@@ -112,7 +112,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             self.present(self.photoPicker, animated: true)
         })
         
-        avatarImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
+        avatarImageActionSheet!.addAction(UIAlertAction(title: "Select photo", style: .default) {
             [unowned self] action in
             
             self.photoPicker.allowsEditing = false
@@ -121,11 +121,21 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             self.present(self.photoPicker, animated: true)
         })
         
-        avatarImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
+        avatarImageActionSheet!.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
+    }
+    
+    func addDeleteActionToDefaultActionSheet() {
+        avatarImageActionSheet!.addAction(UIAlertAction(title: "Delete", style: .destructive) {
+            [unowned self] action in
+            
+            self.avatarImageView.image = #imageLiteral(resourceName: "placeholder")
+            self.setupDefaultActionSheet()
+        })
     }
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        present(avatarImageActionSheet, animated: true)
+        
+        present(avatarImageActionSheet!, animated: true)
     }
     
     func dismissKeyboard() {
@@ -138,12 +148,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         avatarImageView.image = chosenImage
         dismiss(animated:true, completion: nil)
-        
-        avatarImageActionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {
-            [unowned self] action in
-            
-            self.avatarImageView.image = #imageLiteral(resourceName: "placeholder")
-        })
+        addDeleteActionToDefaultActionSheet()
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
