@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBOutlet weak var textColorSampleLabel: UILabel!
     
     let connectionManager = ConnectionManager()
-    let avatatImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    let avatarImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     let photoPicker = UIImagePickerController()
     
     // MARK: - Lifecycle
@@ -101,7 +101,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }
     
     func setupActionSheet() {
-        avatatImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) {
+        avatarImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) {
             [unowned self] action in
             
             self.photoPicker.allowsEditing = false
@@ -111,7 +111,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             self.present(self.photoPicker, animated: true)
         })
         
-        avatatImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
+        avatarImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
             [unowned self] action in
             
             self.photoPicker.allowsEditing = false
@@ -120,11 +120,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             self.present(self.photoPicker, animated: true)
         })
         
-        avatatImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
+        avatarImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
     }
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        present(avatatImageActionSheet, animated: true)
+        present(avatarImageActionSheet, animated: true)
     }
     
     func dismissKeyboard() {
@@ -138,7 +138,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         avatarImageView.image = chosenImage
         dismiss(animated:true, completion: nil)
         
-        avatatImageActionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {
+        avatarImageActionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {
             [unowned self] action in
             
             self.avatarImageView.image = #imageLiteral(resourceName: "placeholder")
