@@ -75,12 +75,13 @@
                                     <outlet property="dateLabel" destination="C1J-H8-zXD" id="cga-EK-37v"/>
                                     <outlet property="messageLabel" destination="3gz-08-Bpl" id="l8f-bp-Lrd"/>
                                     <outlet property="nameLabel" destination="C8A-Qz-cc7" id="J98-bg-I1p"/>
+                                    <segue destination="2RL-d4-GtO" kind="show" identifier="Conversation" id="2sX-jP-W9D"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tinkoff chat" id="bB3-KM-zAM">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="WMv-bR-mc8">
+                        <barButtonItem key="rightBarButtonItem" title="Edit profile" id="WMv-bR-mc8">
                             <connections>
                                 <segue destination="p3c-5G-I6k" kind="presentation" id="i9V-lN-S8i"/>
                             </connections>
@@ -94,24 +95,38 @@
             </objects>
             <point key="canvasLocation" x="-978.75" y="-453.16901408450707"/>
         </scene>
-        <!--TFS-->
+        <!--Name-->
         <scene sceneID="m5y-tJ-67V">
             <objects>
                 <viewController id="2RL-d4-GtO" customClass="ConversationViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="RUe-84-Efd"/>
-                        <viewControllerLayoutGuide type="bottom" id="Xp7-w8-mWh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GQB-as-GWC">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zq2-Cu-pQB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="TFS" id="hng-cN-bH4"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="BQP-fR-Mtp">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BQP-fR-Mtp" id="5rZ-hK-a3U">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="hun-x9-uc4">
+                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hun-x9-uc4" id="1c7-pk-Ihf">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Name" id="Nxf-zC-XMS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jp1-nM-PcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-979" y="262"/>
+            <point key="canvasLocation" x="-176" y="-453"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="d8n-rT-lBn">
@@ -279,7 +294,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMI-Gv-cG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-165" y="-667"/>
+            <point key="canvasLocation" x="-979" y="317"/>
         </scene>
     </scenes>
     <resources>

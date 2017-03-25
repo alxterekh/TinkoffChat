@@ -36,15 +36,21 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        
+        performSegue(withIdentifier: "Conversation", sender: self)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
         return headersTitles[section]
     }
-
     
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if (segue.identifier == "Conversation") {
+            var vc = segue.destination as! ConversationViewController
+        }
+    }
+
     // MARK: - UITableViewDataSource
     
     
