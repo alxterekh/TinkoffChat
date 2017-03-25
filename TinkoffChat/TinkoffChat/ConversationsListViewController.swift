@@ -67,7 +67,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let cell = conversationListTableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! ConversationCell
-        //cell.name = "Tinkoff"
+        cell.name = "Tinkoff"
         
         return cell
     }

@@ -23,9 +23,7 @@ class ConversationCell: UITableViewCell {
     private let defaultMessagePlaceholder = "No messages yet"
     
     var name: String? {
-        get {return self.name}
-        set {
-            self.name = newValue
+        didSet {
             if let name = name {
                 nameLabel.text = name
             }
@@ -33,17 +31,13 @@ class ConversationCell: UITableViewCell {
     }
     
     var message: String? {
-        get {return self.message}
-        set {
-            self.message = newValue
-            messageLabel.text = (message != nil) ? message : defaultMessagePlaceholder
+        didSet {
+                messageLabel.text = (message != nil) ? message : defaultMessagePlaceholder
         }
     }
     
     var date: Date? {
-        get {return self.date}
-        set {
-            self.date = newValue
+        didSet {
             if let date = date {
                 let formatter = DateFormatter()
                 formatter.string(from: date)
@@ -52,18 +46,15 @@ class ConversationCell: UITableViewCell {
             }
         }
     }
-    var online: Bool {
-        get {return self.online}
-        set {
-            self.online = newValue
-            self.backgroundColor = (online) ? hightlightedBackgroundCellColor : defaultBackgroundCellColor
+    
+    var online: Bool? {
+        didSet {
+            self.backgroundColor = (online)! ? hightlightedBackgroundCellColor : defaultBackgroundCellColor
         }
     }
-    var hasUnreadMessages: Bool {
-        get {return self.hasUnreadMessages}
-        set {
-            self.hasUnreadMessages = newValue
-            messageLabel.font = (hasUnreadMessages) ? .boldSystemFont(ofSize: 15.0) : .systemFont(ofSize: 15.0)
+    var hasUnreadMessages: Bool? {
+        didSet {
+            messageLabel.font = (hasUnreadMessages)! ? .boldSystemFont(ofSize: 15.0) : .systemFont(ofSize: 15.0)
         }
     }
     

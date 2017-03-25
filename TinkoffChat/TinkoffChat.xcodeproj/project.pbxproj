@@ -87,8 +87,8 @@
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
 				1101CDB91E68CF5B003B7CA1 /* ViewController.swift */,
 				1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */,
-				11370A811E855989006C487B /* Conversation */,
 				11370A7E1E855935006C487B /* ConversationList */,
+				11370A811E855989006C487B /* Conversation */,
 				119142551E68D8AB00FF9A1B /* Core data */,
 				119C36C61E853CA0006B234F /* Storyboards */,
 			);
