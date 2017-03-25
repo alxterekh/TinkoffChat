@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="7PZ-Rs-kzc" kind="relationship" relationship="rootViewController" id="JzR-Qi-gaz"/>
+                        <segue destination="7PZ-Rs-kzc" kind="relationship" relationship="rootViewController" id="hb2-2Z-re1"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPP-48-vO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -94,7 +94,7 @@
             </objects>
             <point key="canvasLocation" x="-978.75" y="-453.16901408450707"/>
         </scene>
-        <!--Conversation View Controller-->
+        <!--TFS-->
         <scene sceneID="m5y-tJ-67V">
             <objects>
                 <viewController id="2RL-d4-GtO" customClass="ConversationViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -107,10 +107,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="TFS" id="hng-cN-bH4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jp1-nM-PcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-165" y="13"/>
+            <point key="canvasLocation" x="-979" y="262"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="d8n-rT-lBn">

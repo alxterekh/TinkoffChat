@@ -30,7 +30,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     @IBAction func saveProfileData(_ sender: UIButton) {
         print("Profile data saved")
-        navigationController!.popViewController(animated: true)
     }
     
     @IBAction func changeTextColor (_ sender: UIButton) {
