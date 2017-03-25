@@ -30,6 +30,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         messagesListTableView.register(MessageCell.self, forCellReuseIdentifier: outcomingMessageCellId)
         messagesListTableView.estimatedRowHeight = 44
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
+        messagesListTableView.tableFooterView = UIView()
     }
     
     override func viewDidAppear(_ animated: Bool) {

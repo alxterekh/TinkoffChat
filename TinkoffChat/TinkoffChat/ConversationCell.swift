@@ -14,7 +14,7 @@ class ConversationCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
+
     private let defaultBackgroundCellColor: UIColor = .white
     private let hightlightedBackgroundCellColor: UIColor = .yellow
     

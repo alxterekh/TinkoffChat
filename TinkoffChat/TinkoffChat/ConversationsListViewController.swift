@@ -26,6 +26,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
         conversationListTableView.register(ConversationCell.self, forCellReuseIdentifier: conversationCellId)
         conversationListTableView.estimatedRowHeight = 44
         conversationListTableView.rowHeight = UITableViewAutomaticDimension
+        conversationListTableView.tableFooterView = UIView()
     }
     
     override func viewDidAppear(_ animated: Bool) {

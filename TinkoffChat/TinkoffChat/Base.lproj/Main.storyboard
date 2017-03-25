@@ -73,9 +73,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="dateLabel" destination="C1J-H8-zXD" id="cga-EK-37v"/>
-                                    <outlet property="messageLabel" destination="3gz-08-Bpl" id="l8f-bp-Lrd"/>
-                                    <outlet property="nameLabel" destination="C8A-Qz-cc7" id="J98-bg-I1p"/>
+                                    <outlet property="dateLabel" destination="C1J-H8-zXD" id="Tes-JL-wY5"/>
+                                    <outlet property="messageLabel" destination="3gz-08-Bpl" id="pxy-pt-avd"/>
+                                    <outlet property="nameLabel" destination="C8A-Qz-cc7" id="LPe-Eh-YMF"/>
                                     <segue destination="2RL-d4-GtO" kind="show" identifier="Conversation" id="2sX-jP-W9D"/>
                                 </connections>
                             </tableViewCell>
@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2w0-9F-jVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-978.75" y="-453.16901408450707"/>
+            <point key="canvasLocation" x="-1048" y="-453"/>
         </scene>
         <!--Name-->
         <scene sceneID="m5y-tJ-67V">
@@ -221,6 +221,7 @@
                                 </state>
                                 <connections>
                                     <action selector="saveProfileData:" destination="p3c-5G-I6k" eventType="touchUpInside" id="5KE-yi-lA6"/>
+                                    <segue destination="CKW-Jb-ShW" kind="show" id="iu8-i7-c6W"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="oLL-g7-aUL">
@@ -324,7 +325,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMI-Gv-cG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-979" y="317"/>
+            <point key="canvasLocation" x="-979" y="323"/>
         </scene>
     </scenes>
     <resources>

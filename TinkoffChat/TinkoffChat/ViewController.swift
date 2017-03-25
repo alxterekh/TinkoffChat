@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     let connectionManager = ConnectionManager()
     let photoPicker = UIImagePickerController()
-    var avatarImageActionSheet:UIAlertController?
+    var avatarImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,30 +63,32 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     func setupDefaultActionSheet() {
         avatarImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        avatarImageActionSheet!.addAction(UIAlertAction(title: "New photo", style: .default) {
-            [unowned self] action in
+
+            avatarImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) {
+                [unowned self] action in
+                
+                self.photoPicker.allowsEditing = false
+                self.photoPicker.sourceType = UIImagePickerControllerSourceType.camera
+                self.photoPicker.cameraCaptureMode = .photo
+                self.photoPicker.modalPresentationStyle = .fullScreen
+                self.present(self.photoPicker, animated: true)
+            })
             
-            self.photoPicker.allowsEditing = false
-            self.photoPicker.sourceType = UIImagePickerControllerSourceType.camera
-            self.photoPicker.cameraCaptureMode = .photo
-            self.photoPicker.modalPresentationStyle = .fullScreen
-            self.present(self.photoPicker, animated: true)
-        })
+            avatarImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
+                [unowned self] action in
+                
+                self.photoPicker.allowsEditing = false
+                self.photoPicker.sourceType = .photoLibrary
+                self.photoPicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+                self.present(self.photoPicker, animated: true)
+            })
+
+            avatarImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
         
-        avatarImageActionSheet!.addAction(UIAlertAction(title: "Select photo", style: .default) {
-            [unowned self] action in
-            
-            self.photoPicker.allowsEditing = false
-            self.photoPicker.sourceType = .photoLibrary
-            self.photoPicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-            self.present(self.photoPicker, animated: true)
-        })
-        
-        avatarImageActionSheet!.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
     }
     
     func addDeleteActionToDefaultActionSheet() {
-        avatarImageActionSheet!.addAction(UIAlertAction(title: "Delete", style: .destructive) {
+        avatarImageActionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {
             [unowned self] action in
             
             self.avatarImageView.image = #imageLiteral(resourceName: "placeholder")
@@ -96,7 +98,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         
-        present(avatarImageActionSheet!, animated: true)
+        present(avatarImageActionSheet, animated: true)
     }
     
     func dismissKeyboard() {
