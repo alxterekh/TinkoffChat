@@ -17,6 +17,7 @@
 		11370A801E855982006C487B /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11370A7F1E855982006C487B /* ConversationViewController.swift */; };
 		11370A831E855A14006C487B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11370A821E855A14006C487B /* MessageCell.swift */; };
 		118102B61E867FFD00E4FA53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118102B51E867FFD00E4FA53 /* DataController.swift */; };
+		118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 118102BA1E8683A600E4FA53 /* CoreData.framework */; };
 		119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 119142521E68D89A00FF9A1B /* Model.xcdatamodeld */; };
 		119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C36C81E853EA6006B234F /* ConversationCell.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		11370A7F1E855982006C487B /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		11370A821E855A14006C487B /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		118102B51E867FFD00E4FA53 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		118102BA1E8683A600E4FA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
 		119142531E68D89A00FF9A1B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		119C36C81E853EA6006B234F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +58,7 @@
 			children = (
 				1101CDB61E68CF5B003B7CA1 /* TinkoffChat */,
 				1101CDB51E68CF5B003B7CA1 /* Products */,
+				118102B91E8683A600E4FA53 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +111,14 @@
 				11370A821E855A14006C487B /* MessageCell.swift */,
 			);
 			name = Conversation;
+			sourceTree = "<group>";
+		};
+		118102B91E8683A600E4FA53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				118102BA1E8683A600E4FA53 /* CoreData.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		119142551E68D8AB00FF9A1B /* Core data */ = {
