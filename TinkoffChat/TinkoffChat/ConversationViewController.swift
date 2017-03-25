@@ -26,8 +26,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     func setup() {
         messagesListTableView.dataSource = self
         messagesListTableView.delegate = self
-        messagesListTableView.register(MessageCell.self, forCellReuseIdentifier: incomingMessageCellId)
-        messagesListTableView.register(MessageCell.self, forCellReuseIdentifier: outcomingMessageCellId)
         messagesListTableView.estimatedRowHeight = 44
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
