@@ -20,55 +20,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     let connectionManager = ConnectionManager()
     let photoPicker = UIImagePickerController()
     var avatarImageActionSheet:UIAlertController?
-    
-    // MARK: - Lifecycle
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        print("\(#function)")
-        printAllControlsDescriptions()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("\(#function)")
-        printAllControlsDescriptions()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("\(#function)")
-        printAllControlsDescriptions()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("\(#function)")
-        printAllControlsDescriptions()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("\(#function)")
-        printAllControlsDescriptions()
-    }
-    
-    // MARK: - Help methods
-    
-    func printAllControlsDescriptions() {
-        let controls = [usernameField, userinfoText, saveButton] as [UIView]
-        for control in controls {
-            print(control.description)
-            print("\n")
-        }
-        print("\n\n")
     }
     
     // MARK: - Actions
     
     @IBAction func saveProfileData(_ sender: UIButton) {
         print("Profile data saved")
+        navigationController!.popViewController(animated: true)
     }
     
     @IBAction func changeTextColor (_ sender: UIButton) {
