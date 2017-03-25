@@ -10,7 +10,7 @@ import UIKit
 
 class MessageCell: UITableViewCell {
 
-   @IBOutlet weak var messageTextLabel: UILabel!
+    @IBOutlet weak var messageTextLabel: UILabel!
     
     var messageText: String?
 }

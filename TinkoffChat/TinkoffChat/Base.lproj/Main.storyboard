@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -111,8 +112,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incoming message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPz-27-ilj">
-                                            <rect key="frame" x="8" y="12" width="143.5" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incoming message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPz-27-ilj">
+                                            <rect key="frame" x="8" y="12" width="240" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -120,6 +121,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="dPz-27-ilj" firstAttribute="centerY" secondItem="5rZ-hK-a3U" secondAttribute="centerY" id="Aqy-Ud-C6q"/>
+                                        <constraint firstItem="dPz-27-ilj" firstAttribute="width" secondItem="5rZ-hK-a3U" secondAttribute="width" multiplier="0.75" id="sPA-7M-mXC"/>
                                         <constraint firstItem="dPz-27-ilj" firstAttribute="leading" secondItem="5rZ-hK-a3U" secondAttribute="leadingMargin" id="zQr-1f-zgk"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -131,8 +133,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outcoming message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wc0-R5-wHv">
-                                            <rect key="frame" x="154" y="11" width="158" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outcoming message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wc0-R5-wHv">
+                                            <rect key="frame" x="72" y="11" width="240" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -141,6 +143,7 @@
                                     <constraints>
                                         <constraint firstItem="wc0-R5-wHv" firstAttribute="centerY" secondItem="1c7-pk-Ihf" secondAttribute="centerY" id="PkW-6c-h1j"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="wc0-R5-wHv" secondAttribute="trailing" id="d9K-zs-E3x"/>
+                                        <constraint firstItem="wc0-R5-wHv" firstAttribute="width" secondItem="1c7-pk-Ihf" secondAttribute="width" multiplier="0.75" id="mS6-xh-aG3"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
