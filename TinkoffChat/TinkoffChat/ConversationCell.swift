@@ -47,14 +47,14 @@ class ConversationCell: UITableViewCell {
         }
     }
     
-    var online: Bool? {
+    var online: Bool = false {
         didSet {
-            self.backgroundColor = (online)! ? hightlightedBackgroundCellColor : defaultBackgroundCellColor
+            self.backgroundColor = (online) ? hightlightedBackgroundCellColor : defaultBackgroundCellColor
         }
     }
-    var hasUnreadMessages: Bool? {
+    var hasUnreadMessages: Bool = false {
         didSet {
-            messageLabel.font = (hasUnreadMessages)! ? .boldSystemFont(ofSize: 15.0) : .systemFont(ofSize: 15.0)
+            messageLabel.font = (hasUnreadMessages) ? .boldSystemFont(ofSize: 15.0) : .systemFont(ofSize: 15.0)
         }
     }
     

@@ -76,7 +76,7 @@
                                     <outlet property="dateLabel" destination="C1J-H8-zXD" id="Tes-JL-wY5"/>
                                     <outlet property="messageLabel" destination="3gz-08-Bpl" id="pxy-pt-avd"/>
                                     <outlet property="nameLabel" destination="C8A-Qz-cc7" id="LPe-Eh-YMF"/>
-                                    <segue destination="2RL-d4-GtO" kind="show" identifier="Conversation" id="2sX-jP-W9D"/>
+                                    <segue destination="2RL-d4-GtO" kind="show" identifier="Conversation" id="8dO-JF-yDZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2w0-9F-jVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1048" y="-453"/>
+            <point key="canvasLocation" x="-981" y="-453"/>
         </scene>
         <!--Name-->
         <scene sceneID="m5y-tJ-67V">
@@ -133,7 +133,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outcoming message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wc0-R5-wHv">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outgoing message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wc0-R5-wHv">
                                             <rect key="frame" x="72" y="11" width="240" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

@@ -36,7 +36,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        performSegue(withIdentifier: "Conversation", sender: self)
+        //performSegue(withIdentifier: "Conversation", sender: self)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
@@ -47,7 +47,11 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if (segue.identifier == "Conversation") {
-            var vc = segue.destination as! ConversationViewController
+            let vc = segue.destination as! ConversationViewController
+            if let sender = sender as? ConversationCell {
+                vc.сonversationTitle = sender.name
+            }
+            print("hui")
         }
     }
 

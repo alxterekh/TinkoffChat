@@ -12,7 +12,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var messagesListTableView: UITableView!
     
-    var titleConversation: String?
+    var сonversationTitle: String?
     
     let incomingMessageCellId = "incomingMessage"
     let outcomingMessageCellId = "outcomingMessage"
@@ -20,7 +20,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        // navigationController!.title! = titleConversation!
     }
     
     func setup() {
