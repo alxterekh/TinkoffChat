@@ -60,14 +60,14 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return dataProvider.createSampleDataForOnlineConversation().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let cell = conversationListTableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! ConversationCell
         
-        let chat = Chat()
+        let chat = dataProvider.createSampleDataForOnlineConversation()[indexPath.row]
         cell.updateCellForChat(chat)
         
         return cell
