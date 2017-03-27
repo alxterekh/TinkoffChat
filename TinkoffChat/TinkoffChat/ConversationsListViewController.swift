@@ -90,7 +90,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
         let thirdMessage = Message()
         thirdMessage.text = "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer. Ferri adversarium ad quo, no cum similique constituam. Exerci intellegat reprimique an vel, est ei impetus sanctus vulputate, praesent scripserit liberavisse mel an. Est salu"
         
-        return [firstMessage, secondMessage, secondMessage] as [Message]
+        return [firstMessage, secondMessage, thirdMessage] as [Message]
     }
 
 }

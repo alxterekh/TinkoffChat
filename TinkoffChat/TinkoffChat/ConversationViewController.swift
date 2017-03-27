@@ -50,8 +50,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         if let outgoingingMessages = chat.outgoingMessages {
             numberOfRows += outgoingingMessages.count
         }
-
-        print("\(numberOfRows)")
+        
         return numberOfRows
     }
     
