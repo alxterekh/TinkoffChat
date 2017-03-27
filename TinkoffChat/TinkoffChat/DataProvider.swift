@@ -11,7 +11,7 @@ import UIKit
 class DataProvider: NSObject {
    
     let names = ["Oleg", "Egor", "Vika", "Tolya", "Ilya", "Serega", "Masha", "Zhiraph", "Ezh", "Phyton"]
-    let messages = ["No messages yet","Hello world!", "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer."]
+    let messages = ["Hello world!", "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer.", "No messages yet"]
     let dates = [Date(), Date(timeIntervalSinceReferenceDate: -123456789.0)]
     
     func createSampleDataForConversation() -> [[Chat]] {

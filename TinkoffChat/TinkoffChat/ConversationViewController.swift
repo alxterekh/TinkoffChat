@@ -16,7 +16,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     let outcomingMessageCellId = "outcomingMessage"
     
     var chat = Chat()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -43,15 +43,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var numberOfRows = 0
-        if let incomingMessages = chat.incomingMessages {
-            numberOfRows += incomingMessages.count
-        }
-        if let outgoingingMessages = chat.outgoingMessages {
-            numberOfRows += outgoingingMessages.count
-        }
         
-        return numberOfRows
+        return calculateNumberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,6 +55,18 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         cell.updateCellForMessage(messages[indexPath.row])
         
         return cell
+    }
+    
+    func calculateNumberOfRows() -> Int {
+        var numberOfRows = 0
+        if let incomingMessages = chat.incomingMessages {
+            numberOfRows += incomingMessages.count
+        }
+        if let outgoingingMessages = chat.outgoingMessages {
+            numberOfRows += outgoingingMessages.count
+        }
+        
+        return numberOfRows
     }
 }
 

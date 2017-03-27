@@ -17,6 +17,8 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     
     let dataProvider = DataProvider()
     
+    var setOfChats = [[Chat]]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -59,16 +61,15 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        let chats = dataProvider.createSampleDataForConversation()[section]
-        return chats.count
+        setOfChats = dataProvider.createSampleDataForConversation()
+        return setOfChats[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let cell = conversationListTableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! ConversationCell
         
-        let chats = dataProvider.createSampleDataForConversation()[indexPath.section]
+        let chats = setOfChats[indexPath.section]
         let chat = chats[indexPath.row]
         cell.updateCellForChat(chat)
         
