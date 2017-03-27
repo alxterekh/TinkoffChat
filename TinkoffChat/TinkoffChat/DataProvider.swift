@@ -9,63 +9,66 @@
 import UIKit
 
 class DataProvider: NSObject {
-    
+   
     let names = ["Oleg", "Egor", "Vika", "Tolya", "Ilya", "Serega", "Masha", "Zhiraph", "Ezh", "Phyton"]
     let messages = ["Hello world!", "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer."]
     let dates = [Date(), Date(timeIntervalSinceReferenceDate: -123456789.0)]
     
-    func randomBool() -> Bool {
-        return arc4random_uniform(2) == 0
-    }
-
-    func createSampleDataForOnlineConversation() -> [Chat] {
+    func createSampleDataForConversation() -> [[Chat]] {
         var onlineChats = [Chat]()
+        var offlineChats = [Chat]()
         
         for name in names {
             let message = messages[Int(arc4random_uniform(2))]
             let hasUnreadMessages = randomBool()
             let date = dates[Int(arc4random_uniform(2))]
-            let chat = createOnlineChatWith(name:name, message:message, date: date, hasUnreadMessages:hasUnreadMessages)
-            onlineChats.append(chat)
+            onlineChats.append(createOnlineChatWith(name:name, message:message, date: date, hasUnreadMessages:hasUnreadMessages))
+            offlineChats.append(createOfflineChatWith(name:name, message:message, date: date, hasUnreadMessages:hasUnreadMessages))
         }
-        return onlineChats
+        let chats = [onlineChats, offlineChats]
+        return chats
     }
     
+    
     func createOnlineChatWith(name:String, message:String?, date: Date, hasUnreadMessages: Bool) -> Chat {
-        let chat = createBaseOnlineChatTemplate()
+        let chat = createChatWith(name:name, message:message, date: date, hasUnreadMessages: hasUnreadMessages)
+        chat.online = true
+        return chat
+    }
+    
+    func createOfflineChatWith(name:String, message:String?, date: Date, hasUnreadMessages: Bool) -> Chat {
+        let chat = createChatWith(name:name, message:message, date: date, hasUnreadMessages: hasUnreadMessages)
+        chat.online = false
+        return chat
+    }
+    
+    func createChatWith(name:String, message:String?, date: Date, hasUnreadMessages: Bool) -> Chat {
+        let chat = Chat()
         chat.name = name
         chat.message = message
         chat.date = date
         chat.hasUnreadMessages = hasUnreadMessages
-        return chat
-    }
-    
-    func createBaseOfflineChatTemplate() -> Chat {
-        let chat = Chat()
         chat.incomingMessages = createMessagesSampleData()
         chat.outgoingMessages = createMessagesSampleData()
-        chat.online = false
         
-        return chat
-    }
-    
-    func createBaseOnlineChatTemplate() -> Chat {
-        let chat = Chat()
-        chat.incomingMessages = createMessagesSampleData()
-        chat.outgoingMessages = createMessagesSampleData()
-        chat.online = true
-
         return chat
     }
     
     func createMessagesSampleData() -> [Message] {
-        let firstMessage = Message()
-        firstMessage.text = "L"
-        let secondMessage = Message()
-        secondMessage.text = "Lorem ipsum dolor sit amet, pe"
-        let thirdMessage = Message()
-        thirdMessage.text = "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer. Ferri adversarium ad quo, no cum similique constituam. Exerci intellegat reprimique an vel, est ei impetus sanctus vulputate, praesent scripserit liberavisse mel an. Est salu"
+        var messages = [Message]()
+        let messageTexts = ["L", "Lorem ipsum dolor sit amet, pe", "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer. Ferri adversarium ad quo, no cum similique constituam. Exerci intellegat reprimique an vel, est ei impetus sanctus vulputate, praesent scripserit liberavisse mel an. Est salu"]
+        for text in messageTexts {
+            let message = Message()
+            message.text = text
+            messages.append(message)
+        }
         
-        return [firstMessage, secondMessage, secondMessage] as [Message]
+        return messages
+    }
+    
+    func randomBool() -> Bool {
+        return arc4random_uniform(2) == 0
     }
 }
+
+
