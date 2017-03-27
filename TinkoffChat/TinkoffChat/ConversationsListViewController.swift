@@ -68,29 +68,11 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
         let cell = conversationListTableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! ConversationCell
         
         let chat = Chat()
-        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-        chat.name = "Tinkoff1"
-        chat.message = "No messages"
-        chat.date = yesterday
-        chat.online = true
-        chat.hasUnreadMessages = true
-        chat.incomingMessages = createMessagesSampleData()
-        chat.outgoingMessages = createMessagesSampleData()
-        
         cell.updateCellForChat(chat)
         
         return cell
     }
-    
-    func createMessagesSampleData() -> [Message] {
-        let firstMessage = Message()
-        firstMessage.text = "L"
-        let secondMessage = Message()
-        secondMessage.text = "Lorem ipsum dolor sit amet, pe"
-        let thirdMessage = Message()
-        thirdMessage.text = "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer. Ferri adversarium ad quo, no cum similique constituam. Exerci intellegat reprimique an vel, est ei impetus sanctus vulputate, praesent scripserit liberavisse mel an. Est salu"
-        
-        return [firstMessage, secondMessage, thirdMessage] as [Message]
-    }
-
 }
+
+
+
