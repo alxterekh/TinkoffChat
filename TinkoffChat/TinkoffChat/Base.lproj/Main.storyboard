@@ -114,15 +114,16 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Incoming message" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPz-27-ilj">
-                                            <rect key="frame" x="8" y="12" width="240" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Incoming message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPz-27-ilj">
+                                            <rect key="frame" x="8" y="4" width="240" height="35"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="dPz-27-ilj" firstAttribute="centerY" secondItem="5rZ-hK-a3U" secondAttribute="centerY" id="Aqy-Ud-C6q"/>
+                                        <constraint firstItem="dPz-27-ilj" firstAttribute="top" secondItem="5rZ-hK-a3U" secondAttribute="top" constant="4" id="Abd-g4-ulh"/>
+                                        <constraint firstAttribute="bottom" secondItem="dPz-27-ilj" secondAttribute="bottom" constant="4" id="Uor-l0-duR"/>
                                         <constraint firstItem="dPz-27-ilj" firstAttribute="width" secondItem="5rZ-hK-a3U" secondAttribute="width" multiplier="0.75" id="sPA-7M-mXC"/>
                                         <constraint firstItem="dPz-27-ilj" firstAttribute="leading" secondItem="5rZ-hK-a3U" secondAttribute="leadingMargin" id="zQr-1f-zgk"/>
                                     </constraints>
@@ -139,16 +140,17 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Outgoing message" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wc0-R5-wHv">
-                                            <rect key="frame" x="72" y="11" width="240" height="21"/>
+                                            <rect key="frame" x="72" y="4" width="240" height="35"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="wc0-R5-wHv" firstAttribute="centerY" secondItem="1c7-pk-Ihf" secondAttribute="centerY" id="PkW-6c-h1j"/>
+                                        <constraint firstAttribute="bottom" secondItem="wc0-R5-wHv" secondAttribute="bottom" constant="4" id="54C-or-BHA"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="wc0-R5-wHv" secondAttribute="trailing" id="d9K-zs-E3x"/>
                                         <constraint firstItem="wc0-R5-wHv" firstAttribute="width" secondItem="1c7-pk-Ihf" secondAttribute="width" multiplier="0.75" id="mS6-xh-aG3"/>
+                                        <constraint firstItem="wc0-R5-wHv" firstAttribute="top" secondItem="1c7-pk-Ihf" secondAttribute="top" constant="4" id="s8c-Qe-7xI"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="0.96862745098039216" blue="0.78431372549019607" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
