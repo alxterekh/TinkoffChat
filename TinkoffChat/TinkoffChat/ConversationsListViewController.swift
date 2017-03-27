@@ -75,6 +75,3 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
         return cell
     }
 }
-
-
-

@@ -59,6 +59,9 @@ class ConversationCell: UITableViewCell {
             formatter.dateFormat = dateIsTooOld(date) ? dateFormatForOldMessages : defaultDateFormat
             dateLabel.text = formatter.string(from: date)
         }
+        else {
+            dateLabel.text = ""
+        }
     }
     
     func configureCellWithOnlineStatus(_ online: Bool) {

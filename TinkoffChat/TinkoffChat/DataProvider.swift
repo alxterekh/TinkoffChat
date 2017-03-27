@@ -11,7 +11,7 @@ import UIKit
 class DataProvider: NSObject {
    
     let names = ["Oleg", "Egor", "Vika", "Tolya", "Ilya", "Serega", "Masha", "Zhiraph", "Ezh", "Phyton"]
-    let messages = ["Hello world!", "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer."]
+    let messages = ["No messages yet","Hello world!", "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer."]
     let dates = [Date(), Date(timeIntervalSinceReferenceDate: -123456789.0)]
     
     func createSampleDataForConversation() -> [[Chat]] {
@@ -19,11 +19,12 @@ class DataProvider: NSObject {
         var offlineChats = [Chat]()
         
         for name in names {
-            let message = messages[Int(arc4random_uniform(2))]
+            let onlineMessage = messages[Int(arc4random_uniform(3))]
+            let historyMessage = messages[Int(arc4random_uniform(2))]
             let hasUnreadMessages = randomBool()
             let date = dates[Int(arc4random_uniform(2))]
-            onlineChats.append(createOnlineChatWith(name:name, message:message, date: date, hasUnreadMessages:hasUnreadMessages))
-            offlineChats.append(createOfflineChatWith(name:name, message:message, date: date, hasUnreadMessages:hasUnreadMessages))
+            onlineChats.append(createOnlineChatWith(name:name, message:onlineMessage, date: date, hasUnreadMessages:hasUnreadMessages))
+            offlineChats.append(createOfflineChatWith(name:name, message:historyMessage, date: date, hasUnreadMessages:hasUnreadMessages))
         }
         let chats = [onlineChats, offlineChats]
         return chats
@@ -32,6 +33,10 @@ class DataProvider: NSObject {
     
     func createOnlineChatWith(name:String, message:String?, date: Date, hasUnreadMessages: Bool) -> Chat {
         let chat = createChatWith(name:name, message:message, date: date, hasUnreadMessages: hasUnreadMessages)
+        if message == "No messages yet" {
+            chat.message = nil
+            chat.date = nil
+        }
         chat.online = true
         return chat
     }
