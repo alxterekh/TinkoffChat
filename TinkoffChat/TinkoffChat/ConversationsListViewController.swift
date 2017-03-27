@@ -25,6 +25,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func setup() {
+        setOfChats = dataProvider.createSampleDataForConversation()
         conversationListTableView.dataSource = self
         conversationListTableView.delegate = self
         conversationListTableView.estimatedRowHeight = 44
@@ -61,7 +62,6 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        setOfChats = dataProvider.createSampleDataForConversation()
         return setOfChats[section].count
     }
     
