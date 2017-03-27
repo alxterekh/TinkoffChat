@@ -12,5 +12,19 @@ class MessageCell: UITableViewCell {
 
     @IBOutlet weak var messageTextLabel: UILabel!
     
-    var messageText: String?
+    var currentMessage = Message() {
+        didSet {
+            configureCellWithText(currentMessage.text)
+        }
+    }
+    
+    func updateCellForMessage(_ message: Message) {
+        currentMessage = message
+    }
+    
+    func configureCellWithText(_ text: String?) {
+        if let text = text {
+           // messageTextLabel.text = text
+        }
+    }
 }

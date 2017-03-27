@@ -64,27 +64,26 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     func setupDefaultActionSheet() {
         avatarImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-            avatarImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) {
-                [unowned self] action in
-                
-                self.photoPicker.allowsEditing = false
-                self.photoPicker.sourceType = UIImagePickerControllerSourceType.camera
-                self.photoPicker.cameraCaptureMode = .photo
-                self.photoPicker.modalPresentationStyle = .fullScreen
-                self.present(self.photoPicker, animated: true)
-            })
+        avatarImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) {
+            [unowned self] action in
             
-            avatarImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
-                [unowned self] action in
-                
-                self.photoPicker.allowsEditing = false
-                self.photoPicker.sourceType = .photoLibrary
-                self.photoPicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-                self.present(self.photoPicker, animated: true)
-            })
-
-            avatarImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
+            self.photoPicker.allowsEditing = false
+            self.photoPicker.sourceType = UIImagePickerControllerSourceType.camera
+            self.photoPicker.cameraCaptureMode = .photo
+            self.photoPicker.modalPresentationStyle = .fullScreen
+            self.present(self.photoPicker, animated: true)
+        })
         
+        avatarImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
+            [unowned self] action in
+            
+            self.photoPicker.allowsEditing = false
+            self.photoPicker.sourceType = .photoLibrary
+            self.photoPicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+            self.present(self.photoPicker, animated: true)
+        })
+        
+        avatarImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
     }
     
     func addDeleteActionToDefaultActionSheet() {

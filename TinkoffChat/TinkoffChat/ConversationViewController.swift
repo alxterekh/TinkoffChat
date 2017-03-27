@@ -12,10 +12,10 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var messagesListTableView: UITableView!
     
-    var сonversationTitle: String?
-    
     let incomingMessageCellId = "incomingMessage"
     let outcomingMessageCellId = "outcomingMessage"
+    
+    var chat = Chat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         messagesListTableView.estimatedRowHeight = 44
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
+        navigationItem.title = chat.name
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,13 +43,24 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 3
+        var numberOfRows = 0
+        if let incomingMessages = chat.incomingMessages {
+            numberOfRows += incomingMessages.count
+        }
+        if let outgoingingMessages = chat.outgoingMessages {
+            numberOfRows += outgoingingMessages.count
+        }
+
+        print("\(numberOfRows)")
+        return numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = messagesListTableView.dequeueReusableCell(withIdentifier:incomingMessageCellId, for:indexPath) as! MessageCell
+        let cellId = (indexPath.row % 2 == 0) ? incomingMessageCellId : outcomingMessageCellId
+        let cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
+        let messages = chat.incomingMessages! + chat.outgoingMessages!
+        cell.updateCellForMessage(messages[indexPath.row])
         
         return cell
     }

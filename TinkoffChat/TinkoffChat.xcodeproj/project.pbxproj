@@ -12,10 +12,13 @@
 		1101CDBD1E68CF5B003B7CA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */; };
 		1101CDBF1E68CF5B003B7CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */; };
 		1101CDC21E68CF5B003B7CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */; };
+		111B5C7E1E88FC640043FD47 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111B5C7D1E88FC640043FD47 /* DataProvider.swift */; };
+		111B5C811E8901670043FD47 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111B5C801E8901670043FD47 /* Message.swift */; };
 		1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */; };
 		1133D4221E69B6AE006A69F3 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */; };
 		11370A801E855982006C487B /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11370A7F1E855982006C487B /* ConversationViewController.swift */; };
 		11370A831E855A14006C487B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11370A821E855A14006C487B /* MessageCell.swift */; };
+		114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9D3D1E88F59300DB0A0B /* Chat.swift */; };
 		118102B61E867FFD00E4FA53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118102B51E867FFD00E4FA53 /* DataController.swift */; };
 		118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 118102BA1E8683A600E4FA53 /* CoreData.framework */; };
 		119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 119142521E68D89A00FF9A1B /* Model.xcdatamodeld */; };
@@ -30,10 +33,13 @@
 		1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1101CDC31E68CF5B003B7CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		111B5C7D1E88FC640043FD47 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		111B5C801E8901670043FD47 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		11370A7F1E855982006C487B /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		11370A821E855A14006C487B /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		114C9D3D1E88F59300DB0A0B /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		118102B51E867FFD00E4FA53 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		118102BA1E8683A600E4FA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
@@ -81,14 +87,23 @@
 			path = TinkoffChat;
 			sourceTree = "<group>";
 		};
+		111B5C7F1E8901040043FD47 /* Connections */ = {
+			isa = PBXGroup;
+			children = (
+				1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */,
+			);
+			name = Connections;
+			sourceTree = "<group>";
+		};
 		1133D4231E69B6BB006A69F3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
 				1101CDB91E68CF5B003B7CA1 /* ViewController.swift */,
-				1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */,
+				111B5C7D1E88FC640043FD47 /* DataProvider.swift */,
 				11370A7E1E855935006C487B /* ConversationList */,
 				11370A811E855989006C487B /* Conversation */,
+				111B5C7F1E8901040043FD47 /* Connections */,
 				119142551E68D8AB00FF9A1B /* Core data */,
 				119C36C61E853CA0006B234F /* Storyboards */,
 			);
@@ -109,6 +124,8 @@
 			children = (
 				11370A7F1E855982006C487B /* ConversationViewController.swift */,
 				11370A821E855A14006C487B /* MessageCell.swift */,
+				114C9D3D1E88F59300DB0A0B /* Chat.swift */,
+				111B5C801E8901670043FD47 /* Message.swift */,
 			);
 			name = Conversation;
 			sourceTree = "<group>";
@@ -228,10 +245,13 @@
 				11370A801E855982006C487B /* ConversationViewController.swift in Sources */,
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,
 				1101CDBA1E68CF5B003B7CA1 /* ViewController.swift in Sources */,
+				114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,
+				111B5C7E1E88FC640043FD47 /* DataProvider.swift in Sources */,
 				118102B61E867FFD00E4FA53 /* DataController.swift in Sources */,
 				119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */,
 				1133D4221E69B6AE006A69F3 /* ConnectionManager.swift in Sources */,
+				111B5C811E8901670043FD47 /* Message.swift in Sources */,
 				1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */,
 				119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */,
 			);
