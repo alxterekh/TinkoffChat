@@ -55,7 +55,6 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     
     // MARK: - UITableViewDataSource
     
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return headersTitles.count

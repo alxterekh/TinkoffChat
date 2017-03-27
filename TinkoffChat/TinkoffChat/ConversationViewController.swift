@@ -16,7 +16,9 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     let outcomingMessageCellId = "outcomingMessage"
     
     var chat = Chat()
-        
+    
+    // MARK: - 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -51,6 +53,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         
         let cellId = (indexPath.row % 2 == 0) ? incomingMessageCellId : outcomingMessageCellId
         let cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
+        
+        //In next homework I'll change architecture for message data model and remove this shit with forced unwrapping ¯\_(ツ)_/¯
         let messages = chat.incomingMessages! + chat.outgoingMessages!
         cell.updateCellForMessage(messages[indexPath.row])
         

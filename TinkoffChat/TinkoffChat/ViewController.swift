@@ -17,13 +17,28 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var textColorSampleLabel: UILabel!
     
-    let connectionManager = ConnectionManager()
-    let photoPicker = UIImagePickerController()
-    var avatarImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
+    //let connectionManager = ConnectionManager()
+    
+    lazy var photoPicker : UIImagePickerController = {
+       
+        return UIImagePickerController()
+    }()
+    
+    lazy var avatarImageActionSheet : UIAlertController = {
+     
+        return UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    }()
+    
+    // MARK: -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupDefaultActionSheet()
     }
     
     // MARK: - Actions
@@ -41,14 +56,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     func setup() {
         setupDependencies()
         setupGestureRecognizer()
-        setupDefaultActionSheet()
     }
     
     func setupDependencies() {
         usernameField.delegate = self
         userinfoText.delegate = self
         photoPicker.delegate = self
-        connectionManager.delegate = self
+        //connectionManager.delegate = self
         usernameField.returnKeyType = .done
     }
     

@@ -11,8 +11,12 @@ import UIKit
 class DataProvider: NSObject {
    
     let names = ["Oleg", "Egor", "Vika", "Tolya", "Ilya", "Serega", "Masha", "Zhiraph", "Ezh", "Phyton"]
+    
     let messages = ["Lorem ipsum dolor", "Lorem ipsum dolor sit amet, persecuti dissentias persequeris ut ius. Iudico evertitur accommodare usu ex, vel at atqui facer.", "No messages yet"]
+    
     let dates = [Date(), Date(timeIntervalSinceReferenceDate: -123456789.0)]
+    
+     // MARK: - 
     
     func createSampleDataForConversation() -> [[Chat]] {
         var onlineChats = [Chat]()
@@ -29,7 +33,6 @@ class DataProvider: NSObject {
         let chats = [onlineChats, offlineChats]
         return chats
     }
-    
     
     func createOnlineChatWith(name:String, message:String?, date: Date, hasUnreadMessages: Bool) -> Chat {
         let chat = createChatWith(name:name, message:message, date: date, hasUnreadMessages: hasUnreadMessages)
@@ -70,6 +73,8 @@ class DataProvider: NSObject {
         
         return messages
     }
+    
+    // MARK: - Help methods
     
     func randomBool() -> Bool {
         return arc4random_uniform(2) == 0
