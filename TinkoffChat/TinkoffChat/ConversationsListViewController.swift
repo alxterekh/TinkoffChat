@@ -19,6 +19,8 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     
     var setOfChats = [[Chat]]()
     
+    @IBAction func unwindToConversationList(segue: UIStoryboardSegue) {}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()

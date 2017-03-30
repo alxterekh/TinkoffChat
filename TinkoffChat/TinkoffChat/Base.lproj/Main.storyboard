@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CKW-Jb-ShW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CKW-Jb-ShW">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -232,7 +232,6 @@
                                 </state>
                                 <connections>
                                     <action selector="saveProfileData:" destination="p3c-5G-I6k" eventType="touchUpInside" id="5KE-yi-lA6"/>
-                                    <segue destination="CKW-Jb-ShW" kind="show" id="iu8-i7-c6W"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="oLL-g7-aUL">
@@ -332,9 +331,11 @@
                         <outlet property="textColorSampleLabel" destination="8bM-Iw-E9R" id="O3e-u0-LuJ"/>
                         <outlet property="userinfoText" destination="oLL-g7-aUL" id="03A-3K-3p5"/>
                         <outlet property="usernameField" destination="e2a-5Y-Ceh" id="Jbx-ao-ftk"/>
+                        <segue destination="JmY-m0-624" kind="unwind" identifier="unwindToConversationList" unwindAction="unwindToConversationListWithSegue:" id="iaq-JF-iNA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMI-Gv-cG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="JmY-m0-624" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-979" y="323"/>
         </scene>

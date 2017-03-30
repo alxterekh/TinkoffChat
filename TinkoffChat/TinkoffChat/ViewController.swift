@@ -45,6 +45,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     @IBAction func saveProfileData(_ sender: UIButton) {
         print("Profile data saved")
+        self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
     }
     
     @IBAction func changeTextColor (_ sender: UIButton) {
