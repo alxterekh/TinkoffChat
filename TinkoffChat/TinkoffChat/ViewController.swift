@@ -37,9 +37,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         })
         alert.addAction(UIAlertAction(title: "Повторить", style: .default) {
             [unowned self] action in
-            if let currentDataManager = self.currentDataManager {
-                currentDataManager
-            }
+            self.saveProfile()
             })
         
         return alert
@@ -76,8 +74,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     @IBAction func saveProfileData(_ sender: UIButton) {
         activityIndicator.startAnimating()
-        lockButtons(true)
         currentDataManager = dataManagerForPressedButton(sender)
+        lockButtons(true)
         saveProfile()
     }
     
@@ -94,7 +92,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     func dataManagerForPressedButton(_ button: UIButton) -> DataManager {
         return (button.tag == 1) ? gcdDataManager : operationDataManager
     }
-    
     
     @IBAction func changeTextColor (_ sender: UIButton) {
         if let color = sender.backgroundColor {
@@ -121,9 +118,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     func tryToUnloadProfileData() {
         activityIndicator.startAnimating()
-        gcdDataManager.unloadProfileData() {
+        operationDataManager.unloadProfileData() {
             (profileData: Profile?) in
-            sleep(2)
             if let profileData = profileData {
                 self.profile = profileData
                 self.updateViewForProfile(profileData)
@@ -229,16 +225,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-          profile.name = text
-            lockButtons(false)
+        if (profile.name != textField.text) {
+            if let text = textField.text {
+                profile.name = text
+                lockButtons(false)
+            }
         }
     }
 
     // MARK: - UITextViewDelegate
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        profile.userinfo = textView.text
-        lockButtons(false)
+        if (profile.userinfo != textView.text) {
+            profile.userinfo = textView.text
+            lockButtons(false)
+        }
     }
 }
