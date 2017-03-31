@@ -10,14 +10,11 @@ import UIKit
 
 class DataDispatcher {
     
-    func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {}
-    func unloadProfileData(completion: @escaping (Bool) -> Void) {}
-
     let fileManager = FileManager.default
 
     func saveProfileData(_ profile: Profile) -> Bool {
         var result = false
-        if let data = UIImagePNGRepresentation(profile.avatarImage) {
+        if let data = UIImageJPEGRepresentation(profile.avatarImage, 0) {
             let filename = getDocumentsDirectory().appendingPathComponent("avatar.png")
             do {
                 try data.write(to: filename)
@@ -43,5 +40,4 @@ class DataDispatcher {
         let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-    
  }

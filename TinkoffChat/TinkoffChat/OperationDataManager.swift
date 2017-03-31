@@ -8,31 +8,38 @@
 
 import UIKit
 
-//class MyOperation: Operation {
-//    
-//    let profile: Profile
-//    var dataDisaptcher = DataDispatcher()
-//    
-//    init(with profile: Profile) {
-//        self.profile = profile
-//    }
-//    
-//    override func main() {
-//
-//        if self.isCancelled {
-//            return
-//        }
-//        
-//        let succees = self.dataDisaptcher.saveProfileData(profile)
-//        
-//        if self.isCancelled {
-//        
-//            return
-//        }
-//    }
-//}
+class MyOperation: Operation {
+    
+    let profile: Profile
+    let completion: (Bool) -> Void
+    var dataDisaptcher = DataDispatcher()
+    
+    init(with profile: Profile, completion: @escaping (Bool) -> Void) {
+        self.profile = profile
+        self.completion = completion
+    }
+    
+    override func main() {
 
-class OperationDataManager: NSObject {
+        if self.isCancelled {
+            return
+        }
+        
+        let succees = self.dataDisaptcher.saveProfileData(profile)
+        
+        if self.isCancelled {
+        
+            return
+        }
+        
+        OperationQueue.main.addOperation({
+            self.completion(succees)
+        })
+
+    }
+}
+
+class OperationDataManager: NSObject, DataManager {
     
     var dataDisaptcher = DataDispatcher()
     

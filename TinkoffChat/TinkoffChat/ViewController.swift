@@ -37,7 +37,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         })
         alert.addAction(UIAlertAction(title: "Повторить", style: .default) {
             [unowned self] action in
-            //repeat saving profile data
+            if let currentDataManager = self.currentDataManager {
+                currentDataManager
+            }
             })
         
         return alert
@@ -54,18 +56,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }()
     
     var profile = Profile()
-    var dataManager = GCDDataManager()
+    var gcdDataManager = GCDDataManager()
+    var operationDataManager = OperationDataManager()
+    var currentDataManager: DataManager?
     
     // MARK: -
     
     override func viewDidLoad() {
-        setup()
         super.viewDidLoad()
+        setup()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupDefaultActionSheet()
         super.viewDidAppear(animated)
+        setupDefaultActionSheet()
     }
     
     // MARK: - Actions
@@ -73,14 +77,24 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBAction func saveProfileData(_ sender: UIButton) {
         activityIndicator.startAnimating()
         lockButtons(true)
-        dataManager.saveProfileData(profile){
-        (succes: Bool) in
+        currentDataManager = dataManagerForPressedButton(sender)
+        saveProfile()
+    }
+    
+    func saveProfile() {
+        currentDataManager!.saveProfileData(profile){
+            (succes: Bool) in
             self.activityIndicator.stopAnimating()
             self.lockButtons(succes)
             let alert = succes ? self.succesSavingDataAlert : self.failureSavingDataAlert
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    func dataManagerForPressedButton(_ button: UIButton) -> DataManager {
+        return (button.tag == 1) ? gcdDataManager : operationDataManager
+    }
+    
     
     @IBAction func changeTextColor (_ sender: UIButton) {
         if let color = sender.backgroundColor {
@@ -98,16 +112,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
    // MARK: - Initialization
     
     func setup() {
-        setupActivityIndicator()
         setupDependencies()
         setupGestureRecognizer()
         lockButtons(true)
         tryToUnloadProfileData()
+        setupActivityIndicator()
     }
     
     func tryToUnloadProfileData() {
         activityIndicator.startAnimating()
-        dataManager.unloadProfileData() {
+        gcdDataManager.unloadProfileData() {
             (profileData: Profile?) in
             sleep(2)
             if let profileData = profileData {

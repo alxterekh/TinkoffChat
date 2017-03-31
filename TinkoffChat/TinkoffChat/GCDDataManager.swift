@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GCDDataManager: NSObject {
+class GCDDataManager: NSObject, DataManager {
     
     var dataDisaptcher = DataDispatcher()
         

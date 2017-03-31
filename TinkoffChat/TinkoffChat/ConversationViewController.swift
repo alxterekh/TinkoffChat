@@ -32,6 +32,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         messagesListTableView.tableFooterView = UIView()
         navigationItem.title = chat.name
     }
+
     
     override func viewDidAppear(_ animated: Bool) {
         messagesListTableView.reloadData()
