@@ -15,7 +15,6 @@ class GCDDataManager: NSObject {
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {
         let queue = DispatchQueue.global(qos: .utility)
         queue.async{
-            sleep(3)
             let succes = self.dataDisaptcher.saveProfileData(profile)
             DispatchQueue.main.async {
                 completion(succes)

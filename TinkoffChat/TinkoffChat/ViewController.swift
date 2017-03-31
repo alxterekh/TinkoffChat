@@ -109,6 +109,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         activityIndicator.startAnimating()
         dataManager.unloadProfileData() {
             (profileData: Profile?) in
+            sleep(2)
             if let profileData = profileData {
                 self.profile = profileData
                 self.updateViewForProfile(profileData)

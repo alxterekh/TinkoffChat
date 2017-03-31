@@ -10,31 +10,38 @@ import UIKit
 
 class DataDispatcher {
     
-    let filename = "profileData"
-    
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {}
     func unloadProfileData(completion: @escaping (Bool) -> Void) {}
-    
+
+    let fileManager = FileManager.default
+
     func saveProfileData(_ profile: Profile) -> Bool {
-        let data = NSKeyedArchiver.archivedData(withRootObject:profile)
-        let path = getDocumentsDirectory().appendingPathComponent(filename)
         var result = false
-        do {
-            try data.write(to: path)
-            result = true
-        } catch {
-            print("Couldn't write file")
+        if let data = UIImagePNGRepresentation(profile.avatarImage) {
+            let filename = getDocumentsDirectory().appendingPathComponent("avatar.png")
+            do {
+                try data.write(to: filename)
+                result = true
+            }
+            catch {
+                 print("Couldn't write file")
+            }
         }
         return result
     }
-
+    
     func unloadProfileData() -> Profile? {
-        let path = getDocumentsDirectory().appendingPathComponent(filename)
-        return NSKeyedUnarchiver.unarchiveObject(withFile: path.absoluteString) as? Profile
+        let profile = Profile()
+        let path = getDocumentsDirectory().appendingPathComponent("avatar.png")
+        if let image = UIImage(contentsOfFile: path.path) {
+             profile.avatarImage = image
+        }
+        return profile
     }
     
     func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-}
+    
+ }
