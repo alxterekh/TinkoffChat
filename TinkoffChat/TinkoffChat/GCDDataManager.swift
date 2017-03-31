@@ -15,18 +15,21 @@ class GCDDataManager: NSObject {
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {
         let queue = DispatchQueue.global(qos: .utility)
         queue.async{
-           //save
+            let succes = self.dataDisaptcher.saveProfileData(profile)
             DispatchQueue.main.async {
-                completion(true)
+                completion(succes)
             }
         }
     }
     
-    func unloadProfileData() {
+    func unloadProfileData(completion: @escaping (Profile) -> Void) {
         let queue = DispatchQueue.global(qos: .utility)
         queue.async{
-            //save
+            let profile = self.dataDisaptcher.unloadProfileData()
             DispatchQueue.main.async {
+                if let profile = profile {
+                    completion(profile)
+                }
             }
         }
     }

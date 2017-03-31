@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     lazy var succesSavingDataAlert: UIAlertController = {
         let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
         return alert
     }()
     
@@ -32,6 +33,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             [unowned self] action in
             //repeat saving profile data
             })
+        
         return alert
     }()
 
@@ -64,28 +66,27 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     @IBAction func saveProfileData(_ sender: UIButton) {
         activityIndicator.startAnimating()
-        unlockButtons(false)
+        lockButtons(true)
         dataManager.saveProfileData(profile){
         (succes: Bool) in
             self.activityIndicator.stopAnimating()
-            self.unlockButtons(true)
+            self.lockButtons(false)
             let alert = succes ? self.succesSavingDataAlert : self.failureSavingDataAlert
             self.present(alert, animated: true, completion: nil)
-            
         }
         //self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
     }
     
     @IBAction func changeTextColor (_ sender: UIButton) {
-        let color = sender.backgroundColor
-        textColorSampleLabel.textColor = color
-        profile.textColor = color
+        if let color = sender.backgroundColor {
+            textColorSampleLabel.textColor = color
+            profile.textColor = color
+        }
     }
     
-    
-    func unlockButtons(_ value: Bool) {
-        saveProfileByGCDButton.isEnabled = value
-        saveProfileByOperationButton.isEnabled = value
+    func lockButtons(_ value: Bool) {
+        saveProfileByGCDButton.isEnabled = !value
+        saveProfileByOperationButton.isEnabled = !value
     }
     
    // MARK: - Initialization
@@ -94,6 +95,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         setupActivityIndicator()
         setupDependencies()
         setupGestureRecognizer()
+        dataManager.unloadProfileData() {
+            (profileData: Profile) in
+            //update UI
+            self.profile = profileData
+        }
     }
     
     func setupActivityIndicator() {
@@ -184,7 +190,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        profile.name = textField.text
+        if let text = textField.text {
+          profile.name = text
+        }
     }
 
     // MARK: - UITextViewDelegate
@@ -192,5 +200,4 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     func textViewDidEndEditing(_ textView: UITextView) {
         profile.userinfo = textView.text
     }
-
 }

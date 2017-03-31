@@ -10,13 +10,12 @@ import UIKit
 
 class Profile: NSObject {
     
-    var name: String?
-    var userinfo: String?
-    var textColor: UIColor?
-    var avatarImage: UIImage
+    var name = ""
+    var userinfo = ""
+    var textColor = UIColor.black
+    var avatarImage = #imageLiteral(resourceName: "placeholder")
     
     override init() {
-        avatarImage = #imageLiteral(resourceName: "placeholder")
         super.init()
     }
 }

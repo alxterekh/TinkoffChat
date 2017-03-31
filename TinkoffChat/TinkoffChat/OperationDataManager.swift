@@ -10,24 +10,27 @@ import UIKit
 
 class OperationDataManager: NSObject {
     
-    func saveProfileData(_ profile: Profile) {
+    var dataDisaptcher = DataDispatcher()
+    
+    func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {
         let queue = OperationQueue()
         let operation = BlockOperation(block: {
-            //save
+            let succes = self.dataDisaptcher.saveProfileData(profile)
             OperationQueue.main.addOperation({
-                //return
+                completion(succes)
             })
         })
         queue.addOperation(operation)
     }
     
-    func unloadProfileData() {
+    func unloadProfileData(completion: @escaping (Profile) -> Void) {
         let queue = OperationQueue()
         let operation = BlockOperation(block: {
-            //save
+        let profile = self.dataDisaptcher.unloadProfileData()
             OperationQueue.main.addOperation({
-                //return
-            })
+                if let profile = profile {
+                    completion(profile)
+                }            })
         })
         queue.addOperation(operation)
     }
