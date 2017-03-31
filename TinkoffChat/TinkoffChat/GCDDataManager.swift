@@ -10,7 +10,7 @@ import UIKit
 
 class GCDDataManager: NSObject, DataManager {
     
-    var dataDisaptcher = DataDispatcher()
+    var dataDisaptcher = DataExtracor()
         
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {
         let queue = DispatchQueue.global(qos: .utility)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DataDispatcher {
+class DataExtracor {
     
     let avatarKey = "avatarKey"
     let nameKey = "nameKey"

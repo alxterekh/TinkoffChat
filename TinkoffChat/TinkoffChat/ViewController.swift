@@ -112,7 +112,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         setupDependencies()
         setupGestureRecognizer()
         lockButtons(true)
-        tryToUnloadProfileData()
+        //tryToUnloadProfileData()
         setupActivityIndicator()
     }
     

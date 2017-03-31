@@ -12,7 +12,7 @@ class SaveDataOperation: Operation {
     
     let profile: Profile
     let completion: (Bool) -> Void
-    var dataDisaptcher = DataDispatcher()
+    var dataDisaptcher = DataExtracor()
     
     init(with profile: Profile, completion: @escaping (Bool) -> Void) {
         self.profile = profile
@@ -42,7 +42,7 @@ class SaveDataOperation: Operation {
 class LoadDataOperation: Operation {
     
     let completion: (Profile?) -> Void
-    var dataDisaptcher = DataDispatcher()
+    var dataDisaptcher = DataExtracor()
     
     init(with completion: @escaping (Profile?) -> Void) {
         self.completion = completion
@@ -69,9 +69,7 @@ class LoadDataOperation: Operation {
 }
 
 class OperationDataManager: NSObject, DataManager {
-    
-    var dataDisaptcher = DataDispatcher()
-    
+        
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {
         let queue = OperationQueue()
         let operation = SaveDataOperation(with: profile, completion: completion)
