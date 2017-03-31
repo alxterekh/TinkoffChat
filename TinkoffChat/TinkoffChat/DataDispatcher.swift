@@ -15,14 +15,8 @@ class DataDispatcher {
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {}
     func unloadProfileData(completion: @escaping (Bool) -> Void) {}
     
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
-    }
-    
     func saveProfileData(_ profile: Profile) -> Bool {
-        let data = NSKeyedArchiver.archivedData(withRootObject: profile)
+        let data = NSKeyedArchiver.archivedData(withRootObject:profile)
         let path = getDocumentsDirectory().appendingPathComponent(filename)
         var result = false
         do {
@@ -35,11 +29,12 @@ class DataDispatcher {
     }
 
     func unloadProfileData() -> Profile? {
-        var profileData: Profile?
         let path = getDocumentsDirectory().appendingPathComponent(filename)
-        if let data = NSKeyedUnarchiver.unarchiveObject(withFile: path.absoluteString) as? Profile {
-            profileData = data
-        }
-        return profileData
+        return NSKeyedUnarchiver.unarchiveObject(withFile: path.absoluteString) as? Profile
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 }

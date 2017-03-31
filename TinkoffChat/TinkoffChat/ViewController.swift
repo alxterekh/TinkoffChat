@@ -21,14 +21,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     lazy var succesSavingDataAlert: UIAlertController = {
         let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default) {
+            [unowned self] action in
+            self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
+        })
         
         return alert
     }()
     
     lazy var failureSavingDataAlert: UIAlertController = {
         let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default) {
+            [unowned self] action in
+            self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
+        })
         alert.addAction(UIAlertAction(title: "Повторить", style: .default) {
             [unowned self] action in
             //repeat saving profile data
@@ -70,17 +76,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         dataManager.saveProfileData(profile){
         (succes: Bool) in
             self.activityIndicator.stopAnimating()
-            self.lockButtons(false)
+            self.lockButtons(succes)
             let alert = succes ? self.succesSavingDataAlert : self.failureSavingDataAlert
             self.present(alert, animated: true, completion: nil)
         }
-        //self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
     }
     
     @IBAction func changeTextColor (_ sender: UIButton) {
         if let color = sender.backgroundColor {
             textColorSampleLabel.textColor = color
             profile.textColor = color
+            lockButtons(false)
         }
     }
     
@@ -95,11 +101,27 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         setupActivityIndicator()
         setupDependencies()
         setupGestureRecognizer()
+        lockButtons(true)
+        tryToUnloadProfileData()
+    }
+    
+    func tryToUnloadProfileData() {
+        activityIndicator.startAnimating()
         dataManager.unloadProfileData() {
-            (profileData: Profile) in
-            //update UI
-            self.profile = profileData
+            (profileData: Profile?) in
+            if let profileData = profileData {
+                self.profile = profileData
+                self.updateViewForProfile(profileData)
+            }
+            self.activityIndicator.stopAnimating()
         }
+    }
+    
+    func updateViewForProfile(_ profile: Profile) {
+        usernameField.text = profile.name
+        userinfoText.text = profile.userinfo
+        avatarImageView.image = profile.avatarImage
+        textColorSampleLabel.textColor = profile.textColor
     }
     
     func setupActivityIndicator() {
@@ -154,6 +176,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             
             self.avatarImageView.image = #imageLiteral(resourceName: "placeholder")
             self.profile.avatarImage = #imageLiteral(resourceName: "placeholder")
+            self.lockButtons(false)
             self.setupDefaultActionSheet()
         })
     }
@@ -173,6 +196,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         avatarImageView.image = chosenImage
         profile.avatarImage = chosenImage
+        lockButtons(false)
         dismiss(animated:true, completion: nil)
         addDeleteActionToDefaultActionSheet()
     }
@@ -192,6 +216,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let text = textField.text {
           profile.name = text
+            lockButtons(false)
         }
     }
 
@@ -199,5 +224,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     
     func textViewDidEndEditing(_ textView: UITextView) {
         profile.userinfo = textView.text
+        lockButtons(false)
     }
 }
