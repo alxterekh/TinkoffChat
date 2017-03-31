@@ -54,20 +54,17 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         let cellId = (indexPath.row % 2 == 0) ? incomingMessageCellId : outcomingMessageCellId
         let cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
         
-        //In next homework I'll change architecture for message data model and remove this shit with forced unwrapping ¯\_(ツ)_/¯
-        let messages = chat.incomingMessages! + chat.outgoingMessages!
-        cell.updateCellForMessage(messages[indexPath.row])
+        if let messages = chat.messages {
+            cell.updateCellForMessage(messages[indexPath.row])
+        }
         
         return cell
     }
     
     func calculateNumberOfRows() -> Int {
         var numberOfRows = 0
-        if let incomingMessages = chat.incomingMessages {
-            numberOfRows += incomingMessages.count
-        }
-        if let outgoingingMessages = chat.outgoingMessages {
-            numberOfRows += outgoingingMessages.count
+        if let messages = chat.messages {
+            numberOfRows += messages.count
         }
         
         return numberOfRows

@@ -101,7 +101,6 @@
 				11189EF11E8D938A00CEA2F0 /* DataDispatcher.swift */,
 				11189EED1E8D836900CEA2F0 /* GCDDataManager.swift */,
 				11189EEF1E8D838A00CEA2F0 /* OperationDataManager.swift */,
-				11189EF31E8D9D6D00CEA2F0 /* Profile.swift */,
 			);
 			name = Storage;
 			sourceTree = "<group>";
@@ -119,6 +118,7 @@
 			children = (
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
 				1101CDB91E68CF5B003B7CA1 /* ViewController.swift */,
+				11189EF31E8D9D6D00CEA2F0 /* Profile.swift */,
 				111B5C7D1E88FC640043FD47 /* DataProvider.swift */,
 				11370A7E1E855935006C487B /* ConversationList */,
 				11370A811E855989006C487B /* Conversation */,

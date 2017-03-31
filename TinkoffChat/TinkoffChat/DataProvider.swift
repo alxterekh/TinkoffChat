@@ -56,8 +56,7 @@ class DataProvider: NSObject {
         chat.message = message
         chat.date = date
         chat.hasUnreadMessages = hasUnreadMessages
-        chat.incomingMessages = createMessagesSampleData()
-        chat.outgoingMessages = createMessagesSampleData()
+        chat.messages = createMessagesSampleData() + createMessagesSampleData()
         
         return chat
     }

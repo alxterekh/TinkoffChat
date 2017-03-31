@@ -12,4 +12,5 @@ class Message: NSObject {
     
     var text: String?
     var date: Date?
+    var isOutgoing: Bool?
 }
