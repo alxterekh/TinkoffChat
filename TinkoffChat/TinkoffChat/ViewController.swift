@@ -23,17 +23,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         return UIImagePickerController()
     }()
     
-    fileprivate lazy var avatarImageActionSheet : UIAlertController = {
-     
-        return UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    }()
-    
     fileprivate var originalProfile = Profile.createDefaultProfile()
     fileprivate var changedProfile = Profile.createDefaultProfile() {
         didSet {
             setButtonsAreEnabled(!(changedProfile == originalProfile))
         }
     }
+    
     fileprivate var gcdBasedDataOperator = GCDBasedDataOperator()
     fileprivate var operationBasedDataOperator = OperationBasedDataOperator()
     
@@ -84,7 +80,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         avatarImageView.addGestureRecognizer(tapOnImage)
     }
     
-    // MARK: -
+    // MARK: - Alerts
     
     fileprivate func showSucceesfulDataSaveOperationAlert() {
         let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
@@ -107,6 +103,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         })
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: -
     
     func saveProfile(using dataManager: DataOperator) {
         activityIndicator.startAnimating()
@@ -148,9 +146,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         saveProfileByOperationButton.isEnabled = value
     }
     
-    func setupDefaultActionSheet() {
-        avatarImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        avatarImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) {
+    func setupDefaultActionsToSheet(_ sheet: UIAlertController) {
+        sheet.addAction(UIAlertAction(title: "New photo", style: .default) {
             [unowned self] action in
             
             self.photoPicker.allowsEditing = false
@@ -160,7 +157,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             self.present(self.photoPicker, animated: true)
         })
         
-        avatarImageActionSheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
+        sheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
             [unowned self] action in
             
             self.photoPicker.allowsEditing = false
@@ -169,11 +166,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             self.present(self.photoPicker, animated: true)
         })
         
-        avatarImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
     }
     
-    func addDeleteActionToDefaultActionSheet() {
-        avatarImageActionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {
+    func addDeleteActionToSheet(_ sheet: UIAlertController) {
+        sheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {
             [unowned self] action in
             
             self.avatarImageView.image = #imageLiteral(resourceName: "placeholder")
@@ -181,12 +178,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         })
     }
     
+    func userPictureIsDefault() -> Bool {
+        return self.avatarImageView.image == #imageLiteral(resourceName: "placeholder")
+    }
+    
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        setupDefaultActionSheet()
-        if (self.avatarImageView.image != #imageLiteral(resourceName: "placeholder")) {
-            addDeleteActionToDefaultActionSheet()
+        
+        let userPictureActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        setupDefaultActionsToSheet(userPictureActionSheet)
+        if (!userPictureIsDefault()) {
+            addDeleteActionToSheet(userPictureActionSheet)
         }
-        present(avatarImageActionSheet, animated: true)
+        present(userPictureActionSheet, animated: true)
     }
     
     func dismissKeyboard() {
