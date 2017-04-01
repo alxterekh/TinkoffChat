@@ -8,10 +8,36 @@
 
 import UIKit
 
-class Profile: NSObject {
+extension Profile: Equatable {}
+
+func ==(lhs: Profile, rhs: Profile) -> Bool {
+    return lhs.name == rhs.name &&
+        lhs.userInfo == rhs.userInfo &&
+        lhs.textColor == rhs.textColor &&
+        lhs.userPicture == rhs.userPicture
+}
+
+struct Profile {
+    let name: String
+    let userInfo: String
+    let userPicture: UIImage
+    let textColor: UIColor
     
-    var name = ""
-    var userinfo = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
-    var textColor = UIColor.black
-    var avatarImage = #imageLiteral(resourceName: "placeholder")    
+    init(name: String, userInfo: String, textColor: UIColor, userPicture: UIImage) {
+        self.name = name
+        self.userInfo = userInfo
+        self.userPicture = userPicture
+        self.textColor = textColor
+    }
+    
+    static func createDefaultProfile() -> Profile {
+        let name = ""
+        let userInfo = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        return Profile(name: name, userInfo: userInfo, textColor: UIColor.black, userPicture: #imageLiteral(resourceName: "placeholder"))
+    }
+
+    
+    func createCopyWithChange(name: String! = nil, userInfo: String! = nil, textColor: UIColor! = nil, userPicture: UIImage! = nil) -> Profile {
+        return Profile(name: name!, userInfo: userInfo!, textColor: textColor!, userPicture: userPicture!)
+    }
 }

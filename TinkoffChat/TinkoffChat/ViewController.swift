@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import MultipeerConnectivity
 
-class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ConnectionManagerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var userinfoText: UITextView!
@@ -18,30 +17,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBOutlet weak var saveProfileByOperationButton: UIButton!
     @IBOutlet weak var textColorSampleLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    lazy var succesSavingDataAlert: UIAlertController = {
-        let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) {
-            [unowned self] action in
-            self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
-        })
-        
-        return alert
-    }()
-    
-    lazy var failureSavingDataAlert: UIAlertController = {
-        let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) {
-            [unowned self] action in
-            self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
-        })
-        alert.addAction(UIAlertAction(title: "Повторить", style: .default) {
-            [unowned self] action in
-            self.saveProfile()
-            })
-        
-        return alert
-    }()
 
     lazy var photoPicker : UIImagePickerController = {
        
@@ -53,91 +28,49 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         return UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     }()
     
-    var profile = Profile()
-    var gcdDataManager = GCDDataManager()
-    var operationDataManager = OperationDataManager()
-    var currentDataManager: DataManager?
+    var originalProfile = Profile.createDefaultProfile()
+    var changedProfile = Profile.createDefaultProfile() {
+        didSet {
+            if (changedProfile == originalProfile) {
+                setButtonsAreEnabled(false)
+            }
+            else {
+                setButtonsAreEnabled(true)
+            }
+        }
+    }
+    var gcdBasedDataOperator = GCDBasedDataOperator()
+    var operationBasedDataOperator = OperationBasedDataOperator()
     
-    // MARK: -
+    // MARK: - Actions
+    
+    @IBAction func saveProfileDataByGCDButtonTap(_ sender: UIButton) {
+        saveProfile(using: gcdBasedDataOperator)
+    }
+    
+    @IBAction func saveProfileDataByOperationButtonTap(_ sender: UIButton) {
+        saveProfile(using: operationBasedDataOperator)
+    }
+    
+    @IBAction func changeTextColor (_ sender: UIButton) {
+        if let color = sender.backgroundColor {
+            textColorSampleLabel.textColor = color
+            changedProfile = changedProfile.createCopyWithChange(textColor: color)
+        }
+    }
+    
+   // MARK: - Initialization
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupDefaultActionSheet()
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func saveProfileData(_ sender: UIButton) {
-        activityIndicator.startAnimating()
-        currentDataManager = dataManagerForPressedButton(sender)
-        lockButtons(true)
-        saveProfile()
-    }
-    
-    func saveProfile() {
-        currentDataManager!.saveProfileData(profile){
-            (succes: Bool) in
-            self.activityIndicator.stopAnimating()
-            self.lockButtons(succes)
-            let alert = succes ? self.succesSavingDataAlert : self.failureSavingDataAlert
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func dataManagerForPressedButton(_ button: UIButton) -> DataManager {
-        return (button.tag == 1) ? gcdDataManager : operationDataManager
-    }
-    
-    @IBAction func changeTextColor (_ sender: UIButton) {
-        if let color = sender.backgroundColor {
-            textColorSampleLabel.textColor = color
-            profile.textColor = color
-            lockButtons(false)
-        }
-    }
-    
-    func lockButtons(_ value: Bool) {
-        saveProfileByGCDButton.isEnabled = !value
-        saveProfileByOperationButton.isEnabled = !value
-    }
-    
-   // MARK: - Initialization
-    
     func setup() {
         setupDependencies()
         setupGestureRecognizer()
-        lockButtons(true)
-        //tryToUnloadProfileData()
-        setupActivityIndicator()
-    }
-    
-    func tryToUnloadProfileData() {
-        activityIndicator.startAnimating()
-        operationDataManager.unloadProfileData() {
-            (profileData: Profile?) in
-            if let profileData = profileData {
-                self.profile = profileData
-                self.updateViewForProfile(profileData)
-            }
-            self.activityIndicator.stopAnimating()
-        }
-    }
-    
-    func updateViewForProfile(_ profile: Profile) {
-        usernameField.text = profile.name
-        userinfoText.text = profile.userinfo
-        avatarImageView.image = profile.avatarImage
-        textColorSampleLabel.textColor = profile.textColor
-    }
-    
-    func setupActivityIndicator() {
-        activityIndicator.hidesWhenStopped = true;
-        activityIndicator.activityIndicatorViewStyle  = .gray;
+        setButtonsAreEnabled(false)
+        loadProfileData()
     }
     
     func setupDependencies() {
@@ -156,9 +89,70 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         avatarImageView.addGestureRecognizer(tapOnImage)
     }
     
+    // MARK: -
+    
+    fileprivate func showSucceesfulDataSaveOperationAlert() {
+        let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) {
+            [unowned self] action in
+            self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
+        })
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    fileprivate func showFailedDataSaveOperationAlert(withDataManager dataManager: DataManager) {
+        let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) {
+            [unowned self] action in
+            self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
+        })
+        alert.addAction(UIAlertAction(title: "Повторить", style: .default) {
+            [unowned self] action in
+            self.saveProfile(using: dataManager)
+        })
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func saveProfile(using dataManager: DataManager) {
+        activityIndicator.startAnimating()
+        setButtonsAreEnabled(false)
+        dataManager.saveProfileData(changedProfile) {
+            self.activityIndicator.stopAnimating()
+            if $0 {
+                self.showSucceesfulDataSaveOperationAlert()
+                self.originalProfile = self.changedProfile
+            }
+            else {
+                self.showFailedDataSaveOperationAlert(withDataManager: dataManager)
+            }
+            self.setButtonsAreEnabled(true)
+        }
+    }
+    
+    func loadProfileData() {
+        activityIndicator.startAnimating()
+        gcdBasedDataOperator.loadProfileData() {
+            self.originalProfile = $0
+            self.changedProfile = $0
+            self.updateViewForProfile()
+            self.activityIndicator.stopAnimating()
+        }
+    }
+    
+    func updateViewForProfile() {
+        usernameField.text = originalProfile.name
+        userinfoText.text = originalProfile.userInfo
+        avatarImageView.image = originalProfile.userPicture
+        textColorSampleLabel.textColor = originalProfile.textColor
+    }
+    
+    func setButtonsAreEnabled(_ value: Bool) {
+        saveProfileByGCDButton.isEnabled = value
+        saveProfileByOperationButton.isEnabled = value
+    }
+    
     func setupDefaultActionSheet() {
         avatarImageActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
         avatarImageActionSheet.addAction(UIAlertAction(title: "New photo", style: .default) {
             [unowned self] action in
             
@@ -186,14 +180,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
             [unowned self] action in
             
             self.avatarImageView.image = #imageLiteral(resourceName: "placeholder")
-            self.profile.avatarImage = #imageLiteral(resourceName: "placeholder")
-            self.lockButtons(false)
-            self.setupDefaultActionSheet()
+            self.changedProfile = self.changedProfile.createCopyWithChange(userPicture: #imageLiteral(resourceName: "placeholder"))
         })
     }
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        
+        setupDefaultActionSheet()
+        if (self.avatarImageView.image != #imageLiteral(resourceName: "placeholder")) {
+            addDeleteActionToDefaultActionSheet()
+        }
         present(avatarImageActionSheet, animated: true)
     }
     
@@ -206,10 +201,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         avatarImageView.image = chosenImage
-        profile.avatarImage = chosenImage
-        lockButtons(false)
+        changedProfile = changedProfile.createCopyWithChange(userPicture: chosenImage)
         dismiss(animated:true, completion: nil)
-        addDeleteActionToDefaultActionSheet()
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -225,20 +218,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if (profile.name != textField.text) {
-            if let text = textField.text {
-                profile.name = text
-                lockButtons(false)
-            }
+        if let text = textField.text {
+            changedProfile = changedProfile.createCopyWithChange(name: text)
         }
     }
-
+    
     // MARK: - UITextViewDelegate
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if (profile.userinfo != textView.text) {
-            profile.userinfo = textView.text
-            lockButtons(false)
+        if let text = textView.text {
+            changedProfile = changedProfile.createCopyWithChange(userInfo: text)
         }
     }
 }

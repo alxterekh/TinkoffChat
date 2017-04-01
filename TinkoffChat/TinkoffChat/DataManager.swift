@@ -11,5 +11,5 @@ import Foundation
 protocol DataManager {
     
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void)
-    func unloadProfileData(completion: @escaping (Profile?) -> Void)
+    func loadProfileData(completion: @escaping (Profile) -> Void)
 }
