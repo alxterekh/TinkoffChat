@@ -38,6 +38,12 @@ struct Profile {
 
     
     func createCopyWithChange(name: String! = nil, userInfo: String! = nil, textColor: UIColor! = nil, userPicture: UIImage! = nil) -> Profile {
-        return Profile(name: name!, userInfo: userInfo!, textColor: textColor!, userPicture: userPicture!)
+        
+        let copyName = name == nil ? self.name : name
+        let copyUserInfo = userInfo == nil ? self.userInfo : userInfo
+        let copyTextColor = textColor == nil ? self.textColor : textColor
+        let copyUserPicture = userPicture == nil ? self.userPicture : userPicture
+        
+        return Profile(name: copyName!, userInfo: copyUserInfo!, textColor: copyTextColor!, userPicture: copyUserPicture!)
     }
 }
