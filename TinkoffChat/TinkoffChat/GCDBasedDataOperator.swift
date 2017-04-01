@@ -8,26 +8,31 @@
 
 import UIKit
 
-class GCDBasedDataOperator: NSObject, DataManager {
+class GCDBasedDataOperator: NSObject, DataOperator {
     
-    var dataExtracor = DataExtracor()
-    let queue = DispatchQueue(label: "dataManagerQueue")
+    fileprivate var dataExtractor = DataExtractor()
+    fileprivate let queue = DispatchQueue(label: "dataManagerQueue")
         
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {
         queue.async{
-            let succes = self.dataExtracor.saveProfileData(profile)
+            let succes = self.dataExtractor.saveProfileData(profile)
             DispatchQueue.main.async {
                 completion(succes)
             }
         }
     }
     
-    func loadProfileData(completion: @escaping (Profile) -> Void) {
+    func loadProfileData(completion: @escaping (Profile?) -> Void) {
         queue.async{
-            if let profile = self.dataExtracor.loadProfileData() {
+            do {
+               let profile = try self.dataExtractor.loadProfileData()
                 DispatchQueue.main.async {
                     completion(profile)
                 }
+            }
+            catch {
+                completion(nil)
+                print("No profile")
             }
         }
     }

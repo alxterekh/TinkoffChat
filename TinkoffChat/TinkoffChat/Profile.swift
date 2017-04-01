@@ -36,14 +36,12 @@ struct Profile {
         return Profile(name: name, userInfo: userInfo, textColor: UIColor.black, userPicture: #imageLiteral(resourceName: "placeholder"))
     }
 
-    
     func createCopyWithChange(name: String! = nil, userInfo: String! = nil, textColor: UIColor! = nil, userPicture: UIImage! = nil) -> Profile {
+        let copyName = name == nil ? self.name : name as String
+        let copyUserInfo = userInfo == nil ? self.userInfo : userInfo as String
+        let copyTextColor = textColor == nil ? self.textColor : textColor as UIColor
+        let copyUserPicture = userPicture == nil ? self.userPicture : userPicture as UIImage
         
-        let copyName = name == nil ? self.name : name
-        let copyUserInfo = userInfo == nil ? self.userInfo : userInfo
-        let copyTextColor = textColor == nil ? self.textColor : textColor
-        let copyUserPicture = userPicture == nil ? self.userPicture : userPicture
-        
-        return Profile(name: copyName!, userInfo: copyUserInfo!, textColor: copyTextColor!, userPicture: copyUserPicture!)
+        return Profile(name: copyName, userInfo: copyUserInfo, textColor: copyTextColor, userPicture: copyUserPicture)
     }
 }

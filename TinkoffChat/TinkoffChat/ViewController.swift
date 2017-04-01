@@ -18,29 +18,24 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     @IBOutlet weak var textColorSampleLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    lazy var photoPicker : UIImagePickerController = {
+    fileprivate lazy var photoPicker : UIImagePickerController = {
        
         return UIImagePickerController()
     }()
     
-    lazy var avatarImageActionSheet : UIAlertController = {
+    fileprivate lazy var avatarImageActionSheet : UIAlertController = {
      
         return UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     }()
     
-    var originalProfile = Profile.createDefaultProfile()
-    var changedProfile = Profile.createDefaultProfile() {
+    fileprivate var originalProfile = Profile.createDefaultProfile()
+    fileprivate var changedProfile = Profile.createDefaultProfile() {
         didSet {
-            if (changedProfile == originalProfile) {
-                setButtonsAreEnabled(false)
-            }
-            else {
-                setButtonsAreEnabled(true)
-            }
+            setButtonsAreEnabled(!(changedProfile == originalProfile))
         }
     }
-    var gcdBasedDataOperator = GCDBasedDataOperator()
-    var operationBasedDataOperator = OperationBasedDataOperator()
+    fileprivate var gcdBasedDataOperator = GCDBasedDataOperator()
+    fileprivate var operationBasedDataOperator = OperationBasedDataOperator()
     
     // MARK: - Actions
     
@@ -100,7 +95,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         self.present(alert, animated: true, completion: nil)
     }
     
-    fileprivate func showFailedDataSaveOperationAlert(withDataManager dataManager: DataManager) {
+    fileprivate func showFailedDataSaveOperationAlert(withDataManager dataManager: DataOperator) {
         let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) {
             [unowned self] action in
@@ -113,7 +108,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
         self.present(alert, animated: true, completion: nil)
     }
     
-    func saveProfile(using dataManager: DataManager) {
+    func saveProfile(using dataManager: DataOperator) {
         activityIndicator.startAnimating()
         setButtonsAreEnabled(false)
         dataManager.saveProfileData(changedProfile) {
@@ -132,14 +127,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     func loadProfileData() {
         activityIndicator.startAnimating()
         gcdBasedDataOperator.loadProfileData() {
-            self.originalProfile = $0
-            self.changedProfile = $0
-            self.updateViewForProfile()
             self.activityIndicator.stopAnimating()
+            if let profile = $0 {
+                self.originalProfile = profile
+                self.changedProfile = profile
+                self.updateView()
+            }
         }
     }
     
-    func updateViewForProfile() {
+    func updateView() {
         usernameField.text = originalProfile.name
         userinfoText.text = originalProfile.userInfo
         avatarImageView.image = originalProfile.userPicture

@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol DataManager {
+protocol DataOperator {
     
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void)
-    func loadProfileData(completion: @escaping (Profile) -> Void)
+    func loadProfileData(completion: @escaping (Profile?) -> Void)
 }

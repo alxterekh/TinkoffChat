@@ -10,13 +10,13 @@ import UIKit
 
 class SaveDataOperation: Operation {
     
-    let profile: Profile
-    let completion: (Bool) -> Void
-    let dataExtracor: DataExtracor
+    fileprivate let profile: Profile
+    fileprivate let completion: (Bool) -> Void
+    fileprivate let dataExtractor: DataExtractor
     
-    init(with profile: Profile, dataExtracor: DataExtracor,completion: @escaping (Bool) -> Void) {
+    init(with profile: Profile, dataExtracor: DataExtractor,completion: @escaping (Bool) -> Void) {
         self.profile = profile
-        self.dataExtracor = dataExtracor
+        self.dataExtractor = dataExtracor
         self.completion = completion
     }
     
@@ -26,7 +26,7 @@ class SaveDataOperation: Operation {
             return
         }
         
-        let succees = self.dataExtracor.saveProfileData(profile)
+        let succees = self.dataExtractor.saveProfileData(profile)
         
         if self.isCancelled {
         
@@ -42,12 +42,12 @@ class SaveDataOperation: Operation {
 
 class LoadDataOperation: Operation {
     
-    let completion: (Profile) -> Void
-    let dataExtracor: DataExtracor
+    fileprivate let completion: (Profile?) -> Void
+    fileprivate let dataExtractor: DataExtractor
     
-    init(with dataExtracor: DataExtracor, completion: @escaping (Profile) -> Void) {
+    init(with dataExtractor: DataExtractor, completion: @escaping (Profile?) -> Void) {
         self.completion = completion
-        self.dataExtracor = dataExtracor
+        self.dataExtractor = dataExtractor
     }
     
     override func main() {
@@ -56,29 +56,30 @@ class LoadDataOperation: Operation {
             return
         }
         
-        if let data = self.dataExtracor.loadProfileData() {
-            if self.isCancelled {
-                
-                return
+        do {
+            let profile = try self.dataExtractor.loadProfileData()
+            DispatchQueue.main.async {
+                self.completion(profile)
             }
-            OperationQueue.main.addOperation({
-                self.completion(data)
-            })
+        }
+        catch {
+            completion(nil)
+            print("No profile")
         }
     }
 }
 
-class OperationBasedDataOperator: NSObject, DataManager {
+class OperationBasedDataOperator: NSObject, DataOperator {
     
-    let queue = OperationQueue()
-    let dataExtractor = DataExtracor()
+    fileprivate let queue = OperationQueue()
+    fileprivate let dataExtractor = DataExtractor()
     
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {
         let operation = SaveDataOperation(with: profile, dataExtracor: dataExtractor, completion: completion)
         queue.addOperation(operation)
     }
     
-    func loadProfileData(completion: @escaping (Profile) -> Void) {
+    func loadProfileData(completion: @escaping (Profile?) -> Void) {
         let operation = LoadDataOperation(with: dataExtractor, completion: completion)
         queue.addOperation(operation)
     }
