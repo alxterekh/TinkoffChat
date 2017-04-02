@@ -119,6 +119,7 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
                 self.showFailedDataSaveOperationAlert(withDataManager: dataOperator)
             }
             self.setButtonsAreEnabled(true)
+            self.handleDataOperationError($1)
         }
     }
     
@@ -132,6 +133,13 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
                 self.changedProfile = profile
                 self.updateView()
             }
+            self.handleDataOperationError($1)
+        }
+    }
+    
+    fileprivate func handleDataOperationError(_ error: Error?) {
+        if let savingError = error {
+            print("\(savingError)")
         }
     }
     

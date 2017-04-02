@@ -11,10 +11,10 @@ import UIKit
 class SaveDataOperation: Operation {
     
     fileprivate let profile: Profile
-    fileprivate let completion: (Bool) -> Void
+    fileprivate let completion: (Bool, Error?) -> Void
     fileprivate let dataStore: FileBasedDataStore
         
-    init(with profile: Profile, dataStore: FileBasedDataStore,completion: @escaping (Bool) -> Void) {
+    init(with profile: Profile, dataStore: FileBasedDataStore,completion: @escaping (Bool, Error?) -> Void) {
         self.profile = profile
         self.dataStore = dataStore
         self.completion = completion
@@ -29,21 +29,23 @@ class SaveDataOperation: Operation {
         do {
             try self.dataStore.saveProfileData(profile)
             DispatchQueue.main.async {
-                self.completion(true)
+                self.completion(true, nil)
             }
         }
         catch {
-            completion(false)
+            DispatchQueue.main.async {
+                self.completion(false, error)
+            }
         }
     }
 }
 
 class LoadDataOperation: Operation {
     
-    fileprivate let completion: (Profile?) -> Void
+    fileprivate let completion: (Profile?, Error?) -> Void
     fileprivate let dataStore: FileBasedDataStore
     
-    init(with dataStore: FileBasedDataStore, completion: @escaping (Profile?) -> Void) {
+    init(with dataStore: FileBasedDataStore, completion: @escaping (Profile?, Error?) -> Void) {
         self.completion = completion
         self.dataStore = dataStore
     }
@@ -57,11 +59,13 @@ class LoadDataOperation: Operation {
         do {
             let profile = try self.dataStore.loadProfileData()
             DispatchQueue.main.async {
-                self.completion(profile)
+                self.completion(profile, nil)
             }
         }
         catch {
-            completion(nil)
+            DispatchQueue.main.async {
+                self.completion(nil, error)
+            }
         }
     }
 }
@@ -71,12 +75,12 @@ class OperationBasedDataOperator: NSObject, DataStore {
     fileprivate let queue = OperationQueue()
     fileprivate let dataStore = FileBasedDataStore()
     
-    func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {
+    func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void) {
         let operation = SaveDataOperation(with: profile, dataStore: dataStore, completion: completion)
         queue.addOperation(operation)
     }
     
-    func loadProfileData(completion: @escaping (Profile?) -> Void) {
+    func loadProfileData(completion: @escaping (Profile?, Error?) -> Void) {
         let operation = LoadDataOperation(with: dataStore, completion: completion)
         queue.addOperation(operation)
     }
