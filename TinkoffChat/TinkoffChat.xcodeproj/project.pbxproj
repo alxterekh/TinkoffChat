@@ -129,9 +129,9 @@
 				11FA245C1E910B47002166D6 /* Extentions */,
 				11FA24621E910F4C002166D6 /* Profile */,
 				11370A7E1E855935006C487B /* ConversationList */,
-				11370A811E855989006C487B /* Conversation */,
 				111B5C7F1E8901040043FD47 /* Connections */,
 				11189EEC1E8D830300CEA2F0 /* Storage */,
+				11370A811E855989006C487B /* Conversation */,
 				119142551E68D8AB00FF9A1B /* Core data */,
 				119C36C61E853CA0006B234F /* Storyboards */,
 			);
@@ -437,6 +437,7 @@
 				CODE_SIGN_ENTITLEMENTS = TinkoffChat/TinkoffChat.entitlements;
 				DEVELOPMENT_TEAM = U754XV4Y2S;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Alexander-Terekhov.TinkoffChat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -451,6 +452,7 @@
 				CODE_SIGN_ENTITLEMENTS = TinkoffChat/TinkoffChat.entitlements;
 				DEVELOPMENT_TEAM = U754XV4Y2S;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Alexander-Terekhov.TinkoffChat";
 				PRODUCT_NAME = "$(TARGET_NAME)";

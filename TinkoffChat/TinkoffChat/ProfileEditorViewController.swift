@@ -106,17 +106,18 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     
     // MARK: -
     
-    func saveProfile(using dataManager: DataOperator) {
+    func saveProfile(using dataOperator: DataOperator) {
         activityIndicator.startAnimating()
         setButtonsAreEnabled(false)
-        dataManager.saveProfileData(changedProfile) {
+        dataOperator.saveProfileData(changedProfile) {
             self.activityIndicator.stopAnimating()
-            if $0 {
+            let savingIsSucceesful = $0
+            if savingIsSucceesful {
                 self.showSucceesfulDataSaveOperationAlert()
                 self.originalProfile = self.changedProfile
             }
             else {
-                self.showFailedDataSaveOperationAlert(withDataManager: dataManager)
+                self.showFailedDataSaveOperationAlert(withDataManager: dataOperator)
             }
             self.setButtonsAreEnabled(true)
         }
