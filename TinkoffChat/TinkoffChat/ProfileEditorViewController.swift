@@ -10,13 +10,13 @@ import UIKit
 
 class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var userinfoText: UITextView!
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var saveProfileByGCDButton: UIButton!
-    @IBOutlet weak var saveProfileByOperationButton: UIButton!
-    @IBOutlet weak var textColorSampleLabel: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate weak var usernameField: UITextField!
+    @IBOutlet fileprivate weak var userinfoText: UITextView!
+    @IBOutlet fileprivate weak var avatarImageView: UIImageView!
+    @IBOutlet fileprivate weak var saveProfileByGCDButton: UIButton!
+    @IBOutlet fileprivate weak var saveProfileByOperationButton: UIButton!
+    @IBOutlet fileprivate weak var textColorSampleLabel: UILabel!
+    @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
     fileprivate lazy var photoPicker : UIImagePickerController = {
        
@@ -35,18 +35,18 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     
     // MARK: - Actions
     
-    @IBAction func saveProfileDataByGCDButtonTap(_ sender: UIButton) {
+    @IBAction fileprivate func saveProfileDataByGCDButtonTap(_ sender: UIButton) {
         saveProfile(using: gcdBasedDataOperator)
     }
     
-    @IBAction func saveProfileDataByOperationButtonTap(_ sender: UIButton) {
+    @IBAction fileprivate func saveProfileDataByOperationButtonTap(_ sender: UIButton) {
         saveProfile(using: operationBasedDataOperator)
     }
     
-    @IBAction func changeTextColor (_ sender: UIButton) {
+    @IBAction fileprivate func changeTextColor (_ sender: UIButton) {
         if let color = sender.backgroundColor {
-            textColorSampleLabel.textColor = color
             changedProfile = changedProfile.createCopyWithChange(textColor: color)
+            updateView()
         }
     }
     
@@ -57,21 +57,21 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         setup()
     }
     
-    func setup() {
+    fileprivate func setup() {
         setupDependencies()
         setupGestureRecognizer()
         setButtonsAreEnabled(false)
         loadProfileData()
     }
     
-    func setupDependencies() {
+    fileprivate func setupDependencies() {
         usernameField.delegate = self
         userinfoText.delegate = self
         photoPicker.delegate = self
         usernameField.returnKeyType = .done
     }
     
-    func setupGestureRecognizer() {
+    fileprivate func setupGestureRecognizer() {
         let tapOnEmptySpace = UITapGestureRecognizer(target: self, action: #selector(ProfileEditorViewController.dismissKeyboard))
         view.addGestureRecognizer(tapOnEmptySpace)
         
@@ -91,7 +91,7 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         self.present(alert, animated: true, completion: nil)
     }
     
-    fileprivate func showFailedDataSaveOperationAlert(withDataManager dataManager: DataOperator) {
+    fileprivate func showFailedDataSaveOperationAlert(withDataManager dataManager: DataStore) {
         let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) {
             [unowned self] action in
@@ -106,13 +106,12 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     
     // MARK: -
     
-    func saveProfile(using dataOperator: DataOperator) {
+    fileprivate func saveProfile(using dataOperator: DataStore) {
         activityIndicator.startAnimating()
         setButtonsAreEnabled(false)
         dataOperator.saveProfileData(changedProfile) {
             self.activityIndicator.stopAnimating()
-            let savingIsSucceesful = $0
-            if savingIsSucceesful {
+            if $0 {
                 self.showSucceesfulDataSaveOperationAlert()
                 self.originalProfile = self.changedProfile
             }
@@ -123,8 +122,9 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         }
     }
     
-    func loadProfileData() {
+    fileprivate func loadProfileData() {
         activityIndicator.startAnimating()
+        // ¯\_(ツ)_/¯ No recommendations for this case in homework
         gcdBasedDataOperator.loadProfileData() {
             self.activityIndicator.stopAnimating()
             if let profile = $0 {
@@ -135,19 +135,29 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         }
     }
     
-    func updateView() {
-        usernameField.text = originalProfile.name
-        userinfoText.text = originalProfile.userInfo
-        avatarImageView.image = originalProfile.userPicture
-        textColorSampleLabel.textColor = originalProfile.textColor
+    fileprivate func updateView() {
+        usernameField.text = changedProfile.name
+        userinfoText.text = changedProfile.userInfo
+        avatarImageView.image = changedProfile.userPicture
+        textColorSampleLabel.textColor = changedProfile.textColor
     }
     
-    func setButtonsAreEnabled(_ value: Bool) {
+    fileprivate func setButtonsAreEnabled(_ value: Bool) {
         saveProfileByGCDButton.isEnabled = value
         saveProfileByOperationButton.isEnabled = value
     }
     
-    func setupDefaultActionsToSheet(_ sheet: UIAlertController) {
+    @objc fileprivate func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        
+        let userPictureActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        addDefaultActionsToSheet(userPictureActionSheet)
+        if (!changedProfile.hasDefaultUserPicture()) {
+            addDeleteActionToSheet(userPictureActionSheet)
+        }
+        present(userPictureActionSheet, animated: true)
+    }
+    
+    fileprivate func addDefaultActionsToSheet(_ sheet: UIAlertController) {
         sheet.addAction(UIAlertAction(title: "New photo", style: .default) {
             [unowned self] action in
             
@@ -170,7 +180,7 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
     }
     
-    func addDeleteActionToSheet(_ sheet: UIAlertController) {
+    fileprivate func addDeleteActionToSheet(_ sheet: UIAlertController) {
         sheet.addAction(UIAlertAction(title: "Delete", style: .destructive) {
             [unowned self] action in
             
@@ -179,21 +189,7 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         })
     }
     
-    func userPictureIsDefault() -> Bool {
-        return self.avatarImageView.image == #imageLiteral(resourceName: "placeholder")
-    }
-    
-    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        
-        let userPictureActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        setupDefaultActionsToSheet(userPictureActionSheet)
-        if (!userPictureIsDefault()) {
-            addDeleteActionToSheet(userPictureActionSheet)
-        }
-        present(userPictureActionSheet, animated: true)
-    }
-    
-    func dismissKeyboard() {
+    @objc fileprivate func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -201,8 +197,8 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        avatarImageView.image = chosenImage
         changedProfile = changedProfile.createCopyWithChange(userPicture: chosenImage)
+        updateView()
         dismiss(animated:true, completion: nil)
     }
     
@@ -214,7 +210,6 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
         return true
     }
     

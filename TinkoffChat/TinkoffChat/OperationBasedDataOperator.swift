@@ -12,11 +12,11 @@ class SaveDataOperation: Operation {
     
     fileprivate let profile: Profile
     fileprivate let completion: (Bool) -> Void
-    fileprivate let dataExtractor: DataExtractor
-    
-    init(with profile: Profile, dataExtracor: DataExtractor,completion: @escaping (Bool) -> Void) {
+    fileprivate let dataStore: FileBasedDataStore
+        
+    init(with profile: Profile, dataStore: FileBasedDataStore,completion: @escaping (Bool) -> Void) {
         self.profile = profile
-        self.dataExtractor = dataExtracor
+        self.dataStore = dataStore
         self.completion = completion
     }
     
@@ -26,28 +26,26 @@ class SaveDataOperation: Operation {
             return
         }
         
-        let succees = self.dataExtractor.saveProfileData(profile)
-        
-        if self.isCancelled {
-        
-            return
+        do {
+            try self.dataStore.saveProfileData(profile)
+            DispatchQueue.main.async {
+                self.completion(true)
+            }
         }
-        
-        OperationQueue.main.addOperation({
-            self.completion(succees)
-        })
-
+        catch {
+            completion(false)
+        }
     }
 }
 
 class LoadDataOperation: Operation {
     
     fileprivate let completion: (Profile?) -> Void
-    fileprivate let dataExtractor: DataExtractor
+    fileprivate let dataStore: FileBasedDataStore
     
-    init(with dataExtractor: DataExtractor, completion: @escaping (Profile?) -> Void) {
+    init(with dataStore: FileBasedDataStore, completion: @escaping (Profile?) -> Void) {
         self.completion = completion
-        self.dataExtractor = dataExtractor
+        self.dataStore = dataStore
     }
     
     override func main() {
@@ -57,30 +55,29 @@ class LoadDataOperation: Operation {
         }
         
         do {
-            let profile = try self.dataExtractor.loadProfileData()
+            let profile = try self.dataStore.loadProfileData()
             DispatchQueue.main.async {
                 self.completion(profile)
             }
         }
         catch {
             completion(nil)
-            print("No profile")
         }
     }
 }
 
-class OperationBasedDataOperator: NSObject, DataOperator {
+class OperationBasedDataOperator: NSObject, DataStore {
     
     fileprivate let queue = OperationQueue()
-    fileprivate let dataExtractor = DataExtractor()
+    fileprivate let dataStore = FileBasedDataStore()
     
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void) {
-        let operation = SaveDataOperation(with: profile, dataExtracor: dataExtractor, completion: completion)
+        let operation = SaveDataOperation(with: profile, dataStore: dataStore, completion: completion)
         queue.addOperation(operation)
     }
     
     func loadProfileData(completion: @escaping (Profile?) -> Void) {
-        let operation = LoadDataOperation(with: dataExtractor, completion: completion)
+        let operation = LoadDataOperation(with: dataStore, completion: completion)
         queue.addOperation(operation)
     }
 }

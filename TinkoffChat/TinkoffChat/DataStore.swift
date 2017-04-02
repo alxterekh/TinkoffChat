@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol DataOperator {
+protocol DataStore {
     
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool) -> Void)
     func loadProfileData(completion: @escaping (Profile?) -> Void)

@@ -20,14 +20,11 @@ func ==(lhs: Profile, rhs: Profile) -> Bool {
 struct Profile {
     let name: String
     let userInfo: String
-    let userPicture: UIImage
     let textColor: UIColor
+    let userPicture: UIImage
     
-    init(name: String, userInfo: String, textColor: UIColor, userPicture: UIImage) {
-        self.name = name
-        self.userInfo = userInfo
-        self.userPicture = userPicture
-        self.textColor = textColor
+    func hasDefaultUserPicture() -> Bool {
+        return self.userPicture == #imageLiteral(resourceName: "placeholder")
     }
     
     static func createDefaultProfile() -> Profile {
@@ -36,11 +33,12 @@ struct Profile {
         return Profile(name: name, userInfo: userInfo, textColor: UIColor.black, userPicture: #imageLiteral(resourceName: "placeholder"))
     }
 
-    func createCopyWithChange(name: String! = nil, userInfo: String! = nil, textColor: UIColor! = nil, userPicture: UIImage! = nil) -> Profile {
-        let copyName = name == nil ? self.name : name as String
-        let copyUserInfo = userInfo == nil ? self.userInfo : userInfo as String
-        let copyTextColor = textColor == nil ? self.textColor : textColor as UIColor
-        let copyUserPicture = userPicture == nil ? self.userPicture : userPicture as UIImage
+    func createCopyWithChange(name: String? = nil, userInfo: String? = nil, textColor: UIColor? = nil, userPicture: UIImage? = nil) -> Profile {
+    
+        let copyName = name ?? self.name
+        let copyUserInfo = userInfo ?? self.userInfo
+        let copyTextColor = textColor ?? self.textColor
+        let copyUserPicture = userPicture ?? self.userPicture
         
         return Profile(name: copyName, userInfo: copyUserInfo, textColor: copyTextColor, userPicture: copyUserPicture)
     }
