@@ -27,6 +27,7 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     fileprivate var changedProfile = Profile.createDefaultProfile() {
         didSet {
             setButtonsAreEnabled(!(changedProfile == originalProfile))
+            updateView()
         }
     }
     
@@ -46,7 +47,6 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     @IBAction fileprivate func changeTextColor (_ sender: UIButton) {
         if let color = sender.backgroundColor {
             changedProfile = changedProfile.createCopyWithChange(textColor: color)
-            updateView()
         }
     }
     
@@ -68,12 +68,11 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         usernameField.delegate = self
         userinfoText.delegate = self
         photoPicker.delegate = self
-        usernameField.returnKeyType = .done
     }
     
     fileprivate func setupGestureRecognizer() {
-        let tapOnEmptySpace = UITapGestureRecognizer(target: self, action: #selector(ProfileEditorViewController.dismissKeyboard))
-        view.addGestureRecognizer(tapOnEmptySpace)
+        let tapToDismissKeyboards = UITapGestureRecognizer(target: self, action: #selector(ProfileEditorViewController.dismissKeyboard))
+        view.addGestureRecognizer(tapToDismissKeyboards)
         
         let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(ProfileEditorViewController.imageTapped(tapGestureRecognizer:)))
         avatarImageView.isUserInteractionEnabled = true
@@ -91,7 +90,7 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         self.present(alert, animated: true, completion: nil)
     }
     
-    fileprivate func showFailedDataSaveOperationAlert(withDataManager dataManager: DataStore) {
+    fileprivate func showFailedDataSaveOperationAlert(withDataStore dataStore: DataStore) {
         let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) {
             [unowned self] action in
@@ -99,40 +98,43 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         })
         alert.addAction(UIAlertAction(title: "Повторить", style: .default) {
             [unowned self] action in
-            self.saveProfile(using: dataManager)
+            self.saveProfile(using: dataStore)
         })
         self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: -
     
-    fileprivate func saveProfile(using dataOperator: DataStore) {
+    fileprivate func saveProfile(using dataStore: DataStore) {
         activityIndicator.startAnimating()
         setButtonsAreEnabled(false)
-        dataOperator.saveProfileData(changedProfile) {
+        dataStore.saveProfileData(changedProfile) {
+            success, error in
+            
             self.activityIndicator.stopAnimating()
-            if $0 {
+            if success {
                 self.showSucceesfulDataSaveOperationAlert()
                 self.originalProfile = self.changedProfile
             }
             else {
-                self.showFailedDataSaveOperationAlert(withDataManager: dataOperator)
+                self.showFailedDataSaveOperationAlert(withDataStore: dataStore)
             }
+            
             self.setButtonsAreEnabled(true)
-            self.handleDataOperationError($1)
+            self.handleDataOperationError(error)
         }
     }
     
     fileprivate func loadProfileData() {
         activityIndicator.startAnimating()
         // ¯\_(ツ)_/¯ No recommendations for this case in homework
-        getRandomDataOperator().loadProfileData() {
+        getRandomDataStore().loadProfileData() {
             self.activityIndicator.stopAnimating()
             if let profile = $0 {
                 self.originalProfile = profile
                 self.changedProfile = profile
-                self.updateView()
             }
+            
             self.handleDataOperationError($1)
         }
     }
@@ -143,7 +145,7 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         }
     }
     
-    fileprivate func getRandomDataOperator() -> DataStore {
+    fileprivate func getRandomDataStore() -> DataStore {
         let dataOperators = [gcdBasedDataOperator, operationBasedDataOperator] as [DataStore]
         return dataOperators[Int(arc4random_uniform(2))]
     }
@@ -211,7 +213,6 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         changedProfile = changedProfile.createCopyWithChange(userPicture: chosenImage)
-        updateView()
         dismiss(animated:true, completion: nil)
     }
     

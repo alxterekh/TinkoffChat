@@ -21,7 +21,6 @@ class SaveDataOperation: Operation {
     }
     
     override func main() {
-
         if self.isCancelled {
             return
         }
@@ -51,21 +50,16 @@ class LoadDataOperation: Operation {
     }
     
     override func main() {
-        
         if self.isCancelled {
             return
         }
         
         do {
             let profile = try self.dataStore.loadProfileData()
-            DispatchQueue.main.async {
-                self.completion(profile, nil)
-            }
+            DispatchQueue.main.async { self.completion(profile, nil) }
         }
         catch {
-            DispatchQueue.main.async {
-                self.completion(nil, error)
-            }
+            DispatchQueue.main.async { self.completion(nil, error) }
         }
     }
 }

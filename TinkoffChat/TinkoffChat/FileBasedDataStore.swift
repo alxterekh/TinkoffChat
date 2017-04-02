@@ -17,17 +17,12 @@ class FileBasedDataStore {
     static let fileName = "profileData"
     
     enum FileBasedDataStoreError: Error {
-        case brokenDataDictionaty
-        case brokenName
-        case brokenUserInfo
-        case brokenUserPicture
-        case brokenTextColor
-        case noFile
+        case brokenData
     }
     
     fileprivate let fileManager = FileManager.default
     
-    func serializeProfileData(_ profile: Profile) -> Dictionary<String, Any> {
+    fileprivate func serializeProfileData(_ profile: Profile) -> Dictionary<String, Any> {
         let avatarImageData = NSKeyedArchiver.archivedData(withRootObject: profile.userPicture)
         let textColorData = NSKeyedArchiver.archivedData(withRootObject: profile.textColor)
         
@@ -37,24 +32,24 @@ class FileBasedDataStore {
                 FileBasedDataStore.textColorKey: textColorData]
     }
     
-    func desirializeProfileData(_ data: Data) throws -> Profile? {
+    fileprivate func desirializeProfileData(_ data: Data) throws -> Profile? {
         
         guard let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String : Any] else {
-            throw FileBasedDataStoreError.brokenDataDictionaty
+            throw FileBasedDataStoreError.brokenData
         }
         guard let name = dictionary[FileBasedDataStore.nameKey] as? String else {
-            throw FileBasedDataStoreError.brokenName
+            throw FileBasedDataStoreError.brokenData
         }
         guard let userInfo = dictionary[FileBasedDataStore.userInfoKey] as? String else {
-            throw FileBasedDataStoreError.brokenUserInfo
+            throw FileBasedDataStoreError.brokenData
         }
         
         guard let userPicture = NSKeyedUnarchiver.unarchiveObject(with: dictionary[FileBasedDataStore.avatarKey] as! Data) as? UIImage else {
-            throw FileBasedDataStoreError.brokenUserPicture
+            throw FileBasedDataStoreError.brokenData
         }
         
         guard let textColor = NSKeyedUnarchiver.unarchiveObject(with: dictionary[FileBasedDataStore.textColorKey] as! Data) as? UIColor else {
-            throw FileBasedDataStoreError.brokenTextColor
+            throw FileBasedDataStoreError.brokenData
         }
 
         return Profile(name: name, userInfo: userInfo, textColor: textColor, userPicture: userPicture)
@@ -69,7 +64,7 @@ class FileBasedDataStore {
     func loadProfileData() throws -> Profile? {
         var profile: Profile?
         guard fileManager.fileExists(atPath: getFilePath().path) else {
-            throw FileBasedDataStoreError.noFile
+            throw FileBasedDataStoreError.brokenData
         }
         let data = try Data(contentsOf: getFilePath())
         profile =  try desirializeProfileData(data)

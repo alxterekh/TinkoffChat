@@ -14,33 +14,25 @@ class GCDBasedDataOperator: NSObject, DataStore {
     fileprivate let queue = DispatchQueue(label: "dataManagerQueue")
         
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void) {
-        queue.async{
+        queue.async {
             do {
                 try self.dataStore.saveProfileData(profile)
-                DispatchQueue.main.async {
-                    completion(true, nil)
-                }
+                DispatchQueue.main.async { completion(true, nil) }
             }
             catch {
-                DispatchQueue.main.async {
-                    completion(false, error)
-                }
+                DispatchQueue.main.async { completion(false, error) }
             }
         }
     }
     
     func loadProfileData(completion: @escaping (Profile?, Error?) -> Void) {
-        queue.async{
+        queue.async {
             do {
                let profile = try self.dataStore.loadProfileData()
-                DispatchQueue.main.async {
-                    completion(profile, nil)
-                }
+                DispatchQueue.main.async { completion(profile, nil) }
             }
             catch {
-                DispatchQueue.main.async {
-                    completion(nil, error)
-                }
+                DispatchQueue.main.async { completion(nil, error) }
             }
         }
     }
