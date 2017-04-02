@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var userinfoText: UITextView!
@@ -72,10 +72,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate,
     }
     
     func setupGestureRecognizer() {
-        let tapOnEmptySpace = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        let tapOnEmptySpace = UITapGestureRecognizer(target: self, action: #selector(ProfileEditorViewController.dismissKeyboard))
         view.addGestureRecognizer(tapOnEmptySpace)
         
-        let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(ViewController.imageTapped(tapGestureRecognizer:)))
+        let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(ProfileEditorViewController.imageTapped(tapGestureRecognizer:)))
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapOnImage)
     }

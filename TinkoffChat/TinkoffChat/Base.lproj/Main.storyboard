@@ -168,10 +168,10 @@
             </objects>
             <point key="canvasLocation" x="-176" y="-453"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile Editor View Controller-->
         <scene sceneID="d8n-rT-lBn">
             <objects>
-                <viewController id="p3c-5G-I6k" customClass="ViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="p3c-5G-I6k" customClass="ProfileEditorViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2O2-XJ-heK"/>
                         <viewControllerLayoutGuide type="bottom" id="pjc-xD-g2D"/>
@@ -220,15 +220,23 @@
                                     <constraint firstAttribute="width" secondItem="JCI-C5-8tX" secondAttribute="height" multiplier="1:1" id="yQf-tI-7zc"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kh1-3g-e6Z">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kh1-3g-e6Z" customClass="ColoredButton" customModule="TinkoffChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="524" width="156" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.8666666666666667" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.88235294117647056" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="mNc-lk-igB"/>
                                 </constraints>
                                 <state key="normal" title="GCD">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                        <color key="value" red="1" green="0.88235294119999996" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBackgroundColor">
+                                        <color key="value" red="0.83921568627450982" green="0.80784313725490198" blue="0.6470588235294118" alpha="0.63621040239726023" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="saveProfileDataByGCDButtonTap:" destination="p3c-5G-I6k" eventType="touchUpInside" id="kja-iZ-z8Z"/>
                                 </connections>
@@ -284,15 +292,23 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6rk-nH-JrQ">
                                 <rect key="frame" x="150" y="274" width="20" height="20"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9I-Qg-v1k">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9I-Qg-v1k" customClass="ColoredButton" customModule="TinkoffChat" customModuleProvider="target">
                                 <rect key="frame" x="164" y="524" width="156" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.86666666670000003" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.88235294117647056" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ETO-9b-biB"/>
                                 </constraints>
                                 <state key="normal" title="Operation">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                        <color key="value" red="1" green="0.88235294119999996" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="disabledBackgroundColor">
+                                        <color key="value" red="0.83921568629999999" green="0.80784313730000001" blue="0.64705882349999999" alpha="0.63621040240000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="saveProfileDataByOperationButtonTap:" destination="p3c-5G-I6k" eventType="touchUpInside" id="Ror-gs-W46"/>
                                 </connections>

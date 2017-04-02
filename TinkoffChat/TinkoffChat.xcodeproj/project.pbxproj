@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */; };
-		1101CDBA1E68CF5B003B7CA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1101CDB91E68CF5B003B7CA1 /* ViewController.swift */; };
+		1101CDBA1E68CF5B003B7CA1 /* ProfileEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1101CDB91E68CF5B003B7CA1 /* ProfileEditorViewController.swift */; };
 		1101CDBD1E68CF5B003B7CA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */; };
 		1101CDBF1E68CF5B003B7CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */; };
 		1101CDC21E68CF5B003B7CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */; };
@@ -28,12 +28,14 @@
 		118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 118102BA1E8683A600E4FA53 /* CoreData.framework */; };
 		119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 119142521E68D89A00FF9A1B /* Model.xcdatamodeld */; };
 		119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C36C81E853EA6006B234F /* ConversationCell.swift */; };
+		11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */; };
+		11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245F1E910C6E002166D6 /* ColoredButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1101CDB41E68CF5B003B7CA1 /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1101CDB91E68CF5B003B7CA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1101CDB91E68CF5B003B7CA1 /* ProfileEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorViewController.swift; sourceTree = "<group>"; };
 		1101CDBC1E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,6 +57,8 @@
 		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
 		119142531E68D89A00FF9A1B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		119C36C81E853EA6006B234F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
+		11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
+		11FA245F1E910C6E002166D6 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,9 +124,10 @@
 			isa = PBXGroup;
 			children = (
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
-				1101CDB91E68CF5B003B7CA1 /* ViewController.swift */,
-				11189EF31E8D9D6D00CEA2F0 /* Profile.swift */,
 				111B5C7D1E88FC640043FD47 /* DataProvider.swift */,
+				11FA24611E910CA3002166D6 /* Additions */,
+				11FA245C1E910B47002166D6 /* Extentions */,
+				11FA24621E910F4C002166D6 /* Profile */,
 				11370A7E1E855935006C487B /* ConversationList */,
 				11370A811E855989006C487B /* Conversation */,
 				111B5C7F1E8901040043FD47 /* Connections */,
@@ -185,6 +190,31 @@
 				119142521E68D89A00FF9A1B /* Model.xcdatamodeld */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		11FA245C1E910B47002166D6 /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */,
+			);
+			name = Extentions;
+			sourceTree = "<group>";
+		};
+		11FA24611E910CA3002166D6 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				11FA245F1E910C6E002166D6 /* ColoredButton.swift */,
+			);
+			name = Additions;
+			sourceTree = "<group>";
+		};
+		11FA24621E910F4C002166D6 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				11189EF31E8D9D6D00CEA2F0 /* Profile.swift */,
+				1101CDB91E68CF5B003B7CA1 /* ProfileEditorViewController.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,7 +297,7 @@
 			files = (
 				11370A801E855982006C487B /* ConversationViewController.swift in Sources */,
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,
-				1101CDBA1E68CF5B003B7CA1 /* ViewController.swift in Sources */,
+				1101CDBA1E68CF5B003B7CA1 /* ProfileEditorViewController.swift in Sources */,
 				11189EF01E8D838A00CEA2F0 /* OperationBasedDataOperator.swift in Sources */,
 				114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,
@@ -276,11 +306,13 @@
 				118102B61E867FFD00E4FA53 /* DataController.swift in Sources */,
 				11189EF61E8EA96000CEA2F0 /* DataOperator.swift in Sources */,
 				11189EF41E8D9D6D00CEA2F0 /* Profile.swift in Sources */,
+				11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */,
 				11189EF21E8D938A00CEA2F0 /* DataExtractor.swift in Sources */,
 				119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */,
 				1133D4221E69B6AE006A69F3 /* ConnectionManager.swift in Sources */,
 				111B5C811E8901670043FD47 /* Message.swift in Sources */,
 				1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */,
+				11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */,
 				119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
