@@ -125,7 +125,7 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     fileprivate func loadProfileData() {
         activityIndicator.startAnimating()
         // ¯\_(ツ)_/¯ No recommendations for this case in homework
-        gcdBasedDataOperator.loadProfileData() {
+        getRandomDataOperator().loadProfileData() {
             self.activityIndicator.stopAnimating()
             if let profile = $0 {
                 self.originalProfile = profile
@@ -133,6 +133,11 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
                 self.updateView()
             }
         }
+    }
+    
+    fileprivate func getRandomDataOperator() -> DataStore {
+        let dataOperators = [gcdBasedDataOperator, operationBasedDataOperator] as [DataStore]
+        return dataOperators[Int(arc4random_uniform(2))]
     }
     
     fileprivate func updateView() {

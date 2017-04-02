@@ -85,5 +85,5 @@ class FileBasedDataStore {
     fileprivate func getFilePath() -> URL {
         return getDocumentsDirectory().appendingPathComponent(FileBasedDataStore.fileName)
     }
-    
+
  }
