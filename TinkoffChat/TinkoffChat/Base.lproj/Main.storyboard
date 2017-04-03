@@ -213,11 +213,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="JCI-C5-8tX">
-                                <rect key="frame" x="80" y="244" width="160" height="160"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="JCI-C5-8tX">
+                                <rect key="frame" x="68" y="244" width="184" height="184"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="WfG-8z-uxR"/>
-                                    <constraint firstAttribute="width" secondItem="JCI-C5-8tX" secondAttribute="height" multiplier="1:1" id="yQf-tI-7zc"/>
+                                    <constraint firstAttribute="width" secondItem="JCI-C5-8tX" secondAttribute="height" multiplier="1:1" id="Crp-xy-hQk"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kh1-3g-e6Z" customClass="ColoredButton" customModule="TinkoffChat" customModuleProvider="target">
@@ -346,6 +345,7 @@
                             <constraint firstItem="aM2-dD-WNR" firstAttribute="leading" secondItem="jSA-tu-Gvv" secondAttribute="trailing" constant="2" id="fCt-KE-9SJ"/>
                             <constraint firstItem="jSA-tu-Gvv" firstAttribute="leading" secondItem="Csv-X4-LyZ" secondAttribute="trailing" constant="2" id="fsA-BL-fiZ"/>
                             <constraint firstItem="JNY-O9-rFf" firstAttribute="top" secondItem="oLL-g7-aUL" secondAttribute="bottom" constant="8" id="gkE-mv-Ghl"/>
+                            <constraint firstItem="8bM-Iw-E9R" firstAttribute="top" secondItem="JCI-C5-8tX" secondAttribute="bottom" constant="20" id="hFD-B0-I7h"/>
                             <constraint firstItem="JNY-O9-rFf" firstAttribute="leading" secondItem="nt1-yP-vPd" secondAttribute="leadingMargin" id="khR-fD-Cps"/>
                             <constraint firstItem="x9I-Qg-v1k" firstAttribute="leading" secondItem="Kh1-3g-e6Z" secondAttribute="trailing" constant="8" id="lz8-I0-wx0"/>
                             <constraint firstItem="NVn-EH-yEF" firstAttribute="leading" secondItem="nt1-yP-vPd" secondAttribute="leadingMargin" id="m5W-NQ-fvO"/>
