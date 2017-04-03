@@ -19,7 +19,6 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
     fileprivate lazy var photoPicker : UIImagePickerController = {
-       
         return UIImagePickerController()
     }()
     

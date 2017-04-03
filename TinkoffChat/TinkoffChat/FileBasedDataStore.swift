@@ -32,7 +32,7 @@ class FileBasedDataStore {
                 FileBasedDataStore.textColorKey: textColorData]
     }
     
-    fileprivate func desirializeProfileData(_ data: Data) throws -> Profile? {
+    fileprivate func deserializeProfileData(_ data: Data) throws -> Profile? {
         
         guard let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String : Any] else {
             throw FileBasedDataStoreError.brokenData
@@ -67,7 +67,7 @@ class FileBasedDataStore {
             throw FileBasedDataStoreError.brokenData
         }
         let data = try Data(contentsOf: getFilePath())
-        profile =  try desirializeProfileData(data)
+        profile =  try deserializeProfileData(data)
            
         return profile
     }
