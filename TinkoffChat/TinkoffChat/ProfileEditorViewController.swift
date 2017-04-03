@@ -134,6 +134,9 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
                 self.originalProfile = profile
                 self.changedProfile = profile
             }
+            else {
+                self.changedProfile = Profile.createDefaultProfile()
+            }
             
             self.handleDataOperationError($1)
         }
