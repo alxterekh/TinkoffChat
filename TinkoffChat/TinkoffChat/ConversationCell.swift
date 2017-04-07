@@ -11,20 +11,20 @@ import UIKit
 
 class ConversationCell: UITableViewCell {
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var messageLabel: UILabel!
+    @IBOutlet fileprivate weak var dateLabel: UILabel!
     
-    private let defaultBackgroundCellColor: UIColor = .white
-    private let hightlightedBackgroundCellColor: UIColor = UIColor(red: 1, green: 247/255, blue: 200/255, alpha: 0.6)
+    fileprivate let defaultBackgroundCellColor: UIColor = .white
+    fileprivate let hightlightedBackgroundCellColor: UIColor = UIColor(red: 1, green: 247/255, blue: 200/255, alpha: 0.6)
     
-    private let defaultDateFormat = "hh:mm"
-    private let dateFormatForOldMessages = "dd MMM"
-    private let defaultMessagePlaceholder = "No messages yet"
+    fileprivate let defaultDateFormat = "hh:mm"
+    fileprivate let dateFormatForOldMessages = "dd MMM"
+    fileprivate let defaultMessagePlaceholder = "No messages yet"
     
-    private let defaultFont = UIFont.systemFont(ofSize: 17.0)
-    private let boldDefaultFont = UIFont.boldSystemFont(ofSize: 17.0)
-    private let alertFont = UIFont(name: "Arial", size: 13.0)
+    fileprivate let defaultFont = UIFont.systemFont(ofSize: 17.0)
+    fileprivate let boldDefaultFont = UIFont.boldSystemFont(ofSize: 17.0)
+    fileprivate let alertFont = UIFont(name: "Arial", size: 13.0)
     
     var currentChat = Chat() {
         didSet {
@@ -41,18 +41,18 @@ class ConversationCell: UITableViewCell {
         currentChat = chat
     }
     
-    func configureCellWithName(_ name: String?) {
+    fileprivate func configureCellWithName(_ name: String?) {
         if let name = name {
             nameLabel.text = name
         }
     }
     
-    func configureCellWithMessage(_ message: String?) {
+    fileprivate func configureCellWithMessage(_ message: String?) {
         messageLabel.text = (message != nil) ? message : defaultMessagePlaceholder
         setupMessageFontIfThereIsUnreadMessages(currentChat.hasUnreadMessages)
     }
     
-    func configureCellWithDate(_ date: Date?) {
+    fileprivate func configureCellWithDate(_ date: Date?) {
         if let date = date {
             let formatter = DateFormatter()
             formatter.string(from: date)
@@ -64,11 +64,11 @@ class ConversationCell: UITableViewCell {
         }
     }
     
-    func configureCellWithOnlineStatus(_ online: Bool) {
+    fileprivate func configureCellWithOnlineStatus(_ online: Bool) {
         self.backgroundColor = (online) ? hightlightedBackgroundCellColor : defaultBackgroundCellColor
     }
     
-    func setupMessageFontIfThereIsUnreadMessages(_ hasUnreadMessages: Bool) {
+    fileprivate func setupMessageFontIfThereIsUnreadMessages(_ hasUnreadMessages: Bool) {
         if currentChat.message != nil {
             messageLabel.font = (hasUnreadMessages) ? boldDefaultFont : defaultFont
         }
@@ -77,7 +77,7 @@ class ConversationCell: UITableViewCell {
         }
     }
     
-    func dateIsTooOld(_ date: Date) -> Bool {
+    fileprivate func dateIsTooOld(_ date: Date) -> Bool {
         let startOfDay = Calendar.current.startOfDay(for: Date())
     
         return date.timeIntervalSince1970 < startOfDay.timeIntervalSince1970

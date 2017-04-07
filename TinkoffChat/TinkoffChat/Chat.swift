@@ -16,5 +16,6 @@ class Chat: NSObject {
     var online: Bool = false
     var hasUnreadMessages: Bool = false
     var messages : [Message]?
+    
 }
 

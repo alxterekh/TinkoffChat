@@ -10,10 +10,10 @@ import UIKit
 
 class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var messagesListTableView: UITableView!
+    @IBOutlet fileprivate weak var messagesListTableView: UITableView!
     
-    let incomingMessageCellId = "incomingMessage"
-    let outcomingMessageCellId = "outcomingMessage"
+    fileprivate let incomingMessageCellId = "incomingMessage"
+    fileprivate let outcomingMessageCellId = "outcomingMessage"
     
     var chat = Chat()
     
@@ -24,7 +24,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         setup()
     }
     
-    func setup() {
+    fileprivate func setup() {
         messagesListTableView.dataSource = self
         messagesListTableView.delegate = self
         messagesListTableView.estimatedRowHeight = 44
@@ -51,18 +51,19 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cellId = (indexPath.row % 2 == 0) ? incomingMessageCellId : outcomingMessageCellId
-        let cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
-        
+        var cell: UITableViewCell?
         if let messages = chat.messages {
-            cell.updateCellForMessage(messages[indexPath.row])
+            let message = messages[indexPath.row]
+            let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
+            cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
         }
-        
-        return cell
+
+        return (cell != nil) ? cell! : UITableViewCell()
     }
     
-    func calculateNumberOfRows() -> Int {
+     // MARK: -
+    
+    fileprivate func calculateNumberOfRows() -> Int {
         var numberOfRows = 0
         if let messages = chat.messages {
             numberOfRows += messages.count

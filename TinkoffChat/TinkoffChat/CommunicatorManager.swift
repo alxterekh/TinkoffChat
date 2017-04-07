@@ -21,6 +21,30 @@ protocol CommunicatorDelegate : class {
 
 class CommunicatorManager: NSObject, CommunicatorDelegate {
     
+    fileprivate let multipeerCommunicator = MultipeerCommunicator()
+    var chats = [Chat]()
+
+    // MARK: -
+    
+    override init() {
+        super.init()
+        setup()
+    }
+    
+    fileprivate func setup() {
+        multipeerCommunicator.delegate = self
+    }
+    
+    func createChatWith(name:String, message:String?, date: Date, hasUnreadMessages: Bool) -> Chat {
+        let chat = Chat()
+        chat.name = name
+        chat.message = message
+        chat.date = date
+        chat.hasUnreadMessages = hasUnreadMessages
+        
+        return chat
+    }
+    
     func didFoundUser(userID: String, userName: String?) {
         
     }
