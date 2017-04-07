@@ -20,10 +20,11 @@
 		111B5C7E1E88FC640043FD47 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111B5C7D1E88FC640043FD47 /* DataProvider.swift */; };
 		111B5C811E8901670043FD47 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111B5C801E8901670043FD47 /* Message.swift */; };
 		1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */; };
-		1133D4221E69B6AE006A69F3 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */; };
+		1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */; };
 		11370A801E855982006C487B /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11370A7F1E855982006C487B /* ConversationViewController.swift */; };
 		11370A831E855A14006C487B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11370A821E855A14006C487B /* MessageCell.swift */; };
 		114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9D3D1E88F59300DB0A0B /* Chat.swift */; };
+		116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F873B1E97854B00C18C49 /* CommunicatorManager.swift */; };
 		118102B61E867FFD00E4FA53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118102B51E867FFD00E4FA53 /* DataController.swift */; };
 		118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 118102BA1E8683A600E4FA53 /* CoreData.framework */; };
 		119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 119142521E68D89A00FF9A1B /* Model.xcdatamodeld */; };
@@ -48,10 +49,11 @@
 		111B5C7D1E88FC640043FD47 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		111B5C801E8901670043FD47 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
-		1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
+		1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
 		11370A7F1E855982006C487B /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		11370A821E855A14006C487B /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		114C9D3D1E88F59300DB0A0B /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		116F873B1E97854B00C18C49 /* CommunicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicatorManager.swift; sourceTree = "<group>"; };
 		118102B51E867FFD00E4FA53 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		118102BA1E8683A600E4FA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
@@ -115,7 +117,8 @@
 		111B5C7F1E8901040043FD47 /* Connections */ = {
 			isa = PBXGroup;
 			children = (
-				1133D4211E69B6AE006A69F3 /* ConnectionManager.swift */,
+				1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */,
+				116F873B1E97854B00C18C49 /* CommunicatorManager.swift */,
 			);
 			name = Connections;
 			sourceTree = "<group>";
@@ -309,8 +312,9 @@
 				11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */,
 				11189EF21E8D938A00CEA2F0 /* FileBasedDataStore.swift in Sources */,
 				119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */,
-				1133D4221E69B6AE006A69F3 /* ConnectionManager.swift in Sources */,
+				1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */,
 				111B5C811E8901670043FD47 /* Message.swift in Sources */,
+				116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */,
 				1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */,
 				11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */,
 				119142541E68D89A00FF9A1B /* Model.xcdatamodeld in Sources */,
