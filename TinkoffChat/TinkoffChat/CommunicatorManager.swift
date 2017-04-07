@@ -19,9 +19,25 @@ protocol CommunicatorDelegate : class {
     func didRecieveMessage(text: String, fromUser: String, toUser:String)
 }
 
+class PeerManager : NSObject {
+    
+    //chat 
+    
+    //some methods for updating
+    
+    //delegate
+
+}
+
+protocol CommunicatorManagerDelegate : class {
+    func updateConversationList()
+}
+
 class CommunicatorManager: NSObject, CommunicatorDelegate {
     
     fileprivate let multipeerCommunicator = MultipeerCommunicator()
+    
+    weak var delegate: CommunicatorManagerDelegate?
     var chats = [Chat]()
 
     // MARK: -
@@ -35,18 +51,10 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
         multipeerCommunicator.delegate = self
     }
     
-    func createChatWith(name:String, message:String?, date: Date, hasUnreadMessages: Bool) -> Chat {
-        let chat = Chat()
-        chat.name = name
-        chat.message = message
-        chat.date = date
-        chat.hasUnreadMessages = hasUnreadMessages
-        
-        return chat
-    }
-    
     func didFoundUser(userID: String, userName: String?) {
-        
+        let chat = Chat()
+        chat.name = userName
+        chats.append(chat)
     }
     
     func didLostUser(userID: String) {
