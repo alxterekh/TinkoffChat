@@ -27,4 +27,9 @@ class PeerManager: NSObject {
     func recieveMessage(text: String) {
        //chat.messages?.append
     }
+    
+    func sendMessage(text: String) {
+        
+    }
+    
 }

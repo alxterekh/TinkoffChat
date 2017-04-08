@@ -160,8 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				11370A7F1E855982006C487B /* ConversationViewController.swift */,
-				11370A821E855A14006C487B /* MessageCell.swift */,
 				114C9D3D1E88F59300DB0A0B /* Chat.swift */,
+				11370A821E855A14006C487B /* MessageCell.swift */,
 				111B5C801E8901670043FD47 /* Message.swift */,
 			);
 			name = Conversation;

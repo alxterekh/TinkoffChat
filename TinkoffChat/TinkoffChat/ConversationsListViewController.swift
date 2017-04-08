@@ -55,6 +55,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
             let vc = segue.destination as! ConversationViewController
             if let sender = sender as? ConversationCell {
                 vc.chat = sender.currentChat
+                //vc.peerManager = sender.peerManager
             }
         }
     }

@@ -13,6 +13,7 @@ class Message: NSObject {
     var text: String?
     var date: Date?
     var isOutcoming: Bool = false
+    var isUnread: Bool = true
     
 //    init(with text: String, date: Date, isOutcoming: Bool) {
 //        self.text = text

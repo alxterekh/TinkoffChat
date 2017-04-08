@@ -26,8 +26,6 @@ class MessageCell: UITableViewCell {
     func configureCellWithText(_ text: String?) {
         if let text = text {
             messageTextLabel.text = text
-            messageTextLabel.layer.masksToBounds = true
-            messageTextLabel.layer.cornerRadius = 3
         }
     }
 }

@@ -33,6 +33,7 @@ class MultipeerCommunicator: NSObject, MCSessionDelegate, MCNearbyServiceBrowser
     
     fileprivate let peerMessageSerializer = PeerMessageSerializer()
     
+    //
     weak var delegate : CommunicatorDelegate?
     var online: Bool = false
     
@@ -60,7 +61,7 @@ class MultipeerCommunicator: NSObject, MCSessionDelegate, MCNearbyServiceBrowser
     }
     
     fileprivate func getMyDiscoveryInfo() -> Dictionary<String, String>? {
-       
+        /// get real name
         return  [discoveryInfoUserNameKey : UIDevice.current.name]
     }
     
@@ -87,8 +88,7 @@ class MultipeerCommunicator: NSObject, MCSessionDelegate, MCNearbyServiceBrowser
 
     // MARK: - MCNearbyServiceAdvertiserDelegate
     
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Swift.Void) {
-        
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
             let session = getSessionFor(peer: peerID)
             let accept = !session.connectedPeers.contains(peerID)
             invitationHandler(accept, session)

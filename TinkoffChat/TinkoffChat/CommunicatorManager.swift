@@ -28,7 +28,7 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
     fileprivate func setup() {
         multipeerCommunicator.delegate = self
     }
-    
+        
     // MARK: -
     
     func didFoundUser(userID: String, userName: String?) {
@@ -51,6 +51,10 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
         return peerManager
     }
     
+    func didLostUser(userID: String) {
+        removePeerManagerWith(identifier: userID)
+    }
+    
     func removePeerManagerWith(identifier: String) {
         if let index = peerManagers.index(where: { $0.identifier == identifier }) {
             peerManagers.remove(at: index)
@@ -58,13 +62,9 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
         }
     }
     
-    func didLostUser(userID: String) {
-        removePeerManagerWith(identifier: userID)
-    }
-    
     func didRecieveMessage(text: String, fromUser: String, toUser:String) {
         if let peerManager = foundPeerManagerWith(identifier: fromUser) {
-            
+            peerManager.recieveMessage(text: text)
         }
     }
     

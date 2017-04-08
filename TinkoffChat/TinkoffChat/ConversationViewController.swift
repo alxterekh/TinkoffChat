@@ -10,7 +10,7 @@ import UIKit
 
 class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet fileprivate weak var messageTextField: UITextView!
+    @IBOutlet fileprivate weak var messageTexView: UITextView!
     @IBOutlet fileprivate weak var messagesListTableView: UITableView!
     @IBOutlet fileprivate weak var sendButton: UIButton!
     
@@ -18,10 +18,15 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
     var chat = Chat()
+    var peerManager: PeerManager?
     
     @IBAction func sendMessage(_ sender: UIButton) {
-        
+        if let peerManager = peerManager {
+            peerManager.sendMessage(text: messageTexView.text)
+            messageTexView.text = ""
+        }
     }
+    
     // MARK: - 
     
     override func viewDidLoad() {
