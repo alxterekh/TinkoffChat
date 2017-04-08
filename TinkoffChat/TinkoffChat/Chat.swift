@@ -13,7 +13,7 @@ class Chat: NSObject {
     var name: String?
     var message: String?
     var date: Date?
-    var online: Bool = false
+    var online: Bool = true
     var hasUnreadMessages: Bool = false
     var messages : [Message]?
     

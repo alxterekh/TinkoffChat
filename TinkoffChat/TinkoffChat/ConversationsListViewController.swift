@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ConversationsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CommunicatorManagerDelegate {
     
     @IBOutlet fileprivate weak var conversationListTableView: UITableView!
     
@@ -25,6 +25,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     fileprivate func setup() {
+        communicatorManager.delegate = self
         conversationListTableView.dataSource = self
         conversationListTableView.delegate = self
         conversationListTableView.estimatedRowHeight = 44
@@ -33,6 +34,12 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        conversationListTableView.reloadData()
+    }
+    
+    // MARK: -
+    
+    func updateConversationList() {
         conversationListTableView.reloadData()
     }
 
@@ -60,14 +67,13 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return communicatorManager.chats.count
+        return communicatorManager.peerManagers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let cell = conversationListTableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! ConversationCell
-        
-        let chat = communicatorManager.chats[indexPath.row]
+        let chat = communicatorManager.peerManagers[indexPath.row].chat
         cell.updateCellForChat(chat)
         
         return cell
