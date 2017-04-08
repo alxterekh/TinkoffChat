@@ -26,7 +26,6 @@ class MessageCell: UITableViewCell {
     func configureCellWithText(_ text: String?) {
         if let text = text {
             messageTextLabel.text = text
-            messageTextLabel.layer.backgroundColor  = UIColor(red: 1, green: 247/255, blue: 200/255, alpha: 0.6).cgColor
             messageTextLabel.layer.masksToBounds = true
             messageTextLabel.layer.cornerRadius = 3
         }

@@ -17,7 +17,6 @@
 		11189EF21E8D938A00CEA2F0 /* FileBasedDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11189EF11E8D938A00CEA2F0 /* FileBasedDataStore.swift */; };
 		11189EF41E8D9D6D00CEA2F0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11189EF31E8D9D6D00CEA2F0 /* Profile.swift */; };
 		11189EF61E8EA96000CEA2F0 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11189EF51E8EA96000CEA2F0 /* DataStore.swift */; };
-		111B5C7E1E88FC640043FD47 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111B5C7D1E88FC640043FD47 /* DataProvider.swift */; };
 		111B5C811E8901670043FD47 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111B5C801E8901670043FD47 /* Message.swift */; };
 		1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */; };
 		1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */; };
@@ -49,7 +48,6 @@
 		11189EF11E8D938A00CEA2F0 /* FileBasedDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileBasedDataStore.swift; sourceTree = "<group>"; };
 		11189EF31E8D9D6D00CEA2F0 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		11189EF51E8EA96000CEA2F0 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		111B5C7D1E88FC640043FD47 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		111B5C801E8901670043FD47 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
-				111B5C7D1E88FC640043FD47 /* DataProvider.swift */,
 				11FA24611E910CA3002166D6 /* Additions */,
 				11FA245C1E910B47002166D6 /* Extentions */,
 				111B5C7F1E8901040043FD47 /* Connections */,
@@ -315,7 +312,6 @@
 				11F3856A1E98CDD700F90EB0 /* PeerManager.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,
 				11189EEE1E8D836900CEA2F0 /* GCDBasedDataOperator.swift in Sources */,
-				111B5C7E1E88FC640043FD47 /* DataProvider.swift in Sources */,
 				118102B61E867FFD00E4FA53 /* DataController.swift in Sources */,
 				11189EF61E8EA96000CEA2F0 /* DataStore.swift in Sources */,
 				11189EF41E8D9D6D00CEA2F0 /* Profile.swift in Sources */,

@@ -165,7 +165,6 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
     }
     
     @objc fileprivate func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        
         let userPictureActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         addDefaultActionsToSheet(userPictureActionSheet)
         if (!changedProfile.hasDefaultUserPicture()) {

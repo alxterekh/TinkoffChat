@@ -123,6 +123,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Incoming message" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QK-Gp-uDL">
                                                     <rect key="frame" x="8" y="4" width="240" height="36"/>
+                                                    <color key="backgroundColor" red="0.87652680837563457" green="0.86727288068397612" blue="0.85288778313202318" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -148,6 +149,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Outgoing message" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHu-nQ-Nr5">
                                                     <rect key="frame" x="72" y="4" width="240" height="36"/>
+                                                    <color key="backgroundColor" red="1" green="0.90228585023564523" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -168,9 +170,32 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30p-Kr-ClN">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufk-3H-vau">
+                                        <rect key="frame" x="276" y="7" width="36" height="30"/>
+                                        <state key="normal" title="Send"/>
+                                        <connections>
+                                            <action selector="sendMessage:" destination="hsG-j1-tl3" eventType="touchUpInside" id="OVS-0o-YYb"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Текст сообщения" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PhR-5O-ggf">
+                                        <rect key="frame" x="8" y="8.5" width="260" height="27"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="tQw-4J-JWj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.87870796319796951" green="0.87870796319796951" blue="0.87870796319796951" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="PhR-5O-ggf" firstAttribute="centerY" secondItem="30p-Kr-ClN" secondAttribute="centerY" id="53o-So-Pgp"/>
                                     <constraint firstAttribute="height" constant="44" id="Dt6-OJ-KLZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="ufk-3H-vau" secondAttribute="trailing" constant="8" id="FbM-d0-aJz"/>
+                                    <constraint firstItem="ufk-3H-vau" firstAttribute="centerY" secondItem="PhR-5O-ggf" secondAttribute="centerY" id="WYH-Ey-emG"/>
+                                    <constraint firstItem="PhR-5O-ggf" firstAttribute="leading" secondItem="30p-Kr-ClN" secondAttribute="leading" constant="8" id="j7Z-Ka-mQC"/>
+                                    <constraint firstItem="ufk-3H-vau" firstAttribute="leading" secondItem="PhR-5O-ggf" secondAttribute="trailing" constant="8" id="rc8-zB-kES"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -186,10 +211,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Name" id="Pht-Qo-if3"/>
+                    <connections>
+                        <outlet property="messageTextField" destination="PhR-5O-ggf" id="x1z-G9-p7E"/>
+                        <outlet property="messagesListTableView" destination="See-Yo-p7l" id="MrD-Rp-gBu"/>
+                        <outlet property="sendButton" destination="ufk-3H-vau" id="e4i-uX-aca"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ANe-OG-vMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-159.375" y="-453.16901408450707"/>
+            <point key="canvasLocation" x="-36" y="-453"/>
         </scene>
         <!--Profile Editor View Controller-->
         <scene sceneID="d8n-rT-lBn">

@@ -13,4 +13,11 @@ class Message: NSObject {
     var text: String?
     var date: Date?
     var isOutcoming: Bool = false
+    
+//    init(with text: String, date: Date, isOutcoming: Bool) {
+//        self.text = text
+//        self.date = date
+//        self.isOutcoming = isOutcoming
+//        super.init()
+//    }
 }

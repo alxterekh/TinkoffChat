@@ -10,18 +10,27 @@ import UIKit
 
 class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet fileprivate weak var messageTextField: UITextView!
     @IBOutlet fileprivate weak var messagesListTableView: UITableView!
+    @IBOutlet fileprivate weak var sendButton: UIButton!
     
     fileprivate let incomingMessageCellId = "incomingMessage"
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
     var chat = Chat()
     
+    @IBAction func sendMessage(_ sender: UIButton) {
+        
+    }
     // MARK: - 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    deinit {
+        unsubscribeFromKeyboardNotification()
     }
     
     fileprivate func setup() {
@@ -31,8 +40,43 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
         navigationItem.title = chat.name
+        subscribeForKeyboardNotification()
+        setupGestureRecognizer()
     }
-
+    
+    fileprivate func subscribeForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(ConversationViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ConversationViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    fileprivate func unsubscribeFromKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    fileprivate func setupGestureRecognizer() {
+        let tapToDismissKeyboards = UITapGestureRecognizer(target: self, action: #selector(ConversationViewController.dismissKeyboard))
+        view.addGestureRecognizer(tapToDismissKeyboards)
+    }
+    
+    @objc fileprivate func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc fileprivate func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc fileprivate func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         messagesListTableView.reloadData()

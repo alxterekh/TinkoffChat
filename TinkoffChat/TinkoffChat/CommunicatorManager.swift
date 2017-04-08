@@ -62,15 +62,17 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
         removePeerManagerWith(identifier: userID)
     }
     
+    func didRecieveMessage(text: String, fromUser: String, toUser:String) {
+        if let peerManager = foundPeerManagerWith(identifier: fromUser) {
+            
+        }
+    }
+    
     func failedToStartBrowsingForUsers(error: Error) {
-        
+        //error handling
     }
     
     func failedToStartAdvertising(error: Error) {
-        
-    }
-    
-    func didRecieveMessage(text: String, fromUser: String, toUser:String) {
-        
+        //error handling
     }
 }

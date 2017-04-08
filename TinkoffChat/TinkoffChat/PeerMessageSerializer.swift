@@ -9,7 +9,7 @@
 import UIKit
 
 class PeerMessageSerializer: NSObject {
-    
+
     fileprivate static let messageEventTypeKey = "eventType"
     fileprivate static let messageEventTypeDescription = "TextMessage"
     fileprivate static let messageIdKey = "messageId"
