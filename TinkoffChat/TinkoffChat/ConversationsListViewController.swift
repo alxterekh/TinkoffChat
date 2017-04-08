@@ -54,8 +54,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
         if (segue.identifier == "Conversation") {
             let vc = segue.destination as! ConversationViewController
             if let sender = sender as? ConversationCell {
-                vc.chat = sender.currentChat
-                //vc.peerManager = sender.peerManager
+                vc.peerManager = sender.peerManager
             }
         }
     }
@@ -74,8 +73,8 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let cell = conversationListTableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! ConversationCell
-        let chat = communicatorManager.peerManagers[indexPath.row].chat
-        cell.updateCellForChat(chat)
+        let peerManager = communicatorManager.peerManagers[indexPath.row]
+        cell.updateCellForPeerManager(peerManager)
         
         return cell
     }

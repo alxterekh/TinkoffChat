@@ -26,19 +26,21 @@ class ConversationCell: UITableViewCell {
     fileprivate let boldDefaultFont = UIFont.boldSystemFont(ofSize: 17.0)
     fileprivate let alertFont = UIFont(name: "Arial", size: 13.0)
     
-    var currentChat = Chat() {
+    var peerManager: PeerManager? {
         didSet {
-            configureCellWithName(currentChat.name)
-            configureCellWithDate(currentChat.date)
-            configureCellWithOnlineStatus(currentChat.online)
-            configureCellWithMessage(currentChat.message)
+            if let peerManager = peerManager {
+                configureCellWithName(peerManager.chat.name)
+                configureCellWithDate(peerManager.chat.date)
+                configureCellWithOnlineStatus(peerManager.chat.online)
+                configureCellWithMessage(peerManager.chat.message)
+            }
         }
     }
     
     // MARK: - Cell configuration
     
-    func updateCellForChat(_ chat: Chat) {
-        currentChat = chat
+    func updateCellForPeerManager(_ peerManager: PeerManager) {
+        self.peerManager = peerManager
     }
     
     fileprivate func configureCellWithName(_ name: String?) {
@@ -49,7 +51,7 @@ class ConversationCell: UITableViewCell {
     
     fileprivate func configureCellWithMessage(_ message: String?) {
         messageLabel.text = (message != nil) ? message : defaultMessagePlaceholder
-        setupMessageFontIfThereIsUnreadMessages(currentChat.hasUnreadMessages)
+        setupMessageFontIfThereIsUnreadMessages(peerManager!.chat.hasUnreadMessages)
     }
     
     fileprivate func configureCellWithDate(_ date: Date?) {
@@ -69,7 +71,7 @@ class ConversationCell: UITableViewCell {
     }
     
     fileprivate func setupMessageFontIfThereIsUnreadMessages(_ hasUnreadMessages: Bool) {
-        if currentChat.message != nil {
+        if peerManager!.chat.message != nil {
             messageLabel.font = (hasUnreadMessages) ? boldDefaultFont : defaultFont
         }
         else {

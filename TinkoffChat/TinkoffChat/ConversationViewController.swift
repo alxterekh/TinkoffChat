@@ -17,7 +17,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     fileprivate let incomingMessageCellId = "incomingMessage"
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
-    var chat = Chat()
     var peerManager: PeerManager?
     
     @IBAction func sendMessage(_ sender: UIButton) {
@@ -44,9 +43,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         messagesListTableView.estimatedRowHeight = 44
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
-        navigationItem.title = chat.name
         subscribeForKeyboardNotification()
         setupGestureRecognizer()
+        
+        if let peerManager = peerManager {
+           navigationItem.title = peerManager.chat.name
+        }
     }
     
     fileprivate func subscribeForKeyboardNotification() {
@@ -101,7 +103,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell?
-        if let messages = chat.messages {
+        if let messages = peerManager!.chat.messages {
             let message = messages[indexPath.row]
             let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
             cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
@@ -114,7 +116,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     fileprivate func calculateNumberOfRows() -> Int {
         var numberOfRows = 0
-        if let messages = chat.messages {
+        if let messages = peerManager!.chat.messages {
             numberOfRows += messages.count
         }
         

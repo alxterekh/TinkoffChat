@@ -152,6 +152,7 @@
 			children = (
 				1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */,
 				119C36C81E853EA6006B234F /* ConversationCell.swift */,
+				114C9D3D1E88F59300DB0A0B /* Chat.swift */,
 			);
 			name = ConversationList;
 			sourceTree = "<group>";
@@ -160,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				11370A7F1E855982006C487B /* ConversationViewController.swift */,
-				114C9D3D1E88F59300DB0A0B /* Chat.swift */,
 				11370A821E855A14006C487B /* MessageCell.swift */,
 				111B5C801E8901670043FD47 /* Message.swift */,
 			);
