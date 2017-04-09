@@ -13,9 +13,11 @@ class MessageCell: UITableViewCell {
 
     @IBOutlet weak var messageTextLabel: UILabel!
     
-    var currentMessage = Message() {
+    var currentMessage: Message? {
         didSet {
-            configureCellWithText(currentMessage.text)
+            if let text = currentMessage!.text {
+                messageTextLabel.text = text
+            }
         }
     }
     
@@ -23,9 +25,4 @@ class MessageCell: UITableViewCell {
         currentMessage = message
     }
     
-    func configureCellWithText(_ text: String?) {
-        if let text = text {
-            messageTextLabel.text = text
-        }
-    }
 }

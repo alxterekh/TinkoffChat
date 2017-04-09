@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PeerManagerDelegate {
 
     @IBOutlet fileprivate weak var messageTexView: UITextView!
     @IBOutlet fileprivate weak var messagesListTableView: UITableView!
@@ -17,9 +17,13 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     fileprivate let incomingMessageCellId = "incomingMessage"
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
-    var peerManager: PeerManager?
+    var peerManager: PeerManager? {
+        didSet {
+            peerManager?.delegate = self
+        }
+    }
     
-    @IBAction func sendMessage(_ sender: UIButton) {
+    @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         if let peerManager = peerManager {
             peerManager.sendMessage(text: messageTexView.text)
             messageTexView.text = ""
@@ -31,6 +35,10 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        messagesListTableView.reloadData()
     }
     
     deinit {
@@ -85,8 +93,10 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        messagesListTableView.reloadData()
+    // MARK: -
+    
+    func updateMessageList() {
+       messagesListTableView.reloadData()
     }
 
     // MARK: - UITableViewDataSource
@@ -103,24 +113,19 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell?
-        if let messages = peerManager!.chat.messages {
-            let message = messages[indexPath.row]
-            let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
-            cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
-        }
-
+        let messages = peerManager!.chat.messages
+        let message = messages[indexPath.row]
+        let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
+        cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
+        
         return (cell != nil) ? cell! : UITableViewCell()
     }
     
      // MARK: -
     
     fileprivate func calculateNumberOfRows() -> Int {
-        var numberOfRows = 0
-        if let messages = peerManager!.chat.messages {
-            numberOfRows += messages.count
-        }
         
-        return numberOfRows
+        return peerManager!.chat.messages.count
     }
 }
 

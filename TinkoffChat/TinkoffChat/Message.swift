@@ -10,15 +10,19 @@ import UIKit
 
 class Message: NSObject {
     
-    var text: String?
-    var date: Date?
-    var isOutcoming: Bool = false
-    var isUnread: Bool = true
+    private(set) var text: String?
+    private(set) var date: Date?
+    private(set) var isOutcoming: Bool = false
+    private(set) var isUnread: Bool = true
     
-//    init(with text: String, date: Date, isOutcoming: Bool) {
-//        self.text = text
-//        self.date = date
-//        self.isOutcoming = isOutcoming
-//        super.init()
-//    }
+    init(with text: String, date: Date, isOutcoming: Bool) {
+        self.text = text
+        self.date = date
+        self.isOutcoming = isOutcoming
+        super.init()
+    }
+    
+    func markAsRead() {
+        isUnread = false
+    }
 }

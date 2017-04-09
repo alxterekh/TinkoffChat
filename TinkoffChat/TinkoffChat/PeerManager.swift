@@ -15,8 +15,8 @@ protocol PeerManagerDelegate : class {
 class PeerManager: NSObject {
     
     let identifier: String
-    var chat = Chat()
-    weak var delegate: CommunicatorManagerDelegate?
+    private(set) var chat = Chat()
+    weak var delegate: PeerManagerDelegate?
 
     init(with peerManagerId: String, userName:String?) {
         self.identifier = peerManagerId
@@ -25,11 +25,14 @@ class PeerManager: NSObject {
     }
     
     func recieveMessage(text: String) {
-       //chat.messages?.append
+        let message = Message(with: text, date: Date(), isOutcoming: false)
+        chat.messages.append(message)
+        delegate?.updateMessageList()
     }
     
     func sendMessage(text: String) {
-        
+        let message = Message(with: text, date: Date(), isOutcoming: true)
+        chat.messages.append(message)
+        delegate?.updateMessageList()
     }
-    
 }

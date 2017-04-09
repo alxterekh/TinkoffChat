@@ -15,7 +15,7 @@ class Chat: NSObject {
     var date: Date?
     var online: Bool = true
     var hasUnreadMessages: Bool = false
-    var messages : [Message]?
+    var messages = [Message]()
     
 }
 

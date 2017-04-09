@@ -15,7 +15,7 @@ protocol CommunicatorManagerDelegate : class {
 class CommunicatorManager: NSObject, CommunicatorDelegate {
     
     fileprivate let multipeerCommunicator = MultipeerCommunicator()
-    var peerManagers = [PeerManager]()
+    private(set) var peerManagers = [PeerManager]()
     weak var delegate: CommunicatorManagerDelegate?
 
     // MARK: -
@@ -32,17 +32,22 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
     // MARK: -
     
     func didFoundUser(userID: String, userName: String?) {
-        if let peerManager = foundPeerManagerWith(identifier: userID) {
-            //peerManager load history
+        if let _ = findPeerManagerWith(identifier: userID) {
+            //load history
         }
         else {
             let peerManager = PeerManager(with:userID, userName:userName)
             peerManagers.append(peerManager)
-            delegate?.updateConversationList()
         }
+        
+        delegate?.updateConversationList()
     }
     
-    func foundPeerManagerWith(identifier: String) -> PeerManager? {
+    func didLostUser(userID: String) {
+        removePeerManagerWith(identifier: userID)
+    }
+    
+    fileprivate func findPeerManagerWith(identifier: String) -> PeerManager? {
         var peerManager: PeerManager?
         if let index = peerManagers.index(where: { $0.identifier == identifier }) {
             peerManager = peerManagers[index]
@@ -51,11 +56,7 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
         return peerManager
     }
     
-    func didLostUser(userID: String) {
-        removePeerManagerWith(identifier: userID)
-    }
-    
-    func removePeerManagerWith(identifier: String) {
+    fileprivate func removePeerManagerWith(identifier: String) {
         if let index = peerManagers.index(where: { $0.identifier == identifier }) {
             peerManagers.remove(at: index)
             delegate?.updateConversationList()
@@ -63,7 +64,7 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
     }
     
     func didRecieveMessage(text: String, fromUser: String, toUser:String) {
-        if let peerManager = foundPeerManagerWith(identifier: fromUser) {
+        if let peerManager = findPeerManagerWith(identifier: fromUser) {
             peerManager.recieveMessage(text: text)
         }
     }
