@@ -8,12 +8,16 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PeerManagerDelegate {
+class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PeerManagerDelegate, UITextViewDelegate {
 
     @IBOutlet fileprivate weak var messageTexView: UITextView!
     @IBOutlet fileprivate weak var messagesListTableView: UITableView!
     @IBOutlet fileprivate weak var sendButton: UIButton!
-    
+    @IBOutlet fileprivate weak var bottomSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var textViewTopSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var textViewBottomSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var bottomPartHeightConstraint: NSLayoutConstraint!
+
     fileprivate let incomingMessageCellId = "incomingMessage"
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
@@ -34,6 +38,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        messagesListTableView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         setup()
     }
     
@@ -62,6 +67,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     fileprivate func subscribeForKeyboardNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(ConversationViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ConversationViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ConversationViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
     fileprivate func unsubscribeFromKeyboardNotification() {
@@ -78,19 +84,19 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc fileprivate func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//            if self.view.frame.origin.y == 0 {
+//                self.view.frame.origin.y -= keyboardSize.height
+//            }
+            
+            bottomSpaceConstraint.constant = keyboardSize.height
         }
     }
     
     @objc fileprivate func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += keyboardSize.height
-            }
-        }
+//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            bottomSpaceConstraint.constant = 0
+//        }
     }
     
     // MARK: -
@@ -113,10 +119,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let messages = peerManager!.chat.messages
-        let message = messages[indexPath.row]
+        let messageIndex = messages.count - indexPath.row - 1
+        let message = messages[messageIndex]
         let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
         let cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
         cell.updateCellForMessage(message)
+        cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         
         return cell
     }
@@ -126,6 +134,31 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     fileprivate func calculateNumberOfRows() -> Int {
         
         return peerManager!.chat.messages.count
+    }
+    
+     // MARK: -
+    
+    fileprivate static let maxBottomPartHeight: CGFloat = 120
+    fileprivate static let minBottomPartHeight: CGFloat = 42
+    fileprivate static let lineHeightDeviation: CGFloat = 2
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let futureText = textView.attributedText.mutableCopy() as? NSMutableAttributedString {
+            futureText.replaceCharacters(in: range, with: text)
+            let size = futureText.boundingRect(with: CGSize(width: messageTexView.textContainer.size.width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+            let totalHeight = textViewTopSpaceConstraint.constant + textViewBottomSpaceConstraint.constant + size.height + messageTexView.textContainerInset.top + messageTexView.textContainerInset.bottom
+            var resultingHeight = totalHeight < ConversationViewController.maxBottomPartHeight ? totalHeight : ConversationViewController.maxBottomPartHeight
+            resultingHeight = resultingHeight > ConversationViewController.minBottomPartHeight ? resultingHeight : ConversationViewController.minBottomPartHeight
+            let heightDiff = fabs(bottomPartHeightConstraint.constant - resultingHeight)
+            guard let font = textView.font else { return true }
+            if heightDiff > font.lineHeight - ConversationViewController.lineHeightDeviation {
+                bottomPartHeightConstraint.constant = resultingHeight
+                view.setNeedsLayout()
+                view.layoutIfNeeded()
+            }
+        }
+            
+        return true
     }
 }
 

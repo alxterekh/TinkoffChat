@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable final class ColoredButton : UIButton {
+final class ColoredButton : UIButton {
     @IBInspectable var normalBackgroundColor: UIColor = UIColor.white {
         didSet {
             setBackgroundColor(normalBackgroundColor, for: .normal)
