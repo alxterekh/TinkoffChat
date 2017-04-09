@@ -112,13 +112,13 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell?
         let messages = peerManager!.chat.messages
         let message = messages[indexPath.row]
         let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
-        cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
+        let cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
+        cell.updateCellForMessage(message)
         
-        return (cell != nil) ? cell! : UITableViewCell()
+        return cell
     }
     
      // MARK: -

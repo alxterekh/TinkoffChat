@@ -15,9 +15,7 @@ class MessageCell: UITableViewCell {
     
     var currentMessage: Message? {
         didSet {
-            if let text = currentMessage!.text {
-                messageTextLabel.text = text
-            }
+           messageTextLabel.text = currentMessage?.text
         }
     }
     

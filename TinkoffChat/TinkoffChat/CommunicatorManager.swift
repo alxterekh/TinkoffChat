@@ -36,7 +36,7 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
             //load history
         }
         else {
-            let peerManager = PeerManager(with:userID, userName:userName)
+            let peerManager = PeerManager(with:userID, userName:userName, multipeerCommunicator: multipeerCommunicator)
             peerManagers.append(peerManager)
         }
         

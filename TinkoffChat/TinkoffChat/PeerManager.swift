@@ -15,12 +15,15 @@ protocol PeerManagerDelegate : class {
 class PeerManager: NSObject {
     
     let identifier: String
-    private(set) var chat = Chat()
+    let chat: Chat
+    let multipeerCommunicator: MultipeerCommunicator
     weak var delegate: PeerManagerDelegate?
 
-    init(with peerManagerId: String, userName:String?) {
-        self.identifier = peerManagerId
+    init(with peerManagerId: String, userName:String?, multipeerCommunicator: MultipeerCommunicator) {
+        identifier = peerManagerId
+        chat = Chat()
         chat.name = userName
+        self.multipeerCommunicator = multipeerCommunicator
         super.init()
     }
     
@@ -33,6 +36,7 @@ class PeerManager: NSObject {
     func sendMessage(text: String) {
         let message = Message(with: text, date: Date(), isOutcoming: true)
         chat.messages.append(message)
+        multipeerCommunicator.sendMessage(string: text, to: identifier, completionHandler: nil)
         delegate?.updateMessageList()
     }
 }
