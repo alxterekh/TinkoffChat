@@ -97,7 +97,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: -
     
     func updateMessageList() {
-       messagesListTableView.reloadData()
+        DispatchQueue.main.async { self.messagesListTableView.reloadData() }
     }
 
     // MARK: - UITableViewDataSource

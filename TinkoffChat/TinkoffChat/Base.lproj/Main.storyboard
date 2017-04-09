@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="61"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7eS-qr-Zag" id="ama-BZ-hRi">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="60.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8A-Qz-cc7">
@@ -121,29 +121,41 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Incoming message" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QK-Gp-uDL">
-                                                    <rect key="frame" x="8" y="4" width="143.5" height="36"/>
-                                                    <color key="backgroundColor" red="0.87652680837563457" green="0.86727288068397612" blue="0.85288778313202318" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xli-VC-ghs" userLabel="Label container">
+                                                    <rect key="frame" x="8" y="8" width="153" height="28"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Outgoing message" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsk-k4-Uav">
+                                                            <rect key="frame" x="4" y="2" width="145" height="24"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="nsk-k4-Uav" firstAttribute="top" secondItem="xli-VC-ghs" secondAttribute="top" constant="2" id="3Zf-HI-EvV"/>
+                                                        <constraint firstItem="nsk-k4-Uav" firstAttribute="leading" secondItem="xli-VC-ghs" secondAttribute="leading" constant="4" id="7I4-38-D8S"/>
+                                                        <constraint firstAttribute="bottom" secondItem="nsk-k4-Uav" secondAttribute="bottom" constant="2" id="guk-Ya-geF"/>
+                                                        <constraint firstAttribute="trailing" secondItem="nsk-k4-Uav" secondAttribute="trailing" constant="4" id="mH1-Ld-RHv"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="10"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
-                                                </label>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="6QK-Gp-uDL" firstAttribute="top" secondItem="624-4u-AHM" secondAttribute="top" constant="4" id="7fw-JJ-vpu"/>
-                                                <constraint firstAttribute="bottom" secondItem="6QK-Gp-uDL" secondAttribute="bottom" constant="4" id="lHm-lN-l6a"/>
-                                                <constraint firstItem="6QK-Gp-uDL" firstAttribute="width" relation="lessThanOrEqual" secondItem="624-4u-AHM" secondAttribute="width" multiplier="0.75" id="mly-Mx-h0f"/>
-                                                <constraint firstItem="6QK-Gp-uDL" firstAttribute="leading" secondItem="624-4u-AHM" secondAttribute="leadingMargin" id="v2y-vd-4MV"/>
+                                                <constraint firstItem="xli-VC-ghs" firstAttribute="leading" secondItem="624-4u-AHM" secondAttribute="leading" constant="8" id="3eQ-IC-Nwj"/>
+                                                <constraint firstItem="xli-VC-ghs" firstAttribute="top" secondItem="624-4u-AHM" secondAttribute="top" constant="8" id="6TD-ti-l4X"/>
+                                                <constraint firstItem="nsk-k4-Uav" firstAttribute="width" relation="lessThanOrEqual" secondItem="624-4u-AHM" secondAttribute="width" multiplier="0.75" id="V2b-QF-lV5"/>
+                                                <constraint firstAttribute="bottom" secondItem="xli-VC-ghs" secondAttribute="bottom" constant="8" id="udc-Cv-epF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="messageTextLabel" destination="6QK-Gp-uDL" id="eqN-C1-K9y"/>
+                                            <outlet property="messageTextLabel" destination="nsk-k4-Uav" id="70Y-Eh-yam"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="outcomingMessage" rowHeight="44" id="uoW-bm-HDq" customClass="MessageCell" customModule="TinkoffChat" customModuleProvider="target">
@@ -153,25 +165,37 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Outgoing message" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHu-nQ-Nr5">
-                                                    <rect key="frame" x="167.5" y="4" width="144.5" height="36"/>
-                                                    <color key="backgroundColor" red="1" green="0.90228585023564523" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgY-RX-g5E" userLabel="Label container">
+                                                    <rect key="frame" x="159" y="8" width="153" height="28"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Outgoing message" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHu-nQ-Nr5">
+                                                            <rect key="frame" x="4" y="2" width="145" height="24"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="0.91677152480000001" blue="0.26249890399999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="VHu-nQ-Nr5" secondAttribute="trailing" constant="4" id="88h-9b-X4f"/>
+                                                        <constraint firstItem="VHu-nQ-Nr5" firstAttribute="leading" secondItem="xgY-RX-g5E" secondAttribute="leading" constant="4" id="fim-yt-eAX"/>
+                                                        <constraint firstItem="VHu-nQ-Nr5" firstAttribute="top" secondItem="xgY-RX-g5E" secondAttribute="top" constant="2" id="wTL-Tp-1sW"/>
+                                                        <constraint firstAttribute="bottom" secondItem="VHu-nQ-Nr5" secondAttribute="bottom" constant="2" id="ycz-C1-GOl"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="10"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
-                                                </label>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="VHu-nQ-Nr5" secondAttribute="trailing" id="YoQ-Li-VYE"/>
-                                                <constraint firstAttribute="bottom" secondItem="VHu-nQ-Nr5" secondAttribute="bottom" constant="4" id="iv5-Cy-ORu"/>
-                                                <constraint firstItem="VHu-nQ-Nr5" firstAttribute="width" relation="lessThanOrEqual" secondItem="P2n-b8-s1f" secondAttribute="width" multiplier="0.75" id="kjr-a1-td7"/>
-                                                <constraint firstItem="VHu-nQ-Nr5" firstAttribute="top" secondItem="P2n-b8-s1f" secondAttribute="top" constant="4" id="nnF-cO-IqX"/>
+                                                <constraint firstAttribute="bottom" secondItem="xgY-RX-g5E" secondAttribute="bottom" constant="8" id="5R7-5H-yqg"/>
+                                                <constraint firstItem="VHu-nQ-Nr5" firstAttribute="width" relation="lessThanOrEqual" secondItem="P2n-b8-s1f" secondAttribute="width" multiplier="0.75" id="89c-AD-lWV"/>
+                                                <constraint firstItem="xgY-RX-g5E" firstAttribute="top" secondItem="P2n-b8-s1f" secondAttribute="top" constant="8" id="Kfa-mY-cen"/>
+                                                <constraint firstAttribute="trailing" secondItem="xgY-RX-g5E" secondAttribute="trailing" constant="8" id="gAH-DT-HTS"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
