@@ -31,6 +31,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         if let peerManager = peerManager {
             peerManager.sendMessage(text: messageTexView.text)
             messageTexView.text = ""
+            updateTextViewHeight(for: messageTexView.attributedText)
         }
     }
     
@@ -85,18 +86,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc fileprivate func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-//            if self.view.frame.origin.y == 0 {
-//                self.view.frame.origin.y -= keyboardSize.height
-//            }
-            
             bottomSpaceConstraint.constant = keyboardSize.height
         }
     }
     
     @objc fileprivate func keyboardWillHide(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            bottomSpaceConstraint.constant = 0
-//        }
+        bottomSpaceConstraint.constant = 0
     }
     
     // MARK: -
@@ -145,20 +140,24 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if let futureText = textView.attributedText.mutableCopy() as? NSMutableAttributedString {
             futureText.replaceCharacters(in: range, with: text)
-            let size = futureText.boundingRect(with: CGSize(width: messageTexView.textContainer.size.width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
-            let totalHeight = textViewTopSpaceConstraint.constant + textViewBottomSpaceConstraint.constant + size.height + messageTexView.textContainerInset.top + messageTexView.textContainerInset.bottom
-            var resultingHeight = totalHeight < ConversationViewController.maxBottomPartHeight ? totalHeight : ConversationViewController.maxBottomPartHeight
-            resultingHeight = resultingHeight > ConversationViewController.minBottomPartHeight ? resultingHeight : ConversationViewController.minBottomPartHeight
-            let heightDiff = fabs(bottomPartHeightConstraint.constant - resultingHeight)
-            guard let font = textView.font else { return true }
-            if heightDiff > font.lineHeight - ConversationViewController.lineHeightDeviation {
-                bottomPartHeightConstraint.constant = resultingHeight
-                view.setNeedsLayout()
-                view.layoutIfNeeded()
-            }
+            updateTextViewHeight(for: futureText)
         }
-            
+        
         return true
+    }
+    
+    fileprivate func updateTextViewHeight(for text: NSAttributedString) {
+        let size = text.boundingRect(with: CGSize(width: messageTexView.textContainer.size.width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+        let totalHeight = textViewTopSpaceConstraint.constant + textViewBottomSpaceConstraint.constant + size.height + messageTexView.textContainerInset.top + messageTexView.textContainerInset.bottom
+        var resultingHeight = totalHeight < ConversationViewController.maxBottomPartHeight ? totalHeight : ConversationViewController.maxBottomPartHeight
+        resultingHeight = resultingHeight > ConversationViewController.minBottomPartHeight ? resultingHeight : ConversationViewController.minBottomPartHeight
+        let heightDiff = fabs(bottomPartHeightConstraint.constant - resultingHeight)
+        guard let font = messageTexView.font else { return }
+        if heightDiff > font.lineHeight - ConversationViewController.lineHeightDeviation {
+            bottomPartHeightConstraint.constant = resultingHeight
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+        }
     }
 }
 

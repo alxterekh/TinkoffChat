@@ -138,7 +138,7 @@
                                             <constraints>
                                                 <constraint firstItem="6QK-Gp-uDL" firstAttribute="top" secondItem="624-4u-AHM" secondAttribute="top" constant="4" id="7fw-JJ-vpu"/>
                                                 <constraint firstAttribute="bottom" secondItem="6QK-Gp-uDL" secondAttribute="bottom" constant="4" id="lHm-lN-l6a"/>
-                                                <constraint firstItem="6QK-Gp-uDL" firstAttribute="width" secondItem="624-4u-AHM" secondAttribute="width" multiplier="0.75" priority="250" id="mly-Mx-h0f"/>
+                                                <constraint firstItem="6QK-Gp-uDL" firstAttribute="width" relation="lessThanOrEqual" secondItem="624-4u-AHM" secondAttribute="width" multiplier="0.75" id="mly-Mx-h0f"/>
                                                 <constraint firstItem="6QK-Gp-uDL" firstAttribute="leading" secondItem="624-4u-AHM" secondAttribute="leadingMargin" id="v2y-vd-4MV"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -170,7 +170,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="VHu-nQ-Nr5" secondAttribute="trailing" id="YoQ-Li-VYE"/>
                                                 <constraint firstAttribute="bottom" secondItem="VHu-nQ-Nr5" secondAttribute="bottom" constant="4" id="iv5-Cy-ORu"/>
-                                                <constraint firstItem="VHu-nQ-Nr5" firstAttribute="width" secondItem="P2n-b8-s1f" secondAttribute="width" multiplier="0.75" priority="250" id="kjr-a1-td7"/>
+                                                <constraint firstItem="VHu-nQ-Nr5" firstAttribute="width" relation="lessThanOrEqual" secondItem="P2n-b8-s1f" secondAttribute="width" multiplier="0.75" id="kjr-a1-td7"/>
                                                 <constraint firstItem="VHu-nQ-Nr5" firstAttribute="top" secondItem="P2n-b8-s1f" secondAttribute="top" constant="4" id="nnF-cO-IqX"/>
                                             </constraints>
                                         </tableViewCellContentView>
