@@ -29,7 +29,7 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
         multipeerCommunicator.delegate = self
     }
         
-    // MARK: -
+    // MARK: - CommunicatorDelegate
     
     func didFoundUser(userID: String, userName: String?) {
         if let _ = findPeerManagerWith(identifier: userID) {

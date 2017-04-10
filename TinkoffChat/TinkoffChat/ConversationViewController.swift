@@ -23,7 +23,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     var peerManager: PeerManager? {
         didSet {
-            peerManager?.delegate = self
+            oldValue?.removeDelegate(self)
+            peerManager?.addDelegate(self)
         }
     }
     
@@ -49,6 +50,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     deinit {
         unsubscribeFromKeyboardNotification()
+        peerManager?.removeDelegate(self)
     }
     
     fileprivate func setup() {
@@ -97,7 +99,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: -
     
     func updateMessageList() {
-        DispatchQueue.main.async { self.messagesListTableView.reloadData() }
+        self.messagesListTableView.reloadData()
     }
 
     // MARK: - UITableViewDataSource

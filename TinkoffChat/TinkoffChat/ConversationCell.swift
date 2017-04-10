@@ -28,13 +28,18 @@ class ConversationCell: UITableViewCell {
     
     var peerManager: PeerManager? {
         didSet {
-            if let peerManager = peerManager {
-                configureCellWithName(peerManager.chat.name)
-                configureCellWithDate(peerManager.chat.date)
-                configureCellWithOnlineStatus(peerManager.chat.online)
-                configureCellWithMessage(peerManager.chat.message)
-            }
+            oldValue?.removeDelegate(self)
+            peerManager?.addDelegate(self)
+            
+            update()
         }
+    }
+    
+    fileprivate func update() {
+        configureCellWithName(peerManager?.chat.name)
+        configureCellWithDate(peerManager?.chat.date)
+        configureCellWithOnlineStatus(peerManager?.chat.online ?? false)
+        configureCellWithMessage(peerManager?.chat.message)
     }
     
     // MARK: - Cell configuration
@@ -83,6 +88,12 @@ class ConversationCell: UITableViewCell {
         let startOfDay = Calendar.current.startOfDay(for: Date())
     
         return date.timeIntervalSince1970 < startOfDay.timeIntervalSince1970
+    }
+}
+
+extension ConversationCell: PeerManagerDelegate {
+    func updateMessageList() {
+        update()
     }
 }
 

@@ -8,14 +8,32 @@
 
 import UIKit
 
-class Chat: NSObject {
+class Chat {
     
-    var name: String?
-    var message: String?
-    var date: Date?
     var online: Bool = true
-    var hasUnreadMessages: Bool = false
-    var messages = [Message]()
+    private(set) var name: String?
+    private(set) var messages = [Message]()
+
+    var message: String? {
+        return messages.last?.text
+    }
+    var date: Date? {
+        return messages.last?.date
+    }
+    var hasUnreadMessages: Bool {
+        return messages.filter { $0.isUnread }.count > 0
+    }
     
+    func appendMessage(_ message: Message) {
+        messages.append(message)
+    }
+    
+    func chageChatName(_ name: String) {
+        self.name = name
+    }
+    
+    init(with name: String?) {
+        self.name = name
+    }
 }
 

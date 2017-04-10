@@ -52,16 +52,8 @@ class MultipeerCommunicator:NSObject, MCSessionDelegate, MCNearbyServiceBrowserD
     }
     
     fileprivate func setup() {
-        configureServiceAdvertiser()
-        configureServiceBrowser()
-    }
-    
-    fileprivate func configureServiceAdvertiser() {
         serviceAdvertiser.delegate = self
         serviceAdvertiser.startAdvertisingPeer()
-    }
-    
-    fileprivate func configureServiceBrowser() {
         serviceBrowser.delegate = self
         serviceBrowser.startBrowsingForPeers()
     }
@@ -139,16 +131,16 @@ class MultipeerCommunicator:NSObject, MCSessionDelegate, MCNearbyServiceBrowserD
     // MARK: - MCSessionDelegate
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case MCSessionState.connected:
-            print("Connected devices: \(session.connectedPeers.map{$0.displayName})")
-            
-        case MCSessionState.connecting:
-            print("Connecting to session: \(session)")
-            
-        default:
-            print("Did not connect to session: \(session)")
-        }
+//        switch state {
+//        case MCSessionState.connected:
+//            print("Connected devices: \(session.connectedPeers.map{$0.displayName})")
+//            
+//        case MCSessionState.connecting:
+//            print("Connecting to session: \(session)")
+//            
+//        default:
+//            print("Did not connect to session: \(session)")
+//        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
