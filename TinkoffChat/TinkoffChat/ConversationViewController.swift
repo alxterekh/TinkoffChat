@@ -32,6 +32,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         if let peerManager = peerManager {
             peerManager.sendMessage(text: messageTexView.text)
             messageTexView.text = ""
+            sendButton.isEnabled = false
             updateTextViewHeight(for: messageTexView.attributedText)
         }
     }
@@ -61,6 +62,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         messagesListTableView.tableFooterView = UIView()
         subscribeForKeyboardNotification()
         setupGestureRecognizer()
+        
+        sendButton.isEnabled = false
         
         if let peerManager = peerManager {
            navigationItem.title = peerManager.chat.name
@@ -101,6 +104,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     func updateMessageList() {
         self.messagesListTableView.reloadData()
     }
+    
+    func handleUserStatusChange() {
+        if let state = peerManager?.chat.online {
+            sendButton.isEnabled = state
+        }
+    }
 
     // MARK: - UITableViewDataSource
     
@@ -138,6 +147,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     fileprivate static let maxBottomPartHeight: CGFloat = 120
     fileprivate static let minBottomPartHeight: CGFloat = 42
     fileprivate static let lineHeightDeviation: CGFloat = 2
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if let text = textView.text {
+            sendButton.isEnabled = text != ""
+        }
+    }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if let futureText = textView.attributedText.mutableCopy() as? NSMutableAttributedString {

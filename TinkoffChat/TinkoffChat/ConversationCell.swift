@@ -30,7 +30,6 @@ class ConversationCell: UITableViewCell {
         didSet {
             oldValue?.removeDelegate(self)
             peerManager?.addDelegate(self)
-            
             update()
         }
     }

@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol PeerManagerDelegate : NSObjectProtocol {
+@objc protocol PeerManagerDelegate : NSObjectProtocol {
     func updateMessageList()
+    @objc optional func handleUserStatusChange()
 }
 
 func ==(lhs: PeerManagerDelegate, rhs: PeerManagerDelegate) -> Bool {
@@ -69,10 +70,28 @@ class PeerManager: NSObject {
         notifyDelegates()
     }
     
+    func didLostUser() {
+        chat.online = false
+        notifyDelegatesAboutUserStatusChanges()
+    }
+    
+    func didFoundUser() {
+        chat.online = true
+        notifyDelegatesAboutUserStatusChanges()
+    }
+    
     fileprivate func notifyDelegates() {
         DispatchQueue.main.async {
             for wrapper in self.delegates {
                 wrapper.delegate?.updateMessageList()
+            }
+        }
+    }
+    
+    fileprivate func notifyDelegatesAboutUserStatusChanges() {
+        DispatchQueue.main.async {
+            for wrapper in self.delegates {
+                wrapper.delegate?.handleUserStatusChange?()
             }
         }
     }

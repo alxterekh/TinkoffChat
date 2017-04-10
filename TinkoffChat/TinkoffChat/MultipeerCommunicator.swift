@@ -24,7 +24,7 @@ class MultipeerCommunicator:NSObject, MCSessionDelegate, MCNearbyServiceBrowserD
     fileprivate let serviceType = "tinkoff-chat"
     fileprivate let discoveryInfoUserNameKey = "userName"
     
-    fileprivate let myPeerId = MCPeerID(displayName: UUID().uuidString)
+    fileprivate let myPeerId = MCPeerID(displayName: UIDevice.current.identifierForVendor!.uuidString)
     
     fileprivate var serviceBrowser: MCNearbyServiceBrowser
     fileprivate var serviceAdvertiser: MCNearbyServiceAdvertiser
@@ -130,18 +130,7 @@ class MultipeerCommunicator:NSObject, MCSessionDelegate, MCNearbyServiceBrowserD
     
     // MARK: - MCSessionDelegate
     
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-//        switch state {
-//        case MCSessionState.connected:
-//            print("Connected devices: \(session.connectedPeers.map{$0.displayName})")
-//            
-//        case MCSessionState.connecting:
-//            print("Connecting to session: \(session)")
-//            
-//        default:
-//            print("Did not connect to session: \(session)")
-//        }
-    }
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {  }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {

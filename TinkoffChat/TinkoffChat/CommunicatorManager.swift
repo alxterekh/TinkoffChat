@@ -32,8 +32,8 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
     // MARK: - CommunicatorDelegate
     
     func didFoundUser(userID: String, userName: String?) {
-        if let _ = findPeerManagerWith(identifier: userID) {
-            //load history
+        if let peerManager = findPeerManagerWith(identifier: userID) {
+            peerManager.didFoundUser()
         }
         else {
             let peerManager = PeerManager(with:userID, userName:userName, multipeerCommunicator: multipeerCommunicator)
@@ -44,7 +44,10 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
     }
     
     func didLostUser(userID: String) {
-        removePeerManagerWith(identifier: userID)
+        if let peerManager = findPeerManagerWith(identifier: userID) {
+            peerManager.didLostUser()
+            delegate?.updateConversationList()
+        }
     }
     
     fileprivate func findPeerManagerWith(identifier: String) -> PeerManager? {
@@ -56,17 +59,20 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
         return peerManager
     }
     
-    fileprivate func removePeerManagerWith(identifier: String) {
-        if let index = peerManagers.index(where: { $0.identifier == identifier }) {
-            peerManagers.remove(at: index)
-            delegate?.updateConversationList()
-        }
-    }
-    
     func didRecieveMessage(text: String, fromUser: String, toUser:String) {
         if let peerManager = findPeerManagerWith(identifier: fromUser) {
             peerManager.recieveMessage(text: text)
         }
+    }
+    
+    func getOnlinePeerManagers() -> [PeerManager] {
+        
+        return peerManagers.filter { return $0.chat.online }
+    }
+    
+    func getOfflinePeerManagers() -> [PeerManager] {
+        
+        return peerManagers.filter { return !$0.chat.online }
     }
     
     func failedToStartBrowsingForUsers(error: Error) {

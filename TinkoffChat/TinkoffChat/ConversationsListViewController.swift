@@ -13,7 +13,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet fileprivate weak var conversationListTableView: UITableView!
     
     fileprivate let conversationCellId = "conversationCell"
-    fileprivate let headersTitles = ["Online"] //"History"
+    fileprivate let headersTitles = ["Online", "History"]
     
     fileprivate let communicatorManager = CommunicatorManager()
     
@@ -42,7 +42,7 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     func updateConversationList() {
         conversationListTableView.reloadData()
     }
-
+    
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
@@ -67,13 +67,32 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return communicatorManager.peerManagers.count
+        let offlinePeerManagersCount = communicatorManager.getOfflinePeerManagers().count
+        let onlinePeerManagersCount = communicatorManager.getOnlinePeerManagers().count
+        let peerManagersCountCalculatedByStatus = [onlinePeerManagersCount, offlinePeerManagersCount]
+        
+        return peerManagersCountCalculatedByStatus[section]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+        
+        let peerManagersSeparatedByStatus = [communicatorManager.getOnlinePeerManagers(), communicatorManager.getOfflinePeerManagers()]
         let cell = conversationListTableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! ConversationCell
-        let peerManager = communicatorManager.peerManagers[indexPath.row]
+        let neededPeerManagers = peerManagersSeparatedByStatus[indexPath.section]
+        let filteredPeerManagers = neededPeerManagers.sorted(by: {
+            if ($0.chat.date != nil) && ($1.chat.date != nil) {
+               return $0.chat.date! > $1.chat.date!
+            }
+            else if ($0.chat.date == nil) && ($1.chat.date != nil) {
+                return true
+            }
+            else if ($0.chat.date != nil) && ($1.chat.date == nil) {
+                return false
+            }
+            else {
+                return $0.chat.name! > $1.chat.name!
+            }})
+        let peerManager = filteredPeerManagers[indexPath.row]
         cell.updateCellForPeerManager(peerManager)
         
         return cell
