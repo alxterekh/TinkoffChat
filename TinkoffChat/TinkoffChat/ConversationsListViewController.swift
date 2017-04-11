@@ -47,7 +47,12 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
-        return headersTitles[section]
+        if self.tableView(tableView, numberOfRowsInSection: section) == 0 {
+            return nil
+        }
+        else {
+            return headersTitles[section]
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

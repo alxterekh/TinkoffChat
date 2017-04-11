@@ -150,7 +150,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     func textViewDidChange(_ textView: UITextView) {
         if let text = textView.text {
-            sendButton.isEnabled = text != ""
+            sendButton.isEnabled = text != "" && peerManager!.chat.online
         }
     }
     
