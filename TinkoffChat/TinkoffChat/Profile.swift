@@ -28,7 +28,7 @@ struct Profile {
     }
     
     static func createDefaultProfile() -> Profile {
-        let name = ""
+        let name = UIDevice.current.name
         let userInfo = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         return Profile(name: name, userInfo: userInfo, textColor: UIColor.black, userPicture: #imageLiteral(resourceName: "placeholder"))
     }

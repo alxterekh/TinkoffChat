@@ -30,6 +30,8 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         }
     }
     
+    var profile: Profile { return changedProfile }
+    
     fileprivate var gcdBasedDataOperator = GCDBasedDataOperator()
     fileprivate var operationBasedDataOperator = OperationBasedDataOperator()
     
@@ -61,6 +63,7 @@ class ProfileEditorViewController: UIViewController, UITextFieldDelegate, UIText
         setupGestureRecognizer()
         setButtonsAreEnabled(false)
         loadProfileData()
+        usernameField.placeholder = UIDevice.current.name
     }
     
     fileprivate func setupDependencies() {

@@ -58,6 +58,15 @@ class MultipeerCommunicator:NSObject, MCSessionDelegate, MCNearbyServiceBrowserD
         serviceBrowser.startBrowsingForPeers()
     }
     
+    func updateMyPeerName(_ name: String) {
+//        serviceAdvertiser.stopAdvertisingPeer()
+//        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: [discoveryInfoUserNameKey : name], serviceType: serviceType)
+//        serviceAdvertiser.delegate = self
+//        serviceAdvertiser.startAdvertisingPeer()
+        
+        print("\(name)")
+    }
+    
     // MARK: - Communicator
     
     func sendMessage(string: String, to userID: String, completionHandler: ((Bool, Error?) -> Void)?) {
@@ -135,7 +144,7 @@ class MultipeerCommunicator:NSObject, MCSessionDelegate, MCNearbyServiceBrowserD
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
             if let message = try peerMessageSerializer.deserializeMessageFrom(data: data) {
-                delegate?.didRecieveMessage(text: message, fromUser: peerID.displayName, toUser: "")
+                delegate?.didRecieveMessage(text: message, fromUser: peerID.displayName, toUser: myPeerId.displayName)
             }
         }
         catch {

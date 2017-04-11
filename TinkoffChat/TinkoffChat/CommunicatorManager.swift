@@ -10,9 +10,10 @@ import UIKit
 
 protocol CommunicatorManagerDelegate : class {
     func updateConversationList()
+    func handleMultipeerError(_ error: Error)
 }
 
-class CommunicatorManager: NSObject, CommunicatorDelegate {
+final class CommunicatorManager: NSObject, CommunicatorDelegate {
     
     fileprivate let multipeerCommunicator = MultipeerCommunicator()
     private(set) var peerManagers = [PeerManager]()
@@ -28,6 +29,10 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
     fileprivate func setup() {
         multipeerCommunicator.delegate = self
     }
+    
+    func updateMyPeerName(_ name: String) {
+        multipeerCommunicator.updateMyPeerName(name)
+    }
         
     // MARK: - CommunicatorDelegate
     
@@ -40,23 +45,18 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
             peerManagers.append(peerManager)
         }
         
-        delegate?.updateConversationList()
+        DispatchQueue.main.async { self.delegate?.updateConversationList() }
     }
     
     func didLostUser(userID: String) {
         if let peerManager = findPeerManagerWith(identifier: userID) {
             peerManager.didLostUser()
-            delegate?.updateConversationList()
+            DispatchQueue.main.async { self.delegate?.updateConversationList() }
         }
     }
     
     fileprivate func findPeerManagerWith(identifier: String) -> PeerManager? {
-        var peerManager: PeerManager?
-        if let index = peerManagers.index(where: { $0.identifier == identifier }) {
-            peerManager = peerManagers[index]
-        }
-        
-        return peerManager
+        return peerManagers.filter { $0.identifier == identifier }.first
     }
     
     func didRecieveMessage(text: String, fromUser: String, toUser:String) {
@@ -66,20 +66,18 @@ class CommunicatorManager: NSObject, CommunicatorDelegate {
     }
     
     func getOnlinePeerManagers() -> [PeerManager] {
-        
         return peerManagers.filter { return $0.chat.online }
     }
     
     func getOfflinePeerManagers() -> [PeerManager] {
-        
         return peerManagers.filter { return !$0.chat.online }
     }
     
     func failedToStartBrowsingForUsers(error: Error) {
-        //error handling
+        DispatchQueue.main.async { self.delegate?.handleMultipeerError(error) }
     }
     
     func failedToStartAdvertising(error: Error) {
-        //error handling
+        DispatchQueue.main.async { self.delegate?.handleMultipeerError(error) }
     }
 }
