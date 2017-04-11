@@ -30,6 +30,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         if let peerManager = peerManager {
+            messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
             peerManager.sendMessage(text: messageTexView.text)
             messageTexView.text = ""
             sendButton.isEnabled = false
