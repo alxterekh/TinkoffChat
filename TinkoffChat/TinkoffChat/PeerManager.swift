@@ -75,7 +75,7 @@ class PeerManager: NSObject {
         notifyDelegatesAboutUserStatusChanges()
     }
     
-    func didFoundUser() {
+    func didFindUser() {
         chat.online = true
         notifyDelegatesAboutUserStatusChanges()
     }

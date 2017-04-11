@@ -91,7 +91,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="conversationListTableView" destination="SMC-3R-PA5" id="YDW-bg-zuM"/>
+                        <outlet property="tableView" destination="SMC-3R-PA5" id="fNC-Vz-Dcn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2w0-9F-jVh" userLabel="First Responder" sceneMemberID="firstResponder"/>

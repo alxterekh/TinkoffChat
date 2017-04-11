@@ -13,7 +13,7 @@ protocol CommunicatorManagerDelegate : class {
     func handleMultipeerError(_ error: Error)
 }
 
-final class CommunicatorManager: NSObject, CommunicatorDelegate {
+final class CommunicatorManager: NSObject, MultipeerCommunicatorDelegate {
     
     fileprivate let multipeerCommunicator = MultipeerCommunicator()
     private(set) var peerManagers = [PeerManager]()
@@ -36,22 +36,22 @@ final class CommunicatorManager: NSObject, CommunicatorDelegate {
         
     // MARK: - CommunicatorDelegate
     
-    func didFoundUser(userID: String, userName: String?) {
+    func didFindUser(userID: String, userName: String?) {
         if let peerManager = findPeerManagerWith(identifier: userID) {
-            peerManager.didFoundUser()
+            peerManager.didFindUser()
         }
         else {
             let peerManager = PeerManager(with:userID, userName:userName, multipeerCommunicator: multipeerCommunicator)
             peerManagers.append(peerManager)
         }
         
-        DispatchQueue.main.async { self.delegate?.updateConversationList() }
+        delegate?.updateConversationList()
     }
     
-    func didLostUser(userID: String) {
+    func didLooseUser(userID: String) {
         if let peerManager = findPeerManagerWith(identifier: userID) {
             peerManager.didLostUser()
-            DispatchQueue.main.async { self.delegate?.updateConversationList() }
+            delegate?.updateConversationList()
         }
     }
     
@@ -59,7 +59,7 @@ final class CommunicatorManager: NSObject, CommunicatorDelegate {
         return peerManagers.filter { $0.identifier == identifier }.first
     }
     
-    func didRecieveMessage(text: String, fromUser: String, toUser:String) {
+    func didReceiveMessage(text: String, fromUser: String, toUser:String) {
         if let peerManager = findPeerManagerWith(identifier: fromUser) {
             peerManager.recieveMessage(text: text)
         }
@@ -74,10 +74,10 @@ final class CommunicatorManager: NSObject, CommunicatorDelegate {
     }
     
     func failedToStartBrowsingForUsers(error: Error) {
-        DispatchQueue.main.async { self.delegate?.handleMultipeerError(error) }
+        delegate?.handleMultipeerError(error)
     }
     
     func failedToStartAdvertising(error: Error) {
-        DispatchQueue.main.async { self.delegate?.handleMultipeerError(error) }
+        delegate?.handleMultipeerError(error)
     }
 }

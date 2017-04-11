@@ -8,6 +8,6 @@
 
 protocol Communicator {
     func sendMessage(string: String, to userID: String, completionHandler: ((Bool, Error?) -> Void)?)
-    weak var delegate : CommunicatorDelegate? {get set}
+    weak var delegate : MultipeerCommunicatorDelegate? {get set}
     var online: Bool {get set}
 }

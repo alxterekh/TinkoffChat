@@ -143,7 +143,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         return peerManager!.chat.messages.count
     }
     
-     // MARK: -
     
     fileprivate static let maxBottomPartHeight: CGFloat = 120
     fileprivate static let minBottomPartHeight: CGFloat = 42
