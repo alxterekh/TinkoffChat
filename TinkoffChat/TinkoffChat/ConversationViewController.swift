@@ -154,10 +154,13 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    fileprivate let maxMessageLength = 140
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if let futureText = textView.attributedText.mutableCopy() as? NSMutableAttributedString {
             futureText.replaceCharacters(in: range, with: text)
             updateTextViewHeight(for: futureText)
+            return futureText.length < maxMessageLength
         }
         
         return true
