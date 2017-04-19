@@ -12,9 +12,9 @@ class SaveDataOperation: Operation {
     
     fileprivate let profile: Profile
     fileprivate let completion: (Bool, Error?) -> Void
-    fileprivate let dataStore: FileBasedDataStore
+    fileprivate let dataStore: ProfileStorage
         
-    init(with profile: Profile, dataStore: FileBasedDataStore,completion: @escaping (Bool, Error?) -> Void) {
+    init(with profile: Profile, dataStore: ProfileStorage, completion: @escaping (Bool, Error?) -> Void) {
         self.profile = profile
         self.dataStore = dataStore
         self.completion = completion
@@ -42,9 +42,9 @@ class SaveDataOperation: Operation {
 class LoadDataOperation: Operation {
     
     fileprivate let completion: (Profile?, Error?) -> Void
-    fileprivate let dataStore: FileBasedDataStore
+    fileprivate let dataStore: ProfileStorage
     
-    init(with dataStore: FileBasedDataStore, completion: @escaping (Profile?, Error?) -> Void) {
+    init(with dataStore: ProfileStorage, completion: @escaping (Profile?, Error?) -> Void) {
         self.completion = completion
         self.dataStore = dataStore
     }
@@ -64,10 +64,14 @@ class LoadDataOperation: Operation {
     }
 }
 
-class OperationBasedDataOperator: NSObject, DataStore {
+class OperationBasedDataOperator: DataStore {
     
     fileprivate let queue = OperationQueue()
-    fileprivate let dataStore = FileBasedDataStore()
+    fileprivate let dataStore: ProfileStorage
+
+    init(with storage: ProfileStorage) {
+        dataStore = storage
+    }
     
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void) {
         let operation = SaveDataOperation(with: profile, dataStore: dataStore, completion: completion)

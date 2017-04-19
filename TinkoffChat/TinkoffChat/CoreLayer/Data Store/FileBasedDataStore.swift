@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ProfileStorage {
+    func saveProfileData(_ profile: Profile) throws
+    func loadProfileData() throws -> Profile?
+}
+
 class FileBasedDataStore {
     
     static let avatarKey = "avatarKey"
@@ -55,23 +60,6 @@ class FileBasedDataStore {
         return Profile(name: name, userInfo: userInfo, textColor: textColor, userPicture: userPicture)
     }
 
-    func saveProfileData(_ profile: Profile) throws {
-        let dataDicionary = serializeProfileData(profile)
-        let data = NSKeyedArchiver.archivedData(withRootObject: dataDicionary)
-        try data.write(to: getFilePath())
-    }
-
-    func loadProfileData() throws -> Profile? {
-        var profile: Profile?
-        guard fileManager.fileExists(atPath: getFilePath().path) else {
-            throw FileBasedDataStoreError.brokenData
-        }
-        let data = try Data(contentsOf: getFilePath())
-        profile =  try deserializeProfileData(data)
-           
-        return profile
-    }
-    
     fileprivate func getDocumentsDirectory() -> URL {
         let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
@@ -80,5 +68,23 @@ class FileBasedDataStore {
     fileprivate func getFilePath() -> URL {
         return getDocumentsDirectory().appendingPathComponent(FileBasedDataStore.fileName)
     }
+}
 
- }
+extension FileBasedDataStore : ProfileStorage {
+    func saveProfileData(_ profile: Profile) throws {
+        let dataDicionary = serializeProfileData(profile)
+        let data = NSKeyedArchiver.archivedData(withRootObject: dataDicionary)
+        try data.write(to: getFilePath())
+    }
+    
+    func loadProfileData() throws -> Profile? {
+        var profile: Profile?
+        guard fileManager.fileExists(atPath: getFilePath().path) else {
+            throw FileBasedDataStoreError.brokenData
+        }
+        let data = try Data(contentsOf: getFilePath())
+        profile =  try deserializeProfileData(data)
+        
+        return profile
+    }
+}

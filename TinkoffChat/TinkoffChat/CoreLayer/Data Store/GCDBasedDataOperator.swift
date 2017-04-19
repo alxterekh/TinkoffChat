@@ -8,10 +8,14 @@
 
 import UIKit
 
-class GCDBasedDataOperator: NSObject, DataStore {
+class GCDBasedDataOperator: DataStore {
     
-    fileprivate var dataStore = FileBasedDataStore()
+    fileprivate let dataStore: ProfileStorage
     fileprivate let queue = DispatchQueue(label: "dataManagerQueue")
+    
+    init(with storage: ProfileStorage) {
+        dataStore = storage
+    }
         
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void) {
         queue.async {

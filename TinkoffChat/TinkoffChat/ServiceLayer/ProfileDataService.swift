@@ -8,13 +8,45 @@
 
 import UIKit
 
-class ProfileDataService {
+enum DataStoreType {
+    case GCDBasedDataStoreType
+    case OperationBasedDataStoreType
+}
+
+protocol ProfileData {
+    func saveProfileData(_ profile: Profile, dataStoreType: DataStoreType, completion: @escaping (Bool, Error?) -> Void)
+    func loadProfileData(completion: @escaping (Profile?, Error?) -> Void)
+}
+
+class ProfileDataService : ProfileData {
     
-    let gcdBasedDataOperator = GCDBasedDataOperator()
-    let operationBasedDataOperator = OperationBasedDataOperator()
+    fileprivate let gcdBasedDataStore: DataStore
+    fileprivate let operationBasedDataStore: DataStore
     
-    func getRandomDataStore() -> DataStore {
-        let dataOperators = [gcdBasedDataOperator, operationBasedDataOperator] as [DataStore]
+    init(gcdBasedDataStore: DataStore, operationBasedDataStore: DataStore) {
+        self.gcdBasedDataStore = gcdBasedDataStore
+        self.operationBasedDataStore = operationBasedDataStore
+    }
+    
+    func loadProfileData(completion: @escaping (Profile?, Error?) -> Void) {
+        getRandomDataStore().loadProfileData(completion: completion)
+    }
+    
+    func saveProfileData(_ profile: Profile, dataStoreType: DataStoreType, completion: @escaping (Bool, Error?) -> Void) {
+        switch dataStoreType {
+        case DataStoreType.GCDBasedDataStoreType:
+            gcdBasedDataStore.saveProfileData(profile, completion: completion)
+            
+        case DataStoreType.OperationBasedDataStoreType:
+            operationBasedDataStore.saveProfileData(profile, completion: completion)
+
+        default:
+            break
+        }
+    }
+    
+    fileprivate func getRandomDataStore() -> DataStore {
+        let dataOperators = [gcdBasedDataStore, operationBasedDataStore] as [DataStore]
         return dataOperators[Int(arc4random_uniform(2))]
     }
 }
