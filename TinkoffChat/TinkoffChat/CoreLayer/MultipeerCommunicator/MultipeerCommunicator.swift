@@ -9,6 +9,12 @@
 import UIKit
 import MultipeerConnectivity
 
+protocol Communicator {
+    func sendMessage(string: String, to userID: String, completionHandler: ((Bool, Error?) -> Void)?)
+    weak var delegate : MultipeerCommunicatorDelegate? {get set}
+    var online: Bool {get set}
+}
+
 protocol MultipeerCommunicatorDelegate : class {
     func didFindUser(userID: String, userName: String?)
     func didLooseUser(userID: String)

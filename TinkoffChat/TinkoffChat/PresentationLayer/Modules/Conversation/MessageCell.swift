@@ -23,5 +23,4 @@ class MessageCell: UITableViewCell {
     func updateCellForMessage(_ message: Message) {
         currentMessage = message
     }
-    
 }

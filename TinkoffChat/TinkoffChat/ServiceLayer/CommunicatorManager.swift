@@ -13,16 +13,21 @@ protocol CommunicatorManagerDelegate : class {
     func handleMultipeerError(_ error: Error)
 }
 
-final class CommunicatorManager: NSObject, MultipeerCommunicatorDelegate {
-    
-    fileprivate let multipeerCommunicator = MultipeerCommunicator()
-    private(set) var peerManagers = [PeerManager]()
-    weak var delegate: CommunicatorManagerDelegate?
+protocol CommunicatorService {
+    weak var delegate: CommunicatorManagerDelegate? { get set }
+    func updateMyPeerName(_ name: String)
+    func getOnlinePeerManagers() -> [PeerManager]
+    func getOfflinePeerManagers() -> [PeerManager]
+}
 
-    // MARK: -
+final class CommunicatorManager : CommunicatorService {
+    fileprivate let multipeerCommunicator = MultipeerCommunicator()
+    fileprivate var peerManagers = [PeerManager]()
+    weak var delegate: CommunicatorManagerDelegate?
+   
+    // MARK: - Initialization
     
-    override init() {
-        super.init()
+    init() {
         setup()
     }
     
@@ -33,8 +38,27 @@ final class CommunicatorManager: NSObject, MultipeerCommunicatorDelegate {
     func updateMyPeerName(_ name: String) {
         multipeerCommunicator.updateMyPeerName(name)
     }
-        
-    // MARK: - CommunicatorDelegate
+    
+    func getOnlinePeerManagers() -> [PeerManager] {
+        return peerManagers.filter { return $0.chat.online }
+    }
+    
+    func getOfflinePeerManagers() -> [PeerManager] {
+        return peerManagers.filter { return !$0.chat.online }
+    }
+    
+    // MARK: - FailureHandling
+    
+    func failedToStartBrowsingForUsers(error: Error) {
+        delegate?.handleMultipeerError(error)
+    }
+    
+    func failedToStartAdvertising(error: Error) {
+        delegate?.handleMultipeerError(error)
+    }
+}
+
+extension CommunicatorManager : MultipeerCommunicatorDelegate {
     
     func didFindUser(userID: String, userName: String?) {
         if let peerManager = findPeerManagerWith(identifier: userID) {
@@ -55,29 +79,13 @@ final class CommunicatorManager: NSObject, MultipeerCommunicatorDelegate {
         }
     }
     
-    fileprivate func findPeerManagerWith(identifier: String) -> PeerManager? {
-        return peerManagers.filter { $0.identifier == identifier }.first
-    }
-    
     func didReceiveMessage(text: String, fromUser: String, toUser:String) {
         if let peerManager = findPeerManagerWith(identifier: fromUser) {
             peerManager.recieveMessage(text: text)
         }
     }
     
-    func getOnlinePeerManagers() -> [PeerManager] {
-        return peerManagers.filter { return $0.chat.online }
-    }
-    
-    func getOfflinePeerManagers() -> [PeerManager] {
-        return peerManagers.filter { return !$0.chat.online }
-    }
-    
-    func failedToStartBrowsingForUsers(error: Error) {
-        delegate?.handleMultipeerError(error)
-    }
-    
-    func failedToStartAdvertising(error: Error) {
-        delegate?.handleMultipeerError(error)
+    fileprivate func findPeerManagerWith(identifier: String) -> PeerManager? {
+        return peerManagers.filter { $0.identifier == identifier }.first
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PeerManagerDelegate, UITextViewDelegate {
+class ConversationViewController: UIViewController, UITableViewDelegate, PeerManagerDelegate {
 
     @IBOutlet fileprivate weak var messageTexView: UITextView!
     @IBOutlet fileprivate weak var messagesListTableView: UITableView!
@@ -63,13 +63,14 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         messagesListTableView.tableFooterView = UIView()
         subscribeForKeyboardNotification()
         setupGestureRecognizer()
-        
         sendButton.isEnabled = false
         
         if let peerManager = peerManager {
            navigationItem.title = peerManager.chat.name
         }
     }
+    
+    // MARK: -
     
     fileprivate func subscribeForKeyboardNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(ConversationViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -100,7 +101,11 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         bottomSpaceConstraint.constant = 0
     }
     
-    // MARK: -
+    fileprivate func calculateNumberOfRows() -> Int {
+        return peerManager!.chat.messages.count
+    }
+    
+    // MARK: - PeerManagerDelegate
     
     func updateMessageList() {
         self.messagesListTableView.reloadData()
@@ -111,9 +116,9 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
             sendButton.isEnabled = state
         }
     }
+}
 
-    // MARK: - UITableViewDataSource
-    
+extension ConversationViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
@@ -135,18 +140,13 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         
         return cell
     }
-    
-     // MARK: -
-    
-    fileprivate func calculateNumberOfRows() -> Int {
-        
-        return peerManager!.chat.messages.count
-    }
-    
-    
+}
+
+extension ConversationViewController : UITextViewDelegate {
     fileprivate static let maxBottomPartHeight: CGFloat = 120
     fileprivate static let minBottomPartHeight: CGFloat = 42
     fileprivate static let lineHeightDeviation: CGFloat = 2
+    fileprivate static let maxMessageLength = 140
     
     func textViewDidChange(_ textView: UITextView) {
         if let text = textView.text {
@@ -154,13 +154,11 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    fileprivate let maxMessageLength = 140
-    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if let futureText = textView.attributedText.mutableCopy() as? NSMutableAttributedString {
             futureText.replaceCharacters(in: range, with: text)
             updateTextViewHeight(for: futureText)
-            return futureText.length < maxMessageLength
+            return futureText.length < ConversationViewController.maxMessageLength
         }
         
         return true
@@ -180,5 +178,4 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
 }
-
 

@@ -16,14 +16,11 @@ final class ConversationsListViewController: UIViewController {
     fileprivate let headerTitles = ["Online", "History"]
     
     fileprivate let communicatorManager = CommunicatorManager()
-    fileprivate var gcdBasedDataOperator = GCDBasedDataOperator()
-    
     fileprivate var peerManagers = [[PeerManager]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        loadProfileData()
     }
     
     fileprivate func setup() {
@@ -33,15 +30,6 @@ final class ConversationsListViewController: UIViewController {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
-    }
-    
-    fileprivate func loadProfileData() {
-        //        activityIndicator.startAnimating()
-        gcdBasedDataOperator.loadProfileData() {
-            //            self.activityIndicator.stopAnimating()
-            self.updateUserName(with: $0)
-            self.handleProfileReadingError($1)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

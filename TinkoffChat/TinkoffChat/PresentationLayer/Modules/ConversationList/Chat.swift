@@ -9,7 +9,6 @@
 import UIKit
 
 class Chat {
-    
     var online: Bool = true
     private(set) var name: String?
     private(set) var messages = [Message]()
@@ -31,6 +30,8 @@ class Chat {
     func chageChatName(_ name: String) {
         self.name = name
     }
+    
+    //MARK: - Initialization
     
     init(with name: String?) {
         self.name = name

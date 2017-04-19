@@ -34,17 +34,15 @@ class ConversationCell: UITableViewCell {
         }
     }
     
+    func updateCellForPeerManager(_ peerManager: PeerManager) {
+        self.peerManager = peerManager
+    }
+    
     fileprivate func update() {
         configureCellWithName(peerManager?.chat.name)
         configureCellWithDate(peerManager?.chat.date)
         configureCellWithOnlineStatus(peerManager?.chat.online ?? false)
         configureCellWithMessage(peerManager?.chat.message)
-    }
-    
-    // MARK: - Cell configuration
-    
-    func updateCellForPeerManager(_ peerManager: PeerManager) {
-        self.peerManager = peerManager
     }
     
     fileprivate func configureCellWithName(_ name: String?) {
