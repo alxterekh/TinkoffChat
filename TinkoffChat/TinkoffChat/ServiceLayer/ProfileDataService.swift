@@ -39,9 +39,6 @@ class ProfileDataService : ProfileData {
             
         case DataStoreType.OperationBasedDataStoreType:
             operationBasedDataStore.saveProfileData(profile, completion: completion)
-
-        default:
-            break
         }
     }
     

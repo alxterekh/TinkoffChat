@@ -10,7 +10,7 @@ import Foundation
 
 class Assembly  {
     
-    private func profileDataService() -> ProfileData {
+     static func profileDataService() -> ProfileData {
         let store = FileBasedDataStore()
         let operationBasedDataStore =  OperationBasedDataOperator(with: store)
         let gcdBasedDataStore = GCDBasedDataOperator(with: store)
