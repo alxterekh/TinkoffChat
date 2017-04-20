@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol DataStore {
+    func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
+    func loadProfileData(completion: @escaping (Profile?, Error?) -> Void)
+}
+
 class GCDBasedDataOperator: DataStore {
     
     fileprivate let dataStore: ProfileStorage

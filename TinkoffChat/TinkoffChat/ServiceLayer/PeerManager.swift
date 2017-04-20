@@ -13,6 +13,8 @@ import UIKit
     @objc optional func handleUserStatusChange()
 }
 
+//should be protocol for PeerManager
+
 func ==(lhs: PeerManagerDelegate, rhs: PeerManagerDelegate) -> Bool {
     return lhs.hash == rhs.hash
 }
@@ -29,10 +31,10 @@ class PeerManager: NSObject {
     
     let identifier: String
     let chat: Chat
-    let multipeerCommunicator: MultipeerCommunicator
+    fileprivate let multipeerCommunicator: Communicator
     fileprivate var delegates = [PeerManagerDelegateWeakWrapper]()
     
-    init(with peerManagerId: String, userName:String?, multipeerCommunicator: MultipeerCommunicator) {
+    init(with peerManagerId: String, userName:String?, multipeerCommunicator: Communicator) {
         identifier = peerManagerId
         chat = Chat(with: userName)
         self.multipeerCommunicator = multipeerCommunicator

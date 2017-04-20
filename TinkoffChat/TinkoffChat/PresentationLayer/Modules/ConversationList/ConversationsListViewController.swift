@@ -15,7 +15,7 @@ final class ConversationsListViewController: UIViewController {
     fileprivate let conversationCellId = "conversationCell"
     fileprivate let headerTitles = ["Online", "History"]
     
-    fileprivate let communicatorManager = CommunicatorManager()
+    fileprivate var communicatorManager = ServiceAssembly.communicatorService()
     fileprivate var peerManagers = [[PeerManager]]()
     
     override func viewDidLoad() {

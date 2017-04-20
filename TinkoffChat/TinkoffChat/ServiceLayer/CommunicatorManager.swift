@@ -21,19 +21,18 @@ protocol CommunicatorService {
 }
 
 final class CommunicatorManager : CommunicatorService {
-    fileprivate let multipeerCommunicator = MultipeerCommunicator()
+    fileprivate var multipeerCommunicator: Communicator
     fileprivate var peerManagers = [PeerManager]()
     weak var delegate: CommunicatorManagerDelegate?
    
-    // MARK: - Initialization
+    //MARK: - Initialization
     
-    init() {
-        setup()
-    }
-    
-    fileprivate func setup() {
+    init(with communicator: Communicator) {
+        multipeerCommunicator = communicator
         multipeerCommunicator.delegate = self
     }
+    
+    //MARK: -
     
     func updateMyPeerName(_ name: String) {
         multipeerCommunicator.updateMyPeerName(name)

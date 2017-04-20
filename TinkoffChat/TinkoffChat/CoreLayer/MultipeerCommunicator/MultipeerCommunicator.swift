@@ -12,6 +12,7 @@ import MultipeerConnectivity
 protocol Communicator {
     func sendMessage(string: String, to userID: String, completionHandler: ((Bool, Error?) -> Void)?)
     weak var delegate : MultipeerCommunicatorDelegate? {get set}
+    func updateMyPeerName(_ name: String)
     var online: Bool {get set}
 }
 
@@ -37,19 +38,25 @@ class MultipeerCommunicator:NSObject, Communicator {
     
     fileprivate var sessionsByPeerIDKey = [MCPeerID : MCSession]()
     
-    fileprivate let peerMessageSerializer = PeerMessageSerializer()
-    
     weak var delegate : MultipeerCommunicatorDelegate?
     var online: Bool = false
     
-    // MARK: -
+    fileprivate let peerMessageSerializer: MessageSerializer
     
-    override init() {
+    // MARK: - Initialization
+    
+    init(with serializer: MessageSerializer) {
         let myDiscoveryInfo = [discoveryInfoUserNameKey : UIDevice.current.name]
+        peerMessageSerializer = serializer
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType:serviceType)
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: myDiscoveryInfo, serviceType: serviceType)
         super.init()
         setup()
+    }
+    
+    convenience override init() {
+        // defualt initialization
+        self.init(with : PeerMessageSerializer())
     }
     
     deinit {
@@ -65,7 +72,7 @@ class MultipeerCommunicator:NSObject, Communicator {
     }
     
     func updateMyPeerName(_ name: String) {
-        // TODO: implement
+        // TODO: implement name updating
         print("\(name)")
     }
     

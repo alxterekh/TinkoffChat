@@ -8,7 +8,12 @@
 
 import UIKit
 
-class PeerMessageSerializer {
+protocol MessageSerializer {
+    func serializeMessageWith(text: String) throws -> Data
+    func deserializeMessageFrom(data: Data) throws -> String?
+}
+
+class PeerMessageSerializer : MessageSerializer  {
 
     fileprivate static let messageEventTypeKey = "eventType"
     fileprivate static let messageEventTypeDescription = "TextMessage"
