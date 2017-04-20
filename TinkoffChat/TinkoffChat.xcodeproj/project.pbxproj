@@ -111,8 +111,8 @@
 		11189EEC1E8D830300CEA2F0 /* Data Store */ = {
 			isa = PBXGroup;
 			children = (
-				11189EED1E8D836900CEA2F0 /* GCDBasedDataOperator.swift */,
 				11189EF11E8D938A00CEA2F0 /* FileBasedDataStore.swift */,
+				11189EED1E8D836900CEA2F0 /* GCDBasedDataOperator.swift */,
 			);
 			path = "Data Store";
 			sourceTree = "<group>";
@@ -205,7 +205,7 @@
 				116F873B1E97854B00C18C49 /* CommunicatorManager.swift */,
 				11F385691E98CDD700F90EB0 /* PeerManager.swift */,
 			);
-			name = CommunicatorService;
+			path = CommunicatorService;
 			sourceTree = "<group>";
 		};
 		11CD76D51EA8ED9900E0060E /* DataStorageService */ = {
@@ -213,7 +213,7 @@
 			children = (
 				117B96691EA510730052BF52 /* ProfileDataService.swift */,
 			);
-			name = DataStorageService;
+			path = DataStorageService;
 			sourceTree = "<group>";
 		};
 		11FA245C1E910B47002166D6 /* Extentions */ = {
