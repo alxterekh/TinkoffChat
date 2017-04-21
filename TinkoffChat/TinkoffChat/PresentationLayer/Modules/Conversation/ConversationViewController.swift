@@ -21,17 +21,18 @@ class ConversationViewController: UIViewController, UITableViewDelegate, PeerMan
     fileprivate let incomingMessageCellId = "incomingMessage"
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
-    var peerManager: PeerManager? {
+    
+    var chat: Chat? {
         didSet {
-            oldValue?.removeDelegate(self)
-            peerManager?.addDelegate(self)
+//            oldValue?.removeDelegate(self)
+//            peerManager?.addDelegate(self)
         }
     }
-    
+
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
-        if let peerManager = peerManager {
+        if let _ = chat {
             messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-            peerManager.sendMessage(text: messageTexView.text)
+            //CommunicatorService.sendMessage(text: messageTexView.text)
             messageTexView.text = ""
             sendButton.isEnabled = false
             updateTextViewHeight(for: messageTexView.attributedText)
@@ -52,7 +53,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, PeerMan
     
     deinit {
         unsubscribeFromKeyboardNotification()
-        peerManager?.removeDelegate(self)
+        //peerManager?.removeDelegate(self)
     }
     
     fileprivate func setup() {
@@ -65,8 +66,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate, PeerMan
         setupGestureRecognizer()
         sendButton.isEnabled = false
         
-        if let peerManager = peerManager {
-           navigationItem.title = peerManager.chat.name
+        if let chat = chat {
+           navigationItem.title = chat.name
         }
     }
     
@@ -102,7 +103,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, PeerMan
     }
     
     fileprivate func calculateNumberOfRows() -> Int {
-        return peerManager!.chat.messages.count
+        return chat!.messages.count
     }
     
     // MARK: - PeerManagerDelegate
@@ -112,7 +113,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, PeerMan
     }
     
     func handleUserStatusChange() {
-        if let state = peerManager?.chat.online {
+        if let state = chat?.online {
             sendButton.isEnabled = state
         }
     }
@@ -130,7 +131,7 @@ extension ConversationViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messages = peerManager!.chat.messages
+        let messages = [Message]() //peerManager!.chat.messages
         let messageIndex = messages.count - indexPath.row - 1
         let message = messages[messageIndex]
         let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
@@ -150,7 +151,7 @@ extension ConversationViewController : UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if let text = textView.text {
-            sendButton.isEnabled = text != "" && peerManager!.chat.online
+            sendButton.isEnabled = text != "" //&& peerManager!.chat.online
         }
     }
     

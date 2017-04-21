@@ -9,6 +9,8 @@
 import UIKit
 
 class Chat {
+    let identifier: String
+    //var participants
     var online: Bool = true
     private(set) var name: String?
     private(set) var messages = [Message]()
@@ -23,17 +25,18 @@ class Chat {
         return messages.filter { $0.isUnread }.count > 0
     }
     
+    //MARK: - Initialization
+    
+    init(with name: String?, identifier: String) {
+        self.name = name
+        self.identifier = identifier
+    }
+    
     func appendMessage(_ message: Message) {
         messages.append(message)
     }
     
     func chageChatName(_ name: String) {
-        self.name = name
-    }
-    
-    //MARK: - Initialization
-    
-    init(with name: String?) {
         self.name = name
     }
 }

@@ -26,23 +26,23 @@ class ConversationCell: UITableViewCell {
     fileprivate let boldDefaultFont = UIFont.boldSystemFont(ofSize: 17.0)
     fileprivate let alertFont = UIFont(name: "Arial", size: 13.0)
     
-    var peerManager: PeerManager? {
+    var chat: Chat? {
         didSet {
-            oldValue?.removeDelegate(self)
-            peerManager?.addDelegate(self)
+//            oldValue?.removeDelegate(self)
+//            peerManager?.addDelegate(self)
             update()
         }
     }
     
-    func updateCellForPeerManager(_ peerManager: PeerManager) {
-        self.peerManager = peerManager
+    func updateCellForChat(_ chat: Chat) {
+        self.chat = chat
     }
     
     fileprivate func update() {
-        configureCellWithName(peerManager?.chat.name)
-        configureCellWithDate(peerManager?.chat.date)
-        configureCellWithOnlineStatus(peerManager?.chat.online ?? false)
-        configureCellWithMessage(peerManager?.chat.message)
+        configureCellWithName(chat?.name)
+        configureCellWithDate(chat?.date)
+        configureCellWithOnlineStatus(chat?.online ?? false)
+        configureCellWithMessage(chat?.message)
     }
     
     fileprivate func configureCellWithName(_ name: String?) {
@@ -53,7 +53,7 @@ class ConversationCell: UITableViewCell {
     
     fileprivate func configureCellWithMessage(_ message: String?) {
         messageLabel.text = (message != nil) ? message : defaultMessagePlaceholder
-        setupMessageFontIfThereIsUnreadMessages(peerManager!.chat.hasUnreadMessages)
+        setupMessageFontIfThereIsUnreadMessages(chat!.hasUnreadMessages)
     }
     
     fileprivate func configureCellWithDate(_ date: Date?) {
@@ -73,7 +73,7 @@ class ConversationCell: UITableViewCell {
     }
     
     fileprivate func setupMessageFontIfThereIsUnreadMessages(_ hasUnreadMessages: Bool) {
-        if peerManager!.chat.message != nil {
+        if chat?.message != nil {
             messageLabel.font = (hasUnreadMessages) ? boldDefaultFont : defaultFont
         }
         else {

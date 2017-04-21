@@ -16,7 +16,7 @@ final class ConversationsListViewController: UIViewController {
     fileprivate let headerTitles = ["Online", "History"]
     
     fileprivate var communicatorManager = ServiceAssembly.communicatorService()
-    fileprivate var peerManagers = [[PeerManager]]()
+    fileprivate var chats = [[Chat]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,7 @@ final class ConversationsListViewController: UIViewController {
         if segue.identifier == "Conversation" {
             let vc = segue.destination as! ConversationViewController
             if let sender = sender as? ConversationCell {
-                vc.peerManager = sender.peerManager
+                vc.chat = sender.chat
             }
         }
     }
@@ -74,7 +74,7 @@ extension ConversationsListViewController: UITableViewDelegate {
 
 extension ConversationsListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return peerManagers.count
+        return chats.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,13 +82,13 @@ extension ConversationsListViewController: UITableViewDataSource {
     }
     
     fileprivate func numberOfRows(inSection section: Int) -> Int {
-        return peerManagers[section].count
+        return chats[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! ConversationCell
-        let peerManager = peerManagers[indexPath.section][indexPath.row]
-        cell.updateCellForPeerManager(peerManager)
+        let chat = chats[indexPath.section][indexPath.row]
+        cell.updateCellForChat(chat)
         
         return cell
     }
@@ -96,21 +96,21 @@ extension ConversationsListViewController: UITableViewDataSource {
 
 extension ConversationsListViewController: CommunicatorManagerDelegate {
     func updateConversationList() {
-        peerManagers = [sortPeerManagers(communicatorManager.getOnlinePeerManagers()),
-                        sortPeerManagers(communicatorManager.getOfflinePeerManagers())]
+//        peerManagers = [sortPeerManagers(communicatorManager.getOnlinePeerManagers()),
+//                        sortPeerManagers(communicatorManager.getOfflinePeerManagers())]
         tableView.reloadData()
     }
     
-    fileprivate func sortPeerManagers(_ peerManagers: [PeerManager]) -> [PeerManager] {
-        let peersWithLastMessageDate = peerManagers.filter { $0.chat.date != nil }
-        let peersWithoutLastMessageDate = peerManagers.filter { $0.chat.date == nil && $0.chat.name != nil }
-        let peersWithoutDateAndName = peerManagers.filter { $0.chat.date == nil && $0.chat.name == nil }
-        
-        let sortedPeersWithLastMessageDate = peersWithLastMessageDate.sorted { $0.chat.date! > $1.chat.date! }
-        let sortedPeersWithoutLastMessageDate = peersWithoutLastMessageDate.sorted { $0.chat.name! > $1.chat.name! }
-        
-        return sortedPeersWithLastMessageDate + sortedPeersWithoutLastMessageDate + peersWithoutDateAndName
-    }
+//    fileprivate func sortPeerManagers(_ peerManagers: [PeerManager]) -> [PeerManager] {
+//        let peersWithLastMessageDate = peerManagers.filter { $0.chat.date != nil }
+//        let peersWithoutLastMessageDate = peerManagers.filter { $0.chat.date == nil && $0.chat.name != nil }
+//        let peersWithoutDateAndName = peerManagers.filter { $0.chat.date == nil && $0.chat.name == nil }
+//        
+//        let sortedPeersWithLastMessageDate = peersWithLastMessageDate.sorted { $0.chat.date! > $1.chat.date! }
+//        let sortedPeersWithoutLastMessageDate = peersWithoutLastMessageDate.sorted { $0.chat.name! > $1.chat.name! }
+//        
+//        return sortedPeersWithLastMessageDate + sortedPeersWithoutLastMessageDate + peersWithoutDateAndName
+//    }
     
     func handleMultipeerError(_ error: Error) {
         print("\(error)")
