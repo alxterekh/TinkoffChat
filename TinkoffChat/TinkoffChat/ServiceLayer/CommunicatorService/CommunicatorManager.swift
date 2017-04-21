@@ -9,6 +9,8 @@
 import UIKit
 
 protocol CommunicatorManagerDelegate : class {
+    func updateMessageList()
+    //@objc optional func handleUserStatusChange()
     func updateConversationList()
     func handleMultipeerError(_ error: Error)
 } 
@@ -20,30 +22,13 @@ protocol CommunicatorService {
     func getOfflineChats() -> [Chat]
 }
 
-@objc protocol PeerManagerDelegate : NSObjectProtocol {
-    func updateMessageList()
-    @objc optional func handleUserStatusChange()
-}
-
-func ==(lhs: PeerManagerDelegate, rhs: PeerManagerDelegate) -> Bool {
-    return lhs.hash == rhs.hash
-}
-
-fileprivate class PeerManagerDelegateWeakWrapper {
-    weak var delegate: PeerManagerDelegate?
-    
-    init(delegate: PeerManagerDelegate) {
-        self.delegate = delegate
-    }
-}
-
 final class CommunicatorManager : CommunicatorService {
     fileprivate var multipeerCommunicator: Communicator
     weak var delegate: CommunicatorManagerDelegate?
     
     fileprivate var chats = [Chat]()
     
-    fileprivate var delegates = [PeerManagerDelegateWeakWrapper]()
+    //fileprivate var delegates = [PeerManagerDelegateWeakWrapper]()
     
     //MARK: - Initialization
     
@@ -66,29 +51,31 @@ final class CommunicatorManager : CommunicatorService {
         return chats.filter { return !$0.online }
     }
     
-    func addDelegate(_ delegate: PeerManagerDelegate) {
-        delegates.append(PeerManagerDelegateWeakWrapper(delegate: delegate))
-    }
-    
-    func removeDelegate(_ delegate: PeerManagerDelegate) {
-        let filteredDelegates = delegates.filter {
-            if let wrapperDelegate = $0.delegate {
-                return !(wrapperDelegate == delegate)
-            }
-            else {
-                return false
-            }
-        }
-        
-        delegates = filteredDelegates
-    }
+//    func addDelegate(_ delegate: PeerManagerDelegate) {
+//        delegates.append(PeerManagerDelegateWeakWrapper(delegate: delegate))
+//    }
+//    
+//    func removeDelegate(_ delegate: PeerManagerDelegate) {
+//        let filteredDelegates = delegates.filter {
+//            if let wrapperDelegate = $0.delegate {
+//                return !(wrapperDelegate == delegate)
+//            }
+//            else {
+//                return false
+//            }
+//        }
+//        
+//        delegates = filteredDelegates
+//    }
     
     func sendMessage(text: String, to chat: Chat) {
         let message = Message(with: text, date: Date(), isOutcoming: true)
         message.markAsRead()
         chat.appendMessage(message)
         multipeerCommunicator.sendMessage(string: text, to: chat.identifier, completionHandler: nil)
-        notifyDelegates()
+        delegate?.updateMessageList()
+        
+        //notifyDelegates()
     }
     
     // MARK: - FailureHandling
@@ -107,7 +94,7 @@ extension CommunicatorManager : MultipeerCommunicatorDelegate {
     func didFindUser(userID: String, userName: String?) {
         if let chat = findChatWith(identifier: userID) {
             chat.online = true
-            notifyDelegatesAboutUserStatusChanges()
+            //notifyDelegatesAboutUserStatusChanges()
         }
         else {
             let chat = Chat(with: userName, identifier: userID)
@@ -120,36 +107,57 @@ extension CommunicatorManager : MultipeerCommunicatorDelegate {
     func didLooseUser(userID: String) {
         if let chat = findChatWith(identifier: userID) {
             chat.online = false
-            notifyDelegatesAboutUserStatusChanges()
+            //notifyDelegatesAboutUserStatusChanges()
             delegate?.updateConversationList()
         }
     }
     
-    fileprivate func notifyDelegatesAboutUserStatusChanges() {
-        DispatchQueue.main.async {
-            for wrapper in self.delegates {
-                wrapper.delegate?.handleUserStatusChange?()
-            }
-        }
-    }
+//    fileprivate func notifyDelegatesAboutUserStatusChanges() {
+//        DispatchQueue.main.async {
+//            for wrapper in self.delegates {
+//                wrapper.delegate?.handleUserStatusChange?()
+//            }
+//        }
+//    }
     
     func didReceiveMessage(text: String, fromUser: String, toUser:String) {
         if let chat = findChatWith(identifier: fromUser) {
             let message = Message(with: text, date: Date(), isOutcoming: false)
             chat.appendMessage(message)
-            notifyDelegates()
+            delegate?.updateMessageList()
+            
+            //notifyDelegates()
         }
     }
     
-    fileprivate func notifyDelegates() {
-        DispatchQueue.main.async {
-            for wrapper in self.delegates {
-                wrapper.delegate?.updateMessageList()
-            }
-        }
-    }
+//    fileprivate func notifyDelegates() {
+//        DispatchQueue.main.async {
+//            for wrapper in self.delegates {
+//                wrapper.delegate?.updateMessageList()
+//            }
+//        }
+//    }
     
     fileprivate func findChatWith(identifier: String) -> Chat? {
         return chats.filter { $0.identifier == identifier }.first
     }
 }
+
+
+//@objc protocol PeerManagerDelegate : NSObjectProtocol {
+//    func updateMessageList()
+//    @objc optional func handleUserStatusChange()
+//}
+//
+//func ==(lhs: PeerManagerDelegate, rhs: PeerManagerDelegate) -> Bool {
+//    return lhs.hash == rhs.hash
+//}
+//
+//fileprivate class PeerManagerDelegateWeakWrapper {
+//    weak var delegate: PeerManagerDelegate?
+//    
+//    init(delegate: PeerManagerDelegate) {
+//        self.delegate = delegate
+//    }
+//}
+

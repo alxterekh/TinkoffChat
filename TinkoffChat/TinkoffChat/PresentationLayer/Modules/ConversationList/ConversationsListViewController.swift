@@ -95,6 +95,10 @@ extension ConversationsListViewController: UITableViewDataSource {
 }
 
 extension ConversationsListViewController: CommunicatorManagerDelegate {
+    func updateMessageList() {
+        
+    }
+
     func updateConversationList() {
 //        peerManagers = [sortPeerManagers(communicatorManager.getOnlinePeerManagers()),
 //                        sortPeerManagers(communicatorManager.getOfflinePeerManagers())]

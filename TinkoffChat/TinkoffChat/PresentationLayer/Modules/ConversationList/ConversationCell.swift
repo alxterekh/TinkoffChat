@@ -88,9 +88,9 @@ class ConversationCell: UITableViewCell {
     }
 }
 
-extension ConversationCell: PeerManagerDelegate {
-    func updateMessageList() {
-        update()
-    }
-}
+//extension ConversationCell: PeerManagerDelegate {
+//    func updateMessageList() {
+//        update()
+//    }
+//}
 
