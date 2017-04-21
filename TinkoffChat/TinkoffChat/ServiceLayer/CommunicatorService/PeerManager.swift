@@ -13,8 +13,6 @@ import UIKit
     @objc optional func handleUserStatusChange()
 }
 
-//should be protocol for PeerManager
-
 func ==(lhs: PeerManagerDelegate, rhs: PeerManagerDelegate) -> Bool {
     return lhs.hash == rhs.hash
 }
@@ -27,18 +25,19 @@ fileprivate class PeerManagerDelegateWeakWrapper {
     }
 }
 
-class PeerManager: NSObject {
+class PeerManager {
     
     let identifier: String
     let chat: Chat
     fileprivate let multipeerCommunicator: Communicator
     fileprivate var delegates = [PeerManagerDelegateWeakWrapper]()
     
+    //MARK: -
+    
     init(with peerManagerId: String, userName:String?, multipeerCommunicator: Communicator) {
         identifier = peerManagerId
         chat = Chat(with: userName)
         self.multipeerCommunicator = multipeerCommunicator
-        super.init()
     }
     
     func addDelegate(_ delegate: PeerManagerDelegate) {
@@ -58,17 +57,19 @@ class PeerManager: NSObject {
         delegates = filteredDelegates
     }
     
-    func recieveMessage(text: String) {
-        let message = Message(with: text, date: Date(), isOutcoming: false)
-        chat.appendMessage(message)
-        notifyDelegates()
-    }
-    
     func sendMessage(text: String) {
         let message = Message(with: text, date: Date(), isOutcoming: true)
         message.markAsRead()
         chat.appendMessage(message)
         multipeerCommunicator.sendMessage(string: text, to: identifier, completionHandler: nil)
+        notifyDelegates()
+    }
+    
+    //MARK: -
+    
+    func recieveMessage(text: String) {
+        let message = Message(with: text, date: Date(), isOutcoming: false)
+        chat.appendMessage(message)
         notifyDelegates()
     }
     

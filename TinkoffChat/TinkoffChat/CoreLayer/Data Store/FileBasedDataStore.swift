@@ -18,7 +18,6 @@ class FileBasedDataStore {
     static let avatarKey = "avatarKey"
     static let nameKey = "nameKey"
     static let userInfoKey = "userInfoKey"
-    static let textColorKey = "textColorKey"
     static let fileName = "profileData"
     
     enum FileBasedDataStoreError: Error {
@@ -29,12 +28,10 @@ class FileBasedDataStore {
     
     fileprivate func serializeProfileData(_ profile: Profile) -> Dictionary<String, Any> {
         let avatarImageData = NSKeyedArchiver.archivedData(withRootObject: profile.userPicture)
-        let textColorData = NSKeyedArchiver.archivedData(withRootObject: profile.textColor)
         
         return [FileBasedDataStore.avatarKey: avatarImageData,
                 FileBasedDataStore.nameKey: profile.name,
-                FileBasedDataStore.userInfoKey: profile.userInfo,
-                FileBasedDataStore.textColorKey: textColorData]
+                FileBasedDataStore.userInfoKey: profile.userInfo]
     }
     
     fileprivate func deserializeProfileData(_ data: Data) throws -> Profile? {
@@ -52,12 +49,8 @@ class FileBasedDataStore {
         guard let userPicture = NSKeyedUnarchiver.unarchiveObject(with: dictionary[FileBasedDataStore.avatarKey] as! Data) as? UIImage else {
             throw FileBasedDataStoreError.brokenData
         }
-        
-        guard let textColor = NSKeyedUnarchiver.unarchiveObject(with: dictionary[FileBasedDataStore.textColorKey] as! Data) as? UIColor else {
-            throw FileBasedDataStoreError.brokenData
-        }
-
-        return Profile(name: name, userInfo: userInfo, textColor: textColor, userPicture: userPicture)
+    
+        return Profile(name: name, userInfo: userInfo, userPicture: userPicture)
     }
 
     fileprivate func getDocumentsDirectory() -> URL {
