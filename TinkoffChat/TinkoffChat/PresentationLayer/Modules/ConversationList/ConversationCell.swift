@@ -28,8 +28,6 @@ class ConversationCell: UITableViewCell {
     
     var chat: Chat? {
         didSet {
-//            oldValue?.removeDelegate(self)
-//            peerManager?.addDelegate(self)
             update()
         }
     }
@@ -87,10 +85,3 @@ class ConversationCell: UITableViewCell {
         return date.timeIntervalSince1970 < startOfDay.timeIntervalSince1970
     }
 }
-
-//extension ConversationCell: PeerManagerDelegate {
-//    func updateMessageList() {
-//        update()
-//    }
-//}
-

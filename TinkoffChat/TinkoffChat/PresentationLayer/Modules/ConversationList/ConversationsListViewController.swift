@@ -33,6 +33,7 @@ final class ConversationsListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        communicatorManager.delegate = self
         updateConversationList()
     }
     
@@ -55,6 +56,7 @@ final class ConversationsListViewController: UIViewController {
             let vc = segue.destination as! ConversationViewController
             if let sender = sender as? ConversationCell {
                 vc.chat = sender.chat
+                vc.communicator = communicatorManager
             }
         }
     }
@@ -95,28 +97,24 @@ extension ConversationsListViewController: UITableViewDataSource {
 }
 
 extension ConversationsListViewController: CommunicatorManagerDelegate {
-    func updateMessageList() {
-        
+    func updateView() {
+        updateConversationList()
     }
 
-    func updateConversationList() {
-//        peerManagers = [sortPeerManagers(communicatorManager.getOnlinePeerManagers()),
-//                        sortPeerManagers(communicatorManager.getOfflinePeerManagers())]
+    fileprivate func updateConversationList() {
+        chats = [sortChats(communicatorManager.getOnlineChats()),
+                 sortChats(communicatorManager.getOfflineChats())]
         tableView.reloadData()
     }
     
-//    fileprivate func sortPeerManagers(_ peerManagers: [PeerManager]) -> [PeerManager] {
-//        let peersWithLastMessageDate = peerManagers.filter { $0.chat.date != nil }
-//        let peersWithoutLastMessageDate = peerManagers.filter { $0.chat.date == nil && $0.chat.name != nil }
-//        let peersWithoutDateAndName = peerManagers.filter { $0.chat.date == nil && $0.chat.name == nil }
-//        
-//        let sortedPeersWithLastMessageDate = peersWithLastMessageDate.sorted { $0.chat.date! > $1.chat.date! }
-//        let sortedPeersWithoutLastMessageDate = peersWithoutLastMessageDate.sorted { $0.chat.name! > $1.chat.name! }
-//        
-//        return sortedPeersWithLastMessageDate + sortedPeersWithoutLastMessageDate + peersWithoutDateAndName
-//    }
-    
-    func handleMultipeerError(_ error: Error) {
-        print("\(error)")
+    fileprivate func sortChats(_ chats: [Chat]) -> [Chat] {
+        let chatsWithLastMessageDate = chats.filter { $0.date != nil }
+        let chatsWithoutLastMessageDate = chats.filter { $0.date == nil && $0.name != nil }
+        let chatsWithoutDateAndName = chats.filter { $0.date == nil && $0.name == nil }
+        
+        let sortedChatsWithLastMessageDate = chatsWithLastMessageDate.sorted { $0.date! > $1.date! }
+        let sortedChatsWithoutLastMessageDate = chatsWithoutLastMessageDate.sorted { $0.name! > $1.name! }
+        
+        return sortedChatsWithLastMessageDate + sortedChatsWithoutLastMessageDate + chatsWithoutDateAndName
     }
 }

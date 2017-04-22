@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITableViewDelegate {
+class ConversationViewController: UIViewController, UITableViewDelegate, CommunicatorManagerDelegate {
 
     @IBOutlet fileprivate weak var messageTexView: UITextView!
     @IBOutlet fileprivate weak var messagesListTableView: UITableView!
@@ -22,17 +22,17 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
     
-    var chat: Chat? {
+    var chat: Chat?
+    var communicator: CommunicatorService? {
         didSet {
-//            oldValue?.removeDelegate(self)
-//            peerManager?.addDelegate(self)
+            communicator?.delegate = self
         }
     }
-
+    
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         if let _ = chat {
             messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-            //CommunicatorService.sendMessage(text: messageTexView.text)
+            communicator?.sendMessage(text: messageTexView.text, to: chat!)
             messageTexView.text = ""
             sendButton.isEnabled = false
             updateTextViewHeight(for: messageTexView.attributedText)
@@ -53,7 +53,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
     
     deinit {
         unsubscribeFromKeyboardNotification()
-        //peerManager?.removeDelegate(self)
     }
     
     fileprivate func setup() {
@@ -108,14 +107,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
     
     // MARK: - PeerManagerDelegate
     
-    func updateMessageList() {
-        self.messagesListTableView.reloadData()
-    }
-    
-    func handleUserStatusChange() {
+    func updateView() {
         if let state = chat?.online {
             sendButton.isEnabled = state
         }
+
+        self.messagesListTableView.reloadData()
     }
 }
 
@@ -131,7 +128,7 @@ extension ConversationViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messages = [Message]() //peerManager!.chat.messages
+        let messages = chat!.messages
         let messageIndex = messages.count - indexPath.row - 1
         let message = messages[messageIndex]
         let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
@@ -151,7 +148,7 @@ extension ConversationViewController : UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if let text = textView.text {
-            sendButton.isEnabled = text != "" //&& peerManager!.chat.online
+            sendButton.isEnabled = text != "" && chat!.online
         }
     }
     
