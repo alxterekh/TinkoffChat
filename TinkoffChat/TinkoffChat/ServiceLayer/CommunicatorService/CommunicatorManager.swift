@@ -54,16 +54,6 @@ final class CommunicatorManager : CommunicatorService {
         multipeerCommunicator.sendMessage(string: text, to: chat.identifier, completionHandler: nil)
         delegate?.updateView()
     }
-    
-    // MARK: - FailureHandling
-    
-    func failedToStartBrowsingForUsers(error: Error) {
-        print("\(error)")
-    }
-    
-    func failedToStartAdvertising(error: Error) {
-        print("\(error)")
-    }
 }
 
 extension CommunicatorManager : MultipeerCommunicatorDelegate {
@@ -93,6 +83,14 @@ extension CommunicatorManager : MultipeerCommunicatorDelegate {
             chat.appendMessage(message)
             delegate?.updateView()
         }
+    }
+    
+    func failedToStartBrowsingForUsers(error: Error) {
+        print("\(error)")
+    }
+    
+    func failedToStartAdvertising(error: Error) {
+        print("\(error)")
     }
     
     fileprivate func findChatWith(identifier: String) -> Chat? {

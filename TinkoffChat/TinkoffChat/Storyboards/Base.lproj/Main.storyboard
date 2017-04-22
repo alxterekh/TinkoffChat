@@ -251,7 +251,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="See-Yo-p7l" secondAttribute="trailing" id="FTx-tM-Kap"/>
                             <constraint firstItem="See-Yo-p7l" firstAttribute="leading" secondItem="fWI-99-gc5" secondAttribute="leading" id="GD9-fH-xBL"/>
@@ -276,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ANe-OG-vMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-37.5" y="-453.16901408450707"/>
+            <point key="canvasLocation" x="-131" y="-569"/>
         </scene>
         <!--Profile Editor View Controller-->
         <scene sceneID="d8n-rT-lBn">

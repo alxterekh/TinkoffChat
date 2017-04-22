@@ -21,6 +21,7 @@
 		11370A801E855982006C487B /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11370A7F1E855982006C487B /* ConversationViewController.swift */; };
 		11370A831E855A14006C487B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11370A821E855A14006C487B /* MessageCell.swift */; };
 		114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9D3D1E88F59300DB0A0B /* Chat.swift */; };
+		11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */; };
 		116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F873B1E97854B00C18C49 /* CommunicatorManager.swift */; };
 		117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B96691EA510730052BF52 /* ProfileDataService.swift */; };
 		118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 118102BA1E8683A600E4FA53 /* CoreData.framework */; };
@@ -48,6 +49,7 @@
 		11370A7F1E855982006C487B /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		11370A821E855A14006C487B /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		114C9D3D1E88F59300DB0A0B /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifierGenerator.swift; sourceTree = "<group>"; };
 		116F873B1E97854B00C18C49 /* CommunicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicatorManager.swift; sourceTree = "<group>"; };
 		117B96691EA510730052BF52 /* ProfileDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDataService.swift; sourceTree = "<group>"; };
 		118102BA1E8683A600E4FA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -99,6 +101,7 @@
 				119C36C61E853CA0006B234F /* Storyboards */,
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
 				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
+				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
 				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
 				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
@@ -321,6 +324,7 @@
 				1101CDBA1E68CF5B003B7CA1 /* ProfileEditorViewController.swift in Sources */,
 				114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */,
 				117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */,
+				11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,
 				11189EEE1E8D836900CEA2F0 /* GCDBasedDataOperator.swift in Sources */,
 				11923DD41EA7739800DC96C3 /* ServiceAssembly.swift in Sources */,

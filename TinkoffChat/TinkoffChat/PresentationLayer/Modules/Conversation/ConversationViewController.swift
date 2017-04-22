@@ -105,7 +105,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Communi
         return chat!.messages.count
     }
     
-    // MARK: - PeerManagerDelegate
+    // MARK: - 
     
     func updateView() {
         if let state = chat?.online {

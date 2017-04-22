@@ -10,7 +10,6 @@ import UIKit
 
 class Chat {
     let identifier: String
-    //var participants
     var online: Bool = true
     private(set) var name: String?
     private(set) var messages = [Message]()

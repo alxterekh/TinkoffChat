@@ -22,7 +22,7 @@ class PeerMessageSerializer : MessageSerializer  {
     
     func serializeMessageWith(text: String) throws -> Data  {
         let message = [PeerMessageSerializer.messageEventTypeKey : PeerMessageSerializer.messageEventTypeDescription,
-                       PeerMessageSerializer.messageIdKey : generateMessageId(),
+                       PeerMessageSerializer.messageIdKey : IdentifierGenerator.generateIdentifier(),
                        PeerMessageSerializer.messageTextKey : text]
         
         return try JSONSerialization.data(withJSONObject: message, options: .prettyPrinted)
@@ -32,9 +32,5 @@ class PeerMessageSerializer : MessageSerializer  {
         let peerMessage =  try JSONSerialization.jsonObject(with: data, options:[] ) as? [String: String]
         
         return peerMessage?[PeerMessageSerializer.messageTextKey]
-    }
-    
-    fileprivate func generateMessageId() -> String {
-        return ("\(arc4random_uniform(UINT32_MAX)) + \(Date.timeIntervalSinceReferenceDate) + \(arc4random_uniform(UINT32_MAX))".data(using: .utf8)?.base64EncodedString())!
     }
 }

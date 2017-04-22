@@ -161,7 +161,7 @@ extension MultipeerCommunicator : MCNearbyServiceBrowserDelegate {
 }
 
 extension MultipeerCommunicator : MCSessionDelegate {
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {  }
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {}
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
