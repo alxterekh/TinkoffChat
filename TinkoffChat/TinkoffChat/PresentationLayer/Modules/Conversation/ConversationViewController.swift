@@ -21,7 +21,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Communi
     fileprivate let incomingMessageCellId = "incomingMessage"
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
-    
     var chat: Chat?
     var communicator: CommunicatorService? {
         didSet {
@@ -30,9 +29,9 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Communi
     }
     
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
-        if let _ = chat {
+        if let chat = chat {
             messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-            communicator?.sendMessage(text: messageTexView.text, to: chat!)
+            communicator?.sendMessage(text: messageTexView.text, to: chat)
             messageTexView.text = ""
             sendButton.isEnabled = false
             updateTextViewHeight(for: messageTexView.attributedText)
@@ -102,7 +101,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Communi
     }
     
     fileprivate func calculateNumberOfRows() -> Int {
-        return chat!.messages.count
+        return chat?.messages.count ?? 0
     }
     
     // MARK: - 
@@ -128,7 +127,7 @@ extension ConversationViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messages = chat!.messages
+        let messages = chat?.messages ?? [Message]()
         let messageIndex = messages.count - indexPath.row - 1
         let message = messages[messageIndex]
         let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
@@ -148,7 +147,7 @@ extension ConversationViewController : UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if let text = textView.text {
-            sendButton.isEnabled = text != "" && chat!.online
+            sendButton.isEnabled = text != "" && chat?.online ?? false
         }
     }
     
