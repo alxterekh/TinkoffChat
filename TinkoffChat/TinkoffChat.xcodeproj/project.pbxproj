@@ -94,16 +94,16 @@
 			isa = PBXGroup;
 			children = (
 				11FA24611E910CA3002166D6 /* Additions */,
-				117B96651EA505270052BF52 /* CoreLayer */,
 				11FA245C1E910B47002166D6 /* Extentions */,
 				117B96641EA505150052BF52 /* PresentationLayer */,
 				117B96661EA5052F0052BF52 /* ServiceLayer */,
+				117B96651EA505270052BF52 /* CoreLayer */,
 				119C36C61E853CA0006B234F /* Storyboards */,
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
-				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
 				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
-				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
+				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
+				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
 			);
 			path = TinkoffChat;
@@ -197,7 +197,6 @@
 				119A0BB41EB0CA88002BA523 /* Profile.swift */,
 				119A0BB61EB0CAA8002BA523 /* ProfileEditorViewController.swift */,
 			);
-			name = UserProfile;
 			path = UserProfile;
 			sourceTree = "<group>";
 		};
