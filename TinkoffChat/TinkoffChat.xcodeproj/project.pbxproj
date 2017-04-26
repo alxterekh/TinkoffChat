@@ -100,8 +100,8 @@
 				117B96651EA505270052BF52 /* CoreLayer */,
 				119C36C61E853CA0006B234F /* Storyboards */,
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
-				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
 				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
+				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
 				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
 				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
@@ -167,9 +167,9 @@
 		117B96671EA506CE0052BF52 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				11FA24621E910F4C002166D6 /* Profile */,
-				11370A7E1E855935006C487B /* ConversationList */,
 				11370A811E855989006C487B /* Conversation */,
+				11370A7E1E855935006C487B /* ConversationList */,
+				11FA24621E910F4C002166D6 /* Profile */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
