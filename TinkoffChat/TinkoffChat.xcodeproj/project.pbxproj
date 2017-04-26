@@ -28,10 +28,6 @@
 		11923DD41EA7739800DC96C3 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */; };
 		119BFF4B1E98C0370071E02C /* PeerMessageSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119BFF4A1E98C0370071E02C /* PeerMessageSerializer.swift */; };
 		119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C36C81E853EA6006B234F /* ConversationCell.swift */; };
-		11B04A4A1EB08F0000F03D37 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B04A491EB08F0000F03D37 /* CoreDataStack.swift */; };
-		11B04A4D1EB0963300F03D37 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11B04A4B1EB0963300F03D37 /* Model.xcdatamodeld */; };
-		11B04A511EB0AE6000F03D37 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B04A4F1EB0AE6000F03D37 /* Profile+CoreDataClass.swift */; };
-		11B04A521EB0AE6000F03D37 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B04A501EB0AE6000F03D37 /* Profile+CoreDataProperties.swift */; };
 		11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */; };
 		11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245F1E910C6E002166D6 /* ColoredButton.swift */; };
 /* End PBXBuildFile section */
@@ -61,10 +57,6 @@
 		11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		119BFF4A1E98C0370071E02C /* PeerMessageSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerMessageSerializer.swift; sourceTree = "<group>"; };
 		119C36C81E853EA6006B234F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
-		11B04A491EB08F0000F03D37 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		11B04A4C1EB0963300F03D37 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		11B04A4F1EB0AE6000F03D37 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
-		11B04A501EB0AE6000F03D37 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		11FA245F1E910C6E002166D6 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,8 +76,6 @@
 		1101CDAB1E68CF5B003B7CA1 = {
 			isa = PBXGroup;
 			children = (
-				11B04A4F1EB0AE6000F03D37 /* Profile+CoreDataClass.swift */,
-				11B04A501EB0AE6000F03D37 /* Profile+CoreDataProperties.swift */,
 				118102B91E8683A600E4FA53 /* Frameworks */,
 				1101CDB51E68CF5B003B7CA1 /* Products */,
 				1101CDB61E68CF5B003B7CA1 /* TinkoffChat */,
@@ -108,6 +98,7 @@
 				117B96641EA505150052BF52 /* PresentationLayer */,
 				117B96661EA5052F0052BF52 /* ServiceLayer */,
 				117B96651EA505270052BF52 /* CoreLayer */,
+				119C36C61E853CA0006B234F /* Storyboards */,
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
 				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
 				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
@@ -158,8 +149,6 @@
 		117B96651EA505270052BF52 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
-				11B04A4E1EB0964600F03D37 /* CoreData */,
-				119C36C61E853CA0006B234F /* Storyboards */,
 				11189EEC1E8D830300CEA2F0 /* Data Store */,
 				117B96681EA507A20052BF52 /* MultipeerCommunicator */,
 			);
@@ -208,17 +197,7 @@
 				1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */,
 				1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */,
 			);
-			name = Storyboards;
-			path = ../Storyboards;
-			sourceTree = "<group>";
-		};
-		11B04A4E1EB0964600F03D37 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				11B04A491EB08F0000F03D37 /* CoreDataStack.swift */,
-				11B04A4B1EB0963300F03D37 /* Model.xcdatamodeld */,
-			);
-			name = CoreData;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		11CD76D41EA8ED8500E0060E /* CommunicatorService */ = {
@@ -343,7 +322,6 @@
 				11370A801E855982006C487B /* ConversationViewController.swift in Sources */,
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,
 				1101CDBA1E68CF5B003B7CA1 /* ProfileEditorViewController.swift in Sources */,
-				11B04A511EB0AE6000F03D37 /* Profile+CoreDataClass.swift in Sources */,
 				114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */,
 				117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */,
 				11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */,
@@ -351,15 +329,12 @@
 				11189EEE1E8D836900CEA2F0 /* GCDBasedDataOperator.swift in Sources */,
 				11923DD41EA7739800DC96C3 /* ServiceAssembly.swift in Sources */,
 				11189EF41E8D9D6D00CEA2F0 /* Profile.swift in Sources */,
-				11B04A521EB0AE6000F03D37 /* Profile+CoreDataProperties.swift in Sources */,
 				11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */,
 				119BFF4B1E98C0370071E02C /* PeerMessageSerializer.swift in Sources */,
 				11189EF21E8D938A00CEA2F0 /* FileBasedDataStore.swift in Sources */,
 				119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */,
 				1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */,
-				11B04A4A1EB08F0000F03D37 /* CoreDataStack.swift in Sources */,
 				111B5C811E8901670043FD47 /* Message.swift in Sources */,
-				11B04A4D1EB0963300F03D37 /* Model.xcdatamodeld in Sources */,
 				116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */,
 				1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */,
 				11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */,
@@ -533,19 +508,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		11B04A4B1EB0963300F03D37 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				11B04A4C1EB0963300F03D37 /* Model.xcdatamodel */,
-			);
-			currentVersion = 11B04A4C1EB0963300F03D37 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 1101CDAC1E68CF5B003B7CA1 /* Project object */;
 }
