@@ -11,8 +11,6 @@
 		1101CDBD1E68CF5B003B7CA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */; };
 		1101CDBF1E68CF5B003B7CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */; };
 		1101CDC21E68CF5B003B7CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */; };
-		11189EEE1E8D836900CEA2F0 /* GCDBasedDataOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11189EED1E8D836900CEA2F0 /* GCDBasedDataOperator.swift */; };
-		11189EF21E8D938A00CEA2F0 /* FileBasedDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11189EF11E8D938A00CEA2F0 /* FileBasedDataStore.swift */; };
 		111B5C811E8901670043FD47 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111B5C801E8901670043FD47 /* Message.swift */; };
 		1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */; };
 		1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */; };
@@ -28,6 +26,10 @@
 		119A0BB71EB0CAA8002BA523 /* ProfileEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A0BB61EB0CAA8002BA523 /* ProfileEditorViewController.swift */; };
 		119BFF4B1E98C0370071E02C /* PeerMessageSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119BFF4A1E98C0370071E02C /* PeerMessageSerializer.swift */; };
 		119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C36C81E853EA6006B234F /* ConversationCell.swift */; };
+		11B76B5C1EB480E50061478E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11B76B5A1EB480E50061478E /* Model.xcdatamodeld */; };
+		11B76B5F1EB4810B0061478E /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B76B5D1EB4810B0061478E /* User+CoreDataClass.swift */; };
+		11B76B601EB4810B0061478E /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B76B5E1EB4810B0061478E /* User+CoreDataProperties.swift */; };
+		11B76B621EB487730061478E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B76B611EB487730061478E /* CoreDataStack.swift */; };
 		11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */; };
 		11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245F1E910C6E002166D6 /* ColoredButton.swift */; };
 /* End PBXBuildFile section */
@@ -39,8 +41,6 @@
 		1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1101CDC31E68CF5B003B7CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		11189EED1E8D836900CEA2F0 /* GCDBasedDataOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBasedDataOperator.swift; sourceTree = "<group>"; };
-		11189EF11E8D938A00CEA2F0 /* FileBasedDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileBasedDataStore.swift; sourceTree = "<group>"; };
 		111B5C801E8901670043FD47 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
@@ -57,6 +57,10 @@
 		119A0BB61EB0CAA8002BA523 /* ProfileEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditorViewController.swift; sourceTree = "<group>"; };
 		119BFF4A1E98C0370071E02C /* PeerMessageSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerMessageSerializer.swift; sourceTree = "<group>"; };
 		119C36C81E853EA6006B234F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
+		11B76B5B1EB480E50061478E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		11B76B5D1EB4810B0061478E /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "../../User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		11B76B5E1EB4810B0061478E /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../../User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		11B76B611EB487730061478E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = ../Storyboards/CoreDataStack.swift; sourceTree = "<group>"; };
 		11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		11FA245F1E910C6E002166D6 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,20 +106,12 @@
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
 				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
 				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
+				11B76B5A1EB480E50061478E /* Model.xcdatamodeld */,
 				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
 				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
 			);
 			path = TinkoffChat;
-			sourceTree = "<group>";
-		};
-		11189EEC1E8D830300CEA2F0 /* Data Store */ = {
-			isa = PBXGroup;
-			children = (
-				11189EF11E8D938A00CEA2F0 /* FileBasedDataStore.swift */,
-				11189EED1E8D836900CEA2F0 /* GCDBasedDataOperator.swift */,
-			);
-			path = "Data Store";
 			sourceTree = "<group>";
 		};
 		11370A7E1E855935006C487B /* ConversationList */ = {
@@ -149,7 +145,9 @@
 		117B96651EA505270052BF52 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
-				11189EEC1E8D830300CEA2F0 /* Data Store */,
+				11B76B5D1EB4810B0061478E /* User+CoreDataClass.swift */,
+				11B76B5E1EB4810B0061478E /* User+CoreDataProperties.swift */,
+				11B76B611EB487730061478E /* CoreDataStack.swift */,
 				117B96681EA507A20052BF52 /* MultipeerCommunicator */,
 			);
 			path = CoreLayer;
@@ -159,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				11CD76D41EA8ED8500E0060E /* CommunicatorService */,
-				11CD76D51EA8ED9900E0060E /* DataStorageService */,
+				11CD76D51EA8ED9900E0060E /* ProfileDataStorageService */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -217,11 +215,12 @@
 			path = CommunicatorService;
 			sourceTree = "<group>";
 		};
-		11CD76D51EA8ED9900E0060E /* DataStorageService */ = {
+		11CD76D51EA8ED9900E0060E /* ProfileDataStorageService */ = {
 			isa = PBXGroup;
 			children = (
 				117B96691EA510730052BF52 /* ProfileDataService.swift */,
 			);
+			name = ProfileDataStorageService;
 			path = DataStorageService;
 			sourceTree = "<group>";
 		};
@@ -320,24 +319,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				11370A801E855982006C487B /* ConversationViewController.swift in Sources */,
+				11B76B621EB487730061478E /* CoreDataStack.swift in Sources */,
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,
 				114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */,
 				117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */,
 				11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,
-				11189EEE1E8D836900CEA2F0 /* GCDBasedDataOperator.swift in Sources */,
+				11B76B5C1EB480E50061478E /* Model.xcdatamodeld in Sources */,
 				119A0BB51EB0CA88002BA523 /* Profile.swift in Sources */,
 				11923DD41EA7739800DC96C3 /* ServiceAssembly.swift in Sources */,
 				11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */,
 				119BFF4B1E98C0370071E02C /* PeerMessageSerializer.swift in Sources */,
-				11189EF21E8D938A00CEA2F0 /* FileBasedDataStore.swift in Sources */,
 				119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */,
 				119A0BB71EB0CAA8002BA523 /* ProfileEditorViewController.swift in Sources */,
 				1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */,
 				111B5C811E8901670043FD47 /* Message.swift in Sources */,
 				116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */,
+				11B76B601EB4810B0061478E /* User+CoreDataProperties.swift in Sources */,
 				1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */,
 				11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */,
+				11B76B5F1EB4810B0061478E /* User+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +509,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		11B76B5A1EB480E50061478E /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				11B76B5B1EB480E50061478E /* Model.xcdatamodel */,
+			);
+			currentVersion = 11B76B5B1EB480E50061478E /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1101CDAC1E68CF5B003B7CA1 /* Project object */;
 }

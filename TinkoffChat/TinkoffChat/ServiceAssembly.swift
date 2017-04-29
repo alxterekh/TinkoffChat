@@ -11,10 +11,8 @@ import Foundation
 class ServiceAssembly  {
     
     static func profileDataService() -> ProfileDataStorage {
-        let store = FileBasedDataStore()
-        let gcdBasedDataStore = GCDBasedDataOperator(with: store)
-        
-        return ProfileDataService(dataStore: gcdBasedDataStore)
+    
+        return ProfileDataService()
     }
     
     static func communicatorService() -> CommunicatorService {
