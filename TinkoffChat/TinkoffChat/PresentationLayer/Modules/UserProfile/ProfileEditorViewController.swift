@@ -22,24 +22,16 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
     
     fileprivate let profileDataService = ServiceAssembly.profileDataService()
     
-    fileprivate var originalProfile = Profile.createDefaultProfile()
-    fileprivate var changedProfile = Profile.createDefaultProfile() {
+    fileprivate(set) var profile = Profile.createDefaultProfile() {
         didSet {
             updateView()
         }
     }
     
-    var profile: Profile { return changedProfile }
-    
     // MARK: - Actions
     
     @IBAction fileprivate func saveProfileDataByGCDButtonTap(_ sender: UIButton) {
-        if (!(changedProfile == originalProfile)) {
-            saveProfile()
-        }
-        else {
-            self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
-        }
+        saveProfile()
     }
     
     // MARK: - Initialization
@@ -77,15 +69,6 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
     
     // MARK: - Alerts
     
-    fileprivate func showSucceesfulDataSaveOperationAlert() {
-        let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) {
-            [unowned self] action in
-            self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
-        })
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     fileprivate func showFailedDataSaveOperationAlert() {
         let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) {
@@ -102,9 +85,9 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
     // MARK: -
     
     fileprivate func updateView() {
-        usernameField.text = changedProfile.name
-        userinfoText.text = changedProfile.userInfo
-        avatarImageView.image = changedProfile.userPicture
+        usernameField.text = profile.name
+        userinfoText.text = profile.userInfo
+        avatarImageView.image = profile.userPicture
     }
     
     fileprivate func loadProfileData() {
@@ -112,11 +95,10 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
         profileDataService.loadProfileData() {
             self.activityIndicator.stopAnimating()
             if let profile = $0 {
-                self.originalProfile = profile
-                self.changedProfile = profile
+                self.profile = profile
             }
             else {
-                self.changedProfile = Profile.createDefaultProfile()
+                self.profile = Profile.createDefaultProfile()
             }
             
             self.handleDataOperationError($1)
@@ -126,13 +108,12 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
     fileprivate func saveProfile() {
         activityIndicator.startAnimating()
         saveProfileByGCDButton.isEnabled = false
-        profileDataService.saveProfileData(changedProfile) {
+        profileDataService.saveProfileData(profile) {
             success, error in
             
             self.activityIndicator.stopAnimating()
             if success {
-                self.showSucceesfulDataSaveOperationAlert()
-                self.originalProfile = self.changedProfile
+                self.performSegue(withIdentifier: "unwindToConversationList", sender: self)
             }
             else {
                 self.showFailedDataSaveOperationAlert()
@@ -154,7 +135,7 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
     @objc fileprivate func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let userPictureActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         addDefaultActionsToSheet(userPictureActionSheet)
-        if (!changedProfile.hasDefaultUserPicture()) {
+        if (!profile.hasDefaultUserPicture()) {
             addDeleteActionToSheet(userPictureActionSheet)
         }
         present(userPictureActionSheet, animated: true)
@@ -188,7 +169,7 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
             [unowned self] action in
             
             self.avatarImageView.image = #imageLiteral(resourceName: "placeholder")
-            self.changedProfile = self.changedProfile.createCopyWithChange(userPicture: #imageLiteral(resourceName: "placeholder"))
+            self.profile = self.profile.createCopyWithChange(userPicture: #imageLiteral(resourceName: "placeholder"))
         })
     }
     
@@ -200,7 +181,7 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
 extension ProfileEditorViewController : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        changedProfile = changedProfile.createCopyWithChange(userPicture: chosenImage)
+        profile = profile.createCopyWithChange(userPicture: chosenImage)
         dismiss(animated:true, completion: nil)
     }
     
@@ -212,7 +193,7 @@ extension ProfileEditorViewController : UIImagePickerControllerDelegate {
 extension ProfileEditorViewController : UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if let text = textView.text {
-            changedProfile = changedProfile.createCopyWithChange(userInfo: text)
+            profile = profile.createCopyWithChange(userInfo: text)
         }
     }
 }
@@ -225,7 +206,7 @@ extension ProfileEditorViewController : UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let text = textField.text {
-            changedProfile = changedProfile.createCopyWithChange(name: text)
+            profile = profile.createCopyWithChange(name: text)
         }
     }
 }

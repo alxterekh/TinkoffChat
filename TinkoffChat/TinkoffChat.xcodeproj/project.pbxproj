@@ -106,7 +106,6 @@
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
 				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
 				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
-				11B76B5A1EB480E50061478E /* Model.xcdatamodeld */,
 				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
 				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
@@ -145,9 +144,7 @@
 		117B96651EA505270052BF52 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
-				11B76B5D1EB4810B0061478E /* User+CoreDataClass.swift */,
-				11B76B5E1EB4810B0061478E /* User+CoreDataProperties.swift */,
-				11B76B611EB487730061478E /* CoreDataStack.swift */,
+				119C99AC1EB5D8C900B8FE56 /* CoreData */,
 				117B96681EA507A20052BF52 /* MultipeerCommunicator */,
 			);
 			path = CoreLayer;
@@ -205,6 +202,33 @@
 				1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		119C99AC1EB5D8C900B8FE56 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				11B76B611EB487730061478E /* CoreDataStack.swift */,
+				119C99AE1EB5D92100B8FE56 /* Generated */,
+				119C99AD1EB5D90D00B8FE56 /* Model */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		119C99AD1EB5D90D00B8FE56 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11B76B5A1EB480E50061478E /* Model.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		119C99AE1EB5D92100B8FE56 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				11B76B5D1EB4810B0061478E /* User+CoreDataClass.swift */,
+				11B76B5E1EB4810B0061478E /* User+CoreDataProperties.swift */,
+			);
+			name = Generated;
 			sourceTree = "<group>";
 		};
 		11CD76D41EA8ED8500E0060E /* CommunicatorService */ = {
@@ -517,7 +541,8 @@
 				11B76B5B1EB480E50061478E /* Model.xcdatamodel */,
 			);
 			currentVersion = 11B76B5B1EB480E50061478E /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
+			name = Model.xcdatamodeld;
+			path = ../Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

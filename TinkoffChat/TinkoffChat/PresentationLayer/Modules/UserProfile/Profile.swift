@@ -8,14 +8,6 @@
 
 import UIKit
 
-extension Profile: Equatable {}
-
-func ==(lhs: Profile, rhs: Profile) -> Bool {
-    return lhs.name == rhs.name &&
-        lhs.userInfo == rhs.userInfo &&
-        lhs.userPicture == rhs.userPicture
-}
-
 struct Profile {
     let name: String
     let userInfo: String

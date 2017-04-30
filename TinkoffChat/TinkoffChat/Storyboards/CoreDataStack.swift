@@ -9,7 +9,12 @@
 import Foundation
 import CoreData
 
-class CoreDataStack {
+protocol CoreDataStackContextProvider {
+    var mainContext : NSManagedObjectContext? { get }
+    var saveContext : NSManagedObjectContext? { get }
+}
+
+class CoreDataStack : CoreDataStackContextProvider {
     
     fileprivate let managedObjectModelName = "Model"
     

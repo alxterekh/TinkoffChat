@@ -29,28 +29,42 @@ extension User {
 
 class ProfileDataService : ProfileDataStorage {
     
-    let coreDataStack = CoreDataStack()
+    fileprivate let coreDataStack: CoreDataStackContextProvider
+    
+    // MARK: -
+    
+    init(with coreDataStack: CoreDataStackContextProvider) {
+        self.coreDataStack = coreDataStack
+    }
+    
+    // MARK: -
     
     func loadProfileData(completion: @escaping (Profile?, Error?) -> Void) {
         var profile: Profile?
-        if let user = findOrInsertUser(in: coreDataStack.mainContext!) {
-            if let _ = user.name {
-                 profile = Profile(name: user.name!, userInfo: "", userPicture: #imageLiteral(resourceName: "placeholder"))
+        if let context = coreDataStack.mainContext {
+            if let user = findOrInsertUser(in: context) {
+                let userPicture = UIImage(data: user.userPicture! as Data)
+                profile = Profile.createDefaultProfile()
+                profile = profile?.createCopyWithChange(name: user.name, userInfo: user.userInfo, userPicture: userPicture)
             }
-    
         }
-       
+        
         completion(profile, nil)
     }
     
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void) {
-        if let user = findOrInsertUser(in: coreDataStack.saveContext!) {
-            user.name = profile.name
-            user.userInfo = profile.userInfo
+        if let context = coreDataStack.saveContext {
+            if let user = findOrInsertUser(in: context) {
+                user.name = profile.name
+                user.userInfo = profile.userInfo
+                user.userPicture = UIImageJPEGRepresentation(profile.userPicture, 1.0) as NSData?
+            }
+            
+            performSave(context: context, completionHandler: completion)
         }
-        
-        performSave(context: coreDataStack.saveContext!, completionHandler: completion)
     }
+    
+    // MARK: -
 
     fileprivate func findOrInsertUser(in context: NSManagedObjectContext) -> User? {
         var user: User?
@@ -96,14 +110,15 @@ class ProfileDataService : ProfileDataStorage {
                     try context.save()
                 }
                 catch {
-                    completionHandler(false, error)
+                    DispatchQueue.main.async { completionHandler(false, error) }
+                    
                     print("Context save error: \(error)")
                 }
                 if let parent = context.parent {
                     self?.performSave(context: parent, completionHandler: completionHandler)
                 }
                 else {
-                    completionHandler(true, nil)
+                    DispatchQueue.main.async { completionHandler(true, nil) }
                 }
             }
         }

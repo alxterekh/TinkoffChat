@@ -8,11 +8,12 @@
 
 import Foundation
 
-class ServiceAssembly  {
+class ServiceAssembly {
     
     static func profileDataService() -> ProfileDataStorage {
-    
-        return ProfileDataService()
+        let coreDataStack = CoreDataStack()
+        
+        return ProfileDataService(with: coreDataStack)
     }
     
     static func communicatorService() -> CommunicatorService {
