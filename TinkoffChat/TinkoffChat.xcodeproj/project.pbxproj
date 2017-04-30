@@ -97,12 +97,9 @@
 		1101CDB61E68CF5B003B7CA1 /* TinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
-				11FA24611E910CA3002166D6 /* Additions */,
-				11FA245C1E910B47002166D6 /* Extentions */,
 				117B96641EA505150052BF52 /* PresentationLayer */,
 				117B96661EA5052F0052BF52 /* ServiceLayer */,
 				117B96651EA505270052BF52 /* CoreLayer */,
-				119C36C61E853CA0006B234F /* Storyboards */,
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
 				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
 				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
@@ -136,7 +133,10 @@
 		117B96641EA505150052BF52 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				11FA24611E910CA3002166D6 /* Additions */,
+				11FA245C1E910B47002166D6 /* Extentions */,
 				117B96671EA506CE0052BF52 /* Modules */,
+				119C36C61E853CA0006B234F /* Storyboards */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -201,7 +201,8 @@
 				1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */,
 				1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */,
 			);
-			path = Storyboards;
+			name = Storyboards;
+			path = ../Storyboards;
 			sourceTree = "<group>";
 		};
 		119C99AC1EB5D8C900B8FE56 /* CoreData */ = {
@@ -253,7 +254,8 @@
 			children = (
 				11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */,
 			);
-			path = Extentions;
+			name = Extentions;
+			path = ../Extentions;
 			sourceTree = "<group>";
 		};
 		11FA24611E910CA3002166D6 /* Additions */ = {
@@ -261,7 +263,8 @@
 			children = (
 				11FA245F1E910C6E002166D6 /* ColoredButton.swift */,
 			);
-			path = Additions;
+			name = Additions;
+			path = ../Additions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

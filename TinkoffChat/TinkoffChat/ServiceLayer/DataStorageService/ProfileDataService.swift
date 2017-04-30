@@ -43,9 +43,11 @@ class ProfileDataService : ProfileDataStorage {
         var profile: Profile?
         if let context = coreDataStack.mainContext {
             if let user = findOrInsertUser(in: context) {
-                let userPicture = UIImage(data: user.userPicture! as Data)
-                profile = Profile.createDefaultProfile()
-                profile = profile?.createCopyWithChange(name: user.name, userInfo: user.userInfo, userPicture: userPicture)
+                if let userPicture = user.userPicture {
+                    let avatar = UIImage(data: userPicture as Data)
+                    profile = Profile.createDefaultProfile()
+                    profile = profile?.createCopyWithChange(name: user.name, userInfo: user.userInfo, userPicture: avatar)
+                }
             }
         }
         
@@ -111,9 +113,9 @@ class ProfileDataService : ProfileDataStorage {
                 }
                 catch {
                     DispatchQueue.main.async { completionHandler(false, error) }
-                    
                     print("Context save error: \(error)")
                 }
+                
                 if let parent = context.parent {
                     self?.performSave(context: parent, completionHandler: completionHandler)
                 }
