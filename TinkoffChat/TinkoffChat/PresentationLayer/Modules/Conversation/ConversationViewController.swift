@@ -54,10 +54,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Communi
         unsubscribeFromKeyboardNotification()
     }
     
+    fileprivate let estimatedMessageCellRowHeight: CGFloat = 44
+    
     fileprivate func setup() {
         messagesListTableView.dataSource = self
         messagesListTableView.delegate = self
-        messagesListTableView.estimatedRowHeight = 44
+        messagesListTableView.estimatedRowHeight = estimatedMessageCellRowHeight
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
         subscribeForKeyboardNotification()

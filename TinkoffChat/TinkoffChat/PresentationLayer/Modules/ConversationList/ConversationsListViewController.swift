@@ -23,11 +23,13 @@ final class ConversationsListViewController: UIViewController {
         setup()
     }
     
+    fileprivate let estimatedConversationCellRowHeight: CGFloat = 44
+    
     fileprivate func setup() {
         communicatorManager.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.estimatedRowHeight = 44
+        tableView.estimatedRowHeight = estimatedConversationCellRowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
     }

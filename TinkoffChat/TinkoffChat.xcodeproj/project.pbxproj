@@ -58,9 +58,9 @@
 		119BFF4A1E98C0370071E02C /* PeerMessageSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerMessageSerializer.swift; sourceTree = "<group>"; };
 		119C36C81E853EA6006B234F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		11B76B5B1EB480E50061478E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		11B76B5D1EB4810B0061478E /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "../../User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		11B76B5E1EB4810B0061478E /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../../User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		11B76B611EB487730061478E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = ../Storyboards/CoreDataStack.swift; sourceTree = "<group>"; };
+		11B76B5D1EB4810B0061478E /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		11B76B5E1EB4810B0061478E /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		11B76B611EB487730061478E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		11FA245F1E910C6E002166D6 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,8 +162,8 @@
 		117B96671EA506CE0052BF52 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				11370A811E855989006C487B /* Conversation */,
 				11370A7E1E855935006C487B /* ConversationList */,
+				11370A811E855989006C487B /* Conversation */,
 				119A0BB31EB0CA77002BA523 /* UserProfile */,
 			);
 			path = Modules;
@@ -201,8 +201,7 @@
 				1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */,
 				1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */,
 			);
-			name = Storyboards;
-			path = ../Storyboards;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		119C99AC1EB5D8C900B8FE56 /* CoreData */ = {
@@ -212,7 +211,7 @@
 				119C99AE1EB5D92100B8FE56 /* Generated */,
 				119C99AD1EB5D90D00B8FE56 /* Model */,
 			);
-			name = CoreData;
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		119C99AD1EB5D90D00B8FE56 /* Model */ = {
@@ -220,7 +219,7 @@
 			children = (
 				11B76B5A1EB480E50061478E /* Model.xcdatamodeld */,
 			);
-			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		119C99AE1EB5D92100B8FE56 /* Generated */ = {
@@ -229,7 +228,7 @@
 				11B76B5D1EB4810B0061478E /* User+CoreDataClass.swift */,
 				11B76B5E1EB4810B0061478E /* User+CoreDataProperties.swift */,
 			);
-			name = Generated;
+			path = Generated;
 			sourceTree = "<group>";
 		};
 		11CD76D41EA8ED8500E0060E /* CommunicatorService */ = {
@@ -245,8 +244,7 @@
 			children = (
 				117B96691EA510730052BF52 /* ProfileDataService.swift */,
 			);
-			name = ProfileDataStorageService;
-			path = DataStorageService;
+			path = ProfileDataStorageService;
 			sourceTree = "<group>";
 		};
 		11FA245C1E910B47002166D6 /* Extentions */ = {
@@ -254,8 +252,7 @@
 			children = (
 				11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */,
 			);
-			name = Extentions;
-			path = ../Extentions;
+			path = Extentions;
 			sourceTree = "<group>";
 		};
 		11FA24611E910CA3002166D6 /* Additions */ = {
@@ -263,8 +260,7 @@
 			children = (
 				11FA245F1E910C6E002166D6 /* ColoredButton.swift */,
 			);
-			name = Additions;
-			path = ../Additions;
+			path = Additions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -544,8 +540,7 @@
 				11B76B5B1EB480E50061478E /* Model.xcdatamodel */,
 			);
 			currentVersion = 11B76B5B1EB480E50061478E /* Model.xcdatamodel */;
-			name = Model.xcdatamodeld;
-			path = ../Model.xcdatamodeld;
+			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
