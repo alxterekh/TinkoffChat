@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITableViewDelegate, CommunicatorManagerDelegate {
+class ConversationViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet fileprivate weak var messageTexView: UITextView!
     @IBOutlet fileprivate weak var messagesListTableView: UITableView!
@@ -22,12 +22,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Communi
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
     var chat: Chat?
-    var communicator: CommunicatorService? {
-        didSet {
-            communicator?.delegate = self
-        }
-    }
-    
+    var communicator: CommunicatorService?
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         if let chat = chat {
             messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -67,7 +62,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Communi
         sendButton.isEnabled = false
         
         if let chat = chat {
-           navigationItem.title = chat.name
+          // navigationItem.title = chat.name
         }
     }
     
@@ -102,16 +97,16 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Communi
         bottomSpaceConstraint.constant = 0
     }
     
-    fileprivate func calculateNumberOfRows() -> Int {
-        return chat?.messages.count ?? 0
-    }
+//    fileprivate func calculateNumberOfRows() -> Int {
+//        return chat?.messages.count ?? 0
+//    }
     
     // MARK: - 
     
     func updateView() {
-        if let state = chat?.online {
-            sendButton.isEnabled = state
-        }
+//        if let state = chat?.online {
+//            sendButton.isEnabled = state
+//        }
 
         self.messagesListTableView.reloadData()
     }
@@ -125,16 +120,16 @@ extension ConversationViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return calculateNumberOfRows()
+        return 0 //calculateNumberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messages = chat?.messages ?? [Message]()
-        let messageIndex = messages.count - indexPath.row - 1
-        let message = messages[messageIndex]
-        let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
-        let cell = messagesListTableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
-        cell.updateCellForMessage(message)
+//        let messages = chat?.messages ?? [Message]()
+//        let messageIndex = messages.count - indexPath.row - 1
+//        let message = messages[messageIndex]
+        //let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
+        let cell = messagesListTableView.dequeueReusableCell(withIdentifier:"", for:indexPath) as! MessageCell
+        //cell.updateCellForMessage(message)
         cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         
         return cell
@@ -149,7 +144,7 @@ extension ConversationViewController : UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if let text = textView.text {
-            sendButton.isEnabled = text != "" && chat?.online ?? false
+          //  sendButton.isEnabled = text != "" && chat?.online ?? false
         }
     }
     
