@@ -23,11 +23,18 @@ class ConversationListModel : NSObject, NSFetchedResultsControllerDelegate {
         self.tableView = tableView
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         let fetchRequest = NSFetchRequest<Conversation>(entityName: "Conversation")
+        fetchRequest.sortDescriptors = []
         self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.fetchResultsController.delegate = self
+        
+        do {
+            try self.fetchResultsController.performFetch()
+        } catch {
+            print("Error fetching: \(error)")
+        }
     }
     
     //MARK: -

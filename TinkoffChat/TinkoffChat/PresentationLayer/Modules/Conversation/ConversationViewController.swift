@@ -18,19 +18,14 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
     @IBOutlet fileprivate weak var textViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var bottomPartHeightConstraint: NSLayoutConstraint!
 
-    fileprivate let incomingMessageCellId = "incomingMessage"
-    fileprivate let outcomingMessageCellId = "outcomingMessage"
-    
-    var chat: Chat?
     var communicator: CommunicatorService?
+    
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
-        if let chat = chat {
-            messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-            communicator?.sendMessage(text: messageTexView.text, to: chat)
-            messageTexView.text = ""
-            sendButton.isEnabled = false
-            updateTextViewHeight(for: messageTexView.attributedText)
-        }
+        messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        //communicator?.sendMessage(text: messageTexView.text, to: chat)
+        messageTexView.text = ""
+        sendButton.isEnabled = false
+        updateTextViewHeight(for: messageTexView.attributedText)
     }
     
     // MARK: - 
@@ -52,7 +47,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
     fileprivate let estimatedMessageCellRowHeight: CGFloat = 44
     
     fileprivate func setup() {
-        messagesListTableView.dataSource = self
         messagesListTableView.delegate = self
         messagesListTableView.estimatedRowHeight = estimatedMessageCellRowHeight
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
@@ -61,9 +55,9 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
         setupGestureRecognizer()
         sendButton.isEnabled = false
         
-        if let chat = chat {
-          // navigationItem.title = chat.name
-        }
+//        if let chat = chat {
+//          navigationItem.title = chat.name
+//        }
     }
     
     // MARK: -
@@ -109,30 +103,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
 //        }
 
         self.messagesListTableView.reloadData()
-    }
-}
-
-extension ConversationViewController : UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 0 //calculateNumberOfRows()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let messages = chat?.messages ?? [Message]()
-//        let messageIndex = messages.count - indexPath.row - 1
-//        let message = messages[messageIndex]
-        //let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
-        let cell = messagesListTableView.dequeueReusableCell(withIdentifier:"", for:indexPath) as! MessageCell
-        //cell.updateCellForMessage(message)
-        cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
-        
-        return cell
     }
 }
 

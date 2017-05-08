@@ -11,7 +11,7 @@ import UIKit
 protocol CommunicatorService {
     //weak var delegate: CommunicatorManagerDelegate? { get set }
     func updateMyPeerName(_ name: String)
-    func sendMessage(text: String, to chat: Chat)
+    //func sendMessage(text: String, to chat: Chat)
 }
 
 final class CommunicatorManager : CommunicatorService {
@@ -34,7 +34,7 @@ final class CommunicatorManager : CommunicatorService {
         multipeerCommunicator.updateMyPeerName(name)
     }
     
-    func sendMessage(text: String, to chat: Chat) {
+    func sendMessage(text: String, to chat: String) {
         //multipeerCommunicator.sendMessage(string: text, to: chat.identifier, completionHandler: nil)
     }
 }

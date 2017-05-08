@@ -27,7 +27,6 @@
 		1143721A1EC05DC7009CCE10 /* ConversationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372191EC05DC7009CCE10 /* ConversationListModel.swift */; };
 		1143721C1EC070A8009CCE10 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143721B1EC070A8009CCE10 /* ConversationModel.swift */; };
 		1143721E1EC073F3009CCE10 /* ConversationsListDataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143721D1EC073F3009CCE10 /* ConversationsListDataStorageService.swift */; };
-		114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9D3D1E88F59300DB0A0B /* Chat.swift */; };
 		11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */; };
 		116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F873B1E97854B00C18C49 /* CommunicatorManager.swift */; };
 		117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B96691EA510730052BF52 /* ProfileDataService.swift */; };
@@ -66,7 +65,6 @@
 		114372191EC05DC7009CCE10 /* ConversationListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
 		1143721B1EC070A8009CCE10 /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		1143721D1EC073F3009CCE10 /* ConversationsListDataStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListDataStorageService.swift; sourceTree = "<group>"; };
-		114C9D3D1E88F59300DB0A0B /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifierGenerator.swift; sourceTree = "<group>"; };
 		116F873B1E97854B00C18C49 /* CommunicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommunicatorManager.swift; path = CommunicatorService/CommunicatorManager.swift; sourceTree = "<group>"; };
 		117B96691EA510730052BF52 /* ProfileDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileDataService.swift; path = ProfileDataStorageService/ProfileDataService.swift; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 		11370A7E1E855935006C487B /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
-				114C9D3D1E88F59300DB0A0B /* Chat.swift */,
 				119C36C81E853EA6006B234F /* ConversationCell.swift */,
 				1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */,
 				114372191EC05DC7009CCE10 /* ConversationListModel.swift */,
@@ -356,7 +353,6 @@
 				11B76B621EB487730061478E /* CoreDataStack.swift in Sources */,
 				114372151EBF71CC009CCE10 /* Conversation+CoreDataClass.swift in Sources */,
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,
-				114C9D3E1E88F59300DB0A0B /* Chat.swift in Sources */,
 				117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */,
 				114372171EBF71CC009CCE10 /* User+CoreDataClass.swift in Sources */,
 				11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */,
