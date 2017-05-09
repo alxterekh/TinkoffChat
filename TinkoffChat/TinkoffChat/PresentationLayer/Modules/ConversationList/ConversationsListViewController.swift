@@ -34,8 +34,17 @@ final class ConversationsListViewController: UIViewController {
     }
     
     @IBAction fileprivate func unwindToConversationList(segue: UIStoryboardSegue) {
-        if let profileEditor = segue.source as? ProfileEditorViewController {
-            //communicatorManager.updateMyPeerName(profile.name)
+//        if let profileEditor = segue.source as? ProfileEditorViewController {
+//            //communicatorManager.updateMyPeerName(profile.name)
+//        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Conversation" {
+            let vc = segue.destination as! ConversationViewController
+            if let sender = sender as? ConversationCell {
+                //vc.chat = sender.chat
+            }
         }
     }
 }

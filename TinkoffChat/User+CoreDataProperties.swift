@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  TinkoffChat
 //
-//  Created by Alexander on 07/05/2017.
+//  Created by Alexander on 08/05/2017.
 //  Copyright © 2017 Alexander Terekhov. All rights reserved.
 //
 
@@ -22,5 +22,6 @@ extension User {
     @NSManaged public var userPicture: NSData?
     @NSManaged public var isOnline: Bool
     @NSManaged public var currentAppUser: AppUser?
+    @NSManaged public var appUser: AppUser?
 
 }

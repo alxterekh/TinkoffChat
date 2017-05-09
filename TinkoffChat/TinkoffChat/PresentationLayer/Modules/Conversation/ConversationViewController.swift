@@ -17,12 +17,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
     @IBOutlet fileprivate weak var textViewTopSpaceConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var textViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var bottomPartHeightConstraint: NSLayoutConstraint!
-
-    var communicator: CommunicatorService?
     
+    fileprivate var conversationModel: ConversationModel?
+
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        //communicator?.sendMessage(text: messageTexView.text, to: chat)
+        conversationModel!.sendMessage(text: messageTexView.text)
         messageTexView.text = ""
         sendButton.isEnabled = false
         updateTextViewHeight(for: messageTexView.attributedText)
@@ -51,6 +51,9 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
         messagesListTableView.estimatedRowHeight = estimatedMessageCellRowHeight
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
+        
+        conversationModel = ConversationModel(with: messagesListTableView)
+        
         subscribeForKeyboardNotification()
         setupGestureRecognizer()
         sendButton.isEnabled = false
@@ -114,7 +117,7 @@ extension ConversationViewController : UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if let text = textView.text {
-          //  sendButton.isEnabled = text != "" && chat?.online ?? false
+          sendButton.isEnabled = text != "" //&& chat?.online ?? false
         }
     }
     

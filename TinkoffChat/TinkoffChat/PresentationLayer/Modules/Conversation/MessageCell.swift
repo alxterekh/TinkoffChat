@@ -13,14 +13,14 @@ class MessageCell: UITableViewCell {
 
     @IBOutlet weak var messageTextLabel: UILabel!
     
-    var currentMessage: Message? {
+    var message: Message? {
         didSet {
-            messageTextLabel.text = currentMessage?.text
+            messageTextLabel.text = message?.text
             // currentMessage?.markAsRead()
         }
     }
     
     func updateCellForMessage(_ message: Message) {
-        currentMessage = message
+        self.message = message
     }
 }

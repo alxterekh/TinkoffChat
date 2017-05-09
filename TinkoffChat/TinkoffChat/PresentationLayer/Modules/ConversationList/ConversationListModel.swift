@@ -17,14 +17,14 @@ class ConversationListModel : NSObject, NSFetchedResultsControllerDelegate {
     
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Conversation>
+    
     fileprivate var communicatorManager = ServiceAssembly.communicatorService()
     
     init(with tableView: UITableView) {
         self.tableView = tableView
-        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        let fetchRequest = NSFetchRequest<Conversation>(entityName: "Conversation")
-        fetchRequest.sortDescriptors = []
-        self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchRequest: NSFetchRequest<Conversation> = Conversation.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Conversation.conversationId), ascending: false)]
+        self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest, managedObjectContext:communicatorManager.coreDataStack.mainContext!, sectionNameKeyPath: nil, cacheName: nil)
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self

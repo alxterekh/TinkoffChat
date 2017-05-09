@@ -9,54 +9,47 @@
 import UIKit
 
 protocol CommunicatorService {
-    //weak var delegate: CommunicatorManagerDelegate? { get set }
     func updateMyPeerName(_ name: String)
-    //func sendMessage(text: String, to chat: Chat)
+    func sendMessage(text: String, to conversation: Conversation)
+    var coreDataStack: CoreDataStack { get }
 }
 
 final class CommunicatorManager : CommunicatorService {
-    
     fileprivate var multipeerCommunicator: Communicator
-    //weak var delegate: CommunicatorManagerDelegate?
-    
-    let conversationsListDataStorageService = ConversationsListDataStorageService()
-    
-    //MARK: - Initialization
+    var coreDataStack = CoreDataStack()
+    let conversationStorageService: ConversationStorageService
     
     init(with communicator: Communicator) {
+        conversationStorageService = ConversationStorageService(with: coreDataStack)
         multipeerCommunicator = communicator
         multipeerCommunicator.delegate = self
     }
-    
-    //MARK: -
-    
+
     func updateMyPeerName(_ name: String) {
         multipeerCommunicator.updateMyPeerName(name)
     }
     
-    func sendMessage(text: String, to chat: String) {
-        //multipeerCommunicator.sendMessage(string: text, to: chat.identifier, completionHandler: nil)
+    func sendMessage(text: String, to conversation: Conversation) {
+        if let participants = conversation.participants as? Set<User>{
+            for participant in participants {
+                multipeerCommunicator.sendMessage(string: text, to: participant.userId!, completionHandler: nil)
+            }
+        }
     }
 }
 
 extension CommunicatorManager : MultipeerCommunicatorDelegate {
     
     func didFindUser(userID: String, userName: String?) {
-        //online = true
-        conversationsListDataStorageService.addConversation(with: userID)
+        conversationStorageService.handleFoundUser(with: userID, userName: userName)
     }
     
     func didLooseUser(userID: String) {
-        //online = false
-        conversationsListDataStorageService.addConversation(with: userID)
+        conversationStorageService.handleLostUser(with: userID)
     }
     
     func didReceiveMessage(text: String, fromUser: String, toUser:String) {
-//        if let chat = findChatWith(identifier: fromUser) {
-////            let message = Message(with: text, date: Date(), isOutcoming: false)
-////            chat.appendMessage(message)
-//            delegate?.updateView()
-//        }
+        conversationStorageService.receiveMessage(text: text, fromUser: fromUser, toUser: toUser)
     }
     
     func failedToStartBrowsingForUsers(error: Error) {

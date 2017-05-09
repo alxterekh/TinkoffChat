@@ -19,13 +19,17 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Message>
     
-    //fileprivate var communicatorManager
+    var communicator: CommunicatorService?
+
+    func sendMessage(text: String) {
+        //communicator?.sendMessage(text: text, to: <#T##Conversation#>)
+    }
     
     init(with tableView: UITableView) {
         self.tableView = tableView
         let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        let fetchRequest = NSFetchRequest<Message>(entityName: "Message")
-        fetchRequest.sortDescriptors = []
+        let fetchRequest: NSFetchRequest<Message> = Message.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.date), ascending: false)]
         self.fetchResultsController = NSFetchedResultsController<Message>(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         super.init()
         self.tableView.dataSource = self
@@ -110,11 +114,13 @@ extension ConversationModel: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = fetchResultsController.object(at: indexPath)
+        
         //let messageIndex = messages.count - indexPath.row - 1
         //let message = messages[messageIndex]
         //let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
         let cell = tableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! MessageCell
-        let message = fetchResultsController.object(at: indexPath)
+       
         //cell.configure(with: message)
         
         cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))

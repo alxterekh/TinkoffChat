@@ -26,12 +26,14 @@ class ConversationCell: UITableViewCell {
     fileprivate let boldDefaultFont = UIFont.boldSystemFont(ofSize: 17.0)
     fileprivate let alertFont = UIFont(name: "Arial", size: 13.0)
     
-    
     func configure(with conversation: Conversation) {
-//        configureCellWithName(chat?.name)
-//        configureCellWithDate(chat?.date)
-//        configureCellWithOnlineStatus(chat?.online ?? false)
-//        configureCellWithMessage(chat?.message)
+        let participants = Array(conversation.participants!)
+        let user = participants.first as? User
+        let name = user?.name
+        configureCellWithName(name)
+        configureCellWithOnlineStatus(conversation.isOnline)
+        configureCellWithDate(conversation.lastMessage?.date as Date?)
+        configureCellWithMessage(conversation.lastMessage?.text)
     }
     
     fileprivate func configureCellWithName(_ name: String?) {

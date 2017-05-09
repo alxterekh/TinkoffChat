@@ -14,19 +14,6 @@ protocol ProfileDataStorage {
     func loadProfileData(completion: @escaping (Profile?, Error?) -> Void)
 }
 
-extension User {
-    static func fetchRequestUser(model: NSManagedObjectModel) -> NSFetchRequest<User>? {
-        let templateName = "User"
-        guard let fetchRequest = model.fetchRequestTemplate(forName: templateName) as? NSFetchRequest<User> else {
-            assert(false, "No template with name \(templateName)")
-            
-            return nil
-        }
-        
-        return fetchRequest
-    }
-}
-
 class ProfileDataService : ProfileDataStorage {
     
     fileprivate let coreDataStack: CoreDataStackContextProvider
@@ -70,18 +57,7 @@ class ProfileDataService : ProfileDataStorage {
 
     fileprivate func findOrInsertUser(in context: NSManagedObjectContext) -> User? {
         var user: User?
-        guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
-            print("No managed object model in context!")
-            assert(false)
-            
-            return nil
-        }
-        
-        guard let fetchRequest = User.fetchRequestUser(model: model) else {
-            
-            return nil
-        }
-        
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
         do {
             let results = try context.fetch(fetchRequest)
             if let foundUser = results.first {
@@ -101,6 +77,7 @@ class ProfileDataService : ProfileDataStorage {
     
     fileprivate func insertUser(in context: NSManagedObjectContext) -> User? {
         return NSEntityDescription.insertNewObject(forEntityName: "User", into: context) as? User
+           // User(context: context)
     }
 
     fileprivate func performSave(context: NSManagedObjectContext, completionHandler: @escaping (Bool, Error?) -> Void) {
