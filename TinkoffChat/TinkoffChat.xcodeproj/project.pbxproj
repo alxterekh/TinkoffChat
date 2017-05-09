@@ -26,6 +26,7 @@
 		1143722C1EC09C70009CCE10 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372241EC09C70009CCE10 /* User+CoreDataProperties.swift */; };
 		1143722D1EC09C70009CCE10 /* Conversation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372251EC09C70009CCE10 /* Conversation+CoreDataClass.swift */; };
 		1143722E1EC09C70009CCE10 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372261EC09C70009CCE10 /* Conversation+CoreDataProperties.swift */; };
+		1152B7921EC255FA00B8CDDB /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B7911EC255FA00B8CDDB /* RequestSender.swift */; };
 		11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */; };
 		116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F873B1E97854B00C18C49 /* CommunicatorManager.swift */; };
 		117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B96691EA510730052BF52 /* ProfileDataService.swift */; };
@@ -63,6 +64,7 @@
 		114372241EC09C70009CCE10 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../../../../User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		114372251EC09C70009CCE10 /* Conversation+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataClass.swift"; path = "../../../../Conversation+CoreDataClass.swift"; sourceTree = "<group>"; };
 		114372261EC09C70009CCE10 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../../../../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1152B7911EC255FA00B8CDDB /* RequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
 		11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifierGenerator.swift; sourceTree = "<group>"; };
 		116F873B1E97854B00C18C49 /* CommunicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommunicatorManager.swift; path = CommunicatorService/CommunicatorManager.swift; sourceTree = "<group>"; };
 		117B96691EA510730052BF52 /* ProfileDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileDataService.swift; path = ProfileDataStorageService/ProfileDataService.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				119C99AC1EB5D8C900B8FE56 /* CoreData */,
 				117B96681EA507A20052BF52 /* MultipeerCommunicator */,
+				1152B7911EC255FA00B8CDDB /* RequestSender.swift */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				1143722C1EC09C70009CCE10 /* User+CoreDataProperties.swift in Sources */,
 				114372291EC09C70009CCE10 /* Message+CoreDataClass.swift in Sources */,
 				114372281EC09C70009CCE10 /* AppUser+CoreDataProperties.swift in Sources */,
+				1152B7921EC255FA00B8CDDB /* RequestSender.swift in Sources */,
 				114372271EC09C70009CCE10 /* AppUser+CoreDataClass.swift in Sources */,
 				1143721E1EC073F3009CCE10 /* ConversationStorageService.swift in Sources */,
 				1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */,
