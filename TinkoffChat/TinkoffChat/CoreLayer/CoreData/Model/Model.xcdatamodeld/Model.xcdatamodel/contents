@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AppUser" representedClassName=".AppUser" syncable="YES">
-        <relationship name="conversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conversation" inverseName="appUser" inverseEntity="Conversation" syncable="YES"/>
-        <relationship name="currentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="currentAppUser" inverseEntity="User" syncable="YES"/>
-        <relationship name="lastMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="lastMessageAppUser" inverseEntity="Message" syncable="YES"/>
-        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="appUser" inverseEntity="User" syncable="YES"/>
-    </entity>
     <entity name="Conversation" representedClassName=".Conversation" syncable="YES">
         <attribute name="conversationId" attributeType="String" syncable="YES"/>
-        <attribute name="isOnline" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="appUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="conversations" inverseEntity="AppUser" syncable="YES"/>
         <relationship name="lastMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="lastMessageInConversation" inverseEntity="Message" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="conversation" inverseEntity="Message" syncable="YES"/>
-        <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="conversations" inverseEntity="User" syncable="YES"/>
-        <relationship name="unreadMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="unreadInConversation" inverseEntity="Message" syncable="YES"/>
+        <relationship name="participant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="conversation" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Message" representedClassName=".Message" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isOutcoming" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isOutgoing" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isUnread" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="messageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="messages" inverseEntity="Conversation" syncable="YES"/>
-        <relationship name="lastMessageAppUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="lastMessage" inverseEntity="AppUser" syncable="YES"/>
         <relationship name="lastMessageInConversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="lastMessage" inverseEntity="Conversation" syncable="YES"/>
-        <relationship name="unreadInConversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="unreadMessages" inverseEntity="Conversation" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="isOnline" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -31,17 +21,14 @@
         <attribute name="userId" attributeType="String" syncable="YES"/>
         <attribute name="userInfo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userPicture" optional="YES" attributeType="Binary" syncable="YES"/>
-        <relationship name="appUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="users" inverseEntity="AppUser" syncable="YES"/>
-        <relationship name="conversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conversation" inverseName="participants" inverseEntity="Conversation" syncable="YES"/>
-        <relationship name="currentAppUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="currentUser" inverseEntity="AppUser" syncable="YES"/>
+        <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="participant" inverseEntity="Conversation" syncable="YES"/>
     </entity>
     <fetchRequest name="Conversation" entity="Conversation" predicateString="conversationId == $identifier"/>
     <fetchRequest name="User" entity="User" includePropertyValues="YES"/>
     <fetchRequest name="UserWithId" entity="User" predicateString="userId == $identifier"/>
     <elements>
-        <element name="AppUser" positionX="-155" positionY="-553" width="128" height="103"/>
-        <element name="Conversation" positionX="-497" positionY="-328" width="128" height="148"/>
-        <element name="Message" positionX="-207" positionY="-342" width="128" height="163"/>
-        <element name="User" positionX="-596" positionY="-553" width="128" height="163"/>
+        <element name="Conversation" positionX="-587" positionY="-595" width="128" height="103"/>
+        <element name="Message" positionX="-333" positionY="-585" width="128" height="148"/>
+        <element name="User" positionX="-801" positionY="-583" width="128" height="133"/>
     </elements>
 </model>

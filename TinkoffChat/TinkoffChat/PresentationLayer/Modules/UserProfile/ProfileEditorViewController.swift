@@ -142,7 +142,7 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
     }
     
     fileprivate func addDefaultActionsToSheet(_ sheet: UIAlertController) {
-        sheet.addAction(UIAlertAction(title: "New photo", style: .default) {
+        sheet.addAction(UIAlertAction(title: "Take photo", style: .default) {
             [unowned self] action in
             
             self.photoPicker.allowsEditing = false
@@ -152,13 +152,21 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
             self.present(self.photoPicker, animated: true)
         })
         
-        sheet.addAction(UIAlertAction(title: "Select photo", style: .default) {
+        sheet.addAction(UIAlertAction(title: "Select from library", style: .default) {
             [unowned self] action in
             
             self.photoPicker.allowsEditing = false
             self.photoPicker.sourceType = .photoLibrary
             self.photoPicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
             self.present(self.photoPicker, animated: true)
+        })
+        
+        sheet.addAction(UIAlertAction(title: "Load from network", style: .default) {
+            [unowned self] action in
+            
+            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserImagePickerViewController") {
+                 self.present(vc, animated: true)
+            }
         })
         
         sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in })
