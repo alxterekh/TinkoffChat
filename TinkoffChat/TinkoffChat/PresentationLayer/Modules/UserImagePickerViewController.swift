@@ -34,12 +34,13 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 30
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: userImageCellId,
                                                       for: indexPath) as! UserImageCell
+        cell.image.image = #imageLiteral(resourceName: "placeholder")
         
         return cell
     }

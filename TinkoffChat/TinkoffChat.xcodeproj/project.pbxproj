@@ -18,17 +18,15 @@
 		1143721A1EC05DC7009CCE10 /* ConversationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372191EC05DC7009CCE10 /* ConversationListModel.swift */; };
 		1143721C1EC070A8009CCE10 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143721B1EC070A8009CCE10 /* ConversationModel.swift */; };
 		1143721E1EC073F3009CCE10 /* ConversationStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143721D1EC073F3009CCE10 /* ConversationStorageService.swift */; };
-		114372271EC09C70009CCE10 /* AppUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143721F1EC09C70009CCE10 /* AppUser+CoreDataClass.swift */; };
-		114372281EC09C70009CCE10 /* AppUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372201EC09C70009CCE10 /* AppUser+CoreDataProperties.swift */; };
-		114372291EC09C70009CCE10 /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372211EC09C70009CCE10 /* Message+CoreDataClass.swift */; };
-		1143722A1EC09C70009CCE10 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372221EC09C70009CCE10 /* Message+CoreDataProperties.swift */; };
-		1143722B1EC09C70009CCE10 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372231EC09C70009CCE10 /* User+CoreDataClass.swift */; };
-		1143722C1EC09C70009CCE10 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372241EC09C70009CCE10 /* User+CoreDataProperties.swift */; };
-		1143722D1EC09C70009CCE10 /* Conversation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372251EC09C70009CCE10 /* Conversation+CoreDataClass.swift */; };
-		1143722E1EC09C70009CCE10 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114372261EC09C70009CCE10 /* Conversation+CoreDataProperties.swift */; };
 		1152B7921EC255FA00B8CDDB /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B7911EC255FA00B8CDDB /* RequestSender.swift */; };
 		1152B7941EC2F21500B8CDDB /* UserImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B7931EC2F21500B8CDDB /* UserImagePickerViewController.swift */; };
 		1152B7961EC304D400B8CDDB /* UserImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B7951EC304D400B8CDDB /* UserImageCell.swift */; };
+		1152B79E1EC30D3100B8CDDB /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B7981EC30D3100B8CDDB /* User+CoreDataClass.swift */; };
+		1152B79F1EC30D3100B8CDDB /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B7991EC30D3100B8CDDB /* User+CoreDataProperties.swift */; };
+		1152B7A01EC30D3100B8CDDB /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B79A1EC30D3100B8CDDB /* Message+CoreDataClass.swift */; };
+		1152B7A11EC30D3100B8CDDB /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B79B1EC30D3100B8CDDB /* Message+CoreDataProperties.swift */; };
+		1152B7A21EC30D3100B8CDDB /* Conversation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B79C1EC30D3100B8CDDB /* Conversation+CoreDataClass.swift */; };
+		1152B7A31EC30D3200B8CDDB /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152B79D1EC30D3100B8CDDB /* Conversation+CoreDataProperties.swift */; };
 		11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */; };
 		116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F873B1E97854B00C18C49 /* CommunicatorManager.swift */; };
 		117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B96691EA510730052BF52 /* ProfileDataService.swift */; };
@@ -42,6 +40,7 @@
 		11B76B621EB487730061478E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B76B611EB487730061478E /* CoreDataStack.swift */; };
 		11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */; };
 		11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245F1E910C6E002166D6 /* ColoredButton.swift */; };
+		4C345FFF3D3E97F3B3F802F1 /* Pods_TinkoffChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9158D2F6EA6DC0D52DAE6851 /* Pods_TinkoffChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,17 +57,15 @@
 		114372191EC05DC7009CCE10 /* ConversationListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
 		1143721B1EC070A8009CCE10 /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		1143721D1EC073F3009CCE10 /* ConversationStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationStorageService.swift; sourceTree = "<group>"; };
-		1143721F1EC09C70009CCE10 /* AppUser+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "AppUser+CoreDataClass.swift"; path = "../../../../AppUser+CoreDataClass.swift"; sourceTree = "<group>"; };
-		114372201EC09C70009CCE10 /* AppUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "AppUser+CoreDataProperties.swift"; path = "../../../../AppUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		114372211EC09C70009CCE10 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataClass.swift"; path = "../../../../Message+CoreDataClass.swift"; sourceTree = "<group>"; };
-		114372221EC09C70009CCE10 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "../../../../Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		114372231EC09C70009CCE10 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "../../../../User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		114372241EC09C70009CCE10 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../../../../User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		114372251EC09C70009CCE10 /* Conversation+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataClass.swift"; path = "../../../../Conversation+CoreDataClass.swift"; sourceTree = "<group>"; };
-		114372261EC09C70009CCE10 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../../../../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1152B7911EC255FA00B8CDDB /* RequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
 		1152B7931EC2F21500B8CDDB /* UserImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImagePickerViewController.swift; sourceTree = "<group>"; };
 		1152B7951EC304D400B8CDDB /* UserImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageCell.swift; sourceTree = "<group>"; };
+		1152B7981EC30D3100B8CDDB /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "../../../../User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1152B7991EC30D3100B8CDDB /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../../../../User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1152B79A1EC30D3100B8CDDB /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataClass.swift"; path = "../../../../Message+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1152B79B1EC30D3100B8CDDB /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "../../../../Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1152B79C1EC30D3100B8CDDB /* Conversation+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataClass.swift"; path = "../../../../Conversation+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1152B79D1EC30D3100B8CDDB /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../../../../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifierGenerator.swift; sourceTree = "<group>"; };
 		116F873B1E97854B00C18C49 /* CommunicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommunicatorManager.swift; path = CommunicatorService/CommunicatorManager.swift; sourceTree = "<group>"; };
 		117B96691EA510730052BF52 /* ProfileDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileDataService.swift; path = ProfileDataStorageService/ProfileDataService.swift; sourceTree = "<group>"; };
@@ -83,6 +80,9 @@
 		11B76B611EB487730061478E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		11FA245F1E910C6E002166D6 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
+		8B02B2CF4D9E6CA65C04D7A7 /* Pods-TinkoffChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinkoffChat/Pods-TinkoffChat.debug.xcconfig"; sourceTree = "<group>"; };
+		9158D2F6EA6DC0D52DAE6851 /* Pods_TinkoffChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkoffChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59AD8499C2833210AC878C4 /* Pods-TinkoffChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinkoffChat/Pods-TinkoffChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */,
+				4C345FFF3D3E97F3B3F802F1 /* Pods_TinkoffChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +104,7 @@
 				118102B91E8683A600E4FA53 /* Frameworks */,
 				1101CDB51E68CF5B003B7CA1 /* Products */,
 				1101CDB61E68CF5B003B7CA1 /* TinkoffChat */,
+				ACC17326E61C457245260D09 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				118102BA1E8683A600E4FA53 /* CoreData.framework */,
+				9158D2F6EA6DC0D52DAE6851 /* Pods_TinkoffChat.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -257,14 +260,12 @@
 		119C99AE1EB5D92100B8FE56 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				1143721F1EC09C70009CCE10 /* AppUser+CoreDataClass.swift */,
-				114372201EC09C70009CCE10 /* AppUser+CoreDataProperties.swift */,
-				114372211EC09C70009CCE10 /* Message+CoreDataClass.swift */,
-				114372221EC09C70009CCE10 /* Message+CoreDataProperties.swift */,
-				114372231EC09C70009CCE10 /* User+CoreDataClass.swift */,
-				114372241EC09C70009CCE10 /* User+CoreDataProperties.swift */,
-				114372251EC09C70009CCE10 /* Conversation+CoreDataClass.swift */,
-				114372261EC09C70009CCE10 /* Conversation+CoreDataProperties.swift */,
+				1152B7981EC30D3100B8CDDB /* User+CoreDataClass.swift */,
+				1152B7991EC30D3100B8CDDB /* User+CoreDataProperties.swift */,
+				1152B79A1EC30D3100B8CDDB /* Message+CoreDataClass.swift */,
+				1152B79B1EC30D3100B8CDDB /* Message+CoreDataProperties.swift */,
+				1152B79C1EC30D3100B8CDDB /* Conversation+CoreDataClass.swift */,
+				1152B79D1EC30D3100B8CDDB /* Conversation+CoreDataProperties.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -285,6 +286,15 @@
 			path = Additions;
 			sourceTree = "<group>";
 		};
+		ACC17326E61C457245260D09 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B02B2CF4D9E6CA65C04D7A7 /* Pods-TinkoffChat.debug.xcconfig */,
+				B59AD8499C2833210AC878C4 /* Pods-TinkoffChat.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,9 +302,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1101CDC61E68CF5B003B7CA1 /* Build configuration list for PBXNativeTarget "TinkoffChat" */;
 			buildPhases = (
+				61AE8F0186E9BA5D516EAE77 /* [CP] Check Pods Manifest.lock */,
 				1101CDB01E68CF5B003B7CA1 /* Sources */,
 				1101CDB11E68CF5B003B7CA1 /* Frameworks */,
 				1101CDB21E68CF5B003B7CA1 /* Resources */,
+				258792D0760F060C41C6BCBF /* [CP] Embed Pods Frameworks */,
+				3D43EDE7570F6199108E4964 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -358,6 +371,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		258792D0760F060C41C6BCBF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TinkoffChat/Pods-TinkoffChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D43EDE7570F6199108E4964 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TinkoffChat/Pods-TinkoffChat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61AE8F0186E9BA5D516EAE77 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1101CDB01E68CF5B003B7CA1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -368,28 +429,26 @@
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,
 				117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */,
 				11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */,
+				1152B7A11EC30D3100B8CDDB /* Message+CoreDataProperties.swift in Sources */,
 				1143721C1EC070A8009CCE10 /* ConversationModel.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,
+				1152B7A31EC30D3200B8CDDB /* Conversation+CoreDataProperties.swift in Sources */,
 				1152B7941EC2F21500B8CDDB /* UserImagePickerViewController.swift in Sources */,
+				1152B79F1EC30D3100B8CDDB /* User+CoreDataProperties.swift in Sources */,
 				11B76B5C1EB480E50061478E /* Model.xcdatamodeld in Sources */,
-				1143722E1EC09C70009CCE10 /* Conversation+CoreDataProperties.swift in Sources */,
 				119A0BB51EB0CA88002BA523 /* Profile.swift in Sources */,
 				11923DD41EA7739800DC96C3 /* ServiceAssembly.swift in Sources */,
 				1152B7961EC304D400B8CDDB /* UserImageCell.swift in Sources */,
 				11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */,
 				119BFF4B1E98C0370071E02C /* PeerMessageSerializer.swift in Sources */,
+				1152B7A21EC30D3100B8CDDB /* Conversation+CoreDataClass.swift in Sources */,
+				1152B79E1EC30D3100B8CDDB /* User+CoreDataClass.swift in Sources */,
 				1143721A1EC05DC7009CCE10 /* ConversationListModel.swift in Sources */,
-				1143722A1EC09C70009CCE10 /* Message+CoreDataProperties.swift in Sources */,
 				119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */,
 				119A0BB71EB0CAA8002BA523 /* ProfileEditorViewController.swift in Sources */,
-				1143722D1EC09C70009CCE10 /* Conversation+CoreDataClass.swift in Sources */,
-				1143722B1EC09C70009CCE10 /* User+CoreDataClass.swift in Sources */,
-				1143722C1EC09C70009CCE10 /* User+CoreDataProperties.swift in Sources */,
-				114372291EC09C70009CCE10 /* Message+CoreDataClass.swift in Sources */,
-				114372281EC09C70009CCE10 /* AppUser+CoreDataProperties.swift in Sources */,
 				1152B7921EC255FA00B8CDDB /* RequestSender.swift in Sources */,
-				114372271EC09C70009CCE10 /* AppUser+CoreDataClass.swift in Sources */,
 				1143721E1EC073F3009CCE10 /* ConversationStorageService.swift in Sources */,
+				1152B7A01EC30D3100B8CDDB /* Message+CoreDataClass.swift in Sources */,
 				1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */,
 				116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */,
 				1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */,
@@ -514,6 +573,7 @@
 		};
 		1101CDC71E68CF5B003B7CA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B02B2CF4D9E6CA65C04D7A7 /* Pods-TinkoffChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TinkoffChat/TinkoffChat.entitlements;
@@ -529,6 +589,7 @@
 		};
 		1101CDC81E68CF5B003B7CA1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B59AD8499C2833210AC878C4 /* Pods-TinkoffChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TinkoffChat/TinkoffChat.entitlements;

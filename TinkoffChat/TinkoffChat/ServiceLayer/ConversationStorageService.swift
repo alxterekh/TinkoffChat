@@ -6,27 +6,6 @@
 //  Copyright © 2017 Alexander Terekhov. All rights reserved.
 //
 
-
-//class Message: NSObject {
-//    
-//    private(set) var text: String?
-//    private(set) var date: Date?
-//    private(set) var isOutcoming: Bool = false
-//    private(set) var isUnread: Bool = true
-//    
-//    init(with text: String, date: Date, isOutcoming: Bool) {
-//        self.text = text
-//        self.date = date
-//        self.isOutcoming = isOutcoming
-//        super.init()
-//    }
-//    
-//    func markAsRead() {
-//        isUnread = false
-//    }
-//}
-
-
 import Foundation
 import CoreData
 
@@ -40,6 +19,14 @@ extension Conversation {
         }
         
         return fetchRequest
+    }
+    
+    func isOnline() -> Bool {
+        return participant?.isOnline ?? false
+    }
+    
+    var name: String? {
+        return participant?.name
     }
 }
 
@@ -67,24 +54,32 @@ class ConversationStorageService {
     func handleFoundUser(with identifier: String, userName: String?) {
         if let context = coreDataStack.saveContext {
             if let conversation = findOrInsertConversation(in: context, with: identifier) {
-                conversation.isOnline = true
-                
-                
-                
-                performSave(context: context)
+                if let participant = findOrInsertUser(in: context, with: identifier) {
+                    participant.name = userName
+                    participant.isOnline = true
+                    conversation.participant = participant
+                    performSave(context: context)
+                }
             }
         }
     }
    
     func handleLostUser(with identifier: String) {
-        
+        if let context = coreDataStack.saveContext {
+            if let conversation = findOrInsertConversation(in: context, with: identifier) {
+                if let participant = conversation.participant {
+                    participant.isOnline = false
+                    performSave(context: context)
+                }
+            }
+        }
     }
     
     func receiveMessage(text: String, fromUser: String, toUser:String) {
         
     }
     
-    fileprivate func findOrInsertUser(in context: NSManagedObjectContext, with identidier: String, userName: String) -> User? {
+    fileprivate func findOrInsertUser(in context: NSManagedObjectContext, with identidier: String) -> User? {
         var user: User?
         guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
             print("No managed object model in context!")
@@ -112,8 +107,6 @@ class ConversationStorageService {
             user = insertUser(in: context)
             user?.userId = identidier
         }
-        
-        user?.name = userName
         
         return user
     }
@@ -158,7 +151,6 @@ class ConversationStorageService {
     
     fileprivate func insertConversation(in context: NSManagedObjectContext) -> Conversation? {
         return Conversation(context: context)
-        //NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation
     }
     
     fileprivate func performSave(context: NSManagedObjectContext) {

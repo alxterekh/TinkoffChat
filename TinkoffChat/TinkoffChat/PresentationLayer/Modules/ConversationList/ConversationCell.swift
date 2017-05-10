@@ -26,12 +26,12 @@ class ConversationCell: UITableViewCell {
     fileprivate let boldDefaultFont = UIFont.boldSystemFont(ofSize: 17.0)
     fileprivate let alertFont = UIFont(name: "Arial", size: 13.0)
     
+    var conversation: Conversation?
+    
     func configure(with conversation: Conversation) {
-        let participants = Array(conversation.participants!)
-        let user = participants.first as? User
-        let name = user?.name
-        configureCellWithName(name)
-        configureCellWithOnlineStatus(conversation.isOnline)
+        self.conversation = conversation
+        configureCellWithName(conversation.name)
+        configureCellWithOnlineStatus(conversation.isOnline())
         configureCellWithDate(conversation.lastMessage?.date as Date?)
         configureCellWithMessage(conversation.lastMessage?.text)
     }
@@ -64,7 +64,7 @@ class ConversationCell: UITableViewCell {
     }
     
     fileprivate func setupMessageFontIfThereIsUnreadMessages(_ hasUnreadMessages: Bool) {
-//        if chat?.message != nil {
+//        if conversation. {
 //            messageLabel.font = (hasUnreadMessages) ? boldDefaultFont : defaultFont
 //        }
 //        else {

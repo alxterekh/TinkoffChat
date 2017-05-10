@@ -19,6 +19,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
     @IBOutlet fileprivate weak var bottomPartHeightConstraint: NSLayoutConstraint!
     
     fileprivate var conversationModel: ConversationModel?
+    
+    var conversation: Conversation?
 
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -58,9 +60,9 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
         setupGestureRecognizer()
         sendButton.isEnabled = false
         
-//        if let chat = chat {
-//          navigationItem.title = chat.name
-//        }
+        if let conversation = conversation {
+            navigationItem.title = conversation.name
+        }
     }
     
     // MARK: -
@@ -94,10 +96,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
         bottomSpaceConstraint.constant = 0
     }
     
-//    fileprivate func calculateNumberOfRows() -> Int {
-//        return chat?.messages.count ?? 0
-//    }
-    
     // MARK: - 
     
     func updateView() {
@@ -117,7 +115,7 @@ extension ConversationViewController : UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if let text = textView.text {
-          sendButton.isEnabled = text != "" //&& chat?.online ?? false
+          sendButton.isEnabled = text != "" && conversation?.isOnline() ?? false
         }
     }
     

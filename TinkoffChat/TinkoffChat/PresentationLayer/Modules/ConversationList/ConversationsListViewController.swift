@@ -43,7 +43,7 @@ final class ConversationsListViewController: UIViewController {
         if segue.identifier == "Conversation" {
             let vc = segue.destination as! ConversationViewController
             if let sender = sender as? ConversationCell {
-                //vc.chat = sender.chat
+                vc.conversation = sender.conversation
             }
         }
     }

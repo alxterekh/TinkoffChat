@@ -23,8 +23,8 @@ class ConversationListModel : NSObject, NSFetchedResultsControllerDelegate {
     init(with tableView: UITableView) {
         self.tableView = tableView
         let fetchRequest: NSFetchRequest<Conversation> = Conversation.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Conversation.conversationId), ascending: false)]
-        self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest, managedObjectContext:communicatorManager.coreDataStack.mainContext!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Conversation.participant.name), ascending: false)]
+        self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest, managedObjectContext:communicatorManager.coreDataStack.mainContext!, sectionNameKeyPath: #keyPath(Conversation.participant.isOnline), cacheName: nil)
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self

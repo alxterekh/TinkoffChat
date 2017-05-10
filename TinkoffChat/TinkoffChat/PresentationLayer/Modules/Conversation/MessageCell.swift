@@ -20,7 +20,7 @@ class MessageCell: UITableViewCell {
         }
     }
     
-    func updateCellForMessage(_ message: Message) {
+    func configure(with message: Message) {
         self.message = message
     }
 }

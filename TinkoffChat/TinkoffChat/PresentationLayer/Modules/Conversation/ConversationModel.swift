@@ -12,7 +12,6 @@ import CoreData
 
 class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
     
-    fileprivate let conversationCellId = "conversationCell"
     fileprivate let incomingMessageCellId = "incomingMessage"
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     
@@ -22,7 +21,7 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
     var communicator: CommunicatorService?
 
     func sendMessage(text: String) {
-        //communicator?.sendMessage(text: text, to: <#T##Conversation#>)
+       // communicator?.sendMessage(text: text, to: )
     }
     
     init(with tableView: UITableView) {
@@ -115,14 +114,9 @@ extension ConversationModel: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let message = fetchResultsController.object(at: indexPath)
-        
-        //let messageIndex = messages.count - indexPath.row - 1
-        //let message = messages[messageIndex]
-        //let cellId = (message.isOutcoming) ? outcomingMessageCellId : incomingMessageCellId
-        let cell = tableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! MessageCell
-       
-        //cell.configure(with: message)
-        
+        let cellId = (message.isOutgoing) ? outcomingMessageCellId : incomingMessageCellId
+        let cell = tableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
+        cell.configure(with: message)
         cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         
         return cell

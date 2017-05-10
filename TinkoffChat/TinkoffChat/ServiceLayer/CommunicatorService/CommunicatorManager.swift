@@ -30,10 +30,8 @@ final class CommunicatorManager : CommunicatorService {
     }
     
     func sendMessage(text: String, to conversation: Conversation) {
-        if let participants = conversation.participants as? Set<User>{
-            for participant in participants {
+        if let participant = conversation.participant{
                 multipeerCommunicator.sendMessage(string: text, to: participant.userId!, completionHandler: nil)
-            }
         }
     }
 }
