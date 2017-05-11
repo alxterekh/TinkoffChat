@@ -17,8 +17,8 @@ class ImageLoaderService {
 //    }
     
     func loadImageList(completionHandler: @escaping ([ImageApiModel]?, String?) -> Void) {
-        let requestConfig: RequestConfig<[ImageApiModel]> = RequestsFactory.ImageListConfig()
-        requestSender.send(config: requestConfig) { (result: Result<[ImageApiModel]>) in
+        let config = RequestsFactory.ImageListConfig()
+        requestSender.send(config: config) { (result: Result<[ImageApiModel]>) in
             switch result {
             case .Success(let images):
                 completionHandler(images, nil)

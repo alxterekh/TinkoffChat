@@ -19,14 +19,16 @@ class PixabayImageListRequest : Requestable {
     }
     
     fileprivate var urlString: String {
-        return baseUrl + "?key={\(apiKey)}&" + "q=yellow+flowers&image_type=photo&pretty=true&per_pag e=100"
+        return "https://pixabay.com/api/?key=5332108-70759dac755dbffb54facfa1e&q=yellow+flowers&image_type=photo"
+            //baseUrl + "?key=\(apiKey)" + "&q=yellow+flowers&image_type=photo&pretty=true&per_pag e=100"
     }
     
     // MARK: - 
     
     var urlRequest: URLRequest? {
-        if let urlQueryAllowed = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let url = URL(string: urlQueryAllowed) {
+        if let urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let url = URL(string: urlString) {
+                
                 return URLRequest(url: url)
             }
         }

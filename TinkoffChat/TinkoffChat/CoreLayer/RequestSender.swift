@@ -24,9 +24,11 @@ class RequestSender: IRequestSender {
                 completionHandler(Result.Fail(error.localizedDescription))
                 return
             }
-            guard let data = data, let parsedModel: T = config.parser.parse(data: data) else {
-                completionHandler(Result.Fail("recieved data can't be parsed"))
-                return
+            
+            guard let data = data,
+                let parsedModel: T = config.parser.parse(data: data) else {
+                    completionHandler(Result.Fail("recieved data can't be parsed"))
+                    return
             }
             
             completionHandler(Result.Success(parsedModel))

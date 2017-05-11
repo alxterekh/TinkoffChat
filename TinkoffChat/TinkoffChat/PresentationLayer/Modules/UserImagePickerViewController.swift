@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class UserImagePickerViewController: UIViewController, UserImagePickerModelDelegate {
     
@@ -42,9 +43,9 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     }
     
     func show(error message: String) {
-//        DispatchQueue.main.async {
-//            HUD.flash(.labeledError(title: message, subtitle: nil), onView: self.view)
-//        }
+        DispatchQueue.main.async {
+            HUD.flash(.labeledError(title: message, subtitle: nil), onView: self.view)
+        }
     }
 }
 
