@@ -9,7 +9,7 @@
 import Foundation
 
 class PixabayImageListRequest : Requestable {
-    fileprivate let baseUrl: String =  "https://pixabay.com/"
+    fileprivate let baseUrl: String = "https://pixabay.com/"
     fileprivate let apiKey: String
     
     // MARK: - Initialization
@@ -25,9 +25,12 @@ class PixabayImageListRequest : Requestable {
     // MARK: - 
     
     var urlRequest: URLRequest? {
-        if let url = URL(string: urlString) {
-            return URLRequest(url: url)
+        if let urlQueryAllowed = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let url = URL(string: urlQueryAllowed) {
+                return URLRequest(url: url)
+            }
         }
+        
         return nil
     }    
 }

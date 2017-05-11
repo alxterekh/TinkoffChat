@@ -36,7 +36,6 @@
 		11991BCB1EC43A7E00DB3436 /* IRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BCA1EC43A7E00DB3436 /* IRequest.swift */; };
 		11991BCD1EC43AB500DB3436 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BCC1EC43AB500DB3436 /* Parser.swift */; };
 		11991BD11EC43BE700DB3436 /* PixabayImageListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */; };
-		11991BD31EC43E1900DB3436 /* PixabayImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD21EC43E1900DB3436 /* PixabayImageRequest.swift */; };
 		11991BD51EC43EB700DB3436 /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD41EC43EB700DB3436 /* RequestsFactory.swift */; };
 		11991BD71EC43FEC00DB3436 /* PixabayImageListParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD61EC43FEC00DB3436 /* PixabayImageListParser.swift */; };
 		11991BD91EC443EE00DB3436 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */; };
@@ -85,7 +84,6 @@
 		11991BCA1EC43A7E00DB3436 /* IRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequest.swift; sourceTree = "<group>"; };
 		11991BCC1EC43AB500DB3436 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayImageListRequest.swift; sourceTree = "<group>"; };
-		11991BD21EC43E1900DB3436 /* PixabayImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayImageRequest.swift; sourceTree = "<group>"; };
 		11991BD41EC43EB700DB3436 /* RequestsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsFactory.swift; sourceTree = "<group>"; };
 		11991BD61EC43FEC00DB3436 /* PixabayImageListParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayImageListParser.swift; sourceTree = "<group>"; };
 		11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
@@ -275,7 +273,6 @@
 			children = (
 				11991BCA1EC43A7E00DB3436 /* IRequest.swift */,
 				11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */,
-				11991BD21EC43E1900DB3436 /* PixabayImageRequest.swift */,
 			);
 			name = Requesters;
 			sourceTree = "<group>";
@@ -491,7 +488,6 @@
 				11991BD91EC443EE00DB3436 /* ImageLoaderService.swift in Sources */,
 				11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */,
 				11991BD51EC43EB700DB3436 /* RequestsFactory.swift in Sources */,
-				11991BD31EC43E1900DB3436 /* PixabayImageRequest.swift in Sources */,
 				1152B7A11EC30D3100B8CDDB /* Message+CoreDataProperties.swift in Sources */,
 				1143721C1EC070A8009CCE10 /* ConversationModel.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,

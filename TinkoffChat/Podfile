@@ -4,7 +4,8 @@ platform :ios, '9.0'
 target 'TinkoffChat' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
+  
+  pod 'PKHUD', '~> 4.0'
   pod 'SwiftyJSON'
 
   # Pods for TinkoffChat
