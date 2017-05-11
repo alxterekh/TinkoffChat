@@ -40,6 +40,7 @@
 		11991BD71EC43FEC00DB3436 /* PixabayImageListParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD61EC43FEC00DB3436 /* PixabayImageListParser.swift */; };
 		11991BD91EC443EE00DB3436 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */; };
 		11991BDB1EC445CD00DB3436 /* UserImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BDA1EC445CD00DB3436 /* UserImagePickerModel.swift */; };
+		11991BDD1EC4C16500DB3436 /* ImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BDC1EC4C16500DB3436 /* ImageRequest.swift */; };
 		119A0BB51EB0CA88002BA523 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A0BB41EB0CA88002BA523 /* Profile.swift */; };
 		119A0BB71EB0CAA8002BA523 /* ProfileEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A0BB61EB0CAA8002BA523 /* ProfileEditorViewController.swift */; };
 		119BFF4B1E98C0370071E02C /* PeerMessageSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119BFF4A1E98C0370071E02C /* PeerMessageSerializer.swift */; };
@@ -88,6 +89,7 @@
 		11991BD61EC43FEC00DB3436 /* PixabayImageListParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayImageListParser.swift; sourceTree = "<group>"; };
 		11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
 		11991BDA1EC445CD00DB3436 /* UserImagePickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImagePickerModel.swift; sourceTree = "<group>"; };
+		11991BDC1EC4C16500DB3436 /* ImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRequest.swift; sourceTree = "<group>"; };
 		119A0BB41EB0CA88002BA523 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		119A0BB61EB0CAA8002BA523 /* ProfileEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditorViewController.swift; sourceTree = "<group>"; };
 		119BFF4A1E98C0370071E02C /* PeerMessageSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerMessageSerializer.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			children = (
 				11991BCA1EC43A7E00DB3436 /* IRequest.swift */,
 				11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */,
+				11991BDC1EC4C16500DB3436 /* ImageRequest.swift */,
 			);
 			name = Requesters;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */,
 				11991BD91EC443EE00DB3436 /* ImageLoaderService.swift in Sources */,
 				11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */,
+				11991BDD1EC4C16500DB3436 /* ImageRequest.swift in Sources */,
 				11991BD51EC43EB700DB3436 /* RequestsFactory.swift in Sources */,
 				1152B7A11EC30D3100B8CDDB /* Message+CoreDataProperties.swift in Sources */,
 				1143721C1EC070A8009CCE10 /* ConversationModel.swift in Sources */,

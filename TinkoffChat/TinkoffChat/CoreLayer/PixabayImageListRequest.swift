@@ -19,8 +19,7 @@ class PixabayImageListRequest : Requestable {
     }
     
     fileprivate var urlString: String {
-        return "https://pixabay.com/api/?key=5332108-70759dac755dbffb54facfa1e&q=yellow+flowers&image_type=photo"
-            //baseUrl + "?key=\(apiKey)" + "&q=yellow+flowers&image_type=photo&pretty=true&per_pag e=100"
+        return "https://pixabay.com/api/?key=5332108-70759dac755dbffb54facfa1e&q=yellow+flowers&image_type=photo&pretty=true&per_page=200"
     }
     
     // MARK: - 

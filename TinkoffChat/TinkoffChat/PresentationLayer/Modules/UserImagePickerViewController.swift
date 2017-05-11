@@ -30,7 +30,9 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
         collectionView.delegate = self
         userImagePickerModel.delegate = self
         userImagePickerModel.fetchImagesList()
-        HUD.show(.progress, onView: self.view)
+        DispatchQueue.main.async {
+            HUD.show(.progress, onView: self.view)
+        }
     }
     
     // MARK: - UserImagePickerModelDelegate
