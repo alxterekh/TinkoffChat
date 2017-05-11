@@ -30,6 +30,7 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
         collectionView.delegate = self
         userImagePickerModel.delegate = self
         userImagePickerModel.fetchImagesList()
+        HUD.show(.progress, onView: self.view)
     }
     
     // MARK: - UserImagePickerModelDelegate
@@ -38,6 +39,8 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
         self.dataSource = dataSource
         
         DispatchQueue.main.async {
+            //HUD.flash(.success, onView: self.view)
+            
             self.collectionView.reloadData()
         }
     }
