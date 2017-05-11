@@ -8,13 +8,16 @@
 
 import UIKit
 
-class UserImagePickerViewController: UIViewController {
+class UserImagePickerViewController: UIViewController, UserImagePickerModelDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     fileprivate let userImageCellId = "UserPicture"
     fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     fileprivate let itemsPerRow: CGFloat = 3
+    
+    fileprivate let userImagePickerModel = UserImagePickerModel()
+    fileprivate var dataSource: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,24 @@ class UserImagePickerViewController: UIViewController {
     fileprivate func setup() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        userImagePickerModel.delegate = self
+        userImagePickerModel.fetchImagesList()
+    }
+    
+    // MARK: - UserImagePickerModelDelegate
+    
+    func setup(dataSource: [String]) {
+        self.dataSource = dataSource
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func show(error message: String) {
+//        DispatchQueue.main.async {
+//            HUD.flash(.labeledError(title: message, subtitle: nil), onView: self.view)
+//        }
     }
 }
 
@@ -34,7 +55,7 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return dataSource.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

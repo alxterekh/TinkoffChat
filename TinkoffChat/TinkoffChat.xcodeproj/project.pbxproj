@@ -32,6 +32,15 @@
 		117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B96691EA510730052BF52 /* ProfileDataService.swift */; };
 		118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 118102BA1E8683A600E4FA53 /* CoreData.framework */; };
 		11923DD41EA7739800DC96C3 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */; };
+		11991BC91EC43A5300DB3436 /* IRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BC81EC43A5300DB3436 /* IRequestSender.swift */; };
+		11991BCB1EC43A7E00DB3436 /* IRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BCA1EC43A7E00DB3436 /* IRequest.swift */; };
+		11991BCD1EC43AB500DB3436 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BCC1EC43AB500DB3436 /* Parser.swift */; };
+		11991BD11EC43BE700DB3436 /* PixabayImageListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */; };
+		11991BD31EC43E1900DB3436 /* PixabayImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD21EC43E1900DB3436 /* PixabayImageRequest.swift */; };
+		11991BD51EC43EB700DB3436 /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD41EC43EB700DB3436 /* RequestsFactory.swift */; };
+		11991BD71EC43FEC00DB3436 /* PixabayImageListParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD61EC43FEC00DB3436 /* PixabayImageListParser.swift */; };
+		11991BD91EC443EE00DB3436 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */; };
+		11991BDB1EC445CD00DB3436 /* UserImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BDA1EC445CD00DB3436 /* UserImagePickerModel.swift */; };
 		119A0BB51EB0CA88002BA523 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A0BB41EB0CA88002BA523 /* Profile.swift */; };
 		119A0BB71EB0CAA8002BA523 /* ProfileEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119A0BB61EB0CAA8002BA523 /* ProfileEditorViewController.swift */; };
 		119BFF4B1E98C0370071E02C /* PeerMessageSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119BFF4A1E98C0370071E02C /* PeerMessageSerializer.swift */; };
@@ -72,6 +81,15 @@
 		118102BA1E8683A600E4FA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
 		11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
+		11991BC81EC43A5300DB3436 /* IRequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequestSender.swift; sourceTree = "<group>"; };
+		11991BCA1EC43A7E00DB3436 /* IRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequest.swift; sourceTree = "<group>"; };
+		11991BCC1EC43AB500DB3436 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayImageListRequest.swift; sourceTree = "<group>"; };
+		11991BD21EC43E1900DB3436 /* PixabayImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayImageRequest.swift; sourceTree = "<group>"; };
+		11991BD41EC43EB700DB3436 /* RequestsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsFactory.swift; sourceTree = "<group>"; };
+		11991BD61EC43FEC00DB3436 /* PixabayImageListParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayImageListParser.swift; sourceTree = "<group>"; };
+		11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
+		11991BDA1EC445CD00DB3436 /* UserImagePickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImagePickerModel.swift; sourceTree = "<group>"; };
 		119A0BB41EB0CA88002BA523 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		119A0BB61EB0CAA8002BA523 /* ProfileEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditorViewController.swift; sourceTree = "<group>"; };
 		119BFF4A1E98C0370071E02C /* PeerMessageSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerMessageSerializer.swift; sourceTree = "<group>"; };
@@ -157,6 +175,7 @@
 			children = (
 				1152B7951EC304D400B8CDDB /* UserImageCell.swift */,
 				1152B7931EC2F21500B8CDDB /* UserImagePickerViewController.swift */,
+				11991BDA1EC445CD00DB3436 /* UserImagePickerModel.swift */,
 			);
 			name = UserImagePicker;
 			sourceTree = "<group>";
@@ -175,7 +194,7 @@
 		117B96651EA505270052BF52 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
-				1152B7911EC255FA00B8CDDB /* RequestSender.swift */,
+				11991BC51EC439E000DB3436 /* Networking */,
 				119C99AC1EB5D8C900B8FE56 /* CoreData */,
 				117B96681EA507A20052BF52 /* MultipeerCommunicator */,
 			);
@@ -188,6 +207,7 @@
 				117B96691EA510730052BF52 /* ProfileDataService.swift */,
 				116F873B1E97854B00C18C49 /* CommunicatorManager.swift */,
 				1143721D1EC073F3009CCE10 /* ConversationStorageService.swift */,
+				11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -219,6 +239,45 @@
 				9158D2F6EA6DC0D52DAE6851 /* Pods_TinkoffChat.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		11991BC41EC4388E00DB3436 /* RequestSender */ = {
+			isa = PBXGroup;
+			children = (
+				1152B7911EC255FA00B8CDDB /* RequestSender.swift */,
+				11991BC81EC43A5300DB3436 /* IRequestSender.swift */,
+			);
+			name = RequestSender;
+			sourceTree = "<group>";
+		};
+		11991BC51EC439E000DB3436 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				11991BC71EC43A0800DB3436 /* Requesters */,
+				11991BC61EC439EB00DB3436 /* Parsers */,
+				11991BC41EC4388E00DB3436 /* RequestSender */,
+				11991BD41EC43EB700DB3436 /* RequestsFactory.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		11991BC61EC439EB00DB3436 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				11991BCC1EC43AB500DB3436 /* Parser.swift */,
+				11991BD61EC43FEC00DB3436 /* PixabayImageListParser.swift */,
+			);
+			name = Parsers;
+			sourceTree = "<group>";
+		};
+		11991BC71EC43A0800DB3436 /* Requesters */ = {
+			isa = PBXGroup;
+			children = (
+				11991BCA1EC43A7E00DB3436 /* IRequest.swift */,
+				11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */,
+				11991BD21EC43E1900DB3436 /* PixabayImageRequest.swift */,
+			);
+			name = Requesters;
 			sourceTree = "<group>";
 		};
 		119A0BB31EB0CA77002BA523 /* UserProfile */ = {
@@ -424,11 +483,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11991BC91EC43A5300DB3436 /* IRequestSender.swift in Sources */,
 				11370A801E855982006C487B /* ConversationViewController.swift in Sources */,
 				11B76B621EB487730061478E /* CoreDataStack.swift in Sources */,
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,
 				117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */,
+				11991BD91EC443EE00DB3436 /* ImageLoaderService.swift in Sources */,
 				11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */,
+				11991BD51EC43EB700DB3436 /* RequestsFactory.swift in Sources */,
+				11991BD31EC43E1900DB3436 /* PixabayImageRequest.swift in Sources */,
 				1152B7A11EC30D3100B8CDDB /* Message+CoreDataProperties.swift in Sources */,
 				1143721C1EC070A8009CCE10 /* ConversationModel.swift in Sources */,
 				1101CDB81E68CF5B003B7CA1 /* AppDelegate.swift in Sources */,
@@ -443,15 +506,20 @@
 				119BFF4B1E98C0370071E02C /* PeerMessageSerializer.swift in Sources */,
 				1152B7A21EC30D3100B8CDDB /* Conversation+CoreDataClass.swift in Sources */,
 				1152B79E1EC30D3100B8CDDB /* User+CoreDataClass.swift in Sources */,
+				11991BCD1EC43AB500DB3436 /* Parser.swift in Sources */,
 				1143721A1EC05DC7009CCE10 /* ConversationListModel.swift in Sources */,
+				11991BCB1EC43A7E00DB3436 /* IRequest.swift in Sources */,
 				119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */,
 				119A0BB71EB0CAA8002BA523 /* ProfileEditorViewController.swift in Sources */,
 				1152B7921EC255FA00B8CDDB /* RequestSender.swift in Sources */,
 				1143721E1EC073F3009CCE10 /* ConversationStorageService.swift in Sources */,
+				11991BD11EC43BE700DB3436 /* PixabayImageListRequest.swift in Sources */,
 				1152B7A01EC30D3100B8CDDB /* Message+CoreDataClass.swift in Sources */,
 				1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */,
 				116F873C1E97854B00C18C49 /* CommunicatorManager.swift in Sources */,
+				11991BD71EC43FEC00DB3436 /* PixabayImageListParser.swift in Sources */,
 				1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */,
+				11991BDB1EC445CD00DB3436 /* UserImagePickerModel.swift in Sources */,
 				11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
