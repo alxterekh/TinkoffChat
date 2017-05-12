@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ImageLoaderService {
     
@@ -15,6 +16,18 @@ class ImageLoaderService {
 //    init(requestSender: IRequestSender) {
 //        self.requestSender = requestSender
 //    }
+    
+    func loadImage(url: String, completionHandler: @escaping(UIImage?, String?) -> Void) {
+        let config = RequestsFactory.ImageConfig(for: url)
+        requestSender.send(config: config) { (result: Result<UIImage>) in
+            switch result {
+            case .Success(let image):
+                completionHandler(image, nil)
+            case .Fail(let error):
+                completionHandler(nil, error)
+            }
+        }
+    }
     
     func loadImageList(completionHandler: @escaping ([ImageApiModel]?, String?) -> Void) {
         let config = RequestsFactory.ImageListConfig()

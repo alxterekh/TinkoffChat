@@ -19,6 +19,9 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     
     fileprivate let userImagePickerModel = UserImagePickerModel()
     fileprivate var dataSource: [String] = []
+    
+    fileprivate var cashedImages: [UIImage] = []
+    fileprivate var batchSize = 30
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +44,7 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
         self.dataSource = dataSource
         
         DispatchQueue.main.async {
-            //HUD.flash(.success, onView: self.view)
-            
+            HUD.flash(.success, onView: self.view)
             self.collectionView.reloadData()
         }
     }
@@ -68,6 +70,10 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: userImageCellId,
                                                       for: indexPath) as! UserImageCell
         cell.image.image = #imageLiteral(resourceName: "placeholder")
+        userImagePickerModel.fetchImageAtIndex() {
+            image in
+            cell.image.image = image
+        }
         
         return cell
     }

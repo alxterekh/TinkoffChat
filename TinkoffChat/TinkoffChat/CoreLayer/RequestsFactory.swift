@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class RequestsFactory {
     
@@ -15,5 +16,10 @@ class RequestsFactory {
     static func ImageListConfig() -> RequestConfig<[ImageApiModel]> {
         let request = PixabayImageListRequest(apiKey: apiKey)
         return RequestConfig<[ImageApiModel]>(request:request, parser: PixabayImageListParser())
+    }
+    
+    static func ImageConfig(for url: String) -> RequestConfig<UIImage> {
+        let request = ImageRequest(url: url)
+        return RequestConfig<UIImage>(request:request, parser: ImageParser())
     }
 }

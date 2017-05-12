@@ -9,22 +9,22 @@
 import Foundation
 
 class ImageRequest : Requestable {
-    fileprivate let url: String
+    fileprivate let urlString: String
     
     // MARK: - Initialization
     
     init(url: String) {
-        self.url = url
+        self.urlString = url
     }
         
     var urlRequest: URLRequest? {
-//        if let urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-//            if let url = URL(string: urlString) {
-//                
-//                return URLRequest(url: url)
-//            }
-//        }
-//        
+        if let urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let url = URL(string: urlString) {
+                
+                return URLRequest(url: url)
+            }
+        }
+        
         return nil
     }
 }

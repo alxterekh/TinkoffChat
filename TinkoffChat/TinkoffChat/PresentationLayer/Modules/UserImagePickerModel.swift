@@ -25,6 +25,19 @@ class UserImagePickerModel {
     
     let imageLoaderService = ImageLoaderService()
     
+    func fetchImageAtIndex(completionHandler: @escaping(UIImage) -> Void) {
+        imageLoaderService.loadImage(url: "https://cdn.pixabay.com/photo/2013/10/15/09/20/flower-195897_150.jpg") {
+            (image, error) in
+            
+            if let image  = image {
+                completionHandler(image)
+            } else {
+                self.delegate?.show(error: error ?? "Error")
+            }
+            
+        }
+    }
+    
     func fetchImagesList() {
         imageLoaderService.loadImageList {
              (images: [ImageApiModel]?, error) in
