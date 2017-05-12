@@ -70,9 +70,18 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: userImageCellId,
                                                       for: indexPath) as! UserImageCell
         cell.image.image = #imageLiteral(resourceName: "placeholder")
-        userImagePickerModel.fetchImageAtIndex() {
-            image in
-            cell.image.image = image
+        
+        let index = indexPath.row
+        if cashedImages.indices.contains(index) {
+           cell.image.image = cashedImages[index]
+        }
+        else {
+            userImagePickerModel.fetchImageAtIndex() {
+                image in
+                
+                self.cashedImages.append(image)
+                cell.image.image = image
+            }
         }
         
         return cell
