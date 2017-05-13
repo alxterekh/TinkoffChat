@@ -164,8 +164,9 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
         sheet.addAction(UIAlertAction(title: "Load from network", style: .default) {
             [unowned self] action in
             
-            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserImagePickerViewController") {
-                 self.present(vc, animated: true)
+            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserImagePickerViewController") as? UserImagePickerViewController {
+                vc.delegate = self
+                self.present(vc, animated: true)
             }
         })
         
@@ -186,9 +187,15 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
     }
 }
 
+extension ProfileEditorViewController : UserImagePickerViewControllerDelegate {
+    func updateUserPicture(_ image: UIImage) {
+        avatarImageView.image = image
+    }
+}
+
 extension ProfileEditorViewController : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         profile = profile.createCopyWithChange(userPicture: chosenImage)
         dismiss(animated:true, completion: nil)
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RequestSender: IRequestSender {
+class RequestSender: RequestTransmitter {
     
     let session = URLSession.shared
     

@@ -11,7 +11,6 @@ import UIKit
 
 class ImageParser: Parser<UIImage> {
     override func parse(data: Data) -> UIImage? {
-        
         return UIImage(data: data)
     }
 }

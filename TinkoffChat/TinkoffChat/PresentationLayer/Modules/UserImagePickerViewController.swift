@@ -9,6 +9,10 @@
 import UIKit
 import PKHUD
 
+protocol UserImagePickerViewControllerDelegate: class{
+    func updateUserPicture(_ image: UIImage)
+}
+
 class UserImagePickerViewController: UIViewController, UserImagePickerModelDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -16,13 +20,13 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     fileprivate let userImageCellId = "UserPicture"
     fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     fileprivate let itemsPerRow: CGFloat = 3
-    
     fileprivate let userImagePickerModel = UserImagePickerModel()
     fileprivate var dataSource: [String] = []
-    
     fileprivate var cashedImages: [UIImage] = []
-    fileprivate var batchSize = 30
-
+    fileprivate let batchSize = 30
+    
+    weak var delegate: UserImagePickerViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -42,7 +46,6 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     
     func setup(dataSource: [String]) {
         self.dataSource = dataSource
-        
         DispatchQueue.main.async {
             HUD.flash(.success, onView: self.view)
             self.collectionView.reloadData()
@@ -52,6 +55,27 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     func show(error message: String) {
         DispatchQueue.main.async {
             HUD.flash(.labeledError(title: message, subtitle: nil), onView: self.view)
+        }
+    }
+}
+
+extension UserImagePickerViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        
+    }
+    
+    fileprivate func cashImage(_ image: UIImage?) {
+        if let image = image {
+            cashedImages.append(image)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let image = cashedImage(at: indexPath) {
+            delegate?.updateUserPicture(image)
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }
@@ -69,22 +93,31 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: userImageCellId,
                                                       for: indexPath) as! UserImageCell
-        cell.image.image = #imageLiteral(resourceName: "placeholder")
-        
-        let index = indexPath.row
-        if cashedImages.indices.contains(index) {
-           cell.image.image = cashedImages[index]
+        cell.layer.shouldRasterize = true
+        cell.layer.rasterizationScale = UIScreen.main.scale
+        if let image = cashedImage(at: indexPath) {
+            cell.configure(with: image)
         }
         else {
-            userImagePickerModel.fetchImageAtIndex() {
-                image in
-                
-                self.cashedImages.append(image)
-                cell.image.image = image
+            cell.configure(with: nil)
+            let url = dataSource[indexPath.row]
+            userImagePickerModel.fetchImage(at: url) {
+                self.cashImage($0)
+                cell.configure(with: $0)
             }
         }
         
         return cell
+    }
+    
+    fileprivate func cashedImage(at indexPath: IndexPath) -> UIImage? {
+        var image:UIImage?
+        let index = indexPath.row
+        if cashedImages.indices.contains(index) {
+            image = cashedImages[index]
+        }
+        
+        return image
     }
 }
 

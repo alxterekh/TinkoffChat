@@ -9,13 +9,18 @@
 import Foundation
 import UIKit
 
-class ImageLoaderService {
+protocol ImageLoader {
+    func loadImage(url: String, completionHandler: @escaping(UIImage?, String?) -> Void)
+    func loadImageList(completionHandler: @escaping ([ImageApiModel]?, String?) -> Void)
+}
+
+class ImageLoaderService : ImageLoader {
     
-    fileprivate let requestSender: IRequestSender = RequestSender()
+    fileprivate let requestSender: RequestTransmitter
     
-//    init(requestSender: IRequestSender) {
-//        self.requestSender = requestSender
-//    }
+    init(requestSender: RequestTransmitter) {
+        self.requestSender = requestSender
+    }
     
     func loadImage(url: String, completionHandler: @escaping(UIImage?, String?) -> Void) {
         let config = RequestsFactory.ImageConfig(for: url)

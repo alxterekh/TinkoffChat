@@ -33,7 +33,7 @@
 		117C64FF1EC5A9AA0077E11F /* ImageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117C64FE1EC5A9AA0077E11F /* ImageParser.swift */; };
 		118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 118102BA1E8683A600E4FA53 /* CoreData.framework */; };
 		11923DD41EA7739800DC96C3 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */; };
-		11991BC91EC43A5300DB3436 /* IRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BC81EC43A5300DB3436 /* IRequestSender.swift */; };
+		11991BC91EC43A5300DB3436 /* RequestTransmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BC81EC43A5300DB3436 /* RequestTransmitter.swift */; };
 		11991BCB1EC43A7E00DB3436 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BCA1EC43A7E00DB3436 /* Requestable.swift */; };
 		11991BCD1EC43AB500DB3436 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BCC1EC43AB500DB3436 /* Parser.swift */; };
 		11991BD11EC43BE700DB3436 /* PixabayImageListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */; };
@@ -83,7 +83,7 @@
 		118102BA1E8683A600E4FA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
 		11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
-		11991BC81EC43A5300DB3436 /* IRequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequestSender.swift; sourceTree = "<group>"; };
+		11991BC81EC43A5300DB3436 /* RequestTransmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTransmitter.swift; sourceTree = "<group>"; };
 		11991BCA1EC43A7E00DB3436 /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		11991BCC1EC43AB500DB3436 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayImageListRequest.swift; sourceTree = "<group>"; };
@@ -206,10 +206,10 @@
 		117B96661EA5052F0052BF52 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
+				117C65001EC6F3930077E11F /* ImageLoaderService */,
 				117B96691EA510730052BF52 /* ProfileDataService.swift */,
 				116F873B1E97854B00C18C49 /* CommunicatorManager.swift */,
 				1143721D1EC073F3009CCE10 /* ConversationStorageService.swift */,
-				11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -234,6 +234,14 @@
 			path = MultipeerCommunicator;
 			sourceTree = "<group>";
 		};
+		117C65001EC6F3930077E11F /* ImageLoaderService */ = {
+			isa = PBXGroup;
+			children = (
+				11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */,
+			);
+			name = ImageLoaderService;
+			sourceTree = "<group>";
+		};
 		118102B91E8683A600E4FA53 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,7 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				1152B7911EC255FA00B8CDDB /* RequestSender.swift */,
-				11991BC81EC43A5300DB3436 /* IRequestSender.swift */,
+				11991BC81EC43A5300DB3436 /* RequestTransmitter.swift */,
 			);
 			name = RequestSender;
 			sourceTree = "<group>";
@@ -486,7 +494,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11991BC91EC43A5300DB3436 /* IRequestSender.swift in Sources */,
+				11991BC91EC43A5300DB3436 /* RequestTransmitter.swift in Sources */,
 				11370A801E855982006C487B /* ConversationViewController.swift in Sources */,
 				11B76B621EB487730061478E /* CoreDataStack.swift in Sources */,
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,

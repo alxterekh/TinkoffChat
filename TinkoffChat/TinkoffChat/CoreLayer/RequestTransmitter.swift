@@ -18,6 +18,6 @@ enum Result<T> {
     case Fail(String)
 }
 
-protocol IRequestSender {
+protocol RequestTransmitter {
     func send<T>(config: RequestConfig<T>, completionHandler: @escaping (Result<T>) -> Void)
 }

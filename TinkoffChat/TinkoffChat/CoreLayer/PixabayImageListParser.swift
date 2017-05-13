@@ -11,7 +11,7 @@ import SwiftyJSON
 
 struct ImageApiModel {
     let id: Int
-    let previewUrl: String
+    let url: String
 }
 
 class PixabayImageListParser: Parser<[ImageApiModel]> {
@@ -24,10 +24,10 @@ class PixabayImageListParser: Parser<[ImageApiModel]> {
         var imageModels: [ImageApiModel] = []
         for image in images {
             guard let id = image["id"].int,
-                let previewUrl =  image["previewURL"].string else {
+                let url =  image["previewURL"].string else {
                     continue
             }
-            imageModels.append(ImageApiModel(id: id, previewUrl: previewUrl))
+            imageModels.append(ImageApiModel(id: id, url: url))
         }
         
         return imageModels

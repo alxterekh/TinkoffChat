@@ -22,4 +22,10 @@ class ServiceAssembly {
         
         return CommunicatorManager(with: multipeerCommunicator)
     }
+    
+    static func imageLoaderService() -> ImageLoader {
+        let requestSender = RequestSender()
+    
+        return ImageLoaderService(requestSender: requestSender)
+    }
 }

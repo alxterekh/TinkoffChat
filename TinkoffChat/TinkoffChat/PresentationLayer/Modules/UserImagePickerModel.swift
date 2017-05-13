@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol IUserImagePickerModel: class {
+protocol ImagePickerModel: class {
     weak var delegate: UserImagePickerModelDelegate? { get set }
     func fetchImagesList()
 }
@@ -19,34 +19,28 @@ protocol UserImagePickerModelDelegate: class {
     func show(error message: String)
 }
 
-class UserImagePickerModel {
+class UserImagePickerModel : ImagePickerModel {
     
     weak var delegate: UserImagePickerModelDelegate?
+    let imageLoaderService = ServiceAssembly.imageLoaderService()
     
-    let imageLoaderService = ImageLoaderService()
-    
-    func fetchImageAtIndex(completionHandler: @escaping(UIImage) -> Void) {
-        imageLoaderService.loadImage(url: "https://cdn.pixabay.com/photo/2013/10/15/09/20/flower-195897_150.jpg") {
-            (image, error) in
-            
-            if let image  = image {
+    func fetchImage(at url: String, completionHandler: @escaping(UIImage?) -> Void) {
+        imageLoaderService.loadImage(url: url) {
+            if let image  = $0 {
                 completionHandler(image)
             } else {
-                self.delegate?.show(error: error ?? "Error")
+                self.delegate?.show(error: $1 ?? "Error")
             }
-            
         }
     }
     
     func fetchImagesList() {
         imageLoaderService.loadImageList {
-             (images: [ImageApiModel]?, error) in
-            
-            if let images = images {
-                let urls = images.map{ $0.previewUrl }
+            if let images = $0 {
+                let urls = images.map{ $0.url }
                 self.delegate?.setup(dataSource: urls)
             } else {
-                self.delegate?.show(error: error ?? "Error")
+                self.delegate?.show(error: $1 ?? "Error")
             }
         }
     }

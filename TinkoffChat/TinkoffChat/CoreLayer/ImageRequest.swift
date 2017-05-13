@@ -10,9 +10,7 @@ import Foundation
 
 class ImageRequest : Requestable {
     fileprivate let urlString: String
-    
-    // MARK: - Initialization
-    
+        
     init(url: String) {
         self.urlString = url
     }
