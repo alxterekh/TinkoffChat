@@ -86,6 +86,7 @@ class ConversationStorageService {
                 message.conversation = conversation
                 conversation.lastMessage = message
                 conversation.addToMessages(message)
+                performSave(context: context)
             }
         }
     }
@@ -95,9 +96,10 @@ class ConversationStorageService {
             let message = createMessage(with: text , context: context)
             message.isOutgoing = true
             message.isUnread = false
-            message.conversation = conversation
-            conversation.lastMessage = message
-            conversation.addToMessages(message)
+//            message.conversation = conversation
+//            conversation.lastMessage = message
+//            conversation.addToMessages(message)
+            performSave(context: context)
         }
     }
     

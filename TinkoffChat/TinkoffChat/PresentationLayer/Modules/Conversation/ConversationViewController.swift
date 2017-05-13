@@ -24,7 +24,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
 
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        conversationModel!.sendMessage(text: messageTexView.text)
+        conversationModel!.sendMessage(text: messageTexView.text, to: conversation!)
         messageTexView.text = ""
         sendButton.isEnabled = false
         updateTextViewHeight(for: messageTexView.attributedText)

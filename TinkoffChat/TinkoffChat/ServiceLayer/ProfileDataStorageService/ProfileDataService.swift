@@ -76,8 +76,7 @@ class ProfileDataService : ProfileDataStorage {
     }
     
     fileprivate func insertUser(in context: NSManagedObjectContext) -> User? {
-        return NSEntityDescription.insertNewObject(forEntityName: "User", into: context) as? User
-           // User(context: context)
+        return User(context: context)
     }
 
     fileprivate func performSave(context: NSManagedObjectContext, completionHandler: @escaping (Bool, Error?) -> Void) {

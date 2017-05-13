@@ -18,23 +18,30 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Message>
     
-    var communicator: CommunicatorService?
+    var communicator: CommunicatorService = ServiceAssembly.communicatorService()
 
-    func sendMessage(text: String) {
-       // communicator?.sendMessage(text: text, to: )
+    func sendMessage(text: String, to conversation: Conversation) {
+       communicator.sendMessage(text: text, to: conversation)
     }
     
     init(with tableView: UITableView) {
         self.tableView = tableView
-        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        
         let fetchRequest: NSFetchRequest<Message> = Message.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.date), ascending: false)]
-        self.fetchResultsController = NSFetchedResultsController<Message>(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let context = ServiceAssembly.coreDataStack.mainContext!
+        self.fetchResultsController = NSFetchedResultsController<Message>(fetchRequest: fetchRequest,
+                                                                          managedObjectContext: context,
+                                                                          sectionNameKeyPath: nil,
+                                                                          cacheName: nil)
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.fetchResultsController.delegate = self
-        
+        performFetch()
+    }
+    
+    fileprivate func performFetch() {
         do {
             try self.fetchResultsController.performFetch()
         } catch {

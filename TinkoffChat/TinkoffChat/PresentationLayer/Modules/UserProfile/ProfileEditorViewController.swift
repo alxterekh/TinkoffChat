@@ -189,6 +189,7 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
 
 extension ProfileEditorViewController : UserImagePickerViewControllerDelegate {
     func updateUserPicture(_ image: UIImage) {
+        profile = profile.createCopyWithChange(userPicture: image)
         avatarImageView.image = image
     }
 }
