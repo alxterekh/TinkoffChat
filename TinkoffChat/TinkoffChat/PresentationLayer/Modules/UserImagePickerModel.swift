@@ -26,8 +26,11 @@ class UserImagePickerModel : ImagePickerModel {
     
     func fetchImage(at url: String, completionHandler: @escaping(UIImage?) -> Void) {
         imageLoaderService.loadImage(url: url) {
+            
             if let image  = $0 {
-                completionHandler(image)
+                DispatchQueue.main.async {
+                    completionHandler(image)
+                }
             } else {
                 self.delegate?.show(error: $1 ?? "Error")
             }

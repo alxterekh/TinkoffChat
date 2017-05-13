@@ -28,9 +28,18 @@ final class CommunicatorSupervisor : CommunicatorService {
     }
     
     func sendMessage(text: String, to conversation: Conversation) {
-        if let participant = conversation.participant{
-                conversationStorage.handleSendMessage(text: text, to: conversation)
-                multipeerCommunicator.sendMessage(string: text, to: participant.userId!, completionHandler: nil)
+        if let participant = conversation.participant,
+            let userId = participant.userId {
+            multipeerCommunicator.sendMessage(string: text, to: userId) {
+                success, error in
+                
+                if success {
+                   self.conversationStorage.handleSentMessage(text: text, to: conversation)
+                }
+                else {
+                   print("\(String(describing: error))")
+                }
+            }
         }
     }
 }
@@ -50,10 +59,10 @@ extension CommunicatorSupervisor : MultipeerCommunicatorDelegate {
     }
     
     func failedToStartBrowsingForUsers(error: Error) {
-        print("\(error)")
+        print("\(String(describing: error))")
     }
     
     func failedToStartAdvertising(error: Error) {
-        print("\(error)")
+        print("\(String(describing: error))")
     }
 }

@@ -22,7 +22,9 @@ class ConversationListModel : NSObject, NSFetchedResultsControllerDelegate {
     init(with tableView: UITableView) {
         self.tableView = tableView
         let fetchRequest: NSFetchRequest<Conversation> = Conversation.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Conversation.participant.name), ascending: false)]
+        let nameSortDescriptor = NSSortDescriptor(key:#keyPath(Conversation.participant.name), ascending: false)
+        let dateSortDescriptor = NSSortDescriptor(key:#keyPath(Conversation.lastMessage.date), ascending: false)
+        fetchRequest.sortDescriptors = [dateSortDescriptor, nameSortDescriptor]
         let context = ServiceAssembly.coreDataStack.mainContext!
         self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest,
                                                                                managedObjectContext: context,

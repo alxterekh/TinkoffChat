@@ -44,7 +44,7 @@ class ConversationCell: UITableViewCell {
     
     fileprivate func configureCellWithMessage(_ message: String?) {
         messageLabel.text = (message != nil) ? message : defaultMessagePlaceholder
-     //   setupMessageFontIfThereIsUnreadMessages(chat?.hasUnreadMessages ?? false)
+        setupMessageFontIfThereIsUnreadMessages(conversation?.hasUnreadMessages() ?? false)
     }
     
     fileprivate func configureCellWithDate(_ date: Date?) {
@@ -64,7 +64,8 @@ class ConversationCell: UITableViewCell {
     }
     
     fileprivate func setupMessageFontIfThereIsUnreadMessages(_ hasUnreadMessages: Bool) {
-//        if conversation. {
+        messageLabel.font = (hasUnreadMessages) ? boldDefaultFont : defaultFont
+//        if {
 //            messageLabel.font = (hasUnreadMessages) ? boldDefaultFont : defaultFont
 //        }
 //        else {

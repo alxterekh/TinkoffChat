@@ -12,6 +12,7 @@ import CoreData
 protocol CoreDataStackContextProvider {
     var mainContext : NSManagedObjectContext? { get }
     var saveContext : NSManagedObjectContext? { get }
+    func performSave(context: NSManagedObjectContext, completionHandler: @escaping (Bool, Error?) -> Void)
 }
 
 class CoreDataStack : CoreDataStackContextProvider {
@@ -120,6 +121,34 @@ class CoreDataStack : CoreDataStackContextProvider {
         }
     }
     
+    // MARK: -
+    
+    func performSave(context: NSManagedObjectContext, completionHandler: @escaping (Bool, Error?) -> Void) {
+        if context.hasChanges {
+            context.perform {
+                [weak self] in
+                
+                do {
+                    try context.save()
+                }
+                catch {
+                    DispatchQueue.main.async { completionHandler(false, error) }
+                    print("Context save error: \(error)")
+                }
+                
+                if let parent = context.parent {
+                    self?.performSave(context: parent, completionHandler: completionHandler)
+                }
+                else {
+                    DispatchQueue.main.async { completionHandler(true, nil) }
+                }
+            }
+        }
+        else {
+            completionHandler(true, nil)
+        }
+    }
+
     // MARK: - Paths
     
     fileprivate func getStoreURL() -> URL {

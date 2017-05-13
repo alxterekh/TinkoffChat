@@ -9,39 +9,6 @@
 import Foundation
 import CoreData
 
-extension Conversation {
-    static func fetchRequestConversation(model: NSManagedObjectModel, identifier: String) -> NSFetchRequest<Conversation>? {
-        let templateName = "Conversation"
-        guard let fetchRequest = model.fetchRequestFromTemplate(withName: templateName, substitutionVariables: ["identifier" : identifier]) as? NSFetchRequest<Conversation> else {
-            assert(false, "No template with name \(templateName)")
-            
-            return nil
-        }
-        
-        return fetchRequest
-    }
-    
-    func isOnline() -> Bool {
-        return participant?.isOnline ?? false
-    }
-    
-    var name: String? {
-        return participant?.name
-    }
-}
-
-extension User {
-    static func fetchRequestUser(model: NSManagedObjectModel, identifier: String) -> NSFetchRequest<User>? {
-        let templateName = "UserWithId"
-        guard let fetchRequest = model.fetchRequestFromTemplate(withName: templateName, substitutionVariables: ["identifier" : identifier]) as? NSFetchRequest<User> else {
-            assert(false, "No template with name \(templateName)")
-            
-            return nil
-        }
-        
-        return fetchRequest
-    }
-}
 
 class ConversationStorageService {
     
@@ -53,13 +20,13 @@ class ConversationStorageService {
     
     func handleFoundUser(with identifier: String, userName: String?) {
         if let context = coreDataStack.saveContext {
-            if let conversation = findOrInsertConversation(in: context, with: identifier) {
+            if let conversation = Conversation.findOrInsertConversation(in: context, with: identifier) {
                 conversation.isAbleToConversate = true
-                if let participant = findOrInsertUser(in: context, with: identifier) {
+                if let participant = User.findOrInsertUser(in: context, with: identifier) {
                     participant.name = userName
                     participant.isOnline = true
                     conversation.participant = participant
-                    performSave(context: context)
+                    coreDataStack.performSave(context: context){_,_ in }
                 }
             }
         }
@@ -67,11 +34,11 @@ class ConversationStorageService {
    
     func handleLostUser(with identifier: String) {
         if let context = coreDataStack.saveContext {
-            if let conversation = findOrInsertConversation(in: context, with: identifier) {
+            if let conversation = Conversation.findOrInsertConversation(in: context, with: identifier) {
                 conversation.isAbleToConversate = false
                 if let participant = conversation.participant {
                     participant.isOnline = false
-                    performSave(context: context)
+                    coreDataStack.performSave(context: context){_,_ in }
                 }
             }
         }
@@ -79,29 +46,35 @@ class ConversationStorageService {
     
     func handleReceivedMessage(text: String, fromUser: String, toUser:String) {
         if let context = coreDataStack.saveContext {
-            if let conversation = findOrInsertConversation(in: context, with: fromUser) {
+            if let conversation = Conversation.findOrInsertConversation(in: context, with: fromUser) {
                 let message = createMessage(with: text , context: context)
                 message.isOutgoing = false
                 message.isUnread = true
                 message.conversation = conversation
                 conversation.lastMessage = message
                 conversation.addToMessages(message)
-                performSave(context: context)
+                coreDataStack.performSave(context: context){_,_ in }
             }
         }
     }
     
-    func handleSendMessage(text: String, to conversation: Conversation) {
+    func handleSentMessage(text: String, to conversation: Conversation) {
         if let context = coreDataStack.saveContext {
             let message = createMessage(with: text , context: context)
             message.isOutgoing = true
             message.isUnread = false
-//            message.conversation = conversation
-//            conversation.lastMessage = message
-//            conversation.addToMessages(message)
-            performSave(context: context)
+            if let conversationId = conversation.conversationId {
+                if let conversation = Conversation.findOrInsertConversation(in: context, with: conversationId) {
+                    message.conversation = conversation
+                    conversation.lastMessage = message
+                    conversation.addToMessages(message)
+                    
+                    coreDataStack.performSave(context: context){_,_ in }
+                }
+            }
         }
     }
+    
     
     fileprivate func createMessage(with text: String, context: NSManagedObjectContext) -> Message {
         let message = Message(context: context)
@@ -111,104 +84,5 @@ class ConversationStorageService {
         
         return message
     }
-    
-    fileprivate func findOrInsertUser(in context: NSManagedObjectContext, with identidier: String) -> User? {
-        var user: User?
-        guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
-            print("No managed object model in context!")
-            assert(false)
-            
-            return nil
-        }
-        
-        guard let fetchRequest = User.fetchRequestUser(model: model, identifier: identidier) else {
-            
-            return nil
-        }
-        
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let foundUser = results.first {
-                user = foundUser
-            }
-        }
-        catch {
-            print("Failed to fetch User with Id")
-        }
-        
-        if user == nil {
-            user = insertUser(in: context)
-            user?.userId = identidier
-        }
-        
-        return user
-    }
-    
-    fileprivate func insertUser(in context: NSManagedObjectContext) -> User? {
-        return User(context: context)
-    }
-    
-    // MARK: -
-    
-    fileprivate func findOrInsertConversation(in context: NSManagedObjectContext, with identifier: String) -> Conversation? {
-        var conversation: Conversation?
-        guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
-            print("No managed object model in context!")
-            assert(false)
-            
-            return nil
-        }
-        
-        guard let fetchRequest = Conversation.fetchRequestConversation(model: model, identifier: identifier) else {
-            
-            return nil
-        }
-        
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let foundConversation = results.first {
-                conversation = foundConversation
-            }
-        }
-        catch {
-            print("Failed to fetch Conversation")
-        }
-        
-        if conversation == nil {
-            conversation = insertConversation(in: context)
-            conversation?.conversationId = identifier
-        }
-        
-        return conversation
-    }
-    
-    fileprivate func insertConversation(in context: NSManagedObjectContext) -> Conversation? {
-        return Conversation(context: context)
-    }
-    
-    fileprivate func performSave(context: NSManagedObjectContext) {
-        if context.hasChanges {
-            context.perform {
-                [weak self] in
-                
-                do {
-                    try context.save()
-                }
-                catch {
-                    //DispatchQueue.main.async { completionHandler(false, error) }
-                    print("Context save error: \(error)")
-                }
-                
-                if let parent = context.parent {
-                    self?.performSave(context: parent)
-                }
-                else {
-                    //DispatchQueue.main.async { completionHandler(true, nil) }
-                }
-            }
-        }
-        else {
-            //completionHandler(true, nil)
-        }
-    }
+
 }

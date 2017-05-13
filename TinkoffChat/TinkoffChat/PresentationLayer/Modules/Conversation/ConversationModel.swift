@@ -24,12 +24,13 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
        communicator.sendMessage(text: text, to: conversation)
     }
     
-    init(with tableView: UITableView) {
+    init(with tableView: UITableView, id: String?) {
         self.tableView = tableView
         
-        let fetchRequest: NSFetchRequest<Message> = Message.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.date), ascending: false)]
         let context = ServiceAssembly.coreDataStack.mainContext!
+        let fetchRequest: NSFetchRequest<Message> = Message.fetchRequest()
+        //fetchRequestMessage(in: context, identifier: id!)!
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.date), ascending: false)]
         self.fetchResultsController = NSFetchedResultsController<Message>(fetchRequest: fetchRequest,
                                                                           managedObjectContext: context,
                                                                           sectionNameKeyPath: nil,

@@ -24,7 +24,7 @@ class PixabayImageListParser: Parser<[ImageApiModel]> {
         var imageModels: [ImageApiModel] = []
         for image in images {
             guard let id = image["id"].int,
-                let url =  image["previewURL"].string else {
+                let url =  image["webformatURL"].string else {
                     continue
             }
             imageModels.append(ImageApiModel(id: id, url: url))

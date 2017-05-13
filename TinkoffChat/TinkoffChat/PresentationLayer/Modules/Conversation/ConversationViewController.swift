@@ -21,7 +21,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
     fileprivate var conversationModel: ConversationModel?
     
     var conversation: Conversation?
-
+    
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         conversationModel!.sendMessage(text: messageTexView.text, to: conversation!)
@@ -54,7 +54,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
         
-        conversationModel = ConversationModel(with: messagesListTableView)
+        conversationModel = ConversationModel(with: messagesListTableView, id: conversation?.conversationId)
         
         subscribeForKeyboardNotification()
         setupGestureRecognizer()
@@ -94,16 +94,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
     
     @objc fileprivate func keyboardWillHide(notification: NSNotification) {
         bottomSpaceConstraint.constant = 0
-    }
-    
-    // MARK: - 
-    
-    func updateView() {
-//        if let state = chat?.online {
-//            sendButton.isEnabled = state
-//        }
-
-        self.messagesListTableView.reloadData()
     }
 }
 
