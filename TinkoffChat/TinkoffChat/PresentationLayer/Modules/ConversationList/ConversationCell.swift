@@ -31,7 +31,7 @@ class ConversationCell: UITableViewCell {
     func configure(with conversation: Conversation) {
         self.conversation = conversation
         configureCellWithName(conversation.name)
-        configureCellWithOnlineStatus(conversation.isOnline())
+        configureCellWithOnlineStatus(conversation.isAbleToConversate)
         configureCellWithDate(conversation.lastMessage?.date as Date?)
         configureCellWithMessage(conversation.lastMessage?.text)
     }

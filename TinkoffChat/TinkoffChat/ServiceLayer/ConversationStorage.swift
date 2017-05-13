@@ -45,7 +45,7 @@ extension User {
 
 class ConversationStorageService {
     
-    let coreDataStack: CoreDataStackContextProvider
+    fileprivate let coreDataStack: CoreDataStackContextProvider
     
     init(with coreDataStack: CoreDataStackContextProvider) {
         self.coreDataStack = coreDataStack
@@ -54,6 +54,7 @@ class ConversationStorageService {
     func handleFoundUser(with identifier: String, userName: String?) {
         if let context = coreDataStack.saveContext {
             if let conversation = findOrInsertConversation(in: context, with: identifier) {
+                conversation.isAbleToConversate = true
                 if let participant = findOrInsertUser(in: context, with: identifier) {
                     participant.name = userName
                     participant.isOnline = true
@@ -67,6 +68,7 @@ class ConversationStorageService {
     func handleLostUser(with identifier: String) {
         if let context = coreDataStack.saveContext {
             if let conversation = findOrInsertConversation(in: context, with: identifier) {
+                conversation.isAbleToConversate = false
                 if let participant = conversation.participant {
                     participant.isOnline = false
                     performSave(context: context)
@@ -75,8 +77,37 @@ class ConversationStorageService {
         }
     }
     
-    func receiveMessage(text: String, fromUser: String, toUser:String) {
+    func handleReceivedMessage(text: String, fromUser: String, toUser:String) {
+        if let context = coreDataStack.saveContext {
+            if let conversation = findOrInsertConversation(in: context, with: fromUser) {
+                let message = createMessage(with: text , context: context)
+                message.isOutgoing = false
+                message.isUnread = true
+                message.conversation = conversation
+                conversation.lastMessage = message
+                conversation.addToMessages(message)
+            }
+        }
+    }
+    
+    func handleSendMessage(text: String, to conversation: Conversation) {
+        if let context = coreDataStack.saveContext {
+            let message = createMessage(with: text , context: context)
+            message.isOutgoing = true
+            message.isUnread = false
+            message.conversation = conversation
+            conversation.lastMessage = message
+            conversation.addToMessages(message)
+        }
+    }
+    
+    fileprivate func createMessage(with text: String, context: NSManagedObjectContext) -> Message {
+        let message = Message(context: context)
+        message.messageId = IdentifierGenerator.generateIdentifier()
+        message.date = NSDate()
+        message.text = text
         
+        return message
     }
     
     fileprivate func findOrInsertUser(in context: NSManagedObjectContext, with identidier: String) -> User? {

@@ -11,16 +11,14 @@ import UIKit
 protocol CommunicatorService {
     func updateMyPeerName(_ name: String)
     func sendMessage(text: String, to conversation: Conversation)
-    var coreDataStack: CoreDataStack { get }
 }
 
-final class CommunicatorManager : CommunicatorService {
+final class CommunicatorSupervisor : CommunicatorService {
     fileprivate var multipeerCommunicator: Communicator
-    var coreDataStack = CoreDataStack()
-    let conversationStorageService: ConversationStorageService
+    fileprivate let conversationStorage: ConversationStorageService
     
-    init(with communicator: Communicator) {
-        conversationStorageService = ConversationStorageService(with: coreDataStack)
+    init(with communicator: Communicator, storage: ConversationStorageService) {
+        conversationStorage = storage
         multipeerCommunicator = communicator
         multipeerCommunicator.delegate = self
     }
@@ -31,23 +29,24 @@ final class CommunicatorManager : CommunicatorService {
     
     func sendMessage(text: String, to conversation: Conversation) {
         if let participant = conversation.participant{
+                conversationStorage.handleSendMessage(text: text, to: conversation)
                 multipeerCommunicator.sendMessage(string: text, to: participant.userId!, completionHandler: nil)
         }
     }
 }
 
-extension CommunicatorManager : MultipeerCommunicatorDelegate {
+extension CommunicatorSupervisor : MultipeerCommunicatorDelegate {
     
     func didFindUser(userID: String, userName: String?) {
-        conversationStorageService.handleFoundUser(with: userID, userName: userName)
+        conversationStorage.handleFoundUser(with: userID, userName: userName)
     }
     
     func didLooseUser(userID: String) {
-        conversationStorageService.handleLostUser(with: userID)
+        conversationStorage.handleLostUser(with: userID)
     }
     
     func didReceiveMessage(text: String, fromUser: String, toUser:String) {
-        conversationStorageService.receiveMessage(text: text, fromUser: fromUser, toUser: toUser)
+        conversationStorage.handleReceivedMessage(text: text, fromUser: fromUser, toUser: toUser)
     }
     
     func failedToStartBrowsingForUsers(error: Error) {

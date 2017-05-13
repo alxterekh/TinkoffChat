@@ -2,7 +2,7 @@
 //  Conversation+CoreDataProperties.swift
 //  TinkoffChat
 //
-//  Created by Alexander on 10/05/2017.
+//  Created by Alexander on 13/05/2017.
 //  Copyright © 2017 Alexander Terekhov. All rights reserved.
 //
 
@@ -17,6 +17,7 @@ extension Conversation {
     }
 
     @NSManaged public var conversationId: String?
+    @NSManaged public var isAbleToConversate: Bool
     @NSManaged public var lastMessage: Message?
     @NSManaged public var messages: NSSet?
     @NSManaged public var participant: User?

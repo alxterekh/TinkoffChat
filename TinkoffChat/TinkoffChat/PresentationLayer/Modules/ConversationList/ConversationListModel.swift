@@ -17,19 +17,25 @@ class ConversationListModel : NSObject, NSFetchedResultsControllerDelegate {
     
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Conversation>
-    
-    fileprivate var communicatorManager = ServiceAssembly.communicatorService()
+    fileprivate var communicatorService = ServiceAssembly.communicatorService()
     
     init(with tableView: UITableView) {
         self.tableView = tableView
         let fetchRequest: NSFetchRequest<Conversation> = Conversation.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Conversation.participant.name), ascending: false)]
-        self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest, managedObjectContext:communicatorManager.coreDataStack.mainContext!, sectionNameKeyPath: #keyPath(Conversation.participant.isOnline), cacheName: nil)
+        let context = ServiceAssembly.coreDataStack.mainContext!
+        self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: context,
+                                                                               sectionNameKeyPath: #keyPath(Conversation.isAbleToConversate),
+                                                                               cacheName: nil)
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.fetchResultsController.delegate = self
-        
+        performFetch()
+    }
+    
+    fileprivate func performFetch() {
         do {
             try self.fetchResultsController.performFetch()
         } catch {
