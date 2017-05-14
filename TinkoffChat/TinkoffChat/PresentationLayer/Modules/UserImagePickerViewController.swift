@@ -99,16 +99,18 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
         cell.configure(with: image)
         if image == nil {
             let url = dataSource[indexPath.row]
+            cell.url = url
             userImagePickerModel.fetchImage(at: url) {
                 self.cashImage($0)
-                cell.configure(with: $0)
+                if cell.url == url {
+                    cell.configure(with: $0)
+                }
             }
         }
         
         return cell
     }
 
-    
     fileprivate func cashedImage(at indexPath: IndexPath) -> UIImage? {
         var image:UIImage?
         let index = indexPath.row

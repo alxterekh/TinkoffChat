@@ -15,9 +15,9 @@ protocol CommunicatorService {
 
 final class CommunicatorSupervisor : CommunicatorService {
     fileprivate var multipeerCommunicator: Communicator
-    fileprivate let conversationStorage: ConversationStorageService
+    fileprivate let conversationStorage: ConversationStorage
     
-    init(with communicator: Communicator, storage: ConversationStorageService) {
+    init(with communicator: Communicator, storage: ConversationStorage) {
         conversationStorage = storage
         multipeerCommunicator = communicator
         multipeerCommunicator.delegate = self

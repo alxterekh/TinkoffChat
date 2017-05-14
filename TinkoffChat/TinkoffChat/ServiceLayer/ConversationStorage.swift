@@ -9,8 +9,14 @@
 import Foundation
 import CoreData
 
+protocol ConversationStorage {
+    func handleFoundUser(with identifier: String, userName: String?)
+    func handleLostUser(with identifier: String)
+    func handleReceivedMessage(text: String, fromUser: String, toUser:String)
+    func handleSentMessage(text: String, to conversation: Conversation)
+}
 
-class ConversationStorageService {
+class ConversationStorageService : ConversationStorage {
     
     fileprivate let coreDataStack: CoreDataStackContextProvider
     
@@ -60,7 +66,6 @@ class ConversationStorageService {
         if let context = coreDataStack.saveContext {
             let message = createMessage(with: text , context: context)
             message.isOutgoing = true
-            message.isUnread = false
             if let conversationId = conversation.conversationId {
                 if let conversation = Conversation.findOrInsertConversation(in: context, with: conversationId) {
                     message.conversation = conversation
@@ -80,5 +85,4 @@ class ConversationStorageService {
         
         return message
     }
-
 }

@@ -26,7 +26,6 @@
     </entity>
     <fetchRequest name="ConversationWithId" entity="Conversation" predicateString="conversationId == $identifier"/>
     <fetchRequest name="MessageInConversationWithId" entity="Message" predicateString="conversation.conversationId == $identifier"/>
-    <fetchRequest name="UserIsOnline" entity="User" predicateString="isOnline == 1"/>
     <fetchRequest name="UserWithId" entity="User" predicateString="userId == $identifier"/>
     <elements>
         <element name="Conversation" positionX="-641" positionY="-631" width="128" height="120"/>
