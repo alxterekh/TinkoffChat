@@ -26,10 +26,17 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
     
     init(with tableView: UITableView, id: String?) {
         self.tableView = tableView
+        guard let context = ServiceAssembly.coreDataStack.mainContext else {
+            print("No cotext for frc!")
+            abort()
+        }
         
-        let context = ServiceAssembly.coreDataStack.mainContext!
-        let fetchRequest: NSFetchRequest<Message> = Message.fetchRequest()
-        //fetchRequestMessage(in: context, identifier: id!)!
+        guard let id = id,
+            let fetchRequest: NSFetchRequest<Message> = Message.fetchRequestMessage(in: context, identifier: id) else {
+            print("No fetchRequest for frc!")
+            abort()
+        }
+
         fetchRequest.sortDescriptors = [NSSortDescriptor(key:#keyPath(Message.date), ascending: false)]
         self.fetchResultsController = NSFetchedResultsController<Message>(fetchRequest: fetchRequest,
                                                                           managedObjectContext: context,

@@ -25,11 +25,14 @@ class ConversationListModel : NSObject, NSFetchedResultsControllerDelegate {
         let nameSortDescriptor = NSSortDescriptor(key:#keyPath(Conversation.participant.name), ascending: false)
         let dateSortDescriptor = NSSortDescriptor(key:#keyPath(Conversation.lastMessage.date), ascending: false)
         fetchRequest.sortDescriptors = [dateSortDescriptor, nameSortDescriptor]
-        let context = ServiceAssembly.coreDataStack.mainContext!
+        guard let context = ServiceAssembly.coreDataStack.mainContext else {
+            print("No cotext for frc!")
+            abort()
+        }
         self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest,
                                                                                managedObjectContext: context,
                                                                                sectionNameKeyPath: #keyPath(Conversation.isAbleToConversate),
-                                                                               cacheName: nil)
+                                                                            cacheName: nil)
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self

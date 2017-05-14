@@ -36,10 +36,8 @@ class ConversationStorageService {
         if let context = coreDataStack.saveContext {
             if let conversation = Conversation.findOrInsertConversation(in: context, with: identifier) {
                 conversation.isAbleToConversate = false
-                if let participant = conversation.participant {
-                    participant.isOnline = false
-                    coreDataStack.performSave(context: context){_,_ in }
-                }
+                conversation.participant = nil
+                coreDataStack.performSave(context: context){_,_ in }
             }
         }
     }
@@ -68,13 +66,11 @@ class ConversationStorageService {
                     message.conversation = conversation
                     conversation.lastMessage = message
                     conversation.addToMessages(message)
-                    
                     coreDataStack.performSave(context: context){_,_ in }
                 }
             }
         }
     }
-    
     
     fileprivate func createMessage(with text: String, context: NSManagedObjectContext) -> Message {
         let message = Message(context: context)

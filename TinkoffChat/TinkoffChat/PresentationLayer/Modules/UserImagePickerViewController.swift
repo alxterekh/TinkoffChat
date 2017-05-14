@@ -23,11 +23,7 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     fileprivate let userImagePickerModel = UserImagePickerModel()
     fileprivate var dataSource: [String] = []
     fileprivate var cashedImages: [UIImage] = []
-    
-    fileprivate let batchSize = 30
-    fileprivate var offset = 0
-    fileprivate var reachedEndOfItems = false
-    
+        
     weak var delegate: UserImagePickerViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -53,7 +49,6 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
             HUD.flash(.success, onView: self.view)
             self.collectionView.reloadData()
         }
-        loadMore()
     }
     
     func show(error message: String) {
@@ -62,53 +57,20 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
         }
     }
     
-    func loadMore() {
-
-        guard !self.reachedEndOfItems else {
-            return
-        }
-        
-        let start = offset
-        var end = offset + batchSize
-        
-        if end > dataSource.count - 1 {end = dataSource.count - 1 }
-        
-        for url in dataSource[start...end] {
-            userImagePickerModel.fetchImage(at: url) {
-                self.cashImage($0)
-                self.collectionView.reloadData()
-                self.offset += 1
-                self.reachedEndOfItems = self.offset == self.offset + self.batchSize
-            }
-        }
-    }
-}
-
-extension UserImagePickerViewController: UICollectionViewDelegate {
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let currentOffset = scrollView.contentOffset.y
-        
-        print(currentOffset)
-        
-        let maximumOffset = scrollView.frame.size.height
-        print(maximumOffset)
-        if maximumOffset - currentOffset <= 150.0 {
-            self.loadMore()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-        
-    }
-    
     fileprivate func cashImage(_ image: UIImage?) {
         if let image = image {
             cashedImages.append(image)
         }
     }
+}
+
+extension UserImagePickerViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        
+    }
+
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let image = cashedImage(at: indexPath) {
@@ -133,12 +95,19 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
                                                       for: indexPath) as! UserImageCell
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
-     
         let image = cashedImage(at: indexPath)
         cell.configure(with: image)
+        if image == nil {
+            let url = dataSource[indexPath.row]
+            userImagePickerModel.fetchImage(at: url) {
+                self.cashImage($0)
+                cell.configure(with: $0)
+            }
+        }
         
         return cell
     }
+
     
     fileprivate func cashedImage(at indexPath: IndexPath) -> UIImage? {
         var image:UIImage?

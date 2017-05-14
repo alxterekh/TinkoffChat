@@ -114,10 +114,10 @@ class CoreDataStack : CoreDataStackContextProvider {
                 context.parent = parentContext
                 context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
                 context.undoManager = nil
-                _mainContext = context
+                _saveContext = context
             }
             
-            return _mainContext
+            return _saveContext
         }
     }
     

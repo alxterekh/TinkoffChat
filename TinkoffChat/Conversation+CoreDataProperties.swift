@@ -2,7 +2,7 @@
 //  Conversation+CoreDataProperties.swift
 //  TinkoffChat
 //
-//  Created by Alexander on 13/05/2017.
+//  Created by Alexander on 14/05/2017.
 //  Copyright © 2017 Alexander Terekhov. All rights reserved.
 //
 
