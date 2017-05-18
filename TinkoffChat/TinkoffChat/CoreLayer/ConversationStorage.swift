@@ -22,23 +22,6 @@ class ConversationStorageService : ConversationStorage {
     
     init(with coreDataStack: CoreDataStackContextProvider) {
         self.coreDataStack = coreDataStack
-        subscribeForNotification()
-    }
-    
-    
-    fileprivate func subscribeForNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(ConversationStorageService.moveAllConversationsToHistory), name: .UIApplicationWillResignActive, object: nil)
-    }
-    
-    @objc fileprivate func moveAllConversationsToHistory() {
-        if let context = coreDataStack.saveContext {
-            if let conversations = Conversation.findAllConversations(in: context) {
-                for conversation in conversations {
-                    conversation.isAbleToConversate = false
-                }
-                coreDataStack.performSave(context: context){_,_ in }
-            }
-        }
     }
     
     func handleFoundUser(with identifier: String, userName: String?) {

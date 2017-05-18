@@ -32,7 +32,7 @@ class ConversationListModel : NSObject, NSFetchedResultsControllerDelegate {
         self.fetchResultsController = NSFetchedResultsController<Conversation>(fetchRequest: fetchRequest,
                                                                                managedObjectContext: context,
                                                                                sectionNameKeyPath: #keyPath(Conversation.isAbleToConversate),
-                                                                            cacheName: nil)
+                                                                               cacheName: nil)
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -114,8 +114,8 @@ extension ConversationListModel: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfRows(inSection section: Int) -> Int {
-        guard let sections = fetchResultsController.sections else { return 0 }
-        return sections[section].numberOfObjects
+        guard let sections = fetchResultsController.sections?[section] else { return 0 }
+        return sections.numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
