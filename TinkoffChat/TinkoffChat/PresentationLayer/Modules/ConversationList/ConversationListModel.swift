@@ -12,9 +12,7 @@ import CoreData
 
 class ConversationListModel : NSObject, NSFetchedResultsControllerDelegate {
     
-    fileprivate let conversationCellId = "conversationCell"
-    fileprivate let headerTitles = ["Online", "History"]
-    
+    fileprivate let conversationCellId = "conversationCell"    
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Conversation>
     fileprivate var communicatorService = ServiceAssembly.communicatorService
@@ -128,7 +126,12 @@ extension ConversationListModel: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return numberOfRows(inSection: section) == 0 ? nil : Optional<String>(headerTitles[section])
+        guard numberOfRows(inSection: section) > 0 else {
+            return nil
+        }
+        
+        let conversation = fetchResultsController.object(at: IndexPath(row: 0, section: section))
+        return conversation.isAbleToConversate ? "Online" : "History"
     }
 }
 

@@ -135,6 +135,16 @@ extension ConversationModel: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         
+        if message.isUnread,
+            let saveContext = ServiceAssembly.coreDataStack.saveContext,
+            let messageOnSaveContext = saveContext.object(with: message.objectID) as? Message {
+                
+                messageOnSaveContext.isUnread = false
+                ServiceAssembly.coreDataStack.performSave(context: saveContext) {
+                    _, _ in
+                }
+        }
+        
         return cell
     }
 }
