@@ -27,8 +27,4 @@ public class Message: NSManagedObject {
         
         return fetchRequest
     }
-    
-    func markAsRead() {
-        isUnread = false
-    }
 }

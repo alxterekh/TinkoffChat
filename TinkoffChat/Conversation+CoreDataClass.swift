@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 public class Conversation: NSManagedObject {
     
     static func fetchRequestConversation(model: NSManagedObjectModel, identifier: String) -> NSFetchRequest<Conversation>? {
@@ -34,6 +33,18 @@ public class Conversation: NSManagedObject {
     
     var name: String? {
         return participant?.name
+    }
+    
+    static func findAllConversations(in context: NSManagedObjectContext) -> [Conversation]? {
+        var conversations: [Conversation]?
+        do {
+            conversations = try context.fetch(Conversation.fetchRequest())
+        }
+        catch {
+            print("Failed to fetch Conversations")
+        }
+        
+        return conversations
     }
     
     static func findOrInsertConversation(in context: NSManagedObjectContext, with identifier: String) -> Conversation? {

@@ -132,6 +132,7 @@ extension ConversationModel: UITableViewDataSource, UITableViewDelegate {
         let cellId = (message.isOutgoing) ? outcomingMessageCellId : incomingMessageCellId
         let cell = tableView.dequeueReusableCell(withIdentifier:cellId, for:indexPath) as! MessageCell
         cell.configure(with: message)
+        cell.selectionStyle = .none
         cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         
         return cell

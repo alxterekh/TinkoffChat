@@ -16,7 +16,7 @@ class MessageCell: UITableViewCell {
     var message: Message? {
         didSet {
             messageTextLabel.text = message?.text
-            message?.markAsRead()
+            //message?.markAsRead()
         }
     }
     

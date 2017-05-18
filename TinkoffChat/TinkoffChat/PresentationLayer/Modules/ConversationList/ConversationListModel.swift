@@ -122,6 +122,7 @@ extension ConversationListModel: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier:conversationCellId, for:indexPath) as! ConversationCell
         let conversation = fetchResultsController.object(at: indexPath)
         cell.configure(with: conversation)
+        cell.selectionStyle = .none
         
         return cell
     }
