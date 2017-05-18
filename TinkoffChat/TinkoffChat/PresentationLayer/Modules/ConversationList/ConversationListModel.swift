@@ -17,7 +17,7 @@ class ConversationListModel : NSObject, NSFetchedResultsControllerDelegate {
     
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Conversation>
-    fileprivate var communicatorService = ServiceAssembly.communicatorService()
+    fileprivate var communicatorService = ServiceAssembly.communicatorService
     
     init(with tableView: UITableView) {
         self.tableView = tableView

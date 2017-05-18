@@ -22,7 +22,7 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     fileprivate let itemsPerRow: CGFloat = 3
     fileprivate let userImagePickerModel = UserImagePickerModel()
     fileprivate var dataSource: [String] = []
-    fileprivate var cashedImages: [UIImage] = []
+    fileprivate var cashedImages: [IndexPath : UIImage] = [:]
         
     weak var delegate: UserImagePickerViewControllerDelegate?
     
@@ -57,9 +57,9 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
         }
     }
     
-    fileprivate func cashImage(_ image: UIImage?) {
+    fileprivate func cashImage(_ image: UIImage?, at indexPath: IndexPath) {
         if let image = image {
-            cashedImages.append(image)
+            cashedImages[indexPath] = image
         }
     }
 }
@@ -70,10 +70,10 @@ extension UserImagePickerViewController: UICollectionViewDelegate {
                         forItemAt indexPath: IndexPath) {
         
     }
-
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let image = cashedImage(at: indexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! UserImageCell
+        if let image = cell.imageView.image {
             delegate?.updateUserPicture(image)
             self.dismiss(animated: true, completion: nil)
         }
@@ -95,13 +95,13 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
                                                       for: indexPath) as! UserImageCell
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
-        let image = cashedImage(at: indexPath)
+        let image = cashedImages[indexPath]
         cell.configure(with: image)
         if image == nil {
             let url = dataSource[indexPath.row]
             cell.url = url
             userImagePickerModel.fetchImage(at: url) {
-                self.cashImage($0)
+                self.cashImage($0, at: indexPath)
                 if cell.url == url {
                     cell.configure(with: $0)
                 }
@@ -110,16 +110,6 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
         
         return cell
     }
-
-    fileprivate func cashedImage(at indexPath: IndexPath) -> UIImage? {
-        var image:UIImage?
-        let index = indexPath.row
-        if cashedImages.indices.contains(index) {
-            image = cashedImages[index]
-        }
-        
-        return image
-    }
 }
 
 extension UserImagePickerViewController : UICollectionViewDelegateFlowLayout {
@@ -127,9 +117,10 @@ extension UserImagePickerViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
+        let widthPerItem = floor(availableWidth / itemsPerRow)
         
         return CGSize(width: widthPerItem, height: widthPerItem)
     }

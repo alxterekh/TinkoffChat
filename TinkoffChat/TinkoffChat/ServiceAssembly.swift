@@ -11,19 +11,20 @@ import Foundation
 class ServiceAssembly {
     
     static let coreDataStack = CoreDataStack()
+    static let serializer = PeerMessageSerializer()
     
     static func profileDataService() -> ProfileDataStorage {
         
         return ProfileDataService(with: coreDataStack)
     }
     
-    static func communicatorService() -> CommunicatorService {
-        let serializer = PeerMessageSerializer()
+    static var communicatorService = { () -> CommunicatorSupervisor in 
+
         let multipeerCommunicator = MultipeerCommunicator(with: serializer)
         let conversationStorage = ConversationStorageService(with: coreDataStack)
         
         return CommunicatorSupervisor(with: multipeerCommunicator, storage: conversationStorage)
-    }
+    }()
     
     static func imageLoaderService() -> ImageLoader {
         let requestSender = RequestSender()

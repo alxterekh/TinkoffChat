@@ -18,7 +18,7 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Message>
     
-    var communicator: CommunicatorService = ServiceAssembly.communicatorService()
+    var communicator: CommunicatorService = ServiceAssembly.communicatorService
 
     func sendMessage(text: String, to conversation: Conversation) {
        communicator.sendMessage(text: text, to: conversation)

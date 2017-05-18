@@ -42,8 +42,10 @@ class ConversationStorageService : ConversationStorage {
         if let context = coreDataStack.saveContext {
             if let conversation = Conversation.findOrInsertConversation(in: context, with: identifier) {
                 conversation.isAbleToConversate = false
-                conversation.participant = nil
-                coreDataStack.performSave(context: context){_,_ in }
+                if let participant = User.findOrInsertUser(in: context, with: identifier) {
+                    participant.isOnline = false
+                    coreDataStack.performSave(context: context){_,_ in }
+                }
             }
         }
     }
@@ -64,8 +66,9 @@ class ConversationStorageService : ConversationStorage {
     
     func handleSentMessage(text: String, to conversation: Conversation) {
         if let context = coreDataStack.saveContext {
-            let message = createMessage(with: text , context: context)
+            let message = createMessage(with: text, context: context)
             message.isOutgoing = true
+            message.isUnread = true
             if let conversationId = conversation.conversationId {
                 if let conversation = Conversation.findOrInsertConversation(in: context, with: conversationId) {
                     message.conversation = conversation
