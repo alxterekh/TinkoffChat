@@ -17,6 +17,11 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
+    @IBAction func dismissUserImagePickerScreen(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     fileprivate let userImageCellId = "UserPicture"
     fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     fileprivate let itemsPerRow: CGFloat = 3
