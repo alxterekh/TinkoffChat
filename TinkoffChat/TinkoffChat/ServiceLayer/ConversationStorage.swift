@@ -25,7 +25,6 @@ class ConversationStorageService : ConversationStorage {
         subscribeForNotification()
     }
     
-    
     fileprivate func subscribeForNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(ConversationStorageService.moveAllConversationsToHistory), name: .UIApplicationWillResignActive, object: nil)
     }

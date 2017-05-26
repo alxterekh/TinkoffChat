@@ -11,6 +11,9 @@
 		1101CDBD1E68CF5B003B7CA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBB1E68CF5B003B7CA1 /* Main.storyboard */; };
 		1101CDBF1E68CF5B003B7CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */; };
 		1101CDC21E68CF5B003B7CA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1101CDC01E68CF5B003B7CA1 /* LaunchScreen.storyboard */; };
+		110AD6501ED56E4300B619CF /* SpriteEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */; };
+		110AD6521ED7355900B619CF /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110AD6511ED7355900B619CF /* SendMessageButton.swift */; };
+		110AD6541ED75FC300B619CF /* FetchResultslControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */; };
 		1133D4201E69B564006A69F3 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */; };
 		1133D4221E69B6AE006A69F3 /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */; };
 		11370A801E855982006C487B /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11370A7F1E855982006C487B /* ConversationViewController.swift */; };
@@ -60,6 +63,9 @@
 		1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1101CDC31E68CF5B003B7CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteEmitter.swift; sourceTree = "<group>"; };
+		110AD6511ED7355900B619CF /* SendMessageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
+		110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchResultslControllerDelegate.swift; sourceTree = "<group>"; };
 		1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
 		11370A7F1E855982006C487B /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 				11370A7F1E855982006C487B /* ConversationViewController.swift */,
 				1143721B1EC070A8009CCE10 /* ConversationModel.swift */,
 				11370A821E855A14006C487B /* MessageCell.swift */,
+				110AD6511ED7355900B619CF /* SendMessageButton.swift */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -217,6 +224,8 @@
 		117B96671EA506CE0052BF52 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */,
+				110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */,
 				11370A7E1E855935006C487B /* ConversationList */,
 				11370A811E855989006C487B /* Conversation */,
 				1152B7971EC30C8800B8CDDB /* UserImagePicker */,
@@ -493,6 +502,7 @@
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,
 				117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */,
 				11991BD91EC443EE00DB3436 /* ImageLoaderService.swift in Sources */,
+				110AD6501ED56E4300B619CF /* SpriteEmitter.swift in Sources */,
 				11668D7D1EAB4701009AF385 /* IdentifierGenerator.swift in Sources */,
 				11991BDD1EC4C16500DB3436 /* ImageRequest.swift in Sources */,
 				117C650D1EC70C210077E11F /* Message+CoreDataClass.swift in Sources */,
@@ -511,6 +521,7 @@
 				11991BCD1EC43AB500DB3436 /* Parser.swift in Sources */,
 				1143721A1EC05DC7009CCE10 /* ConversationListModel.swift in Sources */,
 				11991BCB1EC43A7E00DB3436 /* Requestable.swift in Sources */,
+				110AD6521ED7355900B619CF /* SendMessageButton.swift in Sources */,
 				117C650C1EC70C210077E11F /* Conversation+CoreDataProperties.swift in Sources */,
 				119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */,
 				119A0BB71EB0CAA8002BA523 /* ProfileEditorViewController.swift in Sources */,
@@ -525,6 +536,7 @@
 				11991BDB1EC445CD00DB3436 /* UserImagePickerModel.swift in Sources */,
 				11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */,
 				117C64FF1EC5A9AA0077E11F /* ImageParser.swift in Sources */,
+				110AD6541ED75FC300B619CF /* FetchResultslControllerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

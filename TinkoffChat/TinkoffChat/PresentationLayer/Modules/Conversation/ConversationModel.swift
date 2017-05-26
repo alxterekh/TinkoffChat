@@ -10,25 +10,38 @@ import Foundation
 import UIKit
 import CoreData
 
+protocol IConversationModel {
+    func sendMessage(text: String)
+}
+
+protocol ConversationModelDelegate : class {
+    func handleChangingConversationState()
+}
+
 class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
-    
     fileprivate let incomingMessageCellId = "incomingMessage"
     fileprivate let outcomingMessageCellId = "outcomingMessage"
-    
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Message>
+    fileprivate let communicator: CommunicatorService = ServiceAssembly.communicatorService
+    fileprivate var fetchResultslControllerDataProvider: FetchResultslControllerDelegate?
+    fileprivate var conversation: Conversation?
     
-    var communicator: CommunicatorService = ServiceAssembly.communicatorService
-
-    func sendMessage(text: String, to conversation: Conversation) {
-       communicator.sendMessage(text: text, to: conversation)
+    weak var delegate: ConversationModelDelegate?
+    
+    var conversationName: String? {
+        get { return conversation?.name}
     }
     
+    var conversationIsAbleToConversate: Bool {
+        get { return conversation?.isAbleToConversate ?? false }
+    }
+
     init(with tableView: UITableView, id: String?) {
         self.tableView = tableView
         guard let context = ServiceAssembly.coreDataStack.mainContext else {
             print("No cotext for frc!")
-            abort()
+            abort() 
         }
         
         guard let id = id,
@@ -45,8 +58,25 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.fetchResultsController.delegate = self
+        fetchResultslControllerDataProvider = FetchResultslControllerDelegate(with: self.tableView)
+        fetchResultsController.delegate = fetchResultslControllerDataProvider
+        if let conversation = Conversation.performConversationFetchRequest(identifier: id, in: context) {
+            self.conversation = conversation
+           // delegate?.handleChangingConversationState()
+        }
+        
+        subscribeForCoreDataNotificationsInContext(context)
         performFetch()
+        
+    }
+    
+    fileprivate func subscribeForCoreDataNotificationsInContext(_ context: NSManagedObjectContext) {
+         let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextDidSave, object: context)
+    }
+    
+    func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        
     }
     
     fileprivate func performFetch() {
@@ -57,56 +87,9 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
         }
     }
     
-    //MARK: -
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .delete:
-            deleteRowsInTableAtIndexPath(indexPath)
-        case .insert:
-            insetRowsInTableAtIndexPath(newIndexPath)
-        case .move:
-            deleteRowsInTableAtIndexPath(indexPath)
-            insetRowsInTableAtIndexPath(newIndexPath)
-        case .update:
-            reloadRowsInTableAtIndexPath(indexPath)
-        }
-    }
-    
-    fileprivate func deleteRowsInTableAtIndexPath(_ indexPath: IndexPath?) {
-        if let indexPath = indexPath {
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-    }
-    
-    fileprivate func insetRowsInTableAtIndexPath(_ indexPath: IndexPath?) {
-        if let indexPath = indexPath {
-            tableView.insertRows(at: [indexPath], with: .automatic)
-        }
-    }
-    
-    fileprivate func reloadRowsInTableAtIndexPath(_ indexPath: IndexPath?) {
-        if let indexPath = indexPath {
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: 		NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
-        default:
-            break
+    func sendMessage(text: String) {
+        if let conversation = conversation {
+            communicator.sendMessage(text: text, to: conversation)
         }
     }
 }

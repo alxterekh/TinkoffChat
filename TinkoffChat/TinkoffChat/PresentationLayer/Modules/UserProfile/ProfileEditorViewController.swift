@@ -28,6 +28,8 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
         }
     }
     
+    fileprivate var emitter: SpriteEmitter?
+    
     // MARK: - Actions
     
     @IBAction fileprivate func saveProfileDataByGCDButtonTap(_ sender: UIButton) {
@@ -39,6 +41,7 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        emitter = SpriteEmitter(with: self.view)
     }
     
     fileprivate func setup() {
@@ -65,6 +68,31 @@ class ProfileEditorViewController: UIViewController, UINavigationControllerDeleg
     
     fileprivate func setDefaultUserNamePlaceholder() {
         usernameField.placeholder = UIDevice.current.name
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        
+        let location = touch.location(in: view)
+       
+        emitter?.start()
+        emitter?.changeEmitterLocation(location)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        
+        let location = touch.location(in: view)
+        
+        emitter?.changeEmitterLocation(location)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        emitter?.stop()
     }
     
     // MARK: - Alerts

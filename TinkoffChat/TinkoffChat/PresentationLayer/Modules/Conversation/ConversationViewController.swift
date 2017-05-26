@@ -8,34 +8,33 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITableViewDelegate {
-
+class ConversationViewController: UIViewController, UITableViewDelegate, ConversationModelDelegate {
+    
     @IBOutlet fileprivate weak var messageTexView: UITextView!
     @IBOutlet fileprivate weak var messagesListTableView: UITableView!
-    @IBOutlet fileprivate weak var sendButton: UIButton!
+    @IBOutlet fileprivate weak var sendButton: SendMessageButton!
     @IBOutlet fileprivate weak var bottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var textViewTopSpaceConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var textViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var bottomPartHeightConstraint: NSLayoutConstraint!
     
     fileprivate var conversationModel: ConversationModel?
-    
-    var conversation: Conversation?
+    var conversationIdentifier: String?
     
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        conversationModel?.sendMessage(text: messageTexView.text, to: conversation!)
+        conversationModel?.sendMessage(text: messageTexView.text)
         messageTexView.text = ""
-        sendButton.isEnabled = false
+        //sendButton.deactivate()
         updateTextViewHeight(for: messageTexView.attributedText)
     }
-    
-    // MARK: - 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         messagesListTableView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         setup()
+        
+        sendButton.activate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,20 +45,62 @@ class ConversationViewController: UIViewController, UITableViewDelegate {
         unsubscribeFromKeyboardNotification()
     }
     
+    fileprivate func setup() {
+        setupTableViewProperties()
+        subscribeForKeyboardNotification()
+        setupGestureRecognizer()
+        conversationModel = ConversationModel(with: messagesListTableView, id: conversationIdentifier)
+        conversationModel?.delegate = self
+        messageTexView.text = ""
+        if let name = conversationModel?.conversationName {
+            updateHeaderWithName(name)
+        }
+    }
+    
+    fileprivate func messageCanBeSent() -> Bool {
+        var result = false
+        if let conversationModel = conversationModel {
+            result = conversationModel.conversationIsAbleToConversate && messageTexView.text != ""
+        }
+        
+        return result
+    }
+    
+    func handleChangingConversationState() {
+        if messageCanBeSent() {
+            
+        }
+        else {
+            
+        }
+    }
+    
     fileprivate let estimatedMessageCellRowHeight: CGFloat = 44
     
-    fileprivate func setup() {
+    fileprivate func setupTableViewProperties() {
         messagesListTableView.delegate = self
         messagesListTableView.estimatedRowHeight = estimatedMessageCellRowHeight
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
-        conversationModel = ConversationModel(with: messagesListTableView, id: conversation?.conversationId)
-        subscribeForKeyboardNotification()
-        setupGestureRecognizer()
-        sendButton.isEnabled = false
-        
-        if let conversation = conversation {
-            navigationItem.title = conversation.name
+    }
+    
+    fileprivate func updateHeaderWithName(_ name: String) {
+        let headerLabel = UILabel()
+        headerLabel.text = name
+        self.navigationItem.titleView = headerLabel
+        self.navigationItem.titleView?.sizeToFit()
+        animate()
+    }
+    
+    fileprivate func animate() {
+        UIView.animate(withDuration: 0.5) {
+            self.navigationItem.titleView?.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
+        }
+    }
+    
+    fileprivate func animate2() {
+        UIView.animate(withDuration: 0.5) {
+            self.navigationItem.titleView?.transform = CGAffineTransform.identity
         }
     }
     
@@ -102,8 +143,11 @@ extension ConversationViewController : UITextViewDelegate {
     fileprivate static let maxMessageLength = 140
     
     func textViewDidChange(_ textView: UITextView) {
-        if let text = textView.text {
-          sendButton.isEnabled = text != "" && conversation?.isAbleToConversate ?? false
+        if messageCanBeSent() {
+            sendButton.activate()
+        }
+        else {
+            sendButton.deactivate()
         }
     }
     
