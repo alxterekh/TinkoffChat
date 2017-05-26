@@ -10,18 +10,6 @@ import Foundation
 import CoreData
 
 public class Conversation: NSManagedObject {
-    
-    static func fetchRequestConversation(model: NSManagedObjectModel, identifier: String) -> NSFetchRequest<Conversation>? {
-        let templateName = "ConversationWithId"
-        guard let fetchRequest = model.fetchRequestFromTemplate(withName: templateName, substitutionVariables: ["identifier" : identifier]) as? NSFetchRequest<Conversation> else {
-            assert(false, "No template with name \(templateName)")
-            
-            return nil
-        }
-        
-        return fetchRequest
-    }
-    
     func hasUnreadMessages() -> Bool {
         var hasUnreadMessages = false
         if let messages = messages as? Set<Message> {
@@ -33,6 +21,31 @@ public class Conversation: NSManagedObject {
     
     var name: String? {
         return participant?.name
+    }
+    
+    static func performConversationFetchRequest(identifier: String?, in context: NSManagedObjectContext) -> Conversation? {
+        var conversation: Conversation?
+        guard let identifier = identifier else {
+            print("No conversation id!")
+            return nil
+        }
+
+        guard let fetchRequest = Conversation.fetchRequestConversation(in: context, identifier: identifier) else {
+            print("No fetch request for conversation with id!")
+            return nil
+        }
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let foundConversation = results.first {
+                conversation = foundConversation
+            }
+        }
+        catch {
+            print("Failed to fetch Conversation")
+        }
+        
+        return conversation
     }
     
     static func findAllConversations(in context: NSManagedObjectContext) -> [Conversation]? {
@@ -49,14 +62,7 @@ public class Conversation: NSManagedObject {
     
     static func findOrInsertConversation(in context: NSManagedObjectContext, with identifier: String) -> Conversation? {
         var conversation: Conversation?
-        guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
-            print("No managed object model in context!")
-            assert(false)
-            
-            return nil
-        }
-        
-        guard let fetchRequest = Conversation.fetchRequestConversation(model: model, identifier: identifier) else {
+        guard let fetchRequest = Conversation.fetchRequestConversation(in: context, identifier: identifier) else {
             
             return nil
         }
@@ -77,5 +83,17 @@ public class Conversation: NSManagedObject {
         }
         
         return conversation
+    }
+    
+    fileprivate static func fetchRequestConversation(in context: NSManagedObjectContext, identifier: String) -> NSFetchRequest<Conversation>? {
+        let templateName = "ConversationWithId"
+        guard let model = context.persistentStoreCoordinator?.managedObjectModel,
+            let fetchRequest = model.fetchRequestFromTemplate(withName: templateName, substitutionVariables: ["identifier" : identifier]) as? NSFetchRequest<Conversation> else {
+            assert(false, "No template with name \(templateName)")
+            
+            return nil
+        }
+        
+        return fetchRequest
     }
 }

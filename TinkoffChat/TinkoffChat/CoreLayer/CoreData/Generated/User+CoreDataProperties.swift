@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  TinkoffChat
 //
-//  Created by Alexander on 29/04/2017.
+//  Created by Alexander on 13/05/2017.
 //  Copyright © 2017 Alexander Terekhov. All rights reserved.
 //
 
@@ -16,9 +16,11 @@ extension User {
         return NSFetchRequest<User>(entityName: "User")
     }
 
+    @NSManaged public var isOnline: Bool
     @NSManaged public var name: String?
+    @NSManaged public var userId: String?
     @NSManaged public var userInfo: String?
     @NSManaged public var userPicture: NSData?
-    @NSManaged public var userId: String?
+    @NSManaged public var conversation: Conversation?
 
 }

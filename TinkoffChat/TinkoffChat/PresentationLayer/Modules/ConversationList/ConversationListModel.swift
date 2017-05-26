@@ -16,8 +16,7 @@ class ConversationListModel : NSObject {
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Conversation>
     fileprivate var communicatorService = ServiceAssembly.communicatorService
-    
-    fileprivate var fetchResultslControllerDataProvider: FetchResultslControllerDelegate?
+    fileprivate var fetchResultslControllerDelegate: FetchResultslControllerDelegate?
     
     init(with tableView: UITableView) {
         self.tableView = tableView
@@ -36,8 +35,8 @@ class ConversationListModel : NSObject {
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        fetchResultslControllerDataProvider = FetchResultslControllerDelegate(with: self.tableView)
-        self.fetchResultsController.delegate = fetchResultslControllerDataProvider
+        fetchResultslControllerDelegate = FetchResultslControllerDelegate(with: self.tableView)
+        self.fetchResultsController.delegate = fetchResultslControllerDelegate
         performFetch()
     }
     

@@ -26,6 +26,10 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
         
     weak var delegate: UserImagePickerViewControllerDelegate?
     
+    @IBAction func dismissUserImagePicker(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()

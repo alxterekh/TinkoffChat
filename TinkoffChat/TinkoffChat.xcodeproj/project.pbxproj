@@ -63,22 +63,22 @@
 		1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1101CDC31E68CF5B003B7CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteEmitter.swift; sourceTree = "<group>"; };
-		110AD6511ED7355900B619CF /* SendMessageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
-		110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchResultslControllerDelegate.swift; sourceTree = "<group>"; };
+		110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpriteEmitter.swift; path = Modules/SpriteEmitter.swift; sourceTree = "<group>"; };
+		110AD6511ED7355900B619CF /* SendMessageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendMessageButton.swift; path = ../Modules/Conversation/SendMessageButton.swift; sourceTree = "<group>"; };
+		110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchResultslControllerDelegate.swift; path = ../Modules/FetchResultslControllerDelegate.swift; sourceTree = "<group>"; };
 		1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
 		11370A7F1E855982006C487B /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		11370A821E855A14006C487B /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		114372191EC05DC7009CCE10 /* ConversationListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
 		1143721B1EC070A8009CCE10 /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
-		1143721D1EC073F3009CCE10 /* ConversationStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationStorage.swift; path = ../ServiceLayer/ConversationStorage.swift; sourceTree = "<group>"; };
+		1143721D1EC073F3009CCE10 /* ConversationStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationStorage.swift; sourceTree = "<group>"; };
 		1152B7911EC255FA00B8CDDB /* RequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
 		1152B7931EC2F21500B8CDDB /* UserImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImagePickerViewController.swift; sourceTree = "<group>"; };
 		1152B7951EC304D400B8CDDB /* UserImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserImageCell.swift; sourceTree = "<group>"; };
 		11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifierGenerator.swift; sourceTree = "<group>"; };
-		116F873B1E97854B00C18C49 /* CommunicatorSupervisor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommunicatorSupervisor.swift; path = CommunicatorService/CommunicatorSupervisor.swift; sourceTree = "<group>"; };
-		117B96691EA510730052BF52 /* ProfileDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileDataService.swift; path = ProfileDataStorageService/ProfileDataService.swift; sourceTree = "<group>"; };
+		116F873B1E97854B00C18C49 /* CommunicatorSupervisor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicatorSupervisor.swift; sourceTree = "<group>"; };
+		117B96691EA510730052BF52 /* ProfileDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDataService.swift; sourceTree = "<group>"; };
 		117C64FE1EC5A9AA0077E11F /* ImageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageParser.swift; sourceTree = "<group>"; };
 		117C65031EC70C210077E11F /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "../../../../User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		117C65041EC70C210077E11F /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../../../../User+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -128,9 +128,9 @@
 			isa = PBXGroup;
 			children = (
 				118102B91E8683A600E4FA53 /* Frameworks */,
+				ACC17326E61C457245260D09 /* Pods */,
 				1101CDB51E68CF5B003B7CA1 /* Products */,
 				1101CDB61E68CF5B003B7CA1 /* TinkoffChat */,
-				ACC17326E61C457245260D09 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,10 +149,10 @@
 				117B96661EA5052F0052BF52 /* ServiceLayer */,
 				117B96651EA505270052BF52 /* CoreLayer */,
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
-				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
-				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
 				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
+				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
 				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
+				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
 			);
 			path = TinkoffChat;
@@ -162,8 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				119C36C81E853EA6006B234F /* ConversationCell.swift */,
-				1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */,
 				114372191EC05DC7009CCE10 /* ConversationListModel.swift */,
+				1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -171,10 +171,9 @@
 		11370A811E855989006C487B /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
-				11370A7F1E855982006C487B /* ConversationViewController.swift */,
 				1143721B1EC070A8009CCE10 /* ConversationModel.swift */,
+				11370A7F1E855982006C487B /* ConversationViewController.swift */,
 				11370A821E855A14006C487B /* MessageCell.swift */,
-				110AD6511ED7355900B619CF /* SendMessageButton.swift */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -183,15 +182,16 @@
 			isa = PBXGroup;
 			children = (
 				1152B7951EC304D400B8CDDB /* UserImageCell.swift */,
-				1152B7931EC2F21500B8CDDB /* UserImagePickerViewController.swift */,
 				11991BDA1EC445CD00DB3436 /* UserImagePickerModel.swift */,
+				1152B7931EC2F21500B8CDDB /* UserImagePickerViewController.swift */,
 			);
-			name = UserImagePicker;
+			path = UserImagePicker;
 			sourceTree = "<group>";
 		};
 		117B96641EA505150052BF52 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */,
 				11FA24611E910CA3002166D6 /* Additions */,
 				11FA245C1E910B47002166D6 /* Extentions */,
 				117B96671EA506CE0052BF52 /* Modules */,
@@ -205,8 +205,8 @@
 			children = (
 				1143721D1EC073F3009CCE10 /* ConversationStorage.swift */,
 				119C99AC1EB5D8C900B8FE56 /* CoreData */,
-				11991BC51EC439E000DB3436 /* Networking */,
 				117B96681EA507A20052BF52 /* MultipeerCommunicator */,
+				11991BC51EC439E000DB3436 /* Networking */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -214,9 +214,9 @@
 		117B96661EA5052F0052BF52 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
-				117B96691EA510730052BF52 /* ProfileDataService.swift */,
-				11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */,
 				116F873B1E97854B00C18C49 /* CommunicatorSupervisor.swift */,
+				11991BD81EC443EE00DB3436 /* ImageLoaderService.swift */,
+				117B96691EA510730052BF52 /* ProfileDataService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -224,8 +224,6 @@
 		117B96671EA506CE0052BF52 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */,
-				110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */,
 				11370A7E1E855935006C487B /* ConversationList */,
 				11370A811E855989006C487B /* Conversation */,
 				1152B7971EC30C8800B8CDDB /* UserImagePicker */,
@@ -258,38 +256,38 @@
 				1152B7911EC255FA00B8CDDB /* RequestSender.swift */,
 				11991BC81EC43A5300DB3436 /* RequestTransmitter.swift */,
 			);
-			name = RequestSender;
+			path = RequestSender;
 			sourceTree = "<group>";
 		};
 		11991BC51EC439E000DB3436 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				11991BC71EC43A0800DB3436 /* Requesters */,
 				11991BC61EC439EB00DB3436 /* Parsers */,
 				11991BC41EC4388E00DB3436 /* RequestSender */,
+				11991BC71EC43A0800DB3436 /* Requesters */,
 				11991BD41EC43EB700DB3436 /* RequestsFactory.swift */,
 			);
-			name = Networking;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		11991BC61EC439EB00DB3436 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				117C64FE1EC5A9AA0077E11F /* ImageParser.swift */,
 				11991BCC1EC43AB500DB3436 /* Parser.swift */,
 				11991BD61EC43FEC00DB3436 /* PixabayImageListParser.swift */,
-				117C64FE1EC5A9AA0077E11F /* ImageParser.swift */,
 			);
-			name = Parsers;
+			path = Parsers;
 			sourceTree = "<group>";
 		};
 		11991BC71EC43A0800DB3436 /* Requesters */ = {
 			isa = PBXGroup;
 			children = (
-				11991BCA1EC43A7E00DB3436 /* Requestable.swift */,
-				11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */,
 				11991BDC1EC4C16500DB3436 /* ImageRequest.swift */,
+				11991BD01EC43BE700DB3436 /* PixabayImageListRequest.swift */,
+				11991BCA1EC43A7E00DB3436 /* Requestable.swift */,
 			);
-			name = Requesters;
+			path = Requesters;
 			sourceTree = "<group>";
 		};
 		119A0BB31EB0CA77002BA523 /* UserProfile */ = {
@@ -331,12 +329,12 @@
 		119C99AE1EB5D92100B8FE56 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				117C65031EC70C210077E11F /* User+CoreDataClass.swift */,
-				117C65041EC70C210077E11F /* User+CoreDataProperties.swift */,
 				117C65051EC70C210077E11F /* Conversation+CoreDataClass.swift */,
 				117C65061EC70C210077E11F /* Conversation+CoreDataProperties.swift */,
 				117C65071EC70C210077E11F /* Message+CoreDataClass.swift */,
 				117C65081EC70C210077E11F /* Message+CoreDataProperties.swift */,
+				117C65031EC70C210077E11F /* User+CoreDataClass.swift */,
+				117C65041EC70C210077E11F /* User+CoreDataProperties.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -352,7 +350,9 @@
 		11FA24611E910CA3002166D6 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				110AD6511ED7355900B619CF /* SendMessageButton.swift */,
 				11FA245F1E910C6E002166D6 /* ColoredButton.swift */,
+				110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";

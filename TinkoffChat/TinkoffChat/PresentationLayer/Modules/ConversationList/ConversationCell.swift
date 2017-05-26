@@ -64,13 +64,13 @@ class ConversationCell: UITableViewCell {
     }
     
     fileprivate func setupMessageFontIfThereIsUnreadMessages(_ hasUnreadMessages: Bool) {
-        messageLabel.font = (hasUnreadMessages) ? boldDefaultFont : defaultFont
-//        if {
-//            messageLabel.font = (hasUnreadMessages) ? boldDefaultFont : defaultFont
-//        }
-//        else {
-//            messageLabel.font = alertFont
-//        }
+        let messagesCount = conversation?.messages?.count ?? 0
+        if messagesCount > 0 {
+            messageLabel.font = (hasUnreadMessages) ? boldDefaultFont : defaultFont
+        }
+        else {
+            messageLabel.font = alertFont
+        }
     }
     
     fileprivate func dateIsTooOld(_ date: Date) -> Bool {

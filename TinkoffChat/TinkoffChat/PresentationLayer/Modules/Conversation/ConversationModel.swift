@@ -24,7 +24,7 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
     fileprivate let tableView: UITableView
     fileprivate let fetchResultsController: NSFetchedResultsController<Message>
     fileprivate let communicator: CommunicatorService = ServiceAssembly.communicatorService
-    fileprivate var fetchResultslControllerDataProvider: FetchResultslControllerDelegate?
+    fileprivate var fetchResultslControllerDelegate: FetchResultslControllerDelegate?
     fileprivate var conversation: Conversation?
     
     weak var delegate: ConversationModelDelegate?
@@ -58,8 +58,8 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
         super.init()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        fetchResultslControllerDataProvider = FetchResultslControllerDelegate(with: self.tableView)
-        fetchResultsController.delegate = fetchResultslControllerDataProvider
+        fetchResultslControllerDelegate = FetchResultslControllerDelegate(with: self.tableView)
+        fetchResultsController.delegate = fetchResultslControllerDelegate
         if let conversation = Conversation.performConversationFetchRequest(identifier: id, in: context) {
             self.conversation = conversation
            // delegate?.handleChangingConversationState()

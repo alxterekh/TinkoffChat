@@ -463,7 +463,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="dismissUserImagePickerScreen:" destination="xY3-vD-afO" eventType="touchUpInside" id="0ie-RL-YVm"/>
+                                    <action selector="dismissUserImagePicker:" destination="xY3-vD-afO" eventType="touchUpInside" id="YVP-n3-AV6"/>
                                 </connections>
                             </button>
                         </subviews>
