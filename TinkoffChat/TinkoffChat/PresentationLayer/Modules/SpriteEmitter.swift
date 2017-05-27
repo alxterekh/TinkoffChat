@@ -10,44 +10,47 @@ import Foundation
 import UIKit
 
 protocol Emitter {
-    func moveToLocation(_ location: CGPoint)
-    func startEmitting()
-    func stopEmitting()
+    func moveToTouch(_ touch: UITouch)
+    func start()
+    func stop()
 }
 
-class SpriteEmitter {
+class SpriteEmitter : Emitter {
     
-    fileprivate let view: UIView
-    fileprivate let emitterLayer = CAEmitterLayer()
-  
-    init(with view: UIView) {
-        self.view = view
+    fileprivate let window: UIWindow
+    fileprivate var emitterLayer = CAEmitterLayer()
+    
+    init(with window: UIWindow) {
+        self.window = window
         setup()
     }
     
     fileprivate func setup() {
-        emitterLayer.emitterPosition = CGPoint(x: 120, y: 320)
         let cell = CAEmitterCell()
         cell.emissionLongitude = -CGFloat.pi/2
-        cell.birthRate = 1
-        cell.alphaSpeed = -1
+        cell.alphaSpeed = -0.5
         cell.lifetime = 2.5
         cell.velocity = 120
         cell.scale = 0.2
         cell.emissionRange = CGFloat.pi/4
         cell.contents = #imageLiteral(resourceName: "blazon").cgImage
         emitterLayer.emitterCells = [cell]
-        stop()
-        view.layer.addSublayer(emitterLayer)
-        
+        emitterLayer.zPosition = CGFloat.greatestFiniteMagnitude
+        window.layer.addSublayer(emitterLayer)
     }
     
-    func changeEmitterLocation(_ location: CGPoint) {
+    func moveToTouch(_ touch: UITouch) {
+        let location = touch.location(in: window)
         emitterLayer.emitterPosition = location
     }
     
     func start() {
-        emitterLayer.birthRate = 20
+        emitterLayer.birthRate = 1
+        if let emitterCells = emitterLayer.emitterCells {
+            for cell in emitterCells {
+                cell.birthRate = 25
+            }
+        }
     }
     
     func stop() {

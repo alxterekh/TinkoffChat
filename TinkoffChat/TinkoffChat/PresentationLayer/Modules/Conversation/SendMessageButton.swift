@@ -14,7 +14,7 @@ class SendMessageButton: UIButton {
     fileprivate let scaleFactor: CGFloat = 1.15
     
     fileprivate let defaultColor = UIColor.gray
-    fileprivate let userInteractableColor = UIColor.yellow
+    fileprivate let userInteractableColor = UIColor(red: 255/255, green: 234/255, blue: 67/255, alpha: 1)
     
     func activate() {
         self.isEnabled = true
@@ -26,7 +26,7 @@ class SendMessageButton: UIButton {
         animateButton(with: defaultColor)
     }
     
-    func animateButton(with color: UIColor) {
+    fileprivate func animateButton(with color: UIColor) {
         UIView.animate(withDuration: animationDuration,
                        animations: {
                         self.transform = CGAffineTransform(scaleX: self.scaleFactor, y: self.scaleFactor)

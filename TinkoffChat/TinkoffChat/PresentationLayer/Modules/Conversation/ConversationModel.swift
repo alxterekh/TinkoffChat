@@ -12,6 +12,8 @@ import CoreData
 
 protocol IConversationModel {
     func sendMessage(text: String)
+    var conversationName: String? { get }
+    var conversationIsAbleToConversate: Bool { get }
 }
 
 protocol ConversationModelDelegate : class {
@@ -25,6 +27,7 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
     fileprivate let fetchResultsController: NSFetchedResultsController<Message>
     fileprivate let communicator: CommunicatorService = ServiceAssembly.communicatorService
     fileprivate var fetchResultslControllerDelegate: FetchResultslControllerDelegate?
+    
     fileprivate var conversation: Conversation?
     
     weak var delegate: ConversationModelDelegate?
@@ -60,23 +63,20 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
         self.tableView.delegate = self
         fetchResultslControllerDelegate = FetchResultslControllerDelegate(with: self.tableView)
         fetchResultsController.delegate = fetchResultslControllerDelegate
-        if let conversation = Conversation.performConversationFetchRequest(identifier: id, in: context) {
-            self.conversation = conversation
-           // delegate?.handleChangingConversationState()
-        }
-        
-        subscribeForCoreDataNotificationsInContext(context)
+        conversation = Conversation.performConversationFetchRequest(identifier: id, in: context)
+        delegate?.handleChangingConversationState()
         performFetch()
         
+
+        NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: NSNotification.Name.NSManagedObjectContextDidSave, object: context)
     }
     
-    fileprivate func subscribeForCoreDataNotificationsInContext(_ context: NSManagedObjectContext) {
-         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextDidSave, object: context)
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func managedObjectContextObjectsDidChange(notification: NSNotification) {
-        
+    func managedObjectContextDidSave(notification: NSNotification) {
+        delegate?.handleChangingConversationState()
     }
     
     fileprivate func performFetch() {
@@ -92,10 +92,21 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
             communicator.sendMessage(text: text, to: conversation)
         }
     }
+    
+    fileprivate func markMessageAsRead(_ message: Message) {
+        if message.isUnread,
+            let saveContext = ServiceAssembly.coreDataStack.saveContext,
+            let messageOnSaveContext = saveContext.object(with: message.objectID) as? Message {
+            
+            messageOnSaveContext.isUnread = false
+            ServiceAssembly.coreDataStack.performSave(context: saveContext) {
+                _, _ in
+            }
+        }
+    }
 }
 
 extension ConversationModel: UITableViewDataSource, UITableViewDelegate {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         guard  let sectionsCount = fetchResultsController.sections?.count else { return 0 }
         return sectionsCount
@@ -117,19 +128,10 @@ extension ConversationModel: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: message)
         cell.selectionStyle = .none
         cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
-        
-        if message.isUnread,
-            let saveContext = ServiceAssembly.coreDataStack.saveContext,
-            let messageOnSaveContext = saveContext.object(with: message.objectID) as? Message {
-                
-                messageOnSaveContext.isUnread = false
-                ServiceAssembly.coreDataStack.performSave(context: saveContext) {
-                    _, _ in
-                }
-        }
+        markMessageAsRead(message)
         
         return cell
     }
 }
 
-    
+

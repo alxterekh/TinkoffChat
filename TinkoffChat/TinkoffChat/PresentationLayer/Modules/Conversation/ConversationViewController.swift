@@ -25,7 +25,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         conversationModel?.sendMessage(text: messageTexView.text)
         messageTexView.text = ""
-        //sendButton.deactivate()
         updateTextViewHeight(for: messageTexView.attributedText)
     }
     
@@ -33,12 +32,13 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         super.viewDidLoad()
         messagesListTableView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         setup()
-        
-        sendButton.activate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         messagesListTableView.reloadData()
+        
+        ////
+        sendButton.activate()
     }
     
     deinit {
@@ -57,22 +57,20 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         }
     }
     
-    fileprivate func messageCanBeSent() -> Bool {
-        var result = false
-        if let conversationModel = conversationModel {
-            result = conversationModel.conversationIsAbleToConversate && messageTexView.text != ""
-        }
-        
-        return result
-    }
-    
     func handleChangingConversationState() {
-        if messageCanBeSent() {
-            
-        }
-        else {
-            
-        }
+//        guard let conversationModel = conversationModel else {
+//            print("No conversation model!")
+//            return
+//        }
+//        
+//        if conversationModel.conversationIsAbleToConversate {
+//            animateAppearanceUser()
+//            sendButton.activate()
+//        }
+//        else {
+//            animateDisappearanceUser()
+//            sendButton.deactivate()
+//        }
     }
     
     fileprivate let estimatedMessageCellRowHeight: CGFloat = 44
@@ -82,6 +80,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         messagesListTableView.estimatedRowHeight = estimatedMessageCellRowHeight
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
+        messagesListTableView.showsVerticalScrollIndicator = false
     }
     
     fileprivate func updateHeaderWithName(_ name: String) {
@@ -89,19 +88,34 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         headerLabel.text = name
         self.navigationItem.titleView = headerLabel
         self.navigationItem.titleView?.sizeToFit()
-        animate()
     }
     
-    fileprivate func animate() {
-        UIView.animate(withDuration: 0.5) {
-            self.navigationItem.titleView?.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
+    // MARK: - Animations
+    
+    fileprivate let duration: TimeInterval = 1
+    fileprivate let headerScale: CGFloat = 1.10
+    
+    fileprivate func animateAppearanceUser() {
+        UIView.animate(withDuration: duration) {
+            self.navigationItem.titleView?.transform = CGAffineTransform(scaleX: self.headerScale, y: self.headerScale)
         }
+        animateHeaderTextColorTransition(with: UIColor.green)
     }
     
-    fileprivate func animate2() {
-        UIView.animate(withDuration: 0.5) {
+    fileprivate func animateDisappearanceUser() {
+        UIView.animate(withDuration: duration) {
             self.navigationItem.titleView?.transform = CGAffineTransform.identity
         }
+        animateHeaderTextColorTransition(with: UIColor.gray)
+    }
+    
+    fileprivate func animateHeaderTextColorTransition(with color: UIColor) {
+        let headerLablel = self.navigationItem.titleView as! UILabel
+        UIView.transition(with: headerLablel,
+                          duration: duration,
+                          options: .transitionCrossDissolve,
+                          animations: { headerLablel.textColor = color },
+                          completion: nil)
     }
     
     // MARK: -
@@ -143,12 +157,12 @@ extension ConversationViewController : UITextViewDelegate {
     fileprivate static let maxMessageLength = 140
     
     func textViewDidChange(_ textView: UITextView) {
-        if messageCanBeSent() {
-            sendButton.activate()
-        }
-        else {
-            sendButton.deactivate()
-        }
+//        if messageCanBeSent() {
+//            sendButton.activate()
+//        }
+//        else {
+//            sendButton.deactivate()
+//        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

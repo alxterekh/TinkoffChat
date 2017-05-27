@@ -19,6 +19,7 @@ final class CommunicatorSupervisor : CommunicatorService {
     
     init(with communicator: Communicator, storage: ConversationStorage) {
         conversationStorage = storage
+        conversationStorage.moveAllExistingConversationsToHistory()
         multipeerCommunicator = communicator
         multipeerCommunicator.delegate = self
     }

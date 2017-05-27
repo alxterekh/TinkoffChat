@@ -51,6 +51,7 @@
 		119C36C91E853EA6006B234F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119C36C81E853EA6006B234F /* ConversationCell.swift */; };
 		11B76B5C1EB480E50061478E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11B76B5A1EB480E50061478E /* Model.xcdatamodeld */; };
 		11B76B621EB487730061478E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B76B611EB487730061478E /* CoreDataStack.swift */; };
+		11D869E31ED99BA300574918 /* TouchableWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D869E21ED99BA300574918 /* TouchableWindow.swift */; };
 		11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */; };
 		11FA24601E910C6E002166D6 /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA245F1E910C6E002166D6 /* ColoredButton.swift */; };
 		4C345FFF3D3E97F3B3F802F1 /* Pods_TinkoffChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9158D2F6EA6DC0D52DAE6851 /* Pods_TinkoffChat.framework */; };
@@ -63,7 +64,7 @@
 		1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1101CDC31E68CF5B003B7CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpriteEmitter.swift; path = Modules/SpriteEmitter.swift; sourceTree = "<group>"; };
+		110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpriteEmitter.swift; path = ../Modules/SpriteEmitter.swift; sourceTree = "<group>"; };
 		110AD6511ED7355900B619CF /* SendMessageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendMessageButton.swift; path = ../Modules/Conversation/SendMessageButton.swift; sourceTree = "<group>"; };
 		110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchResultslControllerDelegate.swift; path = ../Modules/FetchResultslControllerDelegate.swift; sourceTree = "<group>"; };
 		1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		119C36C81E853EA6006B234F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		11B76B5B1EB480E50061478E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		11B76B611EB487730061478E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		11D869E21ED99BA300574918 /* TouchableWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchableWindow.swift; path = ../TouchableWindow.swift; sourceTree = "<group>"; };
 		11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		11FA245F1E910C6E002166D6 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 		8B02B2CF4D9E6CA65C04D7A7 /* Pods-TinkoffChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinkoffChat/Pods-TinkoffChat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,10 +151,10 @@
 				117B96661EA5052F0052BF52 /* ServiceLayer */,
 				117B96651EA505270052BF52 /* CoreLayer */,
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
-				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
-				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
-				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
+				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
+				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
+				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
 			);
 			path = TinkoffChat;
@@ -191,7 +193,6 @@
 		117B96641EA505150052BF52 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
-				110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */,
 				11FA24611E910CA3002166D6 /* Additions */,
 				11FA245C1E910B47002166D6 /* Extentions */,
 				117B96671EA506CE0052BF52 /* Modules */,
@@ -350,6 +351,8 @@
 		11FA24611E910CA3002166D6 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */,
+				11D869E21ED99BA300574918 /* TouchableWindow.swift */,
 				110AD6511ED7355900B619CF /* SendMessageButton.swift */,
 				11FA245F1E910C6E002166D6 /* ColoredButton.swift */,
 				110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */,
@@ -498,6 +501,7 @@
 				11991BC91EC43A5300DB3436 /* RequestTransmitter.swift in Sources */,
 				11370A801E855982006C487B /* ConversationViewController.swift in Sources */,
 				11B76B621EB487730061478E /* CoreDataStack.swift in Sources */,
+				11D869E31ED99BA300574918 /* TouchableWindow.swift in Sources */,
 				117C650A1EC70C210077E11F /* User+CoreDataProperties.swift in Sources */,
 				11370A831E855A14006C487B /* MessageCell.swift in Sources */,
 				117B966A1EA510730052BF52 /* ProfileDataService.swift in Sources */,

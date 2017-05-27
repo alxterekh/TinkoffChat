@@ -14,6 +14,7 @@ protocol ConversationStorage {
     func handleLostUser(with identifier: String)
     func handleReceivedMessage(text: String, fromUser: String, toUser:String)
     func handleSentMessage(text: String, to conversation: Conversation)
+    func moveAllExistingConversationsToHistory()
 }
 
 class ConversationStorageService : ConversationStorage {
@@ -24,43 +25,54 @@ class ConversationStorageService : ConversationStorage {
         self.coreDataStack = coreDataStack
     }
     
-    func handleFoundUser(with identifier: String, userName: String?) {
+    func moveAllExistingConversationsToHistory() {
         if let context = coreDataStack.saveContext {
-            if let conversation = Conversation.findOrInsertConversation(in: context, with: identifier) {
-                conversation.isAbleToConversate = true
-                if let participant = User.findOrInsertUser(in: context, with: identifier) {
-                    participant.name = userName
-                    participant.isOnline = true
-                    conversation.participant = participant
-                    coreDataStack.performSave(context: context){_,_ in }
-                }
+            guard let conversations = Conversation.findAllConversations(in: context) else {
+                return
             }
+            
+            for conversation in conversations {
+                conversation.isAbleToConversate = false
+            }
+            coreDataStack.performSave(context: context){_,_ in }
         }
     }
-   
-    func handleLostUser(with identifier: String) {
-        if let context = coreDataStack.saveContext {
-            if let conversation = Conversation.findOrInsertConversation(in: context, with: identifier) {
-                conversation.isAbleToConversate = false
-                if let participant = User.findOrInsertUser(in: context, with: identifier) {
-                    participant.isOnline = false
-                    coreDataStack.performSave(context: context){_,_ in }
-                }
+    
+    func handleFoundUser(with identifier: String, userName: String?) {
+        if let context = coreDataStack.saveContext,
+            let conversation = Conversation.findOrInsertConversation(in: context, with: identifier) {
+            conversation.isAbleToConversate = true
+            if let participant = User.findOrInsertUser(in: context, with: identifier) {
+                participant.name = userName
+                participant.isOnline = true
+                conversation.participant = participant
+                coreDataStack.performSave(context: context){_,_ in }
             }
         }
     }
     
-    func handleReceivedMessage(text: String, fromUser: String, toUser:String) {
-        if let context = coreDataStack.saveContext {
-            if let conversation = Conversation.findOrInsertConversation(in: context, with: fromUser) {
-                let message = createMessage(with: text , context: context)
-                message.isOutgoing = false
-                message.isUnread = true
-                message.conversation = conversation
-                conversation.lastMessage = message
-                conversation.addToMessages(message)
+    func handleLostUser(with identifier: String) {
+        if let context = coreDataStack.saveContext,
+            let conversation = Conversation.findOrInsertConversation(in: context, with: identifier) {
+            conversation.isAbleToConversate = false
+            if let participant = User.findOrInsertUser(in: context, with: identifier) {
+                participant.isOnline = false
                 coreDataStack.performSave(context: context){_,_ in }
             }
+        }
+    }
+
+
+    func handleReceivedMessage(text: String, fromUser: String, toUser:String) {
+        if let context = coreDataStack.saveContext,
+            let conversation = Conversation.findOrInsertConversation(in: context, with: fromUser) {
+            let message = createMessage(with: text , context: context)
+            message.isOutgoing = false
+            message.isUnread = true
+            message.conversation = conversation
+            conversation.lastMessage = message
+            conversation.addToMessages(message)
+            coreDataStack.performSave(context: context){_,_ in }
         }
     }
     
@@ -69,13 +81,12 @@ class ConversationStorageService : ConversationStorage {
             let message = createMessage(with: text, context: context)
             message.isOutgoing = true
             message.isUnread = true
-            if let conversationId = conversation.conversationId {
-                if let conversation = Conversation.findOrInsertConversation(in: context, with: conversationId) {
-                    message.conversation = conversation
-                    conversation.lastMessage = message
-                    conversation.addToMessages(message)
-                    coreDataStack.performSave(context: context){_,_ in }
-                }
+            if let conversationId = conversation.conversationId,
+                let conversation = Conversation.findOrInsertConversation(in: context, with: conversationId) {
+                message.conversation = conversation
+                conversation.lastMessage = message
+                conversation.addToMessages(message)
+                coreDataStack.performSave(context: context){_,_ in }
             }
         }
     }

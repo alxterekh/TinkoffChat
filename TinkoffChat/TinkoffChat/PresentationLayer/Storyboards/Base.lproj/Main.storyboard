@@ -15,7 +15,7 @@
         <!--Navigation Controller-->
         <scene sceneID="qj6-me-S5Z">
             <objects>
-                <navigationController id="CKW-Jb-ShW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CKW-Jb-ShW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IVG-wF-knX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -31,7 +31,7 @@
         <!--Tinkoff chat-->
         <scene sceneID="ag9-8v-T5a">
             <objects>
-                <viewController id="7PZ-Rs-kzc" customClass="ConversationsListViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConversationsListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7PZ-Rs-kzc" customClass="ConversationsListViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" id="SMC-3R-PA5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -91,7 +91,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="SMC-3R-PA5" id="fNC-Vz-Dcn"/>
+                        <outlet property="tableView" destination="SMC-3R-PA5" id="xae-KO-LDY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2w0-9F-jVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -110,6 +110,63 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DyR-ns-YUQ">
+                                <rect key="frame" x="0.0" y="457" width="320" height="47"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" showsHorizontalScrollIndicator="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xu-ai-YLm">
+                                        <rect key="frame" x="8" y="6" width="211" height="35"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" hint="jsfj"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Text">
+                                                <attributes>
+                                                    <font key="NSFont" size="17" name="SFMono-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="hsG-j1-tl3" id="sUE-KL-62X"/>
+                                        </connections>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xu3-7u-acZ" customClass="SendMessageButton" customModule="TinkoffChat" customModuleProvider="target">
+                                        <rect key="frame" x="227" y="6" width="85" height="35"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="sendMessage:" destination="hsG-j1-tl3" eventType="touchUpInside" id="nKj-Qr-S9Z"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="7Xu-ai-YLm" firstAttribute="leading" secondItem="DyR-ns-YUQ" secondAttribute="leading" constant="8" id="2tF-Ql-bse"/>
+                                    <constraint firstAttribute="height" constant="47" id="5PS-dD-aGp"/>
+                                    <constraint firstItem="7Xu-ai-YLm" firstAttribute="top" secondItem="DyR-ns-YUQ" secondAttribute="top" constant="6" id="8D3-8h-X9J"/>
+                                    <constraint firstAttribute="trailing" secondItem="xu3-7u-acZ" secondAttribute="trailing" constant="8" id="LJj-Sj-15G"/>
+                                    <constraint firstAttribute="bottom" secondItem="xu3-7u-acZ" secondAttribute="bottom" constant="6" id="S9z-vf-1NS"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Xu-ai-YLm" secondAttribute="bottom" constant="6" id="iu3-ob-zBW"/>
+                                    <constraint firstItem="xu3-7u-acZ" firstAttribute="centerY" secondItem="DyR-ns-YUQ" secondAttribute="centerY" id="kul-fo-aaE"/>
+                                    <constraint firstItem="7Xu-ai-YLm" firstAttribute="width" secondItem="DyR-ns-YUQ" secondAttribute="width" multiplier="0.66" id="lEq-UM-A5N"/>
+                                    <constraint firstItem="xu3-7u-acZ" firstAttribute="top" secondItem="DyR-ns-YUQ" secondAttribute="top" constant="6" id="rdG-dT-Ioh"/>
+                                    <constraint firstItem="xu3-7u-acZ" firstAttribute="leading" secondItem="7Xu-ai-YLm" secondAttribute="trailing" constant="8" id="y7d-YV-Qkj"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="See-Yo-p7l">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="457"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -204,63 +261,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DyR-ns-YUQ">
-                                <rect key="frame" x="0.0" y="457" width="320" height="47"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" showsHorizontalScrollIndicator="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xu-ai-YLm">
-                                        <rect key="frame" x="8" y="6" width="211" height="35"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration" hint="jsfj"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Text">
-                                                <attributes>
-                                                    <font key="NSFont" size="17" name="SFMono-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="delegate" destination="hsG-j1-tl3" id="sUE-KL-62X"/>
-                                        </connections>
-                                    </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xu3-7u-acZ" customClass="SendMessageButton" customModule="TinkoffChat" customModuleProvider="target">
-                                        <rect key="frame" x="227" y="6" width="85" height="35"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Send">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="sendMessage:" destination="hsG-j1-tl3" eventType="touchUpInside" id="nKj-Qr-S9Z"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="7Xu-ai-YLm" firstAttribute="leading" secondItem="DyR-ns-YUQ" secondAttribute="leading" constant="8" id="2tF-Ql-bse"/>
-                                    <constraint firstAttribute="height" constant="47" id="5PS-dD-aGp"/>
-                                    <constraint firstItem="7Xu-ai-YLm" firstAttribute="top" secondItem="DyR-ns-YUQ" secondAttribute="top" constant="6" id="8D3-8h-X9J"/>
-                                    <constraint firstAttribute="trailing" secondItem="xu3-7u-acZ" secondAttribute="trailing" constant="8" id="LJj-Sj-15G"/>
-                                    <constraint firstAttribute="bottom" secondItem="xu3-7u-acZ" secondAttribute="bottom" constant="6" id="S9z-vf-1NS"/>
-                                    <constraint firstAttribute="bottom" secondItem="7Xu-ai-YLm" secondAttribute="bottom" constant="6" id="iu3-ob-zBW"/>
-                                    <constraint firstItem="xu3-7u-acZ" firstAttribute="centerY" secondItem="DyR-ns-YUQ" secondAttribute="centerY" id="kul-fo-aaE"/>
-                                    <constraint firstItem="7Xu-ai-YLm" firstAttribute="width" secondItem="DyR-ns-YUQ" secondAttribute="width" multiplier="0.66" id="lEq-UM-A5N"/>
-                                    <constraint firstItem="xu3-7u-acZ" firstAttribute="top" secondItem="DyR-ns-YUQ" secondAttribute="top" constant="6" id="rdG-dT-Ioh"/>
-                                    <constraint firstItem="xu3-7u-acZ" firstAttribute="leading" secondItem="7Xu-ai-YLm" secondAttribute="trailing" constant="8" id="y7d-YV-Qkj"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="See-Yo-p7l" secondAttribute="trailing" id="FTx-tM-Kap"/>
