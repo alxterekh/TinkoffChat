@@ -36,9 +36,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
     
     override func viewDidAppear(_ animated: Bool) {
         messagesListTableView.reloadData()
-        
-        ////
-        sendButton.activate()
+        handleChangingConversationState()
     }
     
     deinit {
@@ -58,19 +56,37 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
     }
     
     func handleChangingConversationState() {
-//        guard let conversationModel = conversationModel else {
-//            print("No conversation model!")
-//            return
-//        }
-//        
-//        if conversationModel.conversationIsAbleToConversate {
-//            animateAppearanceUser()
-//            sendButton.activate()
-//        }
-//        else {
-//            animateDisappearanceUser()
-//            sendButton.deactivate()
-//        }
+        animateHeaderIfNeeded()
+        changeSendButtonStateIfNeeded()
+    }
+    
+    fileprivate func animateHeaderIfNeeded() {
+        guard let conversationModel = conversationModel else {
+            print("No conversation model!")
+            return
+        }
+        
+        if conversationModel.conversationIsAbleToConversate {
+            animateAppearanceUser()
+        }
+        else {
+            animateDisappearanceUser()
+        }
+    }
+    
+    fileprivate func changeSendButtonStateIfNeeded() {
+        guard let conversationModel = conversationModel else {
+            print("No conversation model!")
+            return
+        }
+        
+        let text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if conversationModel.conversationIsAbleToConversate && text != "" {
+            sendButton.activate()
+        }
+        else {
+            sendButton.deactivate()
+        }
     }
     
     fileprivate let estimatedMessageCellRowHeight: CGFloat = 44
@@ -92,14 +108,14 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
     
     // MARK: - Animations
     
-    fileprivate let duration: TimeInterval = 1
+    fileprivate let duration: TimeInterval = 0.5
     fileprivate let headerScale: CGFloat = 1.10
     
     fileprivate func animateAppearanceUser() {
         UIView.animate(withDuration: duration) {
             self.navigationItem.titleView?.transform = CGAffineTransform(scaleX: self.headerScale, y: self.headerScale)
         }
-        animateHeaderTextColorTransition(with: UIColor.green)
+        animateHeaderTextColorTransition(with: UIColor.black )
     }
     
     fileprivate func animateDisappearanceUser() {
@@ -157,12 +173,7 @@ extension ConversationViewController : UITextViewDelegate {
     fileprivate static let maxMessageLength = 140
     
     func textViewDidChange(_ textView: UITextView) {
-//        if messageCanBeSent() {
-//            sendButton.activate()
-//        }
-//        else {
-//            sendButton.deactivate()
-//        }
+        changeSendButtonStateIfNeeded()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

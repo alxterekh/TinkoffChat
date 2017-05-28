@@ -21,9 +21,10 @@ class ConversationListModel : NSObject {
     init(with tableView: UITableView) {
         self.tableView = tableView
         let fetchRequest: NSFetchRequest<Conversation> = Conversation.fetchRequest()
+        let sectionSortDescriptor = NSSortDescriptor(key:#keyPath(Conversation.isAbleToConversate), ascending: false)
         let nameSortDescriptor = NSSortDescriptor(key:#keyPath(Conversation.participant.name), ascending: false)
         let dateSortDescriptor = NSSortDescriptor(key:#keyPath(Conversation.lastMessage.date), ascending: false)
-        fetchRequest.sortDescriptors = [dateSortDescriptor, nameSortDescriptor]
+        fetchRequest.sortDescriptors = [sectionSortDescriptor, dateSortDescriptor, nameSortDescriptor]
         guard let context = ServiceAssembly.coreDataStack.mainContext else {
             print("No cotext for frc!")
             abort()

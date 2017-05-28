@@ -17,13 +17,17 @@ class SendMessageButton: UIButton {
     fileprivate let userInteractableColor = UIColor(red: 255/255, green: 234/255, blue: 67/255, alpha: 1)
     
     func activate() {
+        if self.isEnabled == false {
         self.isEnabled = true
         animateButton(with: userInteractableColor)
+        }
     }
     
     func deactivate() {
+        if self.isEnabled == true {
         self.isEnabled = false
         animateButton(with: defaultColor)
+        }
     }
     
     fileprivate func animateButton(with color: UIColor) {

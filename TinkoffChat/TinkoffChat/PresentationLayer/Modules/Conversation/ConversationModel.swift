@@ -14,6 +14,7 @@ protocol IConversationModel {
     func sendMessage(text: String)
     var conversationName: String? { get }
     var conversationIsAbleToConversate: Bool { get }
+    weak var delegate: ConversationModelDelegate? { get set }
 }
 
 protocol ConversationModelDelegate : class {
@@ -64,10 +65,8 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
         fetchResultslControllerDelegate = FetchResultslControllerDelegate(with: self.tableView)
         fetchResultsController.delegate = fetchResultslControllerDelegate
         conversation = Conversation.performConversationFetchRequest(identifier: id, in: context)
-        delegate?.handleChangingConversationState()
         performFetch()
         
-
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: NSNotification.Name.NSManagedObjectContextDidSave, object: context)
     }
     
@@ -88,7 +87,8 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func sendMessage(text: String) {
-        if let conversation = conversation {
+        if text != "",
+            let conversation = conversation {
             communicator.sendMessage(text: text, to: conversation)
         }
     }

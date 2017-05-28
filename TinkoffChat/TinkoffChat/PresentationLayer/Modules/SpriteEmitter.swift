@@ -29,6 +29,7 @@ class SpriteEmitter : Emitter {
         let cell = CAEmitterCell()
         cell.emissionLongitude = -CGFloat.pi/2
         cell.alphaSpeed = -0.5
+        cell.birthRate = 1
         cell.lifetime = 2.5
         cell.velocity = 120
         cell.scale = 0.2
@@ -45,12 +46,7 @@ class SpriteEmitter : Emitter {
     }
     
     func start() {
-        emitterLayer.birthRate = 1
-        if let emitterCells = emitterLayer.emitterCells {
-            for cell in emitterCells {
-                cell.birthRate = 25
-            }
-        }
+        emitterLayer.birthRate = 25
     }
     
     func stop() {
