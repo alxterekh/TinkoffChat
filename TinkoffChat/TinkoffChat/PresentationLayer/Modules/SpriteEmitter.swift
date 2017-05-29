@@ -11,8 +11,8 @@ import UIKit
 
 protocol Emitter {
     func moveToTouch(_ touch: UITouch)
-    func start()
-    func stop()
+    func startEmittingForTouch(_ touch: UITouch)
+    func stopEmitting()
 }
 
 class SpriteEmitter : Emitter {
@@ -22,10 +22,10 @@ class SpriteEmitter : Emitter {
     
     init(with window: UIWindow) {
         self.window = window
-        setup()
+        setupConfig()
     }
     
-    fileprivate func setup() {
+    fileprivate func setupConfig() {
         let cell = CAEmitterCell()
         cell.emissionLongitude = -CGFloat.pi/2
         cell.alphaSpeed = -0.5
@@ -45,11 +45,12 @@ class SpriteEmitter : Emitter {
         emitterLayer.emitterPosition = location
     }
     
-    func start() {
+    func startEmittingForTouch(_ touch: UITouch) {
         emitterLayer.birthRate = 25
+        moveToTouch(touch)
     }
     
-    func stop() {
+    func stopEmitting() {
         emitterLayer.birthRate = 0
     }
 }

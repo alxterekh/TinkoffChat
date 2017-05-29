@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class FetchResultslControllerDelegate : NSObject, NSFetchedResultsControllerDelegate {
+final class FetchResultslControllerDelegate : NSObject, NSFetchedResultsControllerDelegate {
     
     fileprivate let tableView: UITableView
     

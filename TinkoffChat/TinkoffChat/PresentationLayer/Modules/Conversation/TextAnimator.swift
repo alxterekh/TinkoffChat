@@ -12,7 +12,6 @@ import UIKit
 class TextAnimator {
     fileprivate let duration: TimeInterval = 0.5
     fileprivate let textScale: CGFloat = 1.10
-    
     fileprivate let textLabel: UILabel
     
     init(with label: UILabel) {

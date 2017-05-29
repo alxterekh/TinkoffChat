@@ -175,8 +175,7 @@
 		11370A811E855989006C487B /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
-				1191A8C01EDC03980069B8CB /* TextAnimator.swift */,
-				110AD6511ED7355900B619CF /* SendMessageButton.swift */,
+				1191A8C21EDC09DD0069B8CB /* Animations */,
 				1143721B1EC070A8009CCE10 /* ConversationModel.swift */,
 				11370A7F1E855982006C487B /* ConversationViewController.swift */,
 				11370A821E855A14006C487B /* MessageCell.swift */,
@@ -253,6 +252,32 @@
 				9158D2F6EA6DC0D52DAE6851 /* Pods_TinkoffChat.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1191A8C21EDC09DD0069B8CB /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				110AD6511ED7355900B619CF /* SendMessageButton.swift */,
+				1191A8C01EDC03980069B8CB /* TextAnimator.swift */,
+			);
+			name = Animations;
+			sourceTree = "<group>";
+		};
+		1191A8C41EDC0D5C0069B8CB /* SpriteEmitter */ = {
+			isa = PBXGroup;
+			children = (
+				110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */,
+				11D869E21ED99BA300574918 /* TouchableWindow.swift */,
+			);
+			name = SpriteEmitter;
+			sourceTree = "<group>";
+		};
+		1191A8C51EDC0FCE0069B8CB /* ColoredButton */ = {
+			isa = PBXGroup;
+			children = (
+				11FA245F1E910C6E002166D6 /* ColoredButton.swift */,
+			);
+			name = ColoredButton;
 			sourceTree = "<group>";
 		};
 		11991BC41EC4388E00DB3436 /* RequestSender */ = {
@@ -355,9 +380,8 @@
 		11FA24611E910CA3002166D6 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
-				110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */,
-				11D869E21ED99BA300574918 /* TouchableWindow.swift */,
-				11FA245F1E910C6E002166D6 /* ColoredButton.swift */,
+				1191A8C41EDC0D5C0069B8CB /* SpriteEmitter */,
+				1191A8C51EDC0FCE0069B8CB /* ColoredButton */,
 				110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */,
 			);
 			path = Additions;

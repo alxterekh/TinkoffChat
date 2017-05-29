@@ -66,16 +66,11 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate, IConvers
         fetchResultsController.delegate = fetchResultslControllerDelegate
         conversation = Conversation.performConversationFetchRequest(identifier: id, in: context)
         performFetch()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: NSNotification.Name.NSManagedObjectContextDidSave, object: context)
+        subscribeForCoreDataContextNotifications(context)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    func managedObjectContextDidSave(notification: NSNotification) {
-        delegate?.handleChangingConversationState()
     }
     
     fileprivate func performFetch() {
@@ -85,6 +80,16 @@ class ConversationModel : NSObject, NSFetchedResultsControllerDelegate, IConvers
             print("Error fetching: \(error)")
         }
     }
+    
+    fileprivate func subscribeForCoreDataContextNotifications(_ context: NSManagedObjectContext) {
+        NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: NSNotification.Name.NSManagedObjectContextDidSave, object: context)
+    }
+    
+    func managedObjectContextDidSave(notification: NSNotification) {
+        delegate?.handleChangingConversationState()
+    }
+    
+    // MARK: -
     
     func sendMessage(text: String) {
         if text != "",

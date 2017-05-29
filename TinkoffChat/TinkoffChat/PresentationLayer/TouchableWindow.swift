@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TouchableWindow: UIWindow {
+final class TouchableWindow: UIWindow {
     
     fileprivate var emitter: Emitter?
     
@@ -21,14 +21,11 @@ class TouchableWindow: UIWindow {
             for touch in touches {
                 switch touch.phase {
                 case .began:
-                    emitter?.start()
-                    emitter?.moveToTouch(touch)
+                    emitter?.startEmittingForTouch(touch)
                 case .moved:
                     emitter?.moveToTouch(touch)
-                case .ended:
-                    emitter?.stop()
-                case .cancelled:
-                    emitter?.stop()
+                case .ended, .cancelled:
+                    emitter?.stopEmitting()
                 default:
                     break
                 }

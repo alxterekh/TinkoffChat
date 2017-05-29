@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITableViewDelegate, ConversationModelDelegate {
-    
+class ConversationViewController: UIViewController, ConversationModelDelegate {
     @IBOutlet fileprivate weak var messageTexView: UITextView!
     @IBOutlet fileprivate weak var messagesListTableView: UITableView!
     @IBOutlet fileprivate weak var sendButton: SendMessageButton!
@@ -25,7 +24,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
         messageTexView.text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         conversationModel?.sendMessage(text: messageTexView.text)
-        messageTexView.text = ""
+        clearTextView()
         updateTextViewHeight(for: messageTexView.attributedText)
     }
     
@@ -49,7 +48,11 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         setupGestureRecognizer()
         conversationModel = ConversationModel(with: messagesListTableView, id: conversationIdentifier)
         conversationModel?.delegate = self
-        messageTexView.text = ""
+        setupTitleDependencies()
+        clearTextView()
+    }
+    
+    fileprivate func setupTitleDependencies() {
         if let name = conversationModel?.conversationName {
             updateHeaderWithName(name)
             if let headerText = navigationItem.titleView as? UILabel {
@@ -58,11 +61,14 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         }
     }
     
+    fileprivate func clearTextView() {
+        messageTexView.text = ""
+    }
+    
     fileprivate let estimatedMessageCellRowHeight: CGFloat = 44
     
     fileprivate func setupTableViewProperties() {
         messagesListTableView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
-        messagesListTableView.delegate = self
         messagesListTableView.estimatedRowHeight = estimatedMessageCellRowHeight
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
         messagesListTableView.tableFooterView = UIView()
@@ -104,7 +110,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         sendButton.isActive = conversationModel.conversationIsAbleToConversate && text != ""
     }
     
-        
     // MARK: -
     
     fileprivate func subscribeForKeyboardNotification() {
