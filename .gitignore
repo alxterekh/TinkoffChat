@@ -38,13 +38,6 @@ xcuserdata
 *.moved-aside
 
 ####
-# XCode 4 workspaces - more detailed
-!xcshareddata
-!default.xcworkspace
-*.xcworkspacedata
-
-
-####
 # Xcode 5
 *.xccheckout
 *.xcuserstate
