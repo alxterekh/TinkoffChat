@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ServiceAssembly {
     
@@ -20,11 +21,21 @@ class ServiceAssembly {
     
     static var communicatorService = { () -> CommunicatorSupervisor in 
 
-        let multipeerCommunicator = MultipeerCommunicator(with: serializer)
+        let multipeerCommunicator = MultipeerCommunicator(with: serializer, name: ServiceAssembly.fetchAppUserName())
         let conversationStorage = ConversationStorageService(with: coreDataStack)
         
         return CommunicatorSupervisor(with: multipeerCommunicator, storage: conversationStorage)
     }()
+    
+    fileprivate static func fetchAppUserName() -> String {
+        var name = UIDevice.current.name
+        if let context = ServiceAssembly.coreDataStack.mainContext,
+            let user = User.fetchAppUser(in: context),
+            let userName = user.name {
+            name = userName
+        }
+        return name
+    }
     
     static func imageLoaderService() -> ImageLoader {
         let requestSender = RequestSender()

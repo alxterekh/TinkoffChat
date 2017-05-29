@@ -45,8 +45,8 @@ class MultipeerCommunicator:NSObject, Communicator {
     
     // MARK: - Initialization
     
-    init(with serializer: MessageSerializer) {
-        let myDiscoveryInfo = [discoveryInfoUserNameKey : UIDevice.current.name]
+    init(with serializer: MessageSerializer, name: String) {
+        let myDiscoveryInfo = [discoveryInfoUserNameKey : name]
         peerMessageSerializer = serializer
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType:serviceType)
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: myDiscoveryInfo, serviceType: serviceType)
@@ -56,9 +56,9 @@ class MultipeerCommunicator:NSObject, Communicator {
     
     convenience override init() {
         // defualt initialization
-        self.init(with : PeerMessageSerializer())
+        self.init(with : PeerMessageSerializer(), name: UIDevice.current.name)
     }
-    
+        
     deinit {
         serviceAdvertiser.stopAdvertisingPeer()
         serviceBrowser.stopBrowsingForPeers()

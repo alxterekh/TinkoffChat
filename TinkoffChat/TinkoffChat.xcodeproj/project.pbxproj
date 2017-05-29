@@ -153,10 +153,10 @@
 				117B96661EA5052F0052BF52 /* ServiceLayer */,
 				117B96651EA505270052BF52 /* CoreLayer */,
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
-				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
-				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
-				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
+				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
+				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
+				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
 			);
 			path = TinkoffChat;
