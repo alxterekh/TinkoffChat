@@ -35,6 +35,7 @@
 		117C650D1EC70C210077E11F /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117C65071EC70C210077E11F /* Message+CoreDataClass.swift */; };
 		117C650E1EC70C210077E11F /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117C65081EC70C210077E11F /* Message+CoreDataProperties.swift */; };
 		118102BB1E8683A600E4FA53 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 118102BA1E8683A600E4FA53 /* CoreData.framework */; };
+		1191A8C11EDC03980069B8CB /* TextAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191A8C01EDC03980069B8CB /* TextAnimator.swift */; };
 		11923DD41EA7739800DC96C3 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */; };
 		11991BC91EC43A5300DB3436 /* RequestTransmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BC81EC43A5300DB3436 /* RequestTransmitter.swift */; };
 		11991BCB1EC43A7E00DB3436 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11991BCA1EC43A7E00DB3436 /* Requestable.swift */; };
@@ -65,7 +66,7 @@
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1101CDC31E68CF5B003B7CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpriteEmitter.swift; path = ../Modules/SpriteEmitter.swift; sourceTree = "<group>"; };
-		110AD6511ED7355900B619CF /* SendMessageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendMessageButton.swift; path = ../Modules/Conversation/SendMessageButton.swift; sourceTree = "<group>"; };
+		110AD6511ED7355900B619CF /* SendMessageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
 		110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchResultslControllerDelegate.swift; path = ../Modules/FetchResultslControllerDelegate.swift; sourceTree = "<group>"; };
 		1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		117C65081EC70C210077E11F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "../../../../Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		118102BA1E8683A600E4FA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
+		1191A8C01EDC03980069B8CB /* TextAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAnimator.swift; sourceTree = "<group>"; };
 		11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		11991BC81EC43A5300DB3436 /* RequestTransmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTransmitter.swift; sourceTree = "<group>"; };
 		11991BCA1EC43A7E00DB3436 /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
@@ -173,6 +175,8 @@
 		11370A811E855989006C487B /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
+				1191A8C01EDC03980069B8CB /* TextAnimator.swift */,
+				110AD6511ED7355900B619CF /* SendMessageButton.swift */,
 				1143721B1EC070A8009CCE10 /* ConversationModel.swift */,
 				11370A7F1E855982006C487B /* ConversationViewController.swift */,
 				11370A821E855A14006C487B /* MessageCell.swift */,
@@ -353,7 +357,6 @@
 			children = (
 				110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */,
 				11D869E21ED99BA300574918 /* TouchableWindow.swift */,
-				110AD6511ED7355900B619CF /* SendMessageButton.swift */,
 				11FA245F1E910C6E002166D6 /* ColoredButton.swift */,
 				110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */,
 			);
@@ -519,6 +522,7 @@
 				119A0BB51EB0CA88002BA523 /* Profile.swift in Sources */,
 				11923DD41EA7739800DC96C3 /* ServiceAssembly.swift in Sources */,
 				1152B7961EC304D400B8CDDB /* UserImageCell.swift in Sources */,
+				1191A8C11EDC03980069B8CB /* TextAnimator.swift in Sources */,
 				11FA245E1E910BE0002166D6 /* UIButton+BackgroundColor.swift in Sources */,
 				119BFF4B1E98C0370071E02C /* PeerMessageSerializer.swift in Sources */,
 				117C650B1EC70C210077E11F /* Conversation+CoreDataClass.swift in Sources */,

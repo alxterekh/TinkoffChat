@@ -18,7 +18,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
     @IBOutlet fileprivate weak var textViewBottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var bottomPartHeightConstraint: NSLayoutConstraint!
     
-    fileprivate var conversationModel: ConversationModel?
+    fileprivate var conversationModel: IConversationModel?
+    fileprivate var textAnimator: TextAnimator?
     var conversationIdentifier: String?
     
     @IBAction fileprivate func sendMessage(_ sender: UIButton) {
@@ -30,7 +31,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        messagesListTableView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         setup()
     }
     
@@ -52,46 +52,16 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         messageTexView.text = ""
         if let name = conversationModel?.conversationName {
             updateHeaderWithName(name)
-        }
-    }
-    
-    func handleChangingConversationState() {
-        animateHeaderIfNeeded()
-        changeSendButtonStateIfNeeded()
-    }
-    
-    fileprivate func animateHeaderIfNeeded() {
-        guard let conversationModel = conversationModel else {
-            print("No conversation model!")
-            return
-        }
-        
-        if conversationModel.conversationIsAbleToConversate {
-            animateAppearanceUser()
-        }
-        else {
-            animateDisappearanceUser()
-        }
-    }
-    
-    fileprivate func changeSendButtonStateIfNeeded() {
-        guard let conversationModel = conversationModel else {
-            print("No conversation model!")
-            return
-        }
-        
-        let text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if conversationModel.conversationIsAbleToConversate && text != "" {
-            sendButton.activate()
-        }
-        else {
-            sendButton.deactivate()
+            if let headerText = navigationItem.titleView as? UILabel {
+                textAnimator = TextAnimator(with: headerText)
+            }
         }
     }
     
     fileprivate let estimatedMessageCellRowHeight: CGFloat = 44
     
     fileprivate func setupTableViewProperties() {
+        messagesListTableView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
         messagesListTableView.delegate = self
         messagesListTableView.estimatedRowHeight = estimatedMessageCellRowHeight
         messagesListTableView.rowHeight = UITableViewAutomaticDimension
@@ -106,34 +76,35 @@ class ConversationViewController: UIViewController, UITableViewDelegate, Convers
         self.navigationItem.titleView?.sizeToFit()
     }
     
+    // MARK: - ConversationModelDelegate
+    
+    func handleChangingConversationState() {
+        animateHeaderIfNeeded()
+        changeSendButtonStateIfNeeded()
+    }
+    
     // MARK: - Animations
     
-    fileprivate let duration: TimeInterval = 0.5
-    fileprivate let headerScale: CGFloat = 1.10
-    
-    fileprivate func animateAppearanceUser() {
-        UIView.animate(withDuration: duration) {
-            self.navigationItem.titleView?.transform = CGAffineTransform(scaleX: self.headerScale, y: self.headerScale)
+    fileprivate func animateHeaderIfNeeded() {
+        guard let conversationModel = conversationModel else {
+            print("No conversation model!")
+            return
         }
-        animateHeaderTextColorTransition(with: UIColor.black )
+        
+        textAnimator?.textIsHighlighted = conversationModel.conversationIsAbleToConversate
     }
     
-    fileprivate func animateDisappearanceUser() {
-        UIView.animate(withDuration: duration) {
-            self.navigationItem.titleView?.transform = CGAffineTransform.identity
+    fileprivate func changeSendButtonStateIfNeeded() {
+        guard let conversationModel = conversationModel else {
+            print("No conversation model!")
+            return
         }
-        animateHeaderTextColorTransition(with: UIColor.gray)
+        
+        let text = messageTexView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        sendButton.isActive = conversationModel.conversationIsAbleToConversate && text != ""
     }
     
-    fileprivate func animateHeaderTextColorTransition(with color: UIColor) {
-        let headerLablel = self.navigationItem.titleView as! UILabel
-        UIView.transition(with: headerLablel,
-                          duration: duration,
-                          options: .transitionCrossDissolve,
-                          animations: { headerLablel.textColor = color },
-                          completion: nil)
-    }
-    
+        
     // MARK: -
     
     fileprivate func subscribeForKeyboardNotification() {

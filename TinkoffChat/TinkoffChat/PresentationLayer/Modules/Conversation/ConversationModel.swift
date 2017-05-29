@@ -21,7 +21,7 @@ protocol ConversationModelDelegate : class {
     func handleChangingConversationState()
 }
 
-class ConversationModel : NSObject, NSFetchedResultsControllerDelegate {
+class ConversationModel : NSObject, NSFetchedResultsControllerDelegate, IConversationModel {
     fileprivate let incomingMessageCellId = "incomingMessage"
     fileprivate let outcomingMessageCellId = "outcomingMessage"
     fileprivate let tableView: UITableView

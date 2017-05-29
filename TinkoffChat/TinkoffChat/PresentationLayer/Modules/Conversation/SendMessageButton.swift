@@ -16,28 +16,24 @@ class SendMessageButton: UIButton {
     fileprivate let defaultColor = UIColor.gray
     fileprivate let userInteractableColor = UIColor(red: 255/255, green: 234/255, blue: 67/255, alpha: 1)
     
-    func activate() {
-        if self.isEnabled == false {
-        self.isEnabled = true
-        animateButton(with: userInteractableColor)
-        }
-    }
-    
-    func deactivate() {
-        if self.isEnabled == true {
-        self.isEnabled = false
-        animateButton(with: defaultColor)
+    var isActive: Bool = false {
+        didSet {
+            if isActive != oldValue {
+                self.isEnabled = isActive
+                let color = isActive ? userInteractableColor : defaultColor
+                animateButton(with: color)
+            }
         }
     }
     
     fileprivate func animateButton(with color: UIColor) {
         UIView.animate(withDuration: animationDuration,
                        animations: {
+                        self.backgroundColor = color
                         self.transform = CGAffineTransform(scaleX: self.scaleFactor, y: self.scaleFactor)
         },
                        completion: { _ in
                         UIView.animate(withDuration: self.animationDuration) {
-                            self.backgroundColor = color
                             self.transform = CGAffineTransform.identity
                         }
         })
