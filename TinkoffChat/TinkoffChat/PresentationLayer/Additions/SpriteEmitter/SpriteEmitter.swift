@@ -35,6 +35,7 @@ class SpriteEmitter : Emitter {
         cell.scale = 0.2
         cell.emissionRange = CGFloat.pi/4
         cell.contents = #imageLiteral(resourceName: "blazon").cgImage
+        emitterLayer.birthRate = 0
         emitterLayer.emitterCells = [cell]
         emitterLayer.zPosition = CGFloat.greatestFiniteMagnitude
         window.layer.addSublayer(emitterLayer)
