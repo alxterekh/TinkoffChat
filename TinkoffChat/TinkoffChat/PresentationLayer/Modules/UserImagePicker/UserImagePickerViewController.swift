@@ -9,7 +9,7 @@
 import UIKit
 import PKHUD
 
-protocol UserImagePickerViewControllerDelegate: class{
+protocol UserImagePickerViewControllerDelegate: class {
     func updateUserPicture(_ image: UIImage)
 }
 
@@ -60,12 +60,6 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
             HUD.flash(.labeledError(title: message, subtitle: nil), onView: self.view)
         }
     }
-    
-    fileprivate func cashImage(_ image: UIImage?, at indexPath: IndexPath) {
-        if let image = image {
-            cashedImages[indexPath] = image
-        }
-    }
 }
 
 extension UserImagePickerViewController: UICollectionViewDelegate {
@@ -99,11 +93,17 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
                                                       for: indexPath) as! UserImageCell
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
+        fetchImage(for: cell, at: indexPath)
+        
+        return cell
+    }
+    
+    fileprivate func fetchImage(for cell: UserImageCell, at indexPath: IndexPath) {
         let image = cashedImages[indexPath]
         cell.configure(with: image)
+        let url = dataSource[indexPath.row]
+        cell.url = url
         if image == nil {
-            let url = dataSource[indexPath.row]
-            cell.url = url
             userImagePickerModel.fetchImage(at: url) {
                 self.cashImage($0, at: indexPath)
                 if cell.url == url {
@@ -111,8 +111,12 @@ extension UserImagePickerViewController: UICollectionViewDataSource {
                 }
             }
         }
-        
-        return cell
+    }
+    
+    fileprivate func cashImage(_ image: UIImage?, at indexPath: IndexPath) {
+        if let image = image {
+            cashedImages[indexPath] = image
+        }
     }
 }
 
