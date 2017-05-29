@@ -33,11 +33,7 @@ final class ConversationsListViewController: UIViewController {
         }
     }
     
-    @IBAction fileprivate func unwindToConversationList(segue: UIStoryboardSegue) {
-//        if let profileEditor = segue.source as? ProfileEditorViewController {
-//            //communicatorManager.updateMyPeerName(profile.name)
-//        }
-    }
+    @IBAction fileprivate func unwindToConversationList(segue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Conversation" {

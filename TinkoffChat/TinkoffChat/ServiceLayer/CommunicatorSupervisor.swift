@@ -9,7 +9,6 @@
 import UIKit
 
 protocol CommunicatorService {
-    func updateMyPeerName(_ name: String)
     func sendMessage(text: String, to conversation: Conversation)
 }
 
@@ -22,10 +21,6 @@ final class CommunicatorSupervisor : CommunicatorService {
         conversationStorage.moveAllExistingConversationsToHistory()
         multipeerCommunicator = communicator
         multipeerCommunicator.delegate = self
-    }
-
-    func updateMyPeerName(_ name: String) {
-        multipeerCommunicator.updateMyPeerName(name)
     }
     
     func sendMessage(text: String, to conversation: Conversation) {

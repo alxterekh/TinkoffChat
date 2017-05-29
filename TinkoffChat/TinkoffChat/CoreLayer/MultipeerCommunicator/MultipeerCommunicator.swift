@@ -12,7 +12,6 @@ import MultipeerConnectivity
 protocol Communicator {
     func sendMessage(string: String, to userID: String, completionHandler: ((Bool, Error?) -> Void)?)
     weak var delegate : MultipeerCommunicatorDelegate? {get set}
-    func updateMyPeerName(_ name: String)
     var online: Bool {get set}
 }
 
@@ -69,11 +68,6 @@ class MultipeerCommunicator:NSObject, Communicator {
         serviceAdvertiser.startAdvertisingPeer()
         serviceBrowser.delegate = self
         serviceBrowser.startBrowsingForPeers()
-    }
-    
-    func updateMyPeerName(_ name: String) {
-        // TODO: implement name updating
-        print("\(name)")
     }
     
     // MARK: - Communicator
