@@ -65,9 +65,9 @@
 		1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101CDC11E68CF5B003B7CA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1101CDC31E68CF5B003B7CA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpriteEmitter.swift; path = ../Modules/SpriteEmitter.swift; sourceTree = "<group>"; };
+		110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteEmitter.swift; sourceTree = "<group>"; };
 		110AD6511ED7355900B619CF /* SendMessageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
-		110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchResultslControllerDelegate.swift; path = ../Modules/FetchResultslControllerDelegate.swift; sourceTree = "<group>"; };
+		110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchResultslControllerDelegate.swift; sourceTree = "<group>"; };
 		1133D41F1E69B564006A69F3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		1133D4211E69B6AE006A69F3 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
 		11370A7F1E855982006C487B /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -82,12 +82,12 @@
 		116F873B1E97854B00C18C49 /* CommunicatorSupervisor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicatorSupervisor.swift; sourceTree = "<group>"; };
 		117B96691EA510730052BF52 /* ProfileDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDataService.swift; sourceTree = "<group>"; };
 		117C64FE1EC5A9AA0077E11F /* ImageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageParser.swift; sourceTree = "<group>"; };
-		117C65031EC70C210077E11F /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "../../../../User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		117C65041EC70C210077E11F /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../../../../User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		117C65051EC70C210077E11F /* Conversation+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataClass.swift"; path = "../../../../Conversation+CoreDataClass.swift"; sourceTree = "<group>"; };
-		117C65061EC70C210077E11F /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Conversation+CoreDataProperties.swift"; path = "../../../../Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		117C65071EC70C210077E11F /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataClass.swift"; path = "../../../../Message+CoreDataClass.swift"; sourceTree = "<group>"; };
-		117C65081EC70C210077E11F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "../../../../Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		117C65031EC70C210077E11F /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		117C65041EC70C210077E11F /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		117C65051EC70C210077E11F /* Conversation+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Conversation+CoreDataClass.swift"; sourceTree = "<group>"; };
+		117C65061EC70C210077E11F /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		117C65071EC70C210077E11F /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
+		117C65081EC70C210077E11F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		118102BA1E8683A600E4FA53 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinkoffChat.entitlements; sourceTree = "<group>"; };
 		1191A8C01EDC03980069B8CB /* TextAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAnimator.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		119C36C81E853EA6006B234F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		11B76B5B1EB480E50061478E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		11B76B611EB487730061478E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		11D869E21ED99BA300574918 /* TouchableWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchableWindow.swift; path = ../TouchableWindow.swift; sourceTree = "<group>"; };
+		11D869E21ED99BA300574918 /* TouchableWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchableWindow.swift; sourceTree = "<group>"; };
 		11FA245D1E910BE0002166D6 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		11FA245F1E910C6E002166D6 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 		8B02B2CF4D9E6CA65C04D7A7 /* Pods-TinkoffChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkoffChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinkoffChat/Pods-TinkoffChat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,10 +153,10 @@
 				117B96661EA5052F0052BF52 /* ServiceLayer */,
 				117B96651EA505270052BF52 /* CoreLayer */,
 				1101CDB71E68CF5B003B7CA1 /* AppDelegate.swift */,
-				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
-				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
 				1101CDBE1E68CF5B003B7CA1 /* Assets.xcassets */,
+				11668D7C1EAB4701009AF385 /* IdentifierGenerator.swift */,
 				1101CDC31E68CF5B003B7CA1 /* Info.plist */,
+				11923DD31EA7739800DC96C3 /* ServiceAssembly.swift */,
 				119142511E68D7C200FF9A1B /* TinkoffChat.entitlements */,
 			);
 			path = TinkoffChat;
@@ -207,7 +207,7 @@
 		117B96651EA505270052BF52 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
-				1143721D1EC073F3009CCE10 /* ConversationStorage.swift */,
+				1191A8C61EDC14BE0069B8CB /* Storage */,
 				119C99AC1EB5D8C900B8FE56 /* CoreData */,
 				117B96681EA507A20052BF52 /* MultipeerCommunicator */,
 				11991BC51EC439E000DB3436 /* Networking */,
@@ -228,8 +228,8 @@
 		117B96671EA506CE0052BF52 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				11370A7E1E855935006C487B /* ConversationList */,
 				11370A811E855989006C487B /* Conversation */,
+				11370A7E1E855935006C487B /* ConversationList */,
 				1152B7971EC30C8800B8CDDB /* UserImagePicker */,
 				119A0BB31EB0CA77002BA523 /* UserProfile */,
 			);
@@ -260,7 +260,7 @@
 				110AD6511ED7355900B619CF /* SendMessageButton.swift */,
 				1191A8C01EDC03980069B8CB /* TextAnimator.swift */,
 			);
-			name = Animations;
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		1191A8C41EDC0D5C0069B8CB /* SpriteEmitter */ = {
@@ -269,7 +269,7 @@
 				110AD64F1ED56E4300B619CF /* SpriteEmitter.swift */,
 				11D869E21ED99BA300574918 /* TouchableWindow.swift */,
 			);
-			name = SpriteEmitter;
+			path = SpriteEmitter;
 			sourceTree = "<group>";
 		};
 		1191A8C51EDC0FCE0069B8CB /* ColoredButton */ = {
@@ -277,7 +277,15 @@
 			children = (
 				11FA245F1E910C6E002166D6 /* ColoredButton.swift */,
 			);
-			name = ColoredButton;
+			path = ColoredButton;
+			sourceTree = "<group>";
+		};
+		1191A8C61EDC14BE0069B8CB /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				1143721D1EC073F3009CCE10 /* ConversationStorage.swift */,
+			);
+			name = Storage;
 			sourceTree = "<group>";
 		};
 		11991BC41EC4388E00DB3436 /* RequestSender */ = {
@@ -341,9 +349,9 @@
 		119C99AC1EB5D8C900B8FE56 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				11B76B611EB487730061478E /* CoreDataStack.swift */,
 				119C99AE1EB5D92100B8FE56 /* Generated */,
 				119C99AD1EB5D90D00B8FE56 /* Model */,
+				11B76B611EB487730061478E /* CoreDataStack.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -380,8 +388,8 @@
 		11FA24611E910CA3002166D6 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
-				1191A8C41EDC0D5C0069B8CB /* SpriteEmitter */,
 				1191A8C51EDC0FCE0069B8CB /* ColoredButton */,
+				1191A8C41EDC0D5C0069B8CB /* SpriteEmitter */,
 				110AD6531ED75FC300B619CF /* FetchResultslControllerDelegate.swift */,
 			);
 			path = Additions;
