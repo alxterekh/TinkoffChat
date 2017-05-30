@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class TextAnimator {
-    fileprivate let duration: TimeInterval = 0.5
+    fileprivate let duration: TimeInterval = 1
     fileprivate let textScale: CGFloat = 1.10
     fileprivate let textLabel: UILabel
     
@@ -22,27 +22,22 @@ class TextAnimator {
         didSet {
             if textIsHighlighted {
                 let transform = CGAffineTransform(scaleX: textScale, y: textScale)
-                highlightText(with: transform, color: UIColor.black)
+                highlightText(with: UIColor.black, transform: transform)
             }
             else {
                 let transform = CGAffineTransform.identity
-                highlightText(with: transform, color: UIColor.gray)
+                highlightText(with: UIColor.gray, transform: transform)
             }
         }
     }
-
-    fileprivate func highlightText(with transform: CGAffineTransform, color: UIColor) {
-        animateTextColorTransition(with: color)
-        UIView.animate(withDuration: duration) {
-            self.textLabel.transform = transform
-        }
-    }
     
-    fileprivate func animateTextColorTransition(with color: UIColor) {
+    fileprivate func highlightText(with color: UIColor, transform: CGAffineTransform) {
         UIView.transition(with: textLabel,
                           duration: duration,
                           options: .transitionCrossDissolve,
-                          animations: { self.textLabel.textColor = color },
+                          animations: {
+                            self.textLabel.textColor = color
+                            self.textLabel.transform = transform },
                           completion: nil)
     }
 }
