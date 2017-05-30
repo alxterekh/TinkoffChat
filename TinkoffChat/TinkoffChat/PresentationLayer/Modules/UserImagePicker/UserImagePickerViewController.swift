@@ -18,7 +18,7 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     @IBOutlet weak var collectionView: UICollectionView!
     
     fileprivate let userImageCellId = "UserPicture"
-    fileprivate let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    fileprivate let sectionInsets = UIEdgeInsets(top: 4.0, left: 4.0, bottom: 4.0, right: 4.0)
     fileprivate let itemsPerRow: CGFloat = 3
     fileprivate let userImagePickerModel = UserImagePickerModel()
     fileprivate var dataSource: [String] = []
@@ -33,6 +33,7 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupLayout()
     }
     
     fileprivate func setup() {
@@ -43,6 +44,14 @@ class UserImagePickerViewController: UIViewController, UserImagePickerModelDeleg
         DispatchQueue.main.async {
             HUD.show(.progress, onView: self.view)
         }
+    }
+    
+    fileprivate func setupLayout() {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = sectionInsets
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        collectionView.collectionViewLayout = layout
     }
     
     // MARK: - UserImagePickerModelDelegate

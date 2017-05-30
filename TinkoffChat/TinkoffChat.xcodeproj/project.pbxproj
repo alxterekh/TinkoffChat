@@ -703,7 +703,7 @@
 				CODE_SIGN_ENTITLEMENTS = TinkoffChat/TinkoffChat.entitlements;
 				DEVELOPMENT_TEAM = U754XV4Y2S;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Alexander-Terekhov.TinkoffChat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -719,7 +719,7 @@
 				CODE_SIGN_ENTITLEMENTS = TinkoffChat/TinkoffChat.entitlements;
 				DEVELOPMENT_TEAM = U754XV4Y2S;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Alexander-Terekhov.TinkoffChat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
