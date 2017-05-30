@@ -34,7 +34,7 @@ class TextAnimator {
     fileprivate func highlightText(with color: UIColor, transform: CGAffineTransform) {
         UIView.transition(with: textLabel,
                           duration: duration,
-                          options: .transitionCrossDissolve,
+                          options: [.preferredFramesPerSecond60, .transitionCrossDissolve],
                           animations: {
                             self.textLabel.textColor = color
                             self.textLabel.transform = transform },
