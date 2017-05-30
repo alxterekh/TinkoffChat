@@ -26,32 +26,42 @@ class SpriteEmitter : Emitter {
     }
     
     fileprivate func setupConfig() {
+        emitterLayer.emitterCells = [makeEmitterCell()]
+        emitterLayer.zPosition = .greatestFiniteMagnitude
+        emitParticles(false)
+        window.layer.addSublayer(emitterLayer)
+    }
+    
+    fileprivate func makeEmitterCell() -> CAEmitterCell {
         let cell = CAEmitterCell()
         cell.emissionLongitude = -CGFloat.pi/2
         cell.alphaSpeed = -0.5
-        cell.birthRate = 1
+        cell.birthRate = 25
         cell.lifetime = 2.5
         cell.velocity = 120
         cell.scale = 0.2
         cell.emissionRange = CGFloat.pi/4
         cell.contents = #imageLiteral(resourceName: "blazon").cgImage
-        emitterLayer.birthRate = 0
-        emitterLayer.emitterCells = [cell]
-        emitterLayer.zPosition = .greatestFiniteMagnitude
-        window.layer.addSublayer(emitterLayer)
+        
+        return cell
     }
     
+    //¯\_(ツ)_/¯ because emitterLayer.birthRate works very strange
+    fileprivate func emitParticles(_ value: Bool) {
+        emitterLayer.lifetime = value ? 1 : 0
+    }
+        
     func moveToTouch(_ touch: UITouch) {
         let location = touch.location(in: window)
         emitterLayer.emitterPosition = location
     }
     
     func startEmittingForTouch(_ touch: UITouch) {
-        emitterLayer.birthRate = 25
+        emitParticles(true)
         moveToTouch(touch)
     }
     
     func stopEmitting() {
-        emitterLayer.birthRate = 0
+        emitParticles(false)
     }
 }
